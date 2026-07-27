@@ -13,6 +13,7 @@
     .eyebrow { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--taupe); margin-bottom:6px; }
     .tcm-safety { display:flex; gap:10px; align-items:flex-start; padding:14px; border-radius:12px; background:rgba(201,138,46,.12); border:1.5px solid rgba(201,138,46,.35); font-size:12.5px; line-height:1.55; color:var(--ink); margin:16px; }
     .tcm-safety span { color:var(--warn); font-size:20px; flex-shrink:0; }
+    .tcm-safety.danger { background:rgba(190,74,62,.1); border-color:rgba(190,74,62,.35); }
     .benefit-chips { display:flex; gap:8px; overflow-x:auto; padding:0 16px 8px; }
     .chip { padding:8px 14px; border-radius:99px; border:2px solid var(--line-soft); background:var(--card); font-size:13px; font-weight:700; white-space:nowrap; }
     .recipe-card { margin:16px; padding:16px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); }
@@ -22,6 +23,13 @@
     .timer-box { margin:16px; padding:16px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); text-align:center; }
     .timer-display { font-size:48px; font-weight:800; margin:8px 0; }
     .timer-btn { padding:12px 24px; border:none; border-radius:12px; background:var(--ink); color:var(--card); font-weight:700; cursor:pointer; }
+    .herb-row { display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--line-soft); }
+    .herb-row:last-child { border-bottom:none; }
+    .evidence { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; }
+    .ev-low { background:rgba(176,168,158,.2); color:#5E574F; }
+    .ev-mod { background:rgba(212,168,92,.18); color:#7A5A1E; }
+    .checklist { margin:12px 16px; padding:12px; border-radius:12px; background:var(--sunken); }
+    .checklist li { list-style:none; padding:6px 0; font-size:13px; display:flex; gap:8px; align-items:center; }
   </style>
 </head>
 <body>
@@ -36,14 +44,14 @@
       <div style="text-align:center; padding:24px 16px 8px">
         <div class="eyebrow">WARMING RITUAL</div>
         <h2 style="font-size:24px; margin-bottom:8px">Warm the lower jiao</h2>
-        <p style="color:var(--taupe); font-size:14px; line-height:1.5">Foot baths with ginger and mugwort promote circulation, calm the nervous system, and support restful sleep.</p>
+        <p style="color:var(--taupe); font-size:14px; line-height:1.5">Foot baths warm the lower body, promote circulation, calm the nervous system, and support restful sleep.</p>
       </div>
 
       <div class="tcm-safety">
         <span class="material-symbols-outlined">warning</span>
         <div>
           <strong style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--warn)">Avoid if</strong><br>
-          Pregnant, diabetic neuropathy, open wounds, peripheral vascular disease, or severe varicose veins. Stop if dizzy or overheated.
+          Pregnant, diabetic neuropathy, open wounds, peripheral vascular disease, severe varicose veins, DVT, fever, acute inflammation, severe hypertension, or lower-extremity edema of unknown cause.
         </div>
       </div>
 
@@ -58,24 +66,46 @@
         <h3 style="margin-bottom:12px">\ud83e\uded7 Classic Warming Recipe</h3>
         <div class="tcm-step">
           <div class="num">1</div>
-          <div><strong>Fill basin</strong> with warm water (40\u201342\u00b0C / 104\u2013108\u00b0F). Test with your wrist first.</div>
+          <div><strong>Fill basin</strong> with warm water (38\u201342\u00b0C / 100\u2013108\u00b0F). Test with your wrist or elbow first.</div>
         </div>
         <div class="tcm-step">
           <div class="num">2</div>
-          <div><strong>Add ingredients:</strong> fresh ginger slices (20 g) + dried mugwort (10 g) or a ginger tea bag.</div>
+          <div><strong>Add ingredients:</strong> fresh ginger slices (20 g) + dried mugwort (10 g). Simmer herbs in water for 15\u201320 min, strain, then pour into basin.</div>
         </div>
         <div class="tcm-step">
           <div class="num">3</div>
-          <div><strong>Soak 15\u201320 min</strong> until mild warmth rises and a light sweat appears on the forehead.</div>
+          <div><strong>Soak 15\u201320 min</strong> in the evening, 3\u20135 times per week. Stop when mild warmth rises.</div>
         </div>
         <div class="tcm-step">
           <div class="num">4</div>
-          <div><strong>Dry feet thoroughly</strong>, massage Yongquan (KI1) briefly, then put on warm socks.</div>
+          <div><strong>Dry feet thoroughly</strong>, massage Yongquan (KI1) briefly, then put on warm socks. Avoid cold drafts.</div>
         </div>
-        <div style="margin-top:12px; font-size:13px; color:var(--taupe)">
-          <span class="material-symbols-outlined" style="font-size:16px; vertical-align:middle">schedule</span> 15\u201320 min \u00b7
-          <span class="material-symbols-outlined" style="font-size:16px; vertical-align:middle">dark_mode</span> Evening \u00b7
-          <span class="material-symbols-outlined" style="font-size:16px; vertical-align:middle">calendar_month</span> 2\u20133\u00d7/week
+      </div>
+
+      <div class="recipe-card">
+        <h3 style="margin-bottom:12px">Common Foot-Soak Herbs</h3>
+        <div class="herb-row">
+          <div style="font-size:28px">\ud83e\ued6</div>
+          <div style="flex:1">
+            <strong>Ginger</strong> <span class="evidence ev-mod">Moderate for warmth/sleep</span>
+            <p style="font-size:13px; color:var(--taupe); line-height:1.4; margin-top:4px">Warms channels and disperses cold. Studies suggest improved peripheral warmth, sleep, and circulation.</p>
+          </div>
+        </div>
+        <div class="herb-row">
+          <div style="font-size:28px">\ud83c\udf3f</div>
+          <div style="flex:1">
+            <strong>Mugwort (Ai ye)</strong> <span class="evidence ev-low">Limited foot-bath trials</span>
+            <div style="font-size:12px; color:var(--low); margin-top:4px"><strong>\u26a0\ufe0f Pregnancy contraindicated</strong></div>
+            <p style="font-size:13px; color:var(--taupe); line-height:1.4; margin-top:4px">Warms channels, stops bleeding, dispels cold-damp. Often used in moxibustion and foot soaks.</p>
+          </div>
+        </div>
+        <div class="herb-row">
+          <div style="font-size:28px">\ud83c\udf3a</div>
+          <div style="flex:1">
+            <strong>Safflower (Hong hua)</strong> <span class="evidence ev-low">Limited</span>
+            <div style="font-size:12px; color:var(--low); margin-top:4px"><strong>\u26a0\ufe0f Pregnancy & heavy periods avoid</strong></div>
+            <p style="font-size:13px; color:var(--taupe); line-height:1.4; margin-top:4px">Invigorates Blood and relieves menstrual pain. Avoid with anticoagulants.</p>
+          </div>
         </div>
       </div>
 
@@ -85,19 +115,20 @@
         <button class="timer-btn" id="timerBtn" onclick="toggleTimer()">Start 15 min</button>
       </div>
 
-      <div class="card" style="margin:16px; padding:16px">
-        <h3 style="margin-bottom:8px">\ud83e\udd16 Why this helps ovaries</h3>
-        <p style="font-size:13px; color:var(--taupe); line-height:1.5">Cold and stagnation in the lower body is linked in TCM to menstrual discomfort and poor pelvic circulation. Warming the feet draws blood downward, relaxes the nervous system, and may improve sleep quality \u2014 all supportive of hormonal balance.</p>
+      <div class="checklist">
+        <strong style="font-size:12px; text-transform:uppercase; letter-spacing:0.05em">Contraindication checklist</strong>
+        <ul>
+          <li><span class="material-symbols-outlined" style="font-size:18px; color:var(--low)">cancel</span> Pregnancy (especially with mugwort/safflower)</li>
+          <li><span class="material-symbols-outlined" style="font-size:18px; color:var(--low)">cancel</span> Diabetic or peripheral neuropathy</li>
+          <li><span class="material-symbols-outlined" style="font-size:18px; color:var(--low)">cancel</span> Open wounds or active infection</li>
+          <li><span class="material-symbols-outlined" style="font-size:18px; color:var(--low)">cancel</span> Peripheral vascular disease / DVT</li>
+          <li><span class="material-symbols-outlined" style="font-size:18px; color:var(--low)">cancel</span> Fever, acute inflammation, severe hypertension</li>
+        </ul>
       </div>
 
-      <div class="card" style="margin:16px; padding:16px; background:linear-gradient(135deg, rgba(196,184,208,.18), rgba(240,232,244,.12))">
-        <div style="display:flex; gap:12px; align-items:center">
-          <span class="material-symbols-outlined" style="font-size:32px; color:var(--mauve)">stethoscope</span>
-          <div>
-            <b style="display:block; margin-bottom:2px">Ask a Practitioner</b>
-            <span style="font-size:13px; color:var(--taupe)">Foot soak herbs can be customized to your TCM pattern.</span>
-          </div>
-        </div>
+      <div class="card" style="margin:16px; padding:16px">
+        <h3 style="margin-bottom:8px">\ud83e\udd16 Why this helps ovaries</h3>
+        <p style="font-size:13px; color:var(--taupe); line-height:1.5">In TCM, cold and stagnation in the lower body is linked to menstrual discomfort and poor pelvic circulation. Warming the feet draws blood downward, relaxes the nervous system, and may improve sleep quality \u2014 all supportive of hormonal balance.</p>
       </div>
     </main>
 

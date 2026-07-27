@@ -13,17 +13,26 @@
     .eyebrow { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--taupe); margin-bottom:6px; }
     .herb-card { margin:12px 16px; padding:16px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); }
     .herb-card .row { display:flex; gap:12px; align-items:flex-start; }
-    .herb-thumb { width:64px; height:64px; border-radius:50%; background:#F6F8F3; display:grid; place-items:center; font-size:32px; flex-shrink:0; }
+    .herb-thumb { width:64px; height:64px; border-radius:50%; background:#F6F8F3; display:grid; place-items:center; font-size:28px; flex-shrink:0; }
     .herb-title { font-size:16px; font-weight:800; margin-bottom:2px; }
     .herb-latin { font-size:12px; color:var(--taupe); font-style:italic; margin-bottom:6px; }
     .herb-desc { font-size:13px; color:var(--ink); line-height:1.5; margin-bottom:10px; }
     .tags { display:flex; gap:6px; flex-wrap:wrap; }
-    .tag { padding:4px 10px; border-radius:20px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; background:var(--sunken); color:var(--ink); }
+    .tag { padding:4px 10px; border-radius:20px; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.03em; background:var(--sunken); color:var(--ink); }
+    .evidence { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; margin-bottom:8px; }
+    .ev-low { background:rgba(176,168,158,.2); color:#5E574F; }
+    .ev-mod { background:rgba(212,168,92,.18); color:#7A5A1E; }
+    .ev-mechanism { background:rgba(127,174,201,.18); color:#3A5A6B; }
     .tcm-safety { display:flex; gap:10px; align-items:flex-start; padding:14px; border-radius:12px; background:rgba(201,138,46,.12); border:1.5px solid rgba(201,138,46,.35); font-size:12.5px; line-height:1.55; color:var(--ink); margin:16px; }
     .tcm-safety span { color:var(--warn); font-size:20px; flex-shrink:0; }
     .filters { display:flex; gap:8px; overflow-x:auto; padding:0 16px 8px; }
     .chip { padding:8px 14px; border-radius:99px; border:2px solid var(--line-soft); background:var(--card); font-size:13px; font-weight:700; white-space:nowrap; cursor:pointer; }
     .chip.on { background:var(--ink); color:var(--card); border-color:var(--ink); }
+    .caution { margin-top:12px; padding:10px; border-radius:10px; background:rgba(190,74,62,.08); border:1px solid rgba(190,74,62,.2); font-size:12px; color:var(--ink); }
+    .tea-card { margin:12px 16px; padding:14px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); }
+    .tea-card h4 { margin-bottom:4px; font-size:15px; }
+    .tea-card p { font-size:13px; color:var(--taupe); line-height:1.5; }
+    .section-title { margin:24px 16px 8px; font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--taupe); }
   </style>
 </head>
 <body>
@@ -38,14 +47,14 @@
       <div style="text-align:center; padding:24px 16px 8px">
         <div class="eyebrow">BOTANICAL SUPPORT</div>
         <h2 style="font-size:24px; margin-bottom:8px">Ovarian-friendly herbs</h2>
-        <p style="color:var(--taupe); font-size:14px; line-height:1.5">Daily teas and tonics used in TCM to nourish blood, support qi, and ease cycle-related symptoms.</p>
+        <p style="color:var(--taupe); font-size:14px; line-height:1.5">Evidence-informed TCM herbs and daily teas used to nourish Blood, support qi, and ease cycle-related discomfort.</p>
       </div>
 
       <div class="tcm-safety">
         <span class="material-symbols-outlined">warning</span>
         <div>
-          <strong style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--warn)">Important</strong><br>
-          Herbs can interact with medications and are not safe for everyone. Avoid during pregnancy unless guided by a licensed practitioner. This is educational, not medical advice.
+          <strong style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--warn)">For education only</strong><br>
+          Herbs can interact with medications and are not safe for everyone. Avoid during pregnancy unless guided by a licensed TCM practitioner. This is not medical advice.
         </div>
       </div>
 
@@ -58,7 +67,11 @@
         <div class="chip" data-filter="stress">Stress</div>
       </div>
 
+      <div class="section-title">Single Herbs</div>
       <div id="herbList"></div>
+
+      <div class="section-title">Tea Blends</div>
+      <div id="teaList"></div>
 
       <div class="card" style="margin:16px; padding:16px; background:linear-gradient(135deg, rgba(196,184,208,.18), rgba(240,232,244,.12))">
         <div style="display:flex; gap:12px; align-items:center">
@@ -82,31 +95,53 @@
 
   <script>
     const herbs = [
-      { name: 'Goji berry', latin: 'Lycium barbarum', emoji: '\ud83e\uded6', type: 'tonic', tags: ['Grow','Nurture','Energy'], desc: 'Nourishes liver and kidney yin, supports blood and essence. Often used in fertility and postpartum recovery tonics.', caution: 'May interact with blood thinners. Avoid large doses if diabetic.' },
-      { name: 'Red date + longan tea', latin: 'Ziziphus jujuba + Dimocarpus longan', emoji: '\ud83c\udf75', type: 'tea', tags: ['Bloom','Nurture','Sleep','Stress'], desc: 'Classic blood-nourishing tea for calming the mind, supporting sleep, and replenishing qi after menstruation.', caution: 'Avoid in damp-heat conditions or high blood sugar.' },
-      { name: 'White peony', latin: 'Paeonia lactiflora', emoji: '\ud83c\udf38', type: 'tonic', tags: ['Bloom','Cramps','Stress'], desc: 'Nourishes blood, soothes liver qi stagnation, and is commonly used for menstrual cramps and PMS.', caution: 'Contraindicated in pregnancy unless prescribed.' },
-      { name: 'Chrysanthemum', latin: 'Chrysanthemum morifolium', emoji: '\ud83c\udf3c', type: 'tea', tags: ['Bloom','Stress','Sleep'], desc: 'Clears liver heat and calms the eyes. Gentle evening tea for stress and screen-fatigue relief.', caution: 'Cooling herb; avoid if you run cold or have diarrhea.' },
-      { name: 'Astragalus', latin: 'Astragalus membranaceus', emoji: '\ud83e\uded4', type: 'tonic', tags: ['Grow','Nurture','Energy'], desc: 'Tonifies qi and supports immunity. Often paired with red dates post-period or postpartum.', caution: 'Avoid during acute infection or fever. Use cautiously with immunosuppressants.' },
-      { name: 'Ginger tea', latin: 'Zingiber officinale', emoji: '\ud83e\ued6', type: 'tea', tags: ['Bloom','Cramps','Stress'], desc: 'Warms the middle, dispels cold, improves circulation. Helpful for cold-type menstrual cramps.', caution: 'Can aggravate acid reflux or hot flashes. Use cautiously in pregnancy.' },
-      { name: 'Dang gui', latin: 'Angelica sinensis', emoji: '\ud83e\uded6', type: 'tonic', tags: ['Bloom','Grow','Cramps'], desc: '"Female ginseng" \u2014 nourishes and invigorates blood, regulates menstruation. Core TCM herb for gynecological wellness.', caution: 'Contraindicated in pregnancy and with blood thinners. Use only under practitioner guidance.' },
-      { name: 'Siberian ginseng', latin: 'Eleutherococcus senticosus', emoji: '\ud83c\udf3f', type: 'tonic', tags: ['Wisdom','Energy','Stress'], desc: 'Adaptogen that supports stress resilience and energy. Used in TCM-adjacent protocols for fatigue and HPA axis support.', caution: 'Avoid in high blood pressure or before sleep.' }
+      { name: 'Dang gui', pinyin: '\u7576\u6b78', latin: 'Angelica sinensis', emoji: '\ud83e\uded6', type: 'tonic', tags: ['Bloom','Grow','Cramps'], evidence: 'Preclinical / small clinical', evClass: 'ev-mechanism', desc: 'Classic Blood tonic. Used in formulas for menstrual regulation and diminished ovarian reserve (DOR). Has phytoestrogenic, anti-inflammatory, and anti-apoptotic effects in mechanistic studies.', caution: 'Avoid in early pregnancy. May increase bleeding risk with heavy periods or anticoagulants (warfarin).' },
+      { name: 'Bai shao', pinyin: '\u767d\u828e', latin: 'Paeonia lactiflora', emoji: '\ud83c\udf38', type: 'tonic', tags: ['Bloom','Cramps','Stress'], evidence: 'Preclinical / small clinical', evClass: 'ev-mechanism', desc: 'Nourishes Blood and softens Liver. Total glucosides of peony (TGP) are studied in PCOS and autoimmune contexts for androgen and inflammation modulation.', caution: 'Avoid in early pregnancy. May interact with anticoagulants.' },
+      { name: 'Goji berry', pinyin: '\u6784\u794e\u5b50', latin: 'Lycium barbarum', emoji: '\ud83e\uded6', type: 'tonic', tags: ['Grow','Nurture','Energy'], evidence: 'Preclinical / antioxidant', evClass: 'ev-mechanism', desc: 'Nourishes Liver and Kidney yin/essence. Polysaccharides show antioxidant and metabolic benefits; supports redox balance relevant to oocyte aging.', caution: 'May interact with warfarin/anticoagulants. Monitor blood sugar if diabetic.' },
+      { name: 'Astragalus', pinyin: '\u9ec3\u82a9', latin: 'Astragalus membranaceus', emoji: '\ud83e\uded4', type: 'tonic', tags: ['Grow','Nurture','Energy'], evidence: 'Preclinical / immune', evClass: 'ev-mechanism', desc: 'Tonifies Spleen qi and supports immune resilience. Astragalus polysaccharides studied for fatigue, immune function, and metabolic support.', caution: 'Avoid during acute infection or fever. Use cautiously with immunosuppressants.' },
+      { name: 'He shou wu', pinyin: '\u4f55\u9996\u70cf', latin: 'Polygonum multiflorum', emoji: '\ud83c\udf3f', type: 'tonic', tags: ['Wisdom','Energy'], evidence: 'Limited / safety concern', evClass: 'ev-low', desc: 'Traditionally used to tonify Blood and essence. Evidence for ovarian benefit is weak; case reports document liver injury.', caution: '\u26a0\ufe0f Hepatotoxicity risk. Avoid in pregnancy/lactation. Only use under practitioner supervision with liver monitoring.' },
+      { name: 'Rehmannia', pinyin: '\u5730\u9ec3', latin: 'Rehmannia glutinosa', emoji: '\ud83c\udf31', type: 'tonic', tags: ['Bloom','Wisdom','Sleep'], evidence: 'Preclinical', evClass: 'ev-mechanism', desc: 'Sheng di clears heat and nourishes yin; shu di (steamed) tonifies Blood and Kidney yin. Used in formulas for PCOS and perimenopausal symptoms.', caution: 'Shu di can cause digestive congestion/loose stools. Avoid in Spleen-deficiency diarrhea; pregnancy supervision.' },
+      { name: 'Chai hu', pinyin: '\u67f4\u80e1', latin: 'Bupleurum chinense', emoji: '\ud83c\udf3b', type: 'tonic', tags: ['Bloom','Stress','Cramps'], evidence: 'Preclinical / formula data', evClass: 'ev-mechanism', desc: 'Regulates Liver qi stagnation. Bupleurum-containing formulas studied for stress, PMS-like symptoms, and liver enzyme modulation.', caution: 'Possible hepatotoxicity risk in rare cases. Avoid in pregnancy unless prescribed.' }
     ];
 
-    function render(filter='all') {
+    const teas = [
+      { name: 'Red Date + Longan + Goji', emoji: '\ud83c\udf75', tags: ['Bloom','Nurture','Sleep'], desc: 'Classic Blood and qi tonic. Calms the spirit and supports recovery after menstruation or postpartum.', evidence: 'Traditional', evClass: 'ev-low', caution: 'Generally safe as food tea. Caution with diabetes due to sweetness.' },
+      { name: 'Dang Gui Tea', emoji: '\ud83e\uded6', tags: ['Bloom','Grow','Cramps'], desc: 'Nourishes and invigorates Blood. Often combined with red date or goji.', evidence: 'Preclinical / mechanistic', evClass: 'ev-mechanism', caution: 'Avoid heavy periods and early pregnancy.' },
+      { name: 'Rose + Goji Tea', emoji: '\ud83c\udf3c', tags: ['Bloom','Stress'], desc: 'Soothes Liver qi stagnation and supports mood. Gentle for mild menstrual discomfort.', evidence: 'Limited', evClass: 'ev-low', caution: 'Generally safe.' },
+      { name: 'Ginger + Brown Sugar', emoji: '\ud83e\ued6', tags: ['Bloom','Cramps'], desc: 'Warms the middle and uterus. Ginger has moderate evidence for dysmenorrhea and nausea relief.', evidence: 'Moderate for cramps', evClass: 'ev-mod', caution: 'Avoid with heavy "heat" signs, ulcers, or diabetes. Use cautiously in pregnancy.' }
+    ];
+
+    function renderHerbs(filter='all') {
       const list = document.getElementById('herbList');
       list.innerHTML = herbs.filter(h => filter === 'all' || h.type === filter || h.tags.some(t => t.toLowerCase() === filter)).map(h => `
         <div class="herb-card" data-type="${h.type}">
           <div class="row">
             <div class="herb-thumb">${h.emoji}</div>
-            <div>
-              <div class="herb-title">${h.name}</div>
+            <div style="flex:1">
+              <div class="herb-title">${h.name} <span style="font-size:13px; color:var(--taupe); font-weight:400">(${h.pinyin})</span></div>
               <div class="herb-latin">${h.latin}</div>
+              <div class="evidence ${h.evClass}">${h.evidence}</div>
               <div class="herb-desc">${h.desc}</div>
               <div class="tags">${h.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
             </div>
           </div>
-          <div style="margin-top:12px; padding:10px; border-radius:10px; background:rgba(190,74,62,.08); border:1px solid rgba(190,74,62,.2); font-size:12px; color:var(--ink)">
-            <strong style="color:var(--low)">\u26a0\ufe0f Caution:</strong> ${h.caution}
+          <div class="caution"><strong style="color:var(--low)">\u26a0\ufe0f Caution:</strong> ${h.caution}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderTeas() {
+      document.getElementById('teaList').innerHTML = teas.map(t => `
+        <div class="tea-card">
+          <div style="display:flex; gap:12px; align-items:flex-start">
+            <div style="font-size:28px">${t.emoji}</div>
+            <div style="flex:1">
+              <h4>${t.name}</h4>
+              <div class="evidence ${t.evClass}" style="margin:4px 0">${t.evidence}</div>
+              <p>${t.desc}</p>
+              <div class="tags" style="margin-top:8px">${t.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>
+              <div class="caution" style="margin-top:10px"><strong style="color:var(--low)">\u26a0\ufe0f Caution:</strong> ${t.caution}</div>
+            </div>
           </div>
         </div>
       `).join('');
@@ -116,11 +151,12 @@
       c.addEventListener('click', () => {
         document.querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
         c.classList.add('on');
-        render(c.dataset.filter);
+        renderHerbs(c.dataset.filter);
       });
     });
 
-    render();
+    renderHerbs();
+    renderTeas();
   </script>
 </body>
 </html>

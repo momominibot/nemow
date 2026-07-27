@@ -22,8 +22,14 @@
     .tcm-step { display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--line-soft); }
     .tcm-step:last-child { border-bottom:none; }
     .tcm-step .num { width:26px; height:26px; border-radius:50%; background:var(--ink); color:#fff; display:grid; place-items:center; font:800 12px var(--sans); flex-shrink:0; }
-    .checklist { margin:12px 0; padding:12px; border-radius:12px; background:var(--sunken); }
+    .checklist { margin:12px 16px; padding:12px; border-radius:12px; background:var(--sunken); }
     .checklist li { list-style:none; padding:6px 0; font-size:13px; display:flex; gap:8px; align-items:center; }
+    .point-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:10px; }
+    .point-table th, .point-table td { padding:8px; text-align:left; border-bottom:1px solid var(--line-soft); }
+    .point-table th { font-weight:800; text-transform:uppercase; font-size:10px; letter-spacing:0.05em; color:var(--taupe); }
+    .evidence { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; margin:8px 0; }
+    .ev-mod { background:rgba(212,168,92,.18); color:#7A5A1E; }
+    .ev-low { background:rgba(176,168,158,.2); color:#5E574F; }
   </style>
 </head>
 <body>
@@ -38,7 +44,7 @@
       <div style="text-align:center; padding:24px 16px 8px">
         <div class="eyebrow">WARMTH THERAPY</div>
         <h2 style="font-size:24px; margin-bottom:8px">Gentle external warmth</h2>
-        <p style="color:var(--taupe); font-size:14px; line-height:1.5">Moxibustion, warm compresses, and herbal poultices applied to the lower abdomen support circulation and ease discomfort.</p>
+        <p style="color:var(--taupe); font-size:14px; line-height:1.5">Heat-based therapies can support pelvic circulation and ease cold/stagnation-type discomfort. Moxibustion requires practitioner guidance.</p>
       </div>
 
       <div class="tcm-safety danger">
@@ -53,44 +59,65 @@
         <div class="tab on" data-tab="moxa">Moxibustion</div>
         <div class="tab" data-tab="compress">Warm Compress</div>
         <div class="tab" data-tab="poultice">Herbal Poultice</div>
+        <div class="tab" data-tab="castor">Castor Oil Pack</div>
       </div>
 
       <div class="panel on" id="moxa">
-        <h3 style="margin-bottom:10px">\ud83d\udd25 Moxibustion</h3>
-        <p style="font-size:13px; color:var(--taupe); line-height:1.5; margin-bottom:12px">Burning dried mugwort (moxa) near acupuncture points to warm channels and move qi. Best for cold-type cramps and low back ache.</p>
-        <div class="tcm-step"><div class="num">1</div><div>Light a moxa stick and hold it 2\u20133 cm above the point (CV4, CV6, or SP6).</div></div>
-        <div class="tcm-step"><div class="num">2</div><div>Move in small circles or pecking motions. Never hold still to avoid burns.</div></div>
-        <div class="tcm-step"><div class="num">3</div><div>Continue until skin is rosy and warm, usually 10\u201315 minutes.</div></div>
-        <div class="tcm-step"><div class="num">4</div><div>Extinguish the moxa stick fully in a glass jar. Ventilate the room.</div></div>
-        <div style="margin-top:12px; font-size:13px; color:var(--taupe)">
-          <span class="material-symbols-outlined" style="font-size:16px; vertical-align:middle">schedule</span> 10\u201315 min \u00b7
-          <span class="material-symbols-outlined" style="font-size:16px; vertical-align:middle">sync</span> 2\u20133\u00d7/week
+        <h3 style="margin-bottom:6px">\ud83d\udd25 Moxibustion</h3>
+        <div class="evidence ev-mod">Moderate evidence for PCOS / fertility adjuncts (heterogeneous trials)</div>
+        <p style="font-size:13px; color:var(--taupe); line-height:1.5; margin-bottom:12px">Burning dried mugwort (moxa) near acupuncture points to warm channels and move qi. Best studied for PCOS and infertility as an adjunct therapy.</p>
+
+        <table class="point-table">
+          <tr><th>Point</th><th>TCM Action</th><th>Safety</th></tr>
+          <tr><td><strong>CV4</strong> Guanyuan</td><td>Tonifies Kidney essence and yuan qi</td><td>Pregnancy contraindicated; burn risk</td></tr>
+          <tr><td><strong>CV6</strong> Qihai</td><td>Tonifies qi; warms lower abdomen</td><td>Pregnancy contraindicated; burn risk</td></tr>
+          <tr><td><strong>SP6</strong> Sanyinjiao</td><td>Regulates Spleen/Liver/Kidney; reproductive support</td><td>Pregnancy strongly contraindicated</td></tr>
+          <tr><td><strong>GV4</strong> Mingmen</td><td>Tonifies Kidney yang; warms lower back</td><td>Burn risk over spine; fever/inflammation avoid</td></tr>
+        </table>
+
+        <div class="caution" style="margin-top:14px; padding:10px; border-radius:10px; background:rgba(201,138,46,.12); border:1px solid rgba(201,138,46,.35); font-size:12px">
+          <strong>Practitioner-guided only.</strong> Do not attempt DIY moxibustion without in-person training. See a licensed acupuncturist for point selection and safe technique.
         </div>
       </div>
 
       <div class="panel" id="compress">
-        <h3 style="margin-bottom:10px">\ud83e\uddca Warm Compress</h3>
+        <h3 style="margin-bottom:6px">\ud83e\uddca Warm Compress</h3>
+        <div class="evidence ev-mod">Moderate evidence for dysmenorrhea relief</div>
         <p style="font-size:13px; color:var(--taupe); line-height:1.5; margin-bottom:12px">A simple, safe alternative to moxa. Use a warm (not hot) water bottle or microwaveable pack over the lower abdomen.</p>
-        <div class="tcm-step"><div class="num">1</div><div>Fill a hot water bottle with warm water (around 45\u00b0C / 113\u00b0F).</div></div>
+        <div class="tcm-step"><div class="num">1</div><div>Fill a hot water bottle with warm water (around 40\u201345\u00b0C / 104\u2013113\u00b0F).</div></div>
         <div class="tcm-step"><div class="num">2</div><div>Place a thin cloth between the bottle and skin.</div></div>
         <div class="tcm-step"><div class="num">3</div><div>Rest for 15\u201320 minutes over the lower abdomen or lower back.</div></div>
         <div class="tcm-step"><div class="num">4</div><div>Remove if skin becomes red, numb, or uncomfortable.</div></div>
+        <div style="margin-top:10px; font-size:12px; color:var(--taupe)">Avoid during pregnancy over lower abdomen. Use cautiously with vascular disease or reduced sensation.</div>
       </div>
 
       <div class="panel" id="poultice">
-        <h3 style="margin-bottom:10px">\ud83c\udf3f Herbal Poultice</h3>
-        <p style="font-size:13px; color:var(--taupe); line-height:1.5; margin-bottom:12px">A cloth pack filled with warm herbs applied to the abdomen. Ginger and mugwort are common warming choices.</p>
+        <h3 style="margin-bottom:6px">\ud83c\udf3f Herbal Poultice</h3>
+        <div class="evidence ev-low">Limited clinical evidence</div>
+        <p style="font-size:13px; color:var(--taupe); line-height:1.5; margin-bottom:12px">A cloth pack filled with warm herbs applied to the abdomen. Ginger and mugwort are common warming choices in TCM.</p>
         <div class="tcm-step"><div class="num">1</div><div>Steep 30 g dried mugwort or ginger in hot water for 10 minutes.</div></div>
         <div class="tcm-step"><div class="num">2</div><div>Strain and wrap herbs in a clean cotton cloth.</div></div>
         <div class="tcm-step"><div class="num">3</div><div>Apply warm (test on wrist) over lower abdomen for 15 minutes.</div></div>
         <div class="tcm-step"><div class="num">4</div><div>Discard herbs after one use.</div></div>
+        <div style="margin-top:10px; font-size:12px; color:var(--taupe)">Pregnancy contraindicated. Stop if irritation occurs.</div>
+      </div>
+
+      <div class="panel" id="castor">
+        <h3 style="margin-bottom:6px">\ud83e\udeb6 Castor Oil Pack</h3>
+        <div class="evidence ev-low">Very low direct evidence</div>
+        <p style="font-size:13px; color:var(--taupe); line-height:1.5; margin-bottom:12px">Western naturopathic practice, not classical TCM. Applied to lower abdomen with a warm cloth. Ricinoleic acid may have anti-inflammatory effects when absorbed through skin.</p>
+        <div class="tcm-step"><div class="num">1</div><div>Apply organic castor oil to a cotton flannel cloth.</div></div>
+        <div class="tcm-step"><div class="num">2</div><div>Place over lower abdomen; cover with plastic wrap and a warm towel.</div></div>
+        <div class="tcm-step"><div class="num">3</div><div>Rest 20\u201345 minutes. Relax and breathe slowly.</div></div>
+        <div class="tcm-step"><div class="num">4</div><div>Clean skin with baking soda solution; store cloth in a sealed bag.</div></div>
+        <div style="margin-top:10px; font-size:12px; color:var(--taupe)">Pregnancy contraindicated. Avoid over open skin. May stain fabrics. Allergy to castor beans is rare but possible.</div>
       </div>
 
       <div class="checklist">
         <strong style="font-size:12px; text-transform:uppercase; letter-spacing:0.05em">Stop and seek help if:</strong>
         <ul>
           <li><span class="material-symbols-outlined" style="font-size:18px; color:var(--low)">cancel</span> Redness or blistering lasts >30 min</li>
-          <li><span class="material-symbols-outlined" style="font-size:18px; color:var(--low)">cancel</span> Dizziness, nausea, or headache from smoke</li>
+          <li><span class="material-symbols-outlined" style="font-size:18px; color:var(--low)">cancel</span> Dizziness, nausea, or headache from smoke/heat</li>
           <li><span class="material-symbols-outlined" style="font-size:18px; color:var(--low)">cancel</span> Unusual pain or burning sensation</li>
         </ul>
       </div>
