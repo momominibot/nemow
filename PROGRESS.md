@@ -1,4 +1,4 @@
-# PROGRESS — Ovaria v2 Build
+# PROGRESS — Nemow v2 Build
 
 **Date:** July 24, 2026
 **Status:** Complete — ready for Vercel deploy
@@ -7,7 +7,7 @@
 
 | File | Description | Lines |
 |------|-------------|-------|
-| `ovaria-persona.css` | 4-persona CSS variable system + persona-aware components | ~380 |
+| `nemow-persona.css` | 4-persona CSS variable system + persona-aware components | ~380 |
 | `acupoints.html` | TCM Acupoint Atlas — 13 points, body map, filters, routine + timer | ~350 |
 | `myofascial.html` | Myofascial Relief Guide — 8 techniques, guided sessions | ~250 |
 | `foods.html` | Food Database — 22 foods TCM+Western dual-view, phase-synced eating | ~320 |
@@ -22,7 +22,7 @@
 
 ## Verification Checklist
 
-- [x] 4 persona themes built with distinct CSS variables (ovaria-persona.css)
+- [x] 4 persona themes built with distinct CSS variables (nemow-persona.css)
 - [x] Persona selector in settings/profile working (settings.html > Appearance)
 - [x] Persona filter on Knowledge Hub (learn.html)
 - [x] TCM acupoint atlas page with 13 acupoints (acupoints.html)
@@ -35,14 +35,14 @@
 - [x] Safety warnings on pregnancy-contraindicated acupoints (SP6, LI4)
 - [x] Persona persists via localStorage
 - [x] 400ms crossfade on theme switch
-- [x] Co-branding footer "Ovaria × Vivere Longevity" on all new pages
+- [x] Co-branding footer "Nemow × Nemow" on all new pages
 - [x] Mobile-first 390px viewport
 - [ ] Site deploys successfully to production
 
 ## Known Issues
 - Some internal wiki article links (#) are placeholders
 - Existing pages (home.html, cycle-home.html, etc.) still have the old 5-tab navigation; only learn.html and settings.html were updated with new nav
-- The persona CSS on new pages references the `--ovaria-*` variables but existing pages in the old nav (home.html, etc.) still use the original theme.css `--cocoa`, `--mauve` variables
+- The persona CSS on new pages references the `--nemow-*` variables but existing pages in the old nav (home.html, etc.) still use the original theme.css `--cocoa`, `--mauve` variables
 - Lottie animations on learn.html reference local asset files that may not exist
 
 ## Next Steps

@@ -6,19 +6,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined&family=DM+Serif+Display&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=Inter:opsz,wght@14..32,400;14..32,600&family=Cormorant+Garamond:wght@500&family=Work+Sans:wght@400;500;600&family=Lora:wght@500&family=Plus+Jakarta+Sans:wght@400;500;600&family=Playfair+Display:wght@600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="anim.css">
-<link rel="stylesheet" href="ovaria-persona.css">
+<link rel="stylesheet" href="nemow-persona.css">
 <script src="anim.js" defer></script>
 <style>
-.tech-card h3 { font-family:var(--ovaria-font-heading); font-size:var(--ovaria-font-size-h3); color:var(--ovaria-text-emphasis); margin:0 0 4px; }
-.tech-card .tech-sub { font-size:12.5px; color:var(--ovaria-text-secondary); margin-bottom:12px; }
+.tech-card h3 { font-family:var(--nemow-font-heading); font-size:var(--nemow-font-size-h3); color:var(--nemow-text-emphasis); margin:0 0 4px; }
+.tech-card .tech-sub { font-size:12.5px; color:var(--nemow-text-secondary); margin-bottom:12px; }
 .session-timer-wrap { text-align:center; padding:20px; }
-.session-timer { font-family:var(--ovaria-font-heading); font-size:56px; color:var(--ovaria-accent); }
+.session-timer { font-family:var(--nemow-font-heading); font-size:56px; color:var(--nemow-accent); }
 .session-active { animation:pulse 2s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
-.session-step { padding:10px 0; border-bottom:1px solid var(--ovaria-border); }
-.session-step.current { background:var(--ovaria-accent-glow); border-radius:var(--ovaria-radius-sm); padding:10px 12px; }
-.session-step .ss-num { width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;background:var(--ovaria-border);color:var(--ovaria-text-secondary); }
-.session-step.current .ss-num { background:var(--ovaria-accent);color:var(--ovaria-text-on-cta); }
+.session-step { padding:10px 0; border-bottom:1px solid var(--nemow-border); }
+.session-step.current { background:var(--nemow-accent-glow); border-radius:var(--nemow-radius-sm); padding:10px 12px; }
+.session-step .ss-num { width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;background:var(--nemow-border);color:var(--nemow-text-secondary); }
+.session-step.current .ss-num { background:var(--nemow-accent);color:var(--nemow-text-on-cta); }
 </style>
 </head><body>
 
@@ -32,21 +32,22 @@
 
   <div class="scroll">
     <!-- Hero -->
-    <div class="card tint-sage" style="padding:20px 18px">
-      <div class="row" style="gap:10px;margin-bottom:6px">
-        <span style="font-size:34px">🤲</span>
-        <div>
-          <div style="font-family:var(--ovaria-font-heading);font-weight:600;font-size:19px;color:var(--ovaria-text-emphasis)">Release & Restore</div>
-          <div class="sub" style="font-size:12px;margin-top:3px">8 evidence-backed myofascial techniques for pelvic & abdominal relief. 85% of chronic pelvic pain involves musculoskeletal dysfunction — your body can heal.</div>
-        </div>
-      </div>
+    <div class="card tint-sage" style="padding:20px 18px;text-align:center">
+      <span style="font-size:42px">🤲</span>
+      <div style="font-family:var(--nemow-font-heading);font-weight:600;font-size:19px;color:var(--nemow-text-emphasis);margin-top:6px">Release & Restore</div>
+      <div class="sub" style="font-size:12px;margin-top:3px">Evidence-based myofascial techniques for pelvic & abdominal relief.</div>
+    </div>
+
+    <!-- Demo video -->
+    <div class="card" style="padding:0;overflow:hidden;border-radius:var(--nemow-radius-md)">
+      <video src="assets/videos/back-massage.mp4" autoplay loop muted playsinline style="width:100%;display:block;border-radius:var(--nemow-radius-md)"></video>
     </div>
 
     <!-- Evidence note -->
     <div class="card" style="padding:14px 16px;background:rgba(78,140,106,.08)">
       <div class="row" style="gap:8px">
         <span class="ms" style="font-size:20px;color:var(--ok)">verified</span>
-        <div style="font-size:12px;line-height:1.5"><b>Evidence basis:</b> ACOG Delphi Consensus (2024) recommends pelvic floor physical therapy as universal first-line treatment. Self-massage techniques are supported when PFPT is inaccessible. <a href="#" style="color:var(--ovaria-accent)">PMID 38387036</a></div>
+        <div style="font-size:12px;line-height:1.5"><b>Evidence basis:</b> Pelvic floor physical therapy is a first-line treatment for chronic pelvic pain.</div>
       </div>
     </div>
 
@@ -64,24 +65,24 @@
     <div class="grid2" id="sessionCards">
       <div class="session-card" onclick="startSession(5)">
         <div style="font-size:28px">⏱️</div>
-        <b style="display:block;font-size:15px;color:var(--ovaria-text-emphasis);margin:6px 0">5 Minutes</b>
+        <b style="display:block;font-size:15px;color:var(--nemow-text-emphasis);margin:6px 0">5 Minutes</b>
         <div class="sub" style="font-size:11px">Quick Reset<br>Breathing + Stretch</div>
       </div>
       <div class="session-card" onclick="startSession(10)">
         <div style="font-size:28px">🧘</div>
-        <b style="display:block;font-size:15px;color:var(--ovaria-text-emphasis);margin:6px 0">10 Minutes</b>
+        <b style="display:block;font-size:15px;color:var(--nemow-text-emphasis);margin:6px 0">10 Minutes</b>
         <div class="sub" style="font-size:11px">Daily Relief<br>Massage + Breathing</div>
       </div>
     </div>
     <div class="session-card" onclick="startSession(15)" style="grid-column:span 2">
       <div style="font-size:28px">🌿</div>
-      <b style="display:block;font-size:15px;color:var(--ovaria-text-emphasis);margin:6px 0">15 Minutes</b>
+      <b style="display:block;font-size:15px;color:var(--nemow-text-emphasis);margin:6px 0">15 Minutes</b>
       <div class="sub" style="font-size:11px">Deep Restore — Full session with breathing, self-massage, trigger point release & stretching</div>
     </div>
 
     <!-- Active Session -->
     <div id="activeSession" style="display:none">
-      <div class="card" style="background:var(--ovaria-accent-glow);border:2px solid var(--ovaria-accent)">
+      <div class="card" style="background:var(--nemow-accent-glow);border:2px solid var(--nemow-accent)">
         <div class="session-timer-wrap">
           <div class="session-timer session-active" id="sessionTimer">05:00</div>
           <div class="sub" id="sessionLabel" style="margin-top:4px">Quick Reset</div>
@@ -98,7 +99,7 @@
     <h2 class="sec">All Techniques</h2>
     <div id="techniqueGrid" style="display:flex;flex-direction:column;gap:16px"></div>
 
-    <div class="ovaria-footer"><span>Nemow</span></div>
+    <div class="nemow-footer"><span>Nemow</span></div>
   </div>
 </div>
 
@@ -173,13 +174,13 @@ function renderTechniques(){
         <span class="tech-meta-item"><span class="ms">repeat</span> ${t.frequency}</span>
         <span class="evidence-badge ${t.stagePrimary==='all'?'moderate':'strong'}">${t.stagePrimary==='all'?'🟡 Moderate':'🟢 Strong'}</span>
       </div>
-      <div style="font-size:12px;font-weight:700;color:var(--ovaria-text-emphasis);margin-bottom:6px">How to do it:</div>
+      <div style="font-size:12px;font-weight:700;color:var(--nemow-text-emphasis);margin-bottom:6px">How to do it:</div>
       ${t.steps.map((s,i)=>`<div class="tech-step"><span class="step-num">${i+1}</span><span>${s}</span></div>`).join('')}
       <div class="contraindication"><b>⚠️ Contraindications:</b> ${t.contraindications}</div>
       <div class="lifestage-chips">
         ${t.stages.map(s=>`<span class="${stageLabel(s)}">${stageNames[s]}</span>`).join('')}
       </div>
-      <div style="font-size:10.5px;color:var(--ovaria-text-secondary);margin-top:6px;line-height:1.4"><b>Evidence:</b> ${t.evidence}</div>
+      <div style="font-size:10.5px;color:var(--nemow-text-secondary);margin-top:6px;line-height:1.4"><b>Evidence:</b> ${t.evidence}</div>
     </div>`;
   });
   grid.innerHTML = html || '<div class="card" style="text-align:center;padding:30px"><span style="font-size:32px">🔍</span><div class="sub" style="margin-top:8px">No techniques match this filter.</div></div>';

@@ -1,13 +1,288 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Nemow</title>
+<title>Nemow · Ovarian Age</title>
 <link rel="icon" type="image/png" href="assets/onboarding/egg.png">
-<style>body{font-family:system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:var(--paper);color:var(--ink);padding:24px;text-align:center}
-h1{font-family:Georgia,serif;font-size:28px;color:var(--ink);margin-bottom:8px}p{color:var(--taupe);font-size:15px;max-width:32ch;line-height:1.5}
-a{display:inline-block;margin-top:18px;padding:12px 24px;border-radius:99px;background:var(--mauve);color:#fff;text-decoration:none;font-weight:700;font-size:14px}</style>
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<script src="anim.js" defer></script>
+<style>
+  .hero-ring{ position:relative; width:260px; max-width:100%; margin:0 auto; }
+  .hero-ring svg{ width:100%; display:block; }
+  .ring-label{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; pointer-events:none; }
+  .ring-label .rl-age{ font-family:var(--serif); font-size:38px; font-weight:600; color:var(--cocoa); line-height:1; }
+  .ring-label .rl-cap{ font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--taupe); margin-top:4px; }
+  .ring-label .rl-delta{ font-size:13px; font-weight:700; margin-top:3px; }
+
+  .input-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .field{ display:flex; flex-direction:column; gap:5px; }
+  .field label{ font-size:10.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--taupe); }
+  .field input, .field select{ padding:12px 13px; border-radius:14px; border:1.5px solid var(--line-soft); background:var(--card-solid); font:600 15px var(--sans); color:var(--cocoa); }
+  .field input:focus, .field select:focus{ outline:none; border-color:var(--mauve); }
+  .field.full{ grid-column:1/-1; }
+
+  .result-card{ background:linear-gradient(135deg, rgba(255,255,255,.92), rgba(246,239,224,.8)); border:1.5px solid var(--mauve); }
+  .result-row{ display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--line-soft); }
+  .result-row:last-child{ border-bottom:none; }
+  .result-row .r-label{ font-size:12px; color:var(--taupe); }
+  .result-row .r-val{ font-family:var(--serif); font-size:17px; font-weight:600; color:var(--cocoa); }
+
+  .stage-pill{ display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:99px; background:rgba(217,131,164,.12); color:var(--d-cycle); font-size:12px; font-weight:700; }
+
+  .tip-list{ display:flex; flex-direction:column; gap:10px; }
+  .tip{ display:flex; gap:10px; align-items:flex-start; background:var(--card-solid); border:1.5px solid var(--line-soft); border-radius:16px; padding:13px 14px; }
+  .tip .ms{ font-size:20px; color:var(--mauve); flex-shrink:0; }
+  .tip b{ display:block; font-size:13px; color:var(--cocoa); margin-bottom:1px; }
+  .tip span{ font-size:12px; color:var(--taupe); line-height:1.45; }
+
+  .persona-bar{ display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; }
+  .persona-bar .p-chip{ flex-shrink:0; display:flex; align-items:center; gap:6px; padding:8px 13px; border-radius:99px; border:1.5px solid var(--line-soft); background:var(--card-solid); font-size:12px; font-weight:700; color:var(--cocoa); cursor:pointer; }
+  .persona-bar .p-chip.on{ border-color:var(--mauve); background:rgba(139,108,130,.10); }
+  .persona-bar .p-chip img{ width:18px; height:18px; }
+</style>
 </head><body>
-<h1>✨ Coming soon</h1>
-<p>This feature is being developed. We'll let you know when it's ready.</p>
-<a href="home.html">Back to Nemow</a>
-<script>setTimeout(function(){location.href="home.html"},3000)</script>
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="home.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">Ovarian Age</div>
+    <a class="t-icon ms" href="settings.html">settings</a>
+  </div>
+
+  <div class="scroll">
+
+    <!-- Life-stage chips -->
+    <div class="persona-bar" id="personaBar">
+      <div class="p-chip on" data-p="bloom"><img src="assets/icons/persona-bloom-64.png" alt="">Bloom <span class="sub">13–17</span></div>
+      <div class="p-chip" data-p="grow"><img src="assets/icons/persona-grow-64.png" alt="">Grow <span class="sub">TTC</span></div>
+      <div class="p-chip" data-p="nurture"><img src="assets/icons/persona-nurture-64.png" alt="">Nurture <span class="sub">Postpartum</span></div>
+      <div class="p-chip" data-p="wisdom"><img src="assets/icons/persona-wisdom-64.png" alt="">Wisdom <span class="sub">35+</span></div>
+    </div>
+
+    <!-- Hero ring -->
+    <div class="card" style="padding:22px 18px 18px">
+      <div class="hero-ring" id="ovRingWrap">
+        <div class="ring-label">
+          <div class="rl-cap">Ovarian age</div>
+          <div class="rl-age" id="ovAgeDisplay">33</div>
+          <div class="rl-delta" id="ovDelta" style="color:var(--ok)">−3 vs calendar</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:12px">
+        <span class="stage-pill" id="strawPill"><span class="ms">eco</span> <span id="strawName">Peak reproductive</span></span>
+      </div>
+    </div>
+
+    <!-- Quick inputs -->
+    <div class="card" style="padding:16px">
+      <b style="font-size:14px;color:var(--cocoa);display:block;margin-bottom:12px">Your inputs</b>
+      <div class="input-grid">
+        <div class="field">
+          <label for="age">Age</label>
+          <input type="number" id="age" value="33" min="13" max="65">
+        </div>
+        <div class="field">
+          <label for="amh">AMH (optional)</label>
+          <input type="number" id="amh" value="" step="0.1" min="0" max="15" placeholder="ng/mL">
+        </div>
+        <div class="field">
+          <label for="momMeno">Mom's menopause age</label>
+          <input type="number" id="momMeno" value="" min="30" max="70" placeholder="optional">
+        </div>
+        <div class="field">
+          <label for="smoke">Smoking</label>
+          <select id="smoke">
+            <option value="never">Never</option>
+            <option value="former">Former</option>
+            <option value="current">Current</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="cycle">Cycle pattern</label>
+          <select id="cycle">
+            <option value="regular">Regular ·2 days</option>
+            <option value="variable">Variable length</option>
+            <option value="skipped">Skipped periods</option>
+            <option value="post12">No period ≥12 months</option>
+            <option value="contraceptive">Hormonal contraception</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="circ">Circadian load</label>
+          <select id="circ">
+            <option value="low">Low</option>
+            <option value="some">Some shift work</option>
+            <option value="chronic">Chronic disruption</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="sleep">Sleep quality</label>
+          <select id="sleep">
+            <option value="good">Good 7–9h</option>
+            <option value="poor">Poor / short</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn mauve" id="saveBtn" style="width:100%;margin-top:16px;padding:13px"><span class="ms">save</span> Save to profile</button>
+    </div>
+
+    <!-- Results -->
+    <div class="card result-card" style="padding:16px">
+      <div class="result-row">
+        <span class="r-label">Chronological age</span>
+        <span class="r-val" id="chronoVal">33</span>
+      </div>
+      <div class="result-row">
+        <span class="r-label">Estimated ovarian age</span>
+        <span class="r-val" id="ovVal">33</span>
+      </div>
+      <div class="result-row">
+        <span class="r-label">Years to menopause</span>
+        <span class="r-val" id="ttmVal">18</span>
+      </div>
+      <div class="result-row">
+        <span class="r-label">Confidence range</span>
+        <span class="r-val" id="ciVal" style="font-size:14px">14 – 22 years</span>
+      </div>
+    </div>
+
+    <!-- What it means -->
+    <h2 class="sec">What this means</h2>
+    <div class="card" style="padding:16px">
+      <p style="font-size:13.5px;line-height:1.55;color:var(--cocoa);margin-bottom:10px" id="meaningText">Your ovarian age is close to your calendar age. This suggests your reserve is declining at a typical pace.</p>
+      <a href="learn-ovarian-age.html" class="btn ghost" style="padding:12px">Read the guide →</a>
+    </div>
+
+    <!-- Tips -->
+    <h2 class="sec">Daily levers</h2>
+    <div class="tip-list">
+      <div class="tip"><span class="ms">restaurant</span><div><b>Glycemic stability</b><span>Keep blood sugar steady with protein-first meals and fiber.</span></div></div>
+      <div class="tip"><span class="ms">bedtime</span><div><b>Deep sleep</b><span>7–9 hours supports follicular recovery and hormone rhythm.</span></div></div>
+      <div class="tip"><span class="ms">fitness_center</span><div><b>Phase-aligned movement</b><span>Moderate exercise most days; avoid overtraining.</span></div></div>
+      <div class="tip"><span class="ms">self_improvement</span><div><b>Stress breaks</b><span>Short breathing resets lower cortisol, which matters for estrogen.</span></div></div>
+    </div>
+
+    <a href="bio-age.html" class="btn mauve" style="margin-top:18px;padding:14px">View full Bio-Age breakdown</a>
+
+  </div>
+</div>
+
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+
+<script src="ovarian-model.js"></script>
+<script src="ovarian-ring.js"></script>
+<script src="appnav.js" defer></script>
+<script>
+(function(){
+  var ageIn = document.getElementById('age');
+  var amhIn = document.getElementById('amh');
+  var momIn = document.getElementById('momMeno');
+  var smokeIn = document.getElementById('smoke');
+  var cycleIn = document.getElementById('cycle');
+  var circIn = document.getElementById('circ');
+  var sleepIn = document.getElementById('sleep');
+
+  function getInputs(){
+    return {
+      age: parseInt(ageIn.value,10)||30,
+      amh: amhIn.value==='' ? null : parseFloat(amhIn.value),
+      momMeno: momIn.value==='' ? null : parseInt(momIn.value,10),
+      smoke: smokeIn.value,
+      cycle: cycleIn.value,
+      circ: circIn.value,
+      sleep: sleepIn.value
+    };
+  }
+
+  function update(){
+    var i = getInputs();
+    var r = OvarianModel.computeOvarianAge(i);
+
+    document.getElementById('ovAgeDisplay').textContent = r.ovAge;
+    document.getElementById('chronoVal').textContent = r.chrono;
+    document.getElementById('ovVal').textContent = r.ovAge;
+
+    var delta = r.delta;
+    var deltaEl = document.getElementById('ovDelta');
+    if(delta <= -1){
+      deltaEl.textContent = '−' + Math.abs(delta) + ' vs calendar';
+      deltaEl.style.color = 'var(--ok)';
+    } else if(delta >= 1){
+      deltaEl.textContent = '+' + delta + ' vs calendar';
+      deltaEl.style.color = 'var(--low)';
+    } else {
+      deltaEl.textContent = 'matches calendar age';
+      deltaEl.style.color = 'var(--warn)';
+    }
+
+    document.getElementById('strawName').textContent = r.straw.name;
+
+    if(r.ttm.postFMP){
+      document.getElementById('ttmVal').textContent = 'Post-menopause';
+      document.getElementById('ciVal').textContent = '—';
+    } else {
+      document.getElementById('ttmVal').textContent = r.ttm.median + ' yrs';
+      document.getElementById('ciVal').textContent = r.ttm.lo + ' – ' + r.ttm.hi + ' yrs';
+    }
+
+    var meaning = document.getElementById('meaningText');
+    if(delta <= -2){
+      meaning.textContent = 'Your ovaries appear younger than your calendar age. Keep doing what you’re doing — your lifestyle is likely protective.';
+    } else if(delta >= 3){
+      meaning.textContent = 'Your ovarian age is several years older than your calendar age. This is a signal to focus on metabolic health, sleep, and stress — small changes can slow the pace.';
+    } else if(delta >= 1){
+      meaning.textContent = 'Your ovarian age is slightly older than your calendar age. The trend over time matters more than one reading.';
+    } else {
+      meaning.textContent = 'Your ovarian age is close to your calendar age. This suggests your reserve is declining at a typical pace.';
+    }
+
+    drawOvarianRing(document.getElementById('ovRingWrap'), r.chrono, r.ovAge);
+  }
+
+  [ageIn, amhIn, momIn, smokeIn, cycleIn, circIn, sleepIn].forEach(function(el){ el.addEventListener('input', update); });
+
+  // Persona chips
+  document.querySelectorAll('#personaBar .p-chip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      document.querySelectorAll('#personaBar .p-chip').forEach(function(c){ c.classList.remove('on'); });
+      chip.classList.add('on');
+      var p = chip.dataset.p;
+      localStorage.setItem('nemow_persona', p);
+      document.documentElement.dataset.persona = p;
+      // sensible defaults per persona
+      if(p==='bloom'){ ageIn.value=16; cycleIn.value='regular'; }
+      if(p==='grow'){ ageIn.value=32; cycleIn.value='regular'; }
+      if(p==='nurture'){ ageIn.value=34; cycleIn.value='variable'; }
+      if(p==='wisdom'){ ageIn.value=48; cycleIn.value='variable'; }
+      update();
+    });
+  });
+
+  // Load saved persona
+  var savedP = localStorage.getItem('nemow_persona') || 'bloom';
+  document.querySelectorAll('#personaBar .p-chip').forEach(function(c){ c.classList.toggle('on', c.dataset.p===savedP); });
+  document.documentElement.dataset.persona = savedP;
+
+  // Save button
+  document.getElementById('saveBtn').addEventListener('click', function(){
+    var i = getInputs();
+    var r = OvarianModel.computeOvarianAge(i);
+    localStorage.setItem('nemow_ovarian_age', JSON.stringify(r));
+    var t = document.createElement('div');
+    t.className='otoast'; t.textContent='Saved to profile ✓'; document.body.appendChild(t);
+    requestAnimationFrame(function(){ t.style.opacity='1'; t.style.transform='translateX(-50%)'; });
+    setTimeout(function(){ t.style.opacity='0'; setTimeout(function(){ t.remove(); },260); },1300);
+  });
+
+  update();
+})();
+</script>
 </body></html>

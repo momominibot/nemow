@@ -8,10 +8,10 @@
 /* ── Persona Theme Transition ── */
 [data-persona] {
   transition:
-    background-color var(--ovaria-duration-slow, 400ms) ease,
-    color var(--ovaria-duration-slow, 400ms) ease,
-    border-color var(--ovaria-duration-slow, 400ms) ease,
-    box-shadow var(--ovaria-duration-slow, 400ms) ease;
+    background-color var(--nemow-duration-slow, 400ms) ease,
+    color var(--nemow-duration-slow, 400ms) ease,
+    border-color var(--nemow-duration-slow, 400ms) ease,
+    box-shadow var(--nemow-duration-slow, 400ms) ease;
 }
 
 /* Crossfade overlay for persona switch */
@@ -34,13 +34,13 @@
 /* ── Persona Icon Morph ── */
 .persona-icon {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 48px; height: 48px; border-radius: var(--ovaria-radius-md);
-  transition: transform 300ms var(--ovaria-easing-bounce);
+  width: 48px; height: 48px; border-radius: var(--nemow-radius-md);
+  transition: transform 300ms var(--nemow-easing-bounce);
 }
 .persona-icon:hover { transform: scale(1.08); }
 .persona-icon:active { transform: scale(0.95); }
 .persona-icon.selected {
-  box-shadow: 0 0 0 3px var(--ovaria-accent);
+  box-shadow: 0 0 0 3px var(--nemow-accent);
 }
 
 /* ── Acupoint Pulse (Body Map) ── */
@@ -48,7 +48,7 @@
   position: absolute;
   width: 12px; height: 12px;
   border-radius: 50%;
-  background: var(--ovaria-accent);
+  background: var(--nemow-accent);
   transform: translate(-50%, -50%);
   cursor: pointer;
 }
@@ -56,7 +56,7 @@
   content: '';
   position: absolute; inset: -6px;
   border-radius: 50%;
-  border: 2px solid var(--ovaria-accent);
+  border: 2px solid var(--nemow-accent);
   opacity: 0.4;
   animation: acupoint-pulse 2s ease-in-out infinite;
 }
@@ -64,7 +64,7 @@
   content: '';
   position: absolute; inset: -12px;
   border-radius: 50%;
-  border: 1px solid var(--ovaria-accent);
+  border: 1px solid var(--nemow-accent);
   opacity: 0.2;
   animation: acupoint-pulse 2s ease-in-out infinite 0.4s;
 }
@@ -77,10 +77,10 @@
 .phase-wave {
   position: relative; height: 4px;
   background: linear-gradient(90deg,
-    var(--ovaria-accent-secondary) 0%,
-    var(--ovaria-accent) 33%,
-    var(--ovaria-cta) 66%,
-    var(--ovaria-accent-secondary) 100%
+    var(--nemow-accent-secondary) 0%,
+    var(--nemow-accent) 33%,
+    var(--nemow-cta) 66%,
+    var(--nemow-accent-secondary) 100%
   );
   background-size: 200% 100%;
   border-radius: 2px;
@@ -99,7 +99,7 @@
 .sparkle {
   position: absolute;
   width: 6px; height: 6px;
-  background: var(--ovaria-cta);
+  background: var(--nemow-cta);
   border-radius: 50%;
   animation: sparkle-pop 1s ease-out forwards;
   opacity: 0;
@@ -115,8 +115,8 @@
   width: 32px; height: 32px;
   border-radius: 50%;
   border: 3px solid transparent;
-  border-top-color: var(--ovaria-accent);
-  border-right-color: var(--ovaria-accent-secondary);
+  border-top-color: var(--nemow-accent);
+  border-right-color: var(--nemow-accent-secondary);
   animation: wc-spin 1s linear infinite;
   position: relative;
 }
@@ -124,7 +124,7 @@
   content: '';
   position: absolute; inset: -4px;
   border-radius: 50%;
-  border: 2px solid var(--ovaria-accent);
+  border: 2px solid var(--nemow-accent);
   opacity: 0.2;
   animation: wc-wash 2s ease-in-out infinite;
 }
@@ -138,7 +138,7 @@
 
 /* ── Card Enter Animation ── */
 .card-enter {
-  animation: card-rise 400ms var(--ovaria-easing-smooth) both;
+  animation: card-rise 400ms var(--nemow-easing-smooth) both;
 }
 @keyframes card-rise {
   from { opacity: 0; transform: translateY(12px); }
@@ -153,7 +153,7 @@
 /* ── Breathing Guide (Myofascial) ── */
 .breath-circle {
   width: 80px; height: 80px; border-radius: 50%;
-  background: radial-gradient(circle, var(--ovaria-accent) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--nemow-accent) 0%, transparent 70%);
   opacity: 0.3;
   animation: breath 6s ease-in-out infinite;
 }
@@ -167,8 +167,8 @@
   animation: fertile-pulse 3s ease-in-out infinite;
 }
 @keyframes fertile-pulse {
-  0%, 100% { box-shadow: 0 0 8px var(--ovaria-accent-glow); }
-  50%      { box-shadow: 0 0 20px var(--ovaria-accent-glow), 0 0 40px rgba(212, 165, 116, 0.1); }
+  0%, 100% { box-shadow: 0 0 8px var(--nemow-accent-glow); }
+  50%      { box-shadow: 0 0 20px var(--nemow-accent-glow), 0 0 40px rgba(212, 165, 116, 0.1); }
 }
 
 /* ── Wisdom Slow Dissolve ── */

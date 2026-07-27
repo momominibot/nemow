@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" data-persona="bloom">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nemow · TCM Wellness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="nemow-persona.css">
+  <style>
+    .eyebrow { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--taupe); margin-bottom:6px; }
+    .tcm-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:0 16px; }
+    .tcm-tile { display:flex; flex-direction:column; align-items:flex-start; gap:8px; padding:18px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); text-decoration:none; color:var(--ink); transition:transform .1s; }
+    .tcm-tile:active { transform:scale(.98); }
+    .tcm-tile span.icon { font-size:28px; }
+    .tcm-tile b { font-size:15px; }
+    .tcm-tile small { font-size:12px; color:var(--taupe); line-height:1.4; }
+    .tcm-safety { display:flex; gap:10px; align-items:flex-start; padding:14px; border-radius:12px; background:rgba(201,138,46,.12); border:1.5px solid rgba(201,138,46,.35); font-size:12.5px; line-height:1.55; color:var(--ink); margin:16px; }
+    .tcm-safety span { color:var(--warn); font-size:20px; flex-shrink:0; }
+    .routine-card { margin:16px; padding:16px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a href="home.html" class="icon-btn" aria-label="Back"><span class="material-symbols-outlined">arrow_back_ios_new</span></a>
+      <h1>TCM Wellness</h1>
+      <span></span>
+    </header>
+
+    <main class="content" style="padding-bottom:100px">
+      <div style="text-align:center; padding:24px 16px 8px">
+        <div class="eyebrow">TRADITIONAL CHINESE MEDICINE</div>
+        <h2 style="font-size:24px; margin-bottom:8px">Gentle TCM care, made modern</h2>
+        <p style="color:var(--taupe); font-size:14px; line-height:1.5">Evidence-informed guides for herbs, acupressure, foot soaks, and warming rituals that support ovarian wellness.</p>
+      </div>
+
+      <div class="tcm-safety">
+        <span class="material-symbols-outlined">warning</span>
+        <div>
+          <strong style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--warn)">Safety First</strong><br>
+          Herbs, moxibustion, and some acupoints are contraindicated in pregnancy. Nemow guides; licensed practitioners treat. Always consult a qualified TCM provider for personal advice.
+        </div>
+      </div>
+
+      <div class="tcm-grid">
+        <a href="tcm-herbs.html" class="tcm-tile">
+          <span class="material-symbols-outlined icon" style="color:var(--sage)">eco</span>
+          <b>Herbs & Teas</b>
+          <small>Ovarian-supportive botanicals and daily tonics</small>
+        </a>
+        <a href="acupoints.html" class="tcm-tile">
+          <span class="material-symbols-outlined icon" style="color:var(--terracotta)">acupuncture</span>
+          <b>Acupoints</b>
+          <small>13 evidence-based points with body map</small>
+        </a>
+        <a href="tcm-footsoak.html" class="tcm-tile">
+          <span class="material-symbols-outlined icon" style="color:var(--gold)">bathtub</span>
+          <b>Foot Soaks</b>
+          <small>Warming lower-jiao rituals for circulation</small>
+        </a>
+        <a href="tcm-topical.html" class="tcm-tile">
+          <span class="material-symbols-outlined icon" style="color:var(--coral-deep)">local_fire_department</span>
+          <b>Topical & Moxa</b>
+          <small>Warm compresses and safe moxibustion</small>
+        </a>
+      </div>
+
+      <div class="routine-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
+          <b>My TCM Routine</b>
+          <span style="font-size:12px; color:var(--taupe)">Quick-start</span>
+        </div>
+        <div style="display:flex; gap:8px; overflow-x:auto; padding-bottom:4px">
+          <a href="breathwork.html" class="badge" style="flex-shrink:0; background:var(--sage); color:#fff; text-decoration:none">Breathwork</a>
+          <a href="acupoints.html" class="badge" style="flex-shrink:0; background:var(--terracotta); color:#fff; text-decoration:none">CV4 pressure</a>
+          <a href="tcm-footsoak.html" class="badge" style="flex-shrink:0; background:var(--gold); color:#fff; text-decoration:none">Foot soak</a>
+        </div>
+      </div>
+
+      <div class="card" style="margin:16px; padding:16px; background:linear-gradient(135deg, rgba(196,184,208,.18), rgba(240,232,244,.12))">
+        <div style="display:flex; gap:12px; align-items:center">
+          <span class="material-symbols-outlined" style="font-size:32px; color:var(--mauve)">stethoscope</span>
+          <div>
+            <b style="display:block; margin-bottom:2px">Ask a Practitioner</b>
+            <span style="font-size:13px; color:var(--taupe)">Get personalized guidance from a licensed TCM provider.</span>
+          </div>
+        </div>
+        <button class="btn ghost" style="margin-top:12px; width:100%">Find a practitioner</button>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="home.html"><span class="material-symbols-outlined">home</span>Home</a>
+      <a href="learn.html"><span class="material-symbols-outlined">menu_book</span>Learn</a>
+      <a href="tcm-hub.html" class="active"><span class="material-symbols-outlined">acupuncture</span>TCM</a>
+      <a href="foods.html"><span class="material-symbols-outlined">restaurant</span>Foods</a>
+      <a href="profile.html"><span class="material-symbols-outlined">person</span>Profile</a>
+    </nav>
+  </div>
+</body>
+</html>

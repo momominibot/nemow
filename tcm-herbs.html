@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-persona="bloom">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nemow \u00b7 Herbs & Teas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="nemow-persona.css">
+  <style>
+    .eyebrow { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--taupe); margin-bottom:6px; }
+    .herb-card { margin:12px 16px; padding:16px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); }
+    .herb-card .row { display:flex; gap:12px; align-items:flex-start; }
+    .herb-thumb { width:64px; height:64px; border-radius:50%; background:#F6F8F3; display:grid; place-items:center; font-size:32px; flex-shrink:0; }
+    .herb-title { font-size:16px; font-weight:800; margin-bottom:2px; }
+    .herb-latin { font-size:12px; color:var(--taupe); font-style:italic; margin-bottom:6px; }
+    .herb-desc { font-size:13px; color:var(--ink); line-height:1.5; margin-bottom:10px; }
+    .tags { display:flex; gap:6px; flex-wrap:wrap; }
+    .tag { padding:4px 10px; border-radius:20px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; background:var(--sunken); color:var(--ink); }
+    .tcm-safety { display:flex; gap:10px; align-items:flex-start; padding:14px; border-radius:12px; background:rgba(201,138,46,.12); border:1.5px solid rgba(201,138,46,.35); font-size:12.5px; line-height:1.55; color:var(--ink); margin:16px; }
+    .tcm-safety span { color:var(--warn); font-size:20px; flex-shrink:0; }
+    .filters { display:flex; gap:8px; overflow-x:auto; padding:0 16px 8px; }
+    .chip { padding:8px 14px; border-radius:99px; border:2px solid var(--line-soft); background:var(--card); font-size:13px; font-weight:700; white-space:nowrap; cursor:pointer; }
+    .chip.on { background:var(--ink); color:var(--card); border-color:var(--ink); }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a href="tcm-hub.html" class="icon-btn" aria-label="Back"><span class="material-symbols-outlined">arrow_back_ios_new</span></a>
+      <h1>Herbs & Teas</h1>
+      <span></span>
+    </header>
+
+    <main class="content" style="padding-bottom:100px">
+      <div style="text-align:center; padding:24px 16px 8px">
+        <div class="eyebrow">BOTANICAL SUPPORT</div>
+        <h2 style="font-size:24px; margin-bottom:8px">Ovarian-friendly herbs</h2>
+        <p style="color:var(--taupe); font-size:14px; line-height:1.5">Daily teas and tonics used in TCM to nourish blood, support qi, and ease cycle-related symptoms.</p>
+      </div>
+
+      <div class="tcm-safety">
+        <span class="material-symbols-outlined">warning</span>
+        <div>
+          <strong style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--warn)">Important</strong><br>
+          Herbs can interact with medications and are not safe for everyone. Avoid during pregnancy unless guided by a licensed practitioner. This is educational, not medical advice.
+        </div>
+      </div>
+
+      <div class="filters">
+        <div class="chip on" data-filter="all">All</div>
+        <div class="chip" data-filter="tea">Tea</div>
+        <div class="chip" data-filter="tonic">Tonic</div>
+        <div class="chip" data-filter="cramps">Cramps</div>
+        <div class="chip" data-filter="sleep">Sleep</div>
+        <div class="chip" data-filter="stress">Stress</div>
+      </div>
+
+      <div id="herbList"></div>
+
+      <div class="card" style="margin:16px; padding:16px; background:linear-gradient(135deg, rgba(196,184,208,.18), rgba(240,232,244,.12))">
+        <div style="display:flex; gap:12px; align-items:center">
+          <span class="material-symbols-outlined" style="font-size:32px; color:var(--mauve)">stethoscope</span>
+          <div>
+            <b style="display:block; margin-bottom:2px">Ask a Practitioner</b>
+            <span style="font-size:13px; color:var(--taupe)">Herbal formulas should be personalized. Find a licensed TCM provider.</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="home.html"><span class="material-symbols-outlined">home</span>Home</a>
+      <a href="learn.html"><span class="material-symbols-outlined">menu_book</span>Learn</a>
+      <a href="tcm-hub.html" class="active"><span class="material-symbols-outlined">acupuncture</span>TCM</a>
+      <a href="foods.html"><span class="material-symbols-outlined">restaurant</span>Foods</a>
+      <a href="profile.html"><span class="material-symbols-outlined">person</span>Profile</a>
+    </nav>
+  </div>
+
+  <script>
+    const herbs = [
+      { name: 'Goji berry', latin: 'Lycium barbarum', emoji: '\ud83e\uded6', type: 'tonic', tags: ['Grow','Nurture','Energy'], desc: 'Nourishes liver and kidney yin, supports blood and essence. Often used in fertility and postpartum recovery tonics.', caution: 'May interact with blood thinners. Avoid large doses if diabetic.' },
+      { name: 'Red date + longan tea', latin: 'Ziziphus jujuba + Dimocarpus longan', emoji: '\ud83c\udf75', type: 'tea', tags: ['Bloom','Nurture','Sleep','Stress'], desc: 'Classic blood-nourishing tea for calming the mind, supporting sleep, and replenishing qi after menstruation.', caution: 'Avoid in damp-heat conditions or high blood sugar.' },
+      { name: 'White peony', latin: 'Paeonia lactiflora', emoji: '\ud83c\udf38', type: 'tonic', tags: ['Bloom','Cramps','Stress'], desc: 'Nourishes blood, soothes liver qi stagnation, and is commonly used for menstrual cramps and PMS.', caution: 'Contraindicated in pregnancy unless prescribed.' },
+      { name: 'Chrysanthemum', latin: 'Chrysanthemum morifolium', emoji: '\ud83c\udf3c', type: 'tea', tags: ['Bloom','Stress','Sleep'], desc: 'Clears liver heat and calms the eyes. Gentle evening tea for stress and screen-fatigue relief.', caution: 'Cooling herb; avoid if you run cold or have diarrhea.' },
+      { name: 'Astragalus', latin: 'Astragalus membranaceus', emoji: '\ud83e\uded4', type: 'tonic', tags: ['Grow','Nurture','Energy'], desc: 'Tonifies qi and supports immunity. Often paired with red dates post-period or postpartum.', caution: 'Avoid during acute infection or fever. Use cautiously with immunosuppressants.' },
+      { name: 'Ginger tea', latin: 'Zingiber officinale', emoji: '\ud83e\ued6', type: 'tea', tags: ['Bloom','Cramps','Stress'], desc: 'Warms the middle, dispels cold, improves circulation. Helpful for cold-type menstrual cramps.', caution: 'Can aggravate acid reflux or hot flashes. Use cautiously in pregnancy.' },
+      { name: 'Dang gui', latin: 'Angelica sinensis', emoji: '\ud83e\uded6', type: 'tonic', tags: ['Bloom','Grow','Cramps'], desc: '"Female ginseng" \u2014 nourishes and invigorates blood, regulates menstruation. Core TCM herb for gynecological wellness.', caution: 'Contraindicated in pregnancy and with blood thinners. Use only under practitioner guidance.' },
+      { name: 'Siberian ginseng', latin: 'Eleutherococcus senticosus', emoji: '\ud83c\udf3f', type: 'tonic', tags: ['Wisdom','Energy','Stress'], desc: 'Adaptogen that supports stress resilience and energy. Used in TCM-adjacent protocols for fatigue and HPA axis support.', caution: 'Avoid in high blood pressure or before sleep.' }
+    ];
+
+    function render(filter='all') {
+      const list = document.getElementById('herbList');
+      list.innerHTML = herbs.filter(h => filter === 'all' || h.type === filter || h.tags.some(t => t.toLowerCase() === filter)).map(h => `
+        <div class="herb-card" data-type="${h.type}">
+          <div class="row">
+            <div class="herb-thumb">${h.emoji}</div>
+            <div>
+              <div class="herb-title">${h.name}</div>
+              <div class="herb-latin">${h.latin}</div>
+              <div class="herb-desc">${h.desc}</div>
+              <div class="tags">${h.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+            </div>
+          </div>
+          <div style="margin-top:12px; padding:10px; border-radius:10px; background:rgba(190,74,62,.08); border:1px solid rgba(190,74,62,.2); font-size:12px; color:var(--ink)">
+            <strong style="color:var(--low)">\u26a0\ufe0f Caution:</strong> ${h.caution}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.querySelectorAll('.chip').forEach(c => {
+      c.addEventListener('click', () => {
+        document.querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
+        c.classList.add('on');
+        render(c.dataset.filter);
+      });
+    });
+
+    render();
+  </script>
+</body>
+</html>

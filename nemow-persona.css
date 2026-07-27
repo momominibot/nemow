@@ -1,0 +1,533 @@
+/* ══════════════════════════════════════════════════════════════
+   NEMOW — Persona Theme System (Warm Minimal)
+   4 life-stage themes via data-persona attribute on <html>
+   Subtle accents on the warm cream base — not full background changes.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Transitions ── */
+html[data-persona] body {
+  transition: background-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+              color 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+html[data-persona] .card,
+html[data-persona] .nav,
+html[data-persona] .top,
+html[data-persona] .btn,
+html[data-persona] .chip,
+html[data-persona] .badge,
+html[data-persona] .metric {
+  transition: background-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Persona Selector UI ── */
+.persona-picker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.persona-opt {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 10px;
+  border-radius: 14px;
+  border: 2px solid #E0DAD0;
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: .2s;
+}
+.persona-opt .p-emoji { font-size: 32px; }
+.persona-opt .p-name { font-weight: 800; font-size: 13px; color: #1D1B18; }
+.persona-opt .p-age  { font-size: 11px; color: #8B8178; }
+.persona-opt.on {
+  border-color: #1D1B18;
+  background: #F6EFE0;
+}
+.persona-opt .p-check {
+  position: absolute; top: 8px; right: 8px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #1D1B18;
+  color: #fff; font-size: 12px;
+  display: none; align-items: center; justify-content: center;
+}
+.persona-opt.on .p-check { display: flex; }
+
+/* ── Co-branding footer ── */
+.nemow-footer {
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 12px;
+  color: #8B8178;
+  opacity: 0.6;
+  text-align: center;
+  padding: 24px 0 8px;
+}
+
+/* ═══════════════════════════════════════════════
+   PERSONA: BLOOM — Teens 13–17 (pink accent)
+   ═══════════════════════════════════════════════ */
+[data-persona="bloom"] {
+  --nemow-surface:              #F6EFE0;
+  --nemow-surface-alt:          #F0E8D8;
+  --nemow-surface-card:         #FFFFFF;
+  --nemow-surface-dark:         #2A2432;
+  --nemow-accent:               #D4A0B2;
+  --nemow-accent-secondary:     #7EC8A8;
+  --nemow-accent-glow:          rgba(212, 160, 178, 0.18);
+  --nemow-cta:                  #1D1B18;
+  --nemow-cta-hover:            #3A3630;
+  --nemow-cta-text:             #FFFFFF;
+  --nemow-success:              #5CB89B;
+  --nemow-warning:              #D4A85C;
+  --nemow-text-primary:         #1D1B18;
+  --nemow-text-secondary:       #8B8178;
+  --nemow-text-emphasis:        #1D1B18;
+  --nemow-text-on-cta:          #FFFFFF;
+  --nemow-text-on-accent:       #1D1B18;
+  --nemow-border:               #E0DAD0;
+  --nemow-border-focus:         #D4A0B2;
+  --nemow-radius-sm:            8px;
+  --nemow-radius-md:            14px;
+  --nemow-radius-lg:            20px;
+  --nemow-radius-pill:          999px;
+  --nemow-shadow-card:          0 4px 14px rgba(29,27,24,.08);
+  --nemow-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
+  --nemow-font-heading:         'Nunito', system-ui, sans-serif;
+  --nemow-font-body:            'Nunito', system-ui, sans-serif;
+  --nemow-font-data:            'Nunito', system-ui, sans-serif;
+  --nemow-font-size-h1:         32px;
+  --nemow-font-size-h2:         24px;
+  --nemow-font-size-h3:         20px;
+  --nemow-font-size-body:       16px;
+  --nemow-font-size-caption:    14px;
+  --nemow-font-size-label:      13px;
+  --nemow-font-size-micro:      12px;
+  --nemow-easing-bounce:        cubic-bezier(0.34, 1.56, 0.64, 1);
+  --nemow-easing-smooth:        cubic-bezier(0.4, 0, 0.2, 1);
+  --nemow-duration-fast:        150ms;
+  --nemow-duration-normal:      300ms;
+  --nemow-duration-slow:        500ms;
+  --nemow-icon-style:           'filled';
+  --nemow-icon-weight:          600;
+}
+
+/* ── Bloom: pink accent touches ── */
+[data-persona="bloom"] .top .t-icon { border-color: #D4A0B2; }
+[data-persona="bloom"] .nav { border-top-color: #D4A0B2; }
+[data-persona="bloom"] .card { border-color: rgba(212,160,178,.4); }
+[data-persona="bloom"] .btn.ghost { border-color: #D4A0B2; }
+[data-persona="bloom"] .chip.on { border-color: #D4A0B2; background: rgba(212,160,178,.12); color: #8B5C6E; }
+[data-persona="bloom"] .badge.info { background: rgba(212,160,178,.18); color: #7B4A5C; }
+
+/* ═══════════════════════════════════════════════
+   PERSONA: GROW — Women 25–38 (terracotta accent)
+   ═══════════════════════════════════════════════ */
+[data-persona="grow"] {
+  --nemow-surface:              #F6EFE0;
+  --nemow-surface-alt:          #F0E8D8;
+  --nemow-surface-card:         #FFFFFF;
+  --nemow-surface-dark:         #2C2620;
+  --nemow-accent:               #C88B6E;
+  --nemow-accent-secondary:     #9BB7AD;
+  --nemow-accent-glow:          rgba(200, 139, 110, 0.16);
+  --nemow-cta:                  #1D1B18;
+  --nemow-cta-hover:            #3A3630;
+  --nemow-cta-text:             #FFFFFF;
+  --nemow-success:              #9BB7AD;
+  --nemow-warning:              #D4A85C;
+  --nemow-highlight:            #D4A85C;
+  --nemow-text-primary:         #1D1B18;
+  --nemow-text-secondary:       #8B8178;
+  --nemow-text-emphasis:        #1D1B18;
+  --nemow-text-on-cta:          #FFFFFF;
+  --nemow-text-on-accent:       #FFFFFF;
+  --nemow-data-primary:         #C17767;
+  --nemow-data-secondary:       #C88B6E;
+  --nemow-data-tertiary:        #9BB7AD;
+  --nemow-border:               #E0DAD0;
+  --nemow-border-focus:         #C88B6E;
+  --nemow-radius-sm:            8px;
+  --nemow-radius-md:            12px;
+  --nemow-radius-lg:            16px;
+  --nemow-radius-pill:          999px;
+  --nemow-shadow-card:          0 4px 14px rgba(29,27,24,.08);
+  --nemow-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
+  --nemow-font-heading:         'Nunito', system-ui, sans-serif;
+  --nemow-font-body:            'Nunito', system-ui, sans-serif;
+  --nemow-font-data:            'Nunito', system-ui, sans-serif;
+  --nemow-font-size-h1:         32px;
+  --nemow-font-size-h2:         24px;
+  --nemow-font-size-h3:         20px;
+  --nemow-font-size-body:       16px;
+  --nemow-font-size-caption:    14px;
+  --nemow-font-size-label:      13px;
+  --nemow-font-size-micro:      12px;
+  --nemow-easing-bounce:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --nemow-easing-smooth:        cubic-bezier(0.4, 0, 0.2, 1);
+  --nemow-duration-fast:        200ms;
+  --nemow-duration-normal:      400ms;
+  --nemow-duration-slow:        800ms;
+  --nemow-icon-style:           'outlined';
+  --nemow-icon-weight:          300;
+}
+
+/* ── Grow: terracotta accent touches ── */
+[data-persona="grow"] .top .t-icon { border-color: #C88B6E; }
+[data-persona="grow"] .nav { border-top-color: #C88B6E; }
+[data-persona="grow"] .card { border-color: rgba(200,139,110,.4); }
+[data-persona="grow"] .btn.ghost { border-color: #C88B6E; }
+[data-persona="grow"] .chip.on { border-color: #C88B6E; background: rgba(200,139,110,.12); color: #8B4E30; }
+[data-persona="grow"] .badge.info { background: rgba(200,139,110,.16); color: #7A4230; }
+
+/* ═══════════════════════════════════════════════
+   PERSONA: NURTURE — Post-Pregnancy Recovery (lavender accent)
+   ═══════════════════════════════════════════════ */
+[data-persona="nurture"] {
+  --nemow-surface:              #F6EFE0;
+  --nemow-surface-alt:          #F0E8D8;
+  --nemow-surface-card:         #FFFFFF;
+  --nemow-surface-night:        #2A2330;
+  --nemow-accent:               #B0A0C0;
+  --nemow-accent-secondary:     #A3C4BC;
+  --nemow-accent-glow:          rgba(176, 160, 192, 0.16);
+  --nemow-cta:                  #1D1B18;
+  --nemow-cta-hover:            #3A3630;
+  --nemow-cta-text:             #FFFFFF;
+  --nemow-success:              #A3C4BC;
+  --nemow-warning:              #D4A85C;
+  --nemow-warm-pop:             #E8C4B8;
+  --nemow-earth:                #C88B6E;
+  --nemow-text-primary:         #1D1B18;
+  --nemow-text-secondary:       #8B8178;
+  --nemow-text-emphasis:        #1D1B18;
+  --nemow-text-on-cta:          #FFFFFF;
+  --nemow-text-on-accent:       #1D1B18;
+  --nemow-timer-display:        #1D1B18;
+  --nemow-timer-bg:             #F6EFE0;
+  --nemow-timer-active:         #B0A0C0;
+  --nemow-night-surface:        #2A2330;
+  --nemow-night-text:           #D4CCDD;
+  --nemow-night-accent:         #C9BED9;
+  --nemow-night-amber:          #D4A85C;
+  --nemow-border:               #E0DAD0;
+  --nemow-border-focus:         #B0A0C0;
+  --nemow-radius-sm:            8px;
+  --nemow-radius-md:            14px;
+  --nemow-radius-lg:            18px;
+  --nemow-radius-pill:          999px;
+  --nemow-shadow-card:          0 4px 14px rgba(29,27,24,.08);
+  --nemow-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
+  --nemow-font-heading:         'Nunito', system-ui, sans-serif;
+  --nemow-font-body:            'Nunito', system-ui, sans-serif;
+  --nemow-font-data:            'Nunito', system-ui, sans-serif;
+  --nemow-font-timer:           'Nunito', system-ui, sans-serif;
+  --nemow-font-size-h1:         32px;
+  --nemow-font-size-h2:         24px;
+  --nemow-font-size-h3:         20px;
+  --nemow-font-size-body:       16px;
+  --nemow-font-size-caption:    14px;
+  --nemow-font-size-label:      13px;
+  --nemow-font-size-micro:      12px;
+  --nemow-font-size-timer-lg:   48px;
+  --nemow-font-size-timer-md:   32px;
+  --nemow-easing-bounce:        cubic-bezier(0.4, 0, 0.2, 1);
+  --nemow-easing-smooth:        cubic-bezier(0.4, 0, 0.2, 1);
+  --nemow-easing-pulse:         cubic-bezier(0.4, 0, 0.6, 1);
+  --nemow-duration-fast:        300ms;
+  --nemow-duration-normal:      600ms;
+  --nemow-duration-slow:        1000ms;
+  --nemow-icon-style:           'filled';
+  --nemow-icon-weight:          400;
+}
+
+/* ── Nurture: lavender accent touches ── */
+[data-persona="nurture"] .top .t-icon { border-color: #B0A0C0; }
+[data-persona="nurture"] .nav { border-top-color: #B0A0C0; }
+[data-persona="nurture"] .card { border-color: rgba(176,160,192,.4); }
+[data-persona="nurture"] .btn.ghost { border-color: #B0A0C0; }
+[data-persona="nurture"] .chip.on { border-color: #B0A0C0; background: rgba(176,160,192,.12); color: #6B5A82; }
+[data-persona="nurture"] .badge.info { background: rgba(176,160,192,.18); color: #5A4A72; }
+
+/* ═══════════════════════════════════════════════
+   PERSONA: WISDOM — Women 40–60 (gold accent)
+   ═══════════════════════════════════════════════ */
+[data-persona="wisdom"] {
+  --nemow-surface:              #F6EFE0;
+  --nemow-surface-alt:          #F0E8D8;
+  --nemow-surface-card:         #FFFFFF;
+  --nemow-surface-dark:         #26211E;
+  --nemow-accent:               #B8956A;
+  --nemow-accent-secondary:     #C4A882;
+  --nemow-accent-glow:          rgba(184, 149, 106, 0.14);
+  --nemow-cta:                  #1D1B18;
+  --nemow-cta-hover:            #3A3630;
+  --nemow-cta-text:             #FFFFFF;
+  --nemow-success:              #5D7B6F;
+  --nemow-warning:              #C4A882;
+  --nemow-depth:                #8C5C61;
+  --nemow-cool:                 #5D7B6F;
+  --nemow-text-primary:         #1D1B18;
+  --nemow-text-secondary:       #8B8178;
+  --nemow-text-emphasis:        #1D1B18;
+  --nemow-text-on-cta:          #FFFFFF;
+  --nemow-text-on-accent:       #FFFFFF;
+  --nemow-data-primary:         #B8956A;
+  --nemow-data-secondary:       #8C5C61;
+  --nemow-data-tertiary:        #5D7B6F;
+  --nemow-border:               #E0DAD0;
+  --nemow-border-focus:         #B8956A;
+  --nemow-radius-sm:            6px;
+  --nemow-radius-md:            8px;
+  --nemow-radius-lg:            12px;
+  --nemow-radius-pill:          999px;
+  --nemow-shadow-card:          0 4px 14px rgba(29,27,24,.08);
+  --nemow-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
+  --nemow-font-heading:         'Nunito', system-ui, sans-serif;
+  --nemow-font-body:            'Nunito', system-ui, sans-serif;
+  --nemow-font-data:            'Nunito', system-ui, sans-serif;
+  --nemow-font-size-h1:         32px;
+  --nemow-font-size-h2:         24px;
+  --nemow-font-size-h3:         20px;
+  --nemow-font-size-body:       17px;
+  --nemow-font-size-caption:    15px;
+  --nemow-font-size-label:      15px;
+  --nemow-font-size-micro:      13px;
+  --nemow-easing-bounce:        cubic-bezier(0.4, 0, 0.2, 1);
+  --nemow-easing-smooth:        cubic-bezier(0.4, 0, 0.2, 1);
+  --nemow-duration-fast:        250ms;
+  --nemow-duration-normal:      500ms;
+  --nemow-duration-slow:        900ms;
+  --nemow-icon-style:           'outlined';
+  --nemow-icon-weight:          300;
+}
+
+/* ── Wisdom: gold accent touches ── */
+[data-persona="wisdom"] .top .t-icon { border-color: #B8956A; }
+[data-persona="wisdom"] .nav { border-top-color: #B8956A; }
+[data-persona="wisdom"] .card { border-color: rgba(184,149,106,.4); }
+[data-persona="wisdom"] .btn.ghost { border-color: #B8956A; }
+[data-persona="wisdom"] .chip.on { border-color: #B8956A; background: rgba(184,149,106,.12); color: #7A5A2A; }
+[data-persona="wisdom"] .badge.info { background: rgba(184,149,106,.16); color: #6A4A20; }
+
+/* ── Persona-aware body styles ── */
+html[data-persona] body {
+  background: var(--nemow-surface);
+  color: var(--nemow-text-primary);
+  font-family: var(--nemow-font-body);
+}
+html[data-persona] .card {
+  border-radius: var(--nemow-radius-md);
+  box-shadow: var(--nemow-shadow-card);
+  border-color: var(--nemow-border);
+  background: var(--nemow-surface-card);
+}
+html[data-persona] .btn {
+  border-radius: var(--nemow-radius-pill);
+  background: var(--nemow-cta);
+  color: var(--nemow-text-on-cta);
+}
+html[data-persona] .top {
+  background: linear-gradient(180deg, var(--nemow-surface) 62%, transparent);
+}
+html[data-persona] h2.sec {
+  font-family: var(--nemow-font-heading);
+}
+html[data-persona] .sub {
+  color: var(--nemow-text-secondary);
+}
+
+/* ── Card tints (persona-aware) ── */
+html[data-persona] .card.tint-lavender { background: #F8F3FA; }
+html[data-persona] .card.tint-sage     { background: #F6F8F3; }
+html[data-persona] .card.tint-blush    { background: #FCF6F5; }
+html[data-persona] .card.tint-gold     { background: #FDFAF3; }
+
+/* ── Page-specific persona cards ── */
+.acupoint-card {
+  background: #FFFFFF;
+  border: 2px solid #E0DAD0;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 4px 14px rgba(29,27,24,.08);
+  transition: .2s;
+}
+.acupoint-card h3 {
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #1D1B18;
+  margin: 0 0 2px;
+  letter-spacing: -.01em;
+}
+.acupoint-card .cn-name {
+  font-size: 13px;
+  color: #8B6C82;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.body-map { position: relative; max-width: 380px; margin: 0 auto; }
+.body-map svg { width: 100%; display: block; }
+.body-map .point-dot {
+  cursor: pointer;
+  transition: .2s;
+}
+.body-map .point-dot:hover {
+  transform: scale(1.3);
+}
+
+/* Filter chips */
+.filter-row { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0; scrollbar-width: none; }
+.filter-row::-webkit-scrollbar { display: none; }
+.filter-chip {
+  flex-shrink: 0; padding: 8px 15px; border-radius: 99px;
+  background: #FFFFFF;
+  border: 2px solid #E0DAD0;
+  font: 700 12px 'Nunito', system-ui, sans-serif;
+  color: #1D1B18;
+  cursor: pointer; transition: .15s; white-space: nowrap;
+}
+.filter-chip.on {
+  background: #1D1B18;
+  color: #FFFFFF;
+  border-color: #1D1B18;
+}
+
+/* Evidence badge */
+.evidence-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px; border-radius: 99px;
+  font-size: 10px; font-weight: 800; letter-spacing: .04em;
+}
+.evidence-badge.strong { background: rgba(78,140,106,.14); color: #4E8C6A; }
+.evidence-badge.moderate { background: rgba(201,138,46,.14); color: #C98A2E; }
+.evidence-badge.consensus { background: rgba(158,174,200,.22); color: #5A6BB0; }
+
+/* Safety warning */
+.safety-warn {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 14px; border-radius: 8px;
+  background: rgba(212,168,92,.14);
+  border: 1.5px solid rgba(212,168,92,.35);
+  font-size: 12px; line-height: 1.5; color: #1D1B18;
+}
+
+/* Technique card */
+.tech-card {
+  background: #FFFFFF;
+  border: 2px solid #E0DAD0;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 14px rgba(29,27,24,.08);
+  transition: transform .2s, box-shadow .2s;
+  position: relative;
+  overflow: hidden;
+}
+.tech-card::after {
+  content: "";
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--nemow-accent-secondary, #A0AD90), var(--nemow-accent, #8B6C82));
+  opacity: 0.4;
+}
+.tech-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(29,27,24,.12); }
+.tech-card h3 {
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #1D1B18;
+  margin: 0 0 4px;
+  letter-spacing: -.01em;
+}
+.tech-card .tech-icon { font-size: 32px; flex-shrink: 0; }
+.tech-step {
+  display: flex; gap: 12px; padding: 10px 0;
+  font-size: 14px;
+  color: #1D1B18; line-height: 1.55;
+  border-bottom: 1px solid #E0DAD0;
+}
+.tech-step:last-child { border-bottom: none; }
+.tech-step .step-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #1D1B18; color: #FFFFFF;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; flex-shrink: 0;
+  margin-top: 1px;
+}
+.tech-meta { display: flex; gap: 14px; flex-wrap: wrap; margin: 12px 0; }
+.tech-meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #8B8178; font-weight: 600; }
+.tech-meta-item .ms { font-size: 17px; color: #8B6C82; }
+.contraindication {
+  margin-top: 12px; padding: 10px 14px; border-radius: 8px;
+  background: rgba(212,168,92,.12); border-left: 3px solid #D4A85C;
+  font-size: 11.5px; line-height: 1.5; color: #1D1B18;
+}
+.contraindication b { color: #C98A2E; font-weight: 800; }
+.lifestage-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.lifestage-chips span { padding: 4px 10px; border-radius: 99px; font-size: 10px; font-weight: 800; }
+.ls-bloom { background: rgba(212,160,178,.2); color: #7B4A5C; }
+.ls-grow { background: rgba(200,139,110,.2); color: #7A4230; }
+.ls-nurture { background: rgba(176,160,192,.2); color: #5A4A72; }
+.ls-wisdom { background: rgba(184,149,106,.16); color: #6A4A20; }
+.ls-all { background: rgba(147,187,143,.18); color: #3F6B3A; }
+
+/* Session card */
+.session-card {
+  text-align: center; padding: 20px; border-radius: 14px;
+  background: #F6EFE0;
+  border: 2px solid #E0DAD0;
+  cursor: pointer; transition: .2s;
+}
+.session-card:hover { transform: translateY(-2px); border-color: #1D1B18; }
+
+/* Food card dual-view */
+.food-card {
+  background: #FFFFFF;
+  border: 2px solid #E0DAD0;
+  border-radius: 14px;
+  padding: 18px 16px;
+  box-shadow: 0 4px 14px rgba(29,27,24,.08);
+  transition: transform .2s, box-shadow .2s;
+  position: relative;
+  overflow: hidden;
+}
+.food-card::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--nemow-accent, #8B6C82), var(--nemow-accent-secondary, #A0AD90));
+  opacity: 0.5;
+}
+.food-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(29,27,24,.12); }
+.food-card .food-header { display: flex; align-items: center; gap: 10px; }
+.food-card .food-icon { font-size: 36px; flex-shrink: 0; }
+.food-card .food-title { font-family: 'Nunito', system-ui, sans-serif; font-size: 17px; font-weight: 800; color: #1D1B18; margin: 0; letter-spacing: -.01em; }
+.food-card .food-cn { font-size: 13px; color: #8B6C82; font-weight: 700; margin-left: 6px; letter-spacing: .02em; }
+.food-dual { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.food-tcm, .food-western {
+  padding: 12px 14px; border-radius: 8px;
+  font-size: 14px; line-height: 1.55;
+}
+.food-tcm { background: rgba(139,108,130,.08); }
+.food-western { background: rgba(147,187,143,.1); }
+.food-tcm .f-label, .food-western .f-label {
+  font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 5px;
+}
+.food-tcm .f-label { color: #8B6C82; }
+.food-western .f-label { color: #5CB89B; }
+.food-benefit {
+  font-size: 12px; margin-top: 10px; line-height: 1.45;
+  padding: 8px 12px; border-radius: 8px;
+  background: rgba(232,200,192,.16);
+  border-left: 3px solid #E89580;
+  color: #1D1B18;
+}
+.food-benefit b { color: #8B6C82; font-weight: 800; }
+.thermal-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 99px;
+  font-size: 10.5px; font-weight: 700;
+}
+.thermal-warm { background: rgba(196,111,79,.14); color: #C46F4F; }
+.thermal-cool { background: rgba(127,174,201,.14); color: #5A8AAA; }
+.thermal-neutral { background: rgba(150,150,150,.1); color: #8B8178; }

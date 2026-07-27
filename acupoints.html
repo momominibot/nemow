@@ -6,17 +6,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined&family=DM+Serif+Display&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=Inter:opsz,wght@14..32,400;14..32,600&family=Cormorant+Garamond:wght@500&family=Work+Sans:wght@400;500;600&family=Lora:wght@500&family=Plus+Jakarta+Sans:wght@400;500;600&family=Playfair+Display:wght@600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="anim.css">
-<link rel="stylesheet" href="ovaria-persona.css">
+<link rel="stylesheet" href="nemow-persona.css">
 <script src="anim.js" defer></script>
 <style>
-.acupoint-card h3 { font-family:var(--ovaria-font-heading); font-size:var(--ovaria-font-size-h3); color:var(--ovaria-text-emphasis); margin:0 0 2px; }
-.acupoint-card .cn-name { font-size:13px; color:var(--ovaria-accent); font-weight:600; margin-bottom:8px; }
+.acupoint-card h3 { font-family:var(--nemow-font-heading); font-size:var(--nemow-font-size-h3); color:var(--nemow-text-emphasis); margin:0 0 2px; }
+.acupoint-card .cn-name { font-size:13px; color:var(--nemow-accent); font-weight:600; margin-bottom:8px; }
 .acupoint-grid { display:grid; grid-template-columns:1fr; gap:14px; }
 .field-row { display:flex; gap:8px; margin-top:6px; }
-.field-label { font-size:10.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ovaria-text-secondary); }
-.field-value { font-size:13px; color:var(--ovaria-text-primary); line-height:1.5; }
-.method-tag { display:inline-flex; align-items:center; gap:4px; padding:3px 8px; border-radius:99px; font-size:10px; font-weight:700; background:var(--ovaria-accent-glow); color:var(--ovaria-text-primary); cursor:pointer; transition:.15s; }
-.method-tag.on { background:var(--ovaria-accent); color:var(--ovaria-text-on-cta); }
+.field-label { font-size:10.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--nemow-text-secondary); }
+.field-value { font-size:13px; color:var(--nemow-text-primary); line-height:1.5; }
+.method-tag { display:inline-flex; align-items:center; gap:4px; padding:3px 8px; border-radius:99px; font-size:10px; font-weight:700; background:var(--nemow-accent-glow); color:var(--nemow-text-primary); cursor:pointer; transition:.15s; }
+.method-tag.on { background:var(--nemow-accent); color:var(--nemow-text-on-cta); }
 .tag-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
 .stage-tag { display:inline-flex; align-items:center; gap:3px; padding:3px 8px; border-radius:99px; font-size:10px; font-weight:700; }
 .stage-tag.bloom { background:rgba(201,165,212,.25); color:#7B5A8A; }
@@ -24,11 +24,11 @@
 .stage-tag.nurture { background:rgba(184,169,201,.25); color:#6B5A82; }
 .stage-tag.wisdom { background:rgba(123,107,94,.18); color:#5C4A3E; }
 .preg-warn { font-size:11px; color:#C46F4F; font-weight:600; margin-top:4px; }
-.routine-card { background:var(--ovaria-surface-card); border:2px dashed var(--ovaria-accent); border-radius:var(--ovaria-radius-md); padding:14px; }
+.routine-card { background:var(--nemow-surface-card); border:2px dashed var(--nemow-accent); border-radius:var(--nemow-radius-md); padding:14px; }
 .routine-item { display:flex; align-items:center; gap:8px; padding:8px 0; font-size:13px; }
-.routine-item .r-status { width:22px; height:22px; border-radius:50%; border:2px solid var(--ovaria-border); display:flex; align-items:center; justify-content:center; font-size:11px; color:transparent; cursor:pointer; }
-.routine-item.done .r-status { background:var(--ovaria-accent); border-color:var(--ovaria-accent); color:#fff; }
-.timer-display { font-family:var(--ovaria-font-heading); font-size:36px; text-align:center; color:var(--ovaria-accent); padding:16px 0; }
+.routine-item .r-status { width:22px; height:22px; border-radius:50%; border:2px solid var(--nemow-border); display:flex; align-items:center; justify-content:center; font-size:11px; color:transparent; cursor:pointer; }
+.routine-item.done .r-status { background:var(--nemow-accent); border-color:var(--nemow-accent); color:#fff; }
+.timer-display { font-family:var(--nemow-font-heading); font-size:36px; text-align:center; color:var(--nemow-accent); padding:16px 0; }
 </style>
 </head><body>
 
@@ -42,20 +42,16 @@
 
   <div class="scroll">
     <!-- Hero -->
-    <div class="card tint-lavender" style="padding:20px 18px">
-      <div class="row" style="gap:10px;margin-bottom:6px">
-        <span style="font-size:34px">🗺️</span>
-        <div>
-          <div style="font-family:var(--ovaria-font-heading);font-weight:600;font-size:19px;color:var(--ovaria-text-emphasis)">Your Body's Healing Map</div>
-          <div class="sub" style="font-size:12px;margin-top:3px">13 evidence-backed acupoints for ovarian health across every life stage. TCM wisdom meets modern research.</div>
-        </div>
-      </div>
+    <div class="card tint-lavender" style="padding:20px 18px;text-align:center">
+      <span style="font-size:42px">🗺️</span>
+      <div style="font-family:var(--nemow-font-heading);font-weight:600;font-size:19px;color:var(--nemow-text-emphasis);margin-top:6px">Your Body's Healing Map</div>
+      <div class="sub" style="font-size:12px;margin-top:3px">13 evidence-backed acupoints for ovarian health across every life stage.</div>
     </div>
 
     <!-- Safety warning -->
     <div class="safety-warn">
       <span class="ms" style="font-size:20px;color:#C46F4F">warning</span>
-      <div><b style="color:#C46F4F">Safety First</b><br>SP6 (Sanyinjiao) and LI4 (Hegu) are <b>contraindicated during pregnancy</b>. If you're using the Grow persona and may be pregnant, these points are automatically flagged. Always consult a licensed TCM practitioner for professional treatment.</div>
+      <div><b style="color:#C46F4F">Safety first</b><br>Some points are contraindicated in pregnancy. Consult a licensed practitioner.</div>
     </div>
 
     <!-- Filter row -->
@@ -77,46 +73,46 @@
     </div>
 
     <!-- Body Map -->
-    <div class="card" style="padding:0;overflow:hidden;border-radius:var(--ovaria-radius-md)">
+    <div class="card" style="padding:0;overflow:hidden;border-radius:var(--nemow-radius-md)">
       <div class="body-map" style="position:relative;width:100%;max-width:320px;margin:0 auto">
         <img src="assets/illustrations/body-silhouette-600.png" alt="Body map for acupoint reference" style="width:100%;display:block" loading="eager" id="bodyMapImg">
         <!-- Acupoint markers overlaid on body -->
         <!-- CV4 Guanyuan — lower abdomen -->
-        <a href="#card-cv4" class="point-dot" data-point="cv4" style="position:absolute;left:49%;top:40%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:var(--ovaria-accent);opacity:0.8;box-shadow:0 0 6px var(--ovaria-accent-glow)"></a>
-        <span style="position:absolute;left:56%;top:39.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">CV4</span>
+        <a href="#card-cv4" class="point-dot" data-point="cv4" style="position:absolute;left:49%;top:40%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:var(--nemow-accent);opacity:0.8;box-shadow:0 0 6px var(--nemow-accent-glow)"></a>
+        <span style="position:absolute;left:56%;top:39.5%;font-size:9px;font-weight:700;color:var(--nemow-text-primary)">CV4</span>
         <!-- CV6 Qihai -->
-        <a href="#card-cv6" class="point-dot" data-point="cv6" style="position:absolute;left:49%;top:37%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--ovaria-accent);opacity:0.7;box-shadow:0 0 5px var(--ovaria-accent-glow)"></a>
-        <span style="position:absolute;left:56%;top:36.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">CV6</span>
+        <a href="#card-cv6" class="point-dot" data-point="cv6" style="position:absolute;left:49%;top:37%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--nemow-accent);opacity:0.7;box-shadow:0 0 5px var(--nemow-accent-glow)"></a>
+        <span style="position:absolute;left:56%;top:36.5%;font-size:9px;font-weight:700;color:var(--nemow-text-primary)">CV6</span>
         <!-- CV3 Zhongji -->
-        <a href="#card-cv3" class="point-dot" data-point="cv3" style="position:absolute;left:49%;top:43.5%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.6"></a>
-        <span style="position:absolute;left:56%;top:43%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">CV3</span>
+        <a href="#card-cv3" class="point-dot" data-point="cv3" style="position:absolute;left:49%;top:43.5%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--nemow-accent);opacity:0.6"></a>
+        <span style="position:absolute;left:56%;top:43%;font-size:9px;font-weight:700;color:var(--nemow-text-primary)">CV3</span>
         <!-- ST29 Guilai — bilateral -->
-        <a href="#card-st29" class="point-dot" data-point="st29" style="position:absolute;left:42%;top:44%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.6"></a>
-        <span style="position:absolute;left:34%;top:43.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">ST29</span>
+        <a href="#card-st29" class="point-dot" data-point="st29" style="position:absolute;left:42%;top:44%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--nemow-accent);opacity:0.6"></a>
+        <span style="position:absolute;left:34%;top:43.5%;font-size:9px;font-weight:700;color:var(--nemow-text-primary)">ST29</span>
         <!-- PC6 Neiguan — forearms -->
-        <a href="#card-pc6" class="point-dot" data-point="pc6" style="position:absolute;left:17%;top:30%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.6"></a>
-        <span style="position:absolute;left:8%;top:29%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">PC6</span>
+        <a href="#card-pc6" class="point-dot" data-point="pc6" style="position:absolute;left:17%;top:30%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--nemow-accent);opacity:0.6"></a>
+        <span style="position:absolute;left:8%;top:29%;font-size:9px;font-weight:700;color:var(--nemow-text-primary)">PC6</span>
         <!-- SP6 Sanyinjiao — lower legs -->
-        <a href="#card-sp6" class="point-dot" data-point="sp6" style="position:absolute;left:33%;top:74%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:var(--ovaria-accent);opacity:0.8;box-shadow:0 0 6px var(--ovaria-accent-glow)"></a>
-        <span style="position:absolute;left:24%;top:73.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">SP6</span>
+        <a href="#card-sp6" class="point-dot" data-point="sp6" style="position:absolute;left:33%;top:74%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:var(--nemow-accent);opacity:0.8;box-shadow:0 0 6px var(--nemow-accent-glow)"></a>
+        <span style="position:absolute;left:24%;top:73.5%;font-size:9px;font-weight:700;color:var(--nemow-text-primary)">SP6</span>
         <!-- SP10 Xuehai — thighs -->
-        <a href="#card-sp10" class="point-dot" data-point="sp10" style="position:absolute;left:38%;top:58%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.6"></a>
-        <span style="position:absolute;left:30%;top:57%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">SP10</span>
+        <a href="#card-sp10" class="point-dot" data-point="sp10" style="position:absolute;left:38%;top:58%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--nemow-accent);opacity:0.6"></a>
+        <span style="position:absolute;left:30%;top:57%;font-size:9px;font-weight:700;color:var(--nemow-text-primary)">SP10</span>
         <!-- ST36 Zusanli — below knees -->
-        <a href="#card-st36" class="point-dot" data-point="st36" style="position:absolute;left:36%;top:66%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--ovaria-accent);opacity:0.7"></a>
-        <span style="position:absolute;left:28%;top:65.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">ST36</span>
+        <a href="#card-st36" class="point-dot" data-point="st36" style="position:absolute;left:36%;top:66%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--nemow-accent);opacity:0.7"></a>
+        <span style="position:absolute;left:28%;top:65.5%;font-size:9px;font-weight:700;color:var(--nemow-text-primary)">ST36</span>
         <!-- KI3 Taixi — ankles -->
-        <a href="#card-ki3" class="point-dot" data-point="ki3" style="position:absolute;left:32%;top:84%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.6"></a>
-        <span style="position:absolute;left:23%;top:83.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">KI3</span>
+        <a href="#card-ki3" class="point-dot" data-point="ki3" style="position:absolute;left:32%;top:84%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--nemow-accent);opacity:0.6"></a>
+        <span style="position:absolute;left:23%;top:83.5%;font-size:9px;font-weight:700;color:var(--nemow-text-primary)">KI3</span>
         <!-- LV3 Taichong — feet -->
-        <a href="#card-lv3" class="point-dot" data-point="lv3" style="position:absolute;left:30%;top:90%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.6"></a>
-        <span style="position:absolute;left:22%;top:89.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">LV3</span>
+        <a href="#card-lv3" class="point-dot" data-point="lv3" style="position:absolute;left:30%;top:90%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--nemow-accent);opacity:0.6"></a>
+        <span style="position:absolute;left:22%;top:89.5%;font-size:9px;font-weight:700;color:var(--nemow-text-primary)">LV3</span>
         <!-- BL23 Shenshu — lower back center -->
-        <a href="#card-bl23" class="point-dot" data-point="bl23" style="position:absolute;left:47%;top:27%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.5"></a>
-        <span style="position:absolute;left:54%;top:26.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">BL23</span>
+        <a href="#card-bl23" class="point-dot" data-point="bl23" style="position:absolute;left:47%;top:27%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--nemow-accent);opacity:0.5"></a>
+        <span style="position:absolute;left:54%;top:26.5%;font-size:9px;font-weight:700;color:var(--nemow-text-primary)">BL23</span>
         <!-- GV4 Mingmen — lower back -->
-        <a href="#card-gv4" class="point-dot" data-point="gv4" style="position:absolute;left:49%;top:29%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.5"></a>
-        <span style="position:absolute;left:56%;top:28.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">GV4</span>
+        <a href="#card-gv4" class="point-dot" data-point="gv4" style="position:absolute;left:49%;top:29%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--nemow-accent);opacity:0.5"></a>
+        <span style="position:absolute;left:56%;top:28.5%;font-size:9px;font-weight:700;color:var(--nemow-text-primary)">GV4</span>
       </div>
     </div>
           </div>
@@ -125,8 +121,8 @@
     <div class="sub" style="text-align:center;font-size:12px">Tap a point on the map or scroll below for details</div>
 
     <!-- Demo Video -->
-    <div class="card" style="margin-top:16px;padding:0;overflow:hidden;border-radius:var(--ovaria-radius-md)">
-      <video src="assets/videos/acupressure-demo.mp4" autoplay loop muted playsinline style="width:100%;display:block;border-radius:var(--ovaria-radius-md)"></video>
+    <div class="card" style="margin-top:16px;padding:0;overflow:hidden;border-radius:var(--nemow-radius-md)">
+      <video src="assets/videos/acupressure-demo.mp4" autoplay loop muted playsinline style="width:100%;display:block;border-radius:var(--nemow-radius-md)"></video>
       <div style="padding:12px 16px"><span style="font-weight:700;font-size:13px">👆 Self-Acupressure Demo</span><span class="sub" style="display:block;font-size:11px;margin-top:2px">CV4 Guanyuan — gentle circular pressure for 1-3 minutes</span></div>
     </div>
 
@@ -148,7 +144,7 @@
       </div>
     </div>
 
-    <div class="ovaria-footer"><span>Nemow</span></div>
+    <div class="nemow-footer"><span>Nemow</span></div>
   </div>
 
 <nav class="nav">
@@ -195,7 +191,7 @@ function renderAcupoints(){
           <h3>${p.name}</h3>
           <div class="cn-name">${p.en}</div>
         </div>
-        <span class="ms" style="font-size:22px;color:${inRoutine?'var(--ovaria-accent)':'var(--ovaria-border)'};cursor:pointer" onclick="toggleRoutine('${p.id}',this)">${inRoutine?'bookmark':'bookmark_border'}</span>
+        <span class="ms" style="font-size:22px;color:${inRoutine?'var(--nemow-accent)':'var(--nemow-border)'};cursor:pointer" onclick="toggleRoutine('${p.id}',this)">${inRoutine?'bookmark':'bookmark_border'}</span>
       </div>
       <div class="field-row"><span class="field-label">Location</span></div>
       <div class="field-value">${p.location}</div>
@@ -210,7 +206,7 @@ function renderAcupoints(){
       </div>
       <div style="margin-top:8px">
         <span class="evidence-badge ${p.evidenceLevel}">${p.evidenceLevel==='strong'?'🟢 Strong':p.evidenceLevel==='moderate'?'🟡 Moderate':'🔵 Consensus'}</span>
-        <span style="font-size:10px;color:var(--ovaria-text-secondary);margin-left:6px">${p.evidence}</span>
+        <span style="font-size:10px;color:var(--nemow-text-secondary);margin-left:6px">${p.evidence}</span>
       </div>
     </div>`;
   });
@@ -231,18 +227,18 @@ function renderRoutine(){
   if(!routinePoints.length){ list.innerHTML = '<div class="sub" style="text-align:center;padding:10px">No points saved yet. Tap the bookmark icon to add.</div>'; document.getElementById('timerSection').style.display='none'; return; }
   document.getElementById('timerSection').style.display='block';
   list.innerHTML = routinePoints.map(p => `
-    <div class="routine-item ${p.id}" style="border-bottom:1px solid var(--ovaria-border)">
+    <div class="routine-item ${p.id}" style="border-bottom:1px solid var(--nemow-border)">
       <span class="r-status" onclick="markDone('${p.id}')">✓</span>
-      <span style="flex:1"><b>${p.name}</b> <span style="font-size:11px;color:var(--ovaria-text-secondary)">${p.location}</span></span>
-      <span style="font-size:11px;color:var(--ovaria-accent);cursor:pointer" onclick="removeFromRoutine('${p.id}')">✕</span>
+      <span style="flex:1"><b>${p.name}</b> <span style="font-size:11px;color:var(--nemow-text-secondary)">${p.location}</span></span>
+      <span style="font-size:11px;color:var(--nemow-accent);cursor:pointer" onclick="removeFromRoutine('${p.id}')">✕</span>
     </div>
   `).join('');
 }
 
 function toggleRoutine(id, el){
   const idx = routine.indexOf(id);
-  if(idx >= 0){ routine.splice(idx,1); if(el) el.textContent = 'bookmark_border'; el.style.color = 'var(--ovaria-border)'; }
-  else { routine.push(id); if(el) el.textContent = 'bookmark'; el.style.color = 'var(--ovaria-accent)'; }
+  if(idx >= 0){ routine.splice(idx,1); if(el) el.textContent = 'bookmark_border'; el.style.color = 'var(--nemow-border)'; }
+  else { routine.push(id); if(el) el.textContent = 'bookmark'; el.style.color = 'var(--nemow-accent)'; }
   localStorage.setItem('ov_acupoint_routine', JSON.stringify(routine));
   renderAcupoints();
   renderRoutine();

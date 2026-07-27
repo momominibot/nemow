@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-persona="nurture">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nemow · Breathwork</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="ovaria-persona.css">
+  <style>
+    .breath-hero { text-align:center; padding:24px 16px; }
+    .breath-circle { width:220px; height:220px; margin:24px auto; border-radius:50%; border:3px solid var(--ovaria-text-primary); display:flex; align-items:center; justify-content:center; transition:transform 0.2s ease; background:var(--ovaria-surface); }
+    .breath-label { font-size:18px; font-weight:800; text-transform:uppercase; letter-spacing:1px; }
+    .timer { font-size:48px; font-weight:800; margin-top:8px; }
+    .controls { display:flex; gap:12px; justify-content:center; margin:24px 0; }
+    .controls button { padding:12px 24px; border:none; border-radius:12px; background:var(--ovaria-text-primary); color:var(--ovaria-surface); font-weight:700; cursor:pointer; }
+    .controls select { padding:12px; border-radius:12px; border:2px solid var(--ovaria-border); background:var(--ovaria-surface); font-family:inherit; }
+    .technique-card { margin:12px 16px; padding:16px; border:2px solid var(--ovaria-border); border-radius:16px; background:var(--ovaria-surface); }
+    .technique-card h4 { margin-bottom:4px; }
+    .technique-card p { font-size:13px; color:var(--ovaria-text-secondary); line-height:1.5; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a href="home.html" class="icon-btn" aria-label="Back">←</a>
+      <h1>Breathwork</h1>
+      <span></span>
+    </header>
+
+    <main class="content">
+      <div class="breath-hero">
+        <div class="eyebrow">STRESS & HRV</div>
+        <h2>Breathe to lower stress</h2>
+        <p class="sub">Resonance breathing at ~5-6 breaths/min increases HRV and calms the HPA axis — supporting hormonal balance.</p>
+      </div>
+
+      <div class="breath-circle" id="breathCircle">
+        <div style="text-align:center">
+          <div class="breath-label" id="breathText">Ready</div>
+          <div class="timer" id="breathTimer">—</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <select id="patternSelect">
+          <option value="resonance">Resonance (4-7-8)</option>
+          <option value="box">Box (4-4-4-4)</option>
+          <option value="coherent">Coherent (5.5 in / 5.5 out)</option>
+        </select>
+        <button id="startBtn" onclick="toggleBreathing()">Start</button>
+      </div>
+
+      <div class="technique-card">
+        <h4>💭 Resonance Breathing</h4>
+        <p>Inhale 4s, hold 7s, exhale 8s. Shown to reduce cortisol and improve HRV. Best before bed or during high-stress moments.</p>
+      </div>
+
+      <div class="technique-card">
+        <h4>🔷 Box Breathing</h4>
+        <p>Equal inhale, hold, exhale, hold. Used by athletes and clinicians to quickly down-regulate the nervous system.</p>
+      </div>
+
+      <div class="technique-card">
+        <h4>🔄 Coherent Breathing</h4>
+        <p>5.5 seconds in, 5.5 seconds out. Targets cardiac resonance frequency, maximizing heart rate variability.</p>
+      </div>
+
+      <div class="card" style="margin:16px">
+        <h3 style="margin-bottom:8px">🧠 Why this helps ovaries</h3>
+        <p class="sub" style="font-size:13px;line-height:1.5">Chronic stress elevates cortisol, which can disrupt GnRH pulsatility and ovarian function. Regular breathwork is a free, evidence-based tool to support hormonal resilience.</p>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="home.html"><span>home</span>Home</a>
+      <a href="learn.html"><span>menu_book</span>Learn</a>
+      <a href="acupoints.html"><span>acupuncture</span>TCM</a>
+      <a href="foods.html"><span>restaurant</span>Foods</a>
+      <a href="profile.html"><span>person</span>Profile</a>
+    </nav>
+  </div>
+
+  <script>
+    let running = false, interval = null, timeout = null;
+    const patterns = {
+      resonance: { inhale:4, hold1:7, exhale:8, hold2:0, label:['Inhale','Hold','Exhale'] },
+      box: { inhale:4, hold1:4, exhale:4, hold2:4, label:['Inhale','Hold','Exhale','Hold'] },
+      coherent: { inhale:5.5, hold1:0, exhale:5.5, hold2:0, label:['Inhale','Exhale'] }
+    };
+
+    function toggleBreathing() {
+      if(running) stop(); else start();
+    }
+
+    function start() {
+      running = true;
+      document.getElementById('startBtn').textContent = 'Stop';
+      const p = patterns[document.getElementById('patternSelect').value];
+      runCycle(p, 0, 0);
+    }
+
+    function runCycle(p, phaseIndex, count) {
+      if(!running) return;
+      const phases = [];
+      if(p.inhale) phases.push({label:p.label[0], dur:p.inhale, scale:1.35});
+      if(p.hold1) phases.push({label:p.label[1], dur:p.hold1, scale:1.35});
+      if(p.exhale) phases.push({label:p.label[phases.length] || 'Exhale', dur:p.exhale, scale:1.0});
+      if(p.hold2) phases.push({label:p.label[phases.length] || 'Hold', dur:p.hold2, scale:1.0});
+
+      const phase = phases[phaseIndex % phases.length];
+      document.getElementById('breathText').textContent = phase.label;
+      document.getElementById('breathCircle').style.transform = `scale(${phase.scale})`;
+
+      let remaining = phase.dur;
+      document.getElementById('breathTimer').textContent = remaining.toFixed(1);
+      interval = setInterval(() => {
+        remaining -= 0.1;
+        document.getElementById('breathTimer').textContent = remaining > 0 ? remaining.toFixed(1) : '0.0';
+      }, 100);
+
+      timeout = setTimeout(() => {
+        clearInterval(interval);
+        runCycle(p, phaseIndex+1, count+1);
+      }, phase.dur * 1000);
+    }
+
+    function stop() {
+      running = false;
+      clearInterval(interval);
+      clearTimeout(timeout);
+      document.getElementById('startBtn').textContent = 'Start';
+      document.getElementById('breathText').textContent = 'Ready';
+      document.getElementById('breathTimer').textContent = '—';
+      document.getElementById('breathCircle').style.transform = 'scale(1)';
+    }
+  </script>
+</body>
+</html>

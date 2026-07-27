@@ -35,7 +35,28 @@
 
   <div class="scroll">
 
-    <!-- gesture from a loved one (arrives from partner-view) -->
+    <!-- Life-stage persona -->
+    <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:2px" id="personaBar">
+      <div class="p-chip on" data-p="bloom" style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 13px;border-radius:99px;border:1.5px solid var(--line-soft);background:var(--card-solid);font-size:12px;font-weight:700;color:var(--cocoa);cursor:pointer"><img src="assets/icons/persona-bloom-64.png" style="width:18px;height:18px" alt="">Bloom <span class="sub">13–17</span></div>
+      <div class="p-chip" data-p="grow" style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 13px;border-radius:99px;border:1.5px solid var(--line-soft);background:var(--card-solid);font-size:12px;font-weight:700;color:var(--cocoa);cursor:pointer"><img src="assets/icons/persona-grow-64.png" style="width:18px;height:18px" alt="">Grow <span class="sub">TTC</span></div>
+      <div class="p-chip" data-p="nurture" style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 13px;border-radius:99px;border:1.5px solid var(--line-soft);background:var(--card-solid);font-size:12px;font-weight:700;color:var(--cocoa);cursor:pointer"><img src="assets/icons/persona-nurture-64.png" style="width:18px;height:18px" alt="">Nurture <span class="sub">Postpartum</span></div>
+      <div class="p-chip" data-p="wisdom" style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 13px;border-radius:99px;border:1.5px solid var(--line-soft);background:var(--card-solid);font-size:12px;font-weight:700;color:var(--cocoa);cursor:pointer"><img src="assets/icons/persona-wisdom-64.png" style="width:18px;height:18px" alt="">Wisdom <span class="sub">35+</span></div>
+    </div>
+
+    <!-- Ovarian Age Hero -->
+    <a href="ovarian-age.html" class="card" style="padding:18px;text-decoration:none;color:inherit;display:block;background:linear-gradient(135deg, rgba(139,108,130,.12), rgba(255,255,255,.85));border:1.5px solid rgba(139,108,130,.35)">
+      <div class="row" style="justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="sub" style="font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mauve)">Ovarian Age</div>
+          <div style="font-family:var(--serif);font-size:32px;font-weight:600;color:var(--cocoa);line-height:1.1;margin-top:4px">33</div>
+          <div style="font-size:13px;color:var(--ok);font-weight:700;margin-top:2px">−3 years vs calendar</div>
+        </div>
+        <span class="ms" style="font-size:34px;color:var(--mauve)">radio_button_checked</span>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--taupe);line-height:1.45">Your latest estimate looks protective. Recalculate anytime with AMH or cycle data.</div>
+    </a>
+
+    <!-- gesture from a loved one -->
     <a href="partner-connect.html" id="gestureBanner" style="display:none;text-decoration:none;color:inherit">
       <div class="card" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(135deg,rgba(217,131,164,.22),rgba(255,255,255,.75));border:1.5px solid rgba(217,131,164,.4)">
         <span style="width:42px;height:42px;border-radius:50%;background:var(--d-cycle);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:beatPulse 2s ease-in-out infinite"><span class="ms" id="gIcon">favorite</span></span>
@@ -62,40 +83,30 @@
       </div>
     </div>
 
-    <!-- Insight hero — stats from connected 3rd-party integrations -->
+    <!-- Today's insights -->
     <div class="card" style="padding:18px">
       <div class="row" style="justify-content:space-between">
-        <b style="font-family:var(--serif);font-size:19px;color:var(--cocoa)">Today's insights</b>
-        <span class="badge ok" style="font-size:10.5px"><span class="ms" style="font-size:13px">watch</span> Apple Watch · synced 7:02 AM</span>
+        <b style="font-family:var(--serif);font-size:18px;color:var(--cocoa)">Today</b>
+        <span class="badge ok" style="font-size:10.5px"><span class="ms" style="font-size:13px">watch</span> Synced</span>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
         <div style="background:rgba(127,174,201,.14);border-radius:16px;padding:13px 14px">
           <div class="row" style="gap:6px"><span class="ms" style="font-size:16px;color:var(--d-sleep)">bedtime</span><span class="sub" style="font-size:10.5px;font-weight:800;letter-spacing:.05em">SLEEP</span></div>
           <div style="font-family:var(--serif);font-size:22px;color:var(--cocoa);margin-top:3px">7h 24m</div>
-          <div class="sub" style="font-size:10.5px">Score 88 · deep +12%</div>
+          <div class="sub" style="font-size:10.5px">Score 88</div>
         </div>
         <div style="background:rgba(236,150,120,.14);border-radius:16px;padding:13px 14px">
           <div class="row" style="gap:6px"><span class="ms" style="font-size:16px;color:var(--d-stress)">monitor_heart</span><span class="sub" style="font-size:10.5px;font-weight:800;letter-spacing:.05em">HRV</span></div>
           <div style="font-family:var(--serif);font-size:22px;color:var(--cocoa);margin-top:3px">62 ms</div>
-          <div class="sub" style="font-size:10.5px">Balanced · RHR 61</div>
-        </div>
-        <div style="background:rgba(227,181,99,.16);border-radius:16px;padding:13px 14px">
-          <div class="row" style="gap:6px"><span class="ms" style="font-size:16px;color:var(--d-exercise)">directions_walk</span><span class="sub" style="font-size:10.5px;font-weight:800;letter-spacing:.05em">MOVEMENT</span></div>
-          <div style="font-family:var(--serif);font-size:22px;color:var(--cocoa);margin-top:3px">8,432</div>
-          <div class="sub" style="font-size:10.5px">steps · 32 zone-2 min</div>
-        </div>
-        <div style="background:rgba(217,131,164,.14);border-radius:16px;padding:13px 14px">
-          <div class="row" style="gap:6px"><span class="ms" style="font-size:16px;color:var(--d-cycle)">thermostat</span><span class="sub" style="font-size:10.5px;font-weight:800;letter-spacing:.05em">SKIN TEMP</span></div>
-          <div style="font-family:var(--serif);font-size:22px;color:var(--cocoa);margin-top:3px">+0.2°C</div>
-          <div class="sub" style="font-size:10.5px">vs baseline · follicular</div>
+          <div class="sub" style="font-size:10.5px">Balanced</div>
         </div>
       </div>
     </div>
 
-    <!-- Nutrition glance → full hub in diet.html -->
+    <!-- Nutrition glance -->
     <a href="diet.html" class="card" style="padding:16px 18px;display:block;text-decoration:none;color:inherit">
       <div class="row" style="justify-content:space-between;align-items:baseline">
-        <b style="font-size:13.5px"><span class="ms" style="font-size:17px;color:var(--d-diet);vertical-align:-3px">restaurant</span> Nutrition today</b>
+        <b style="font-size:13.5px"><span class="ms" style="font-size:17px;color:var(--d-diet);vertical-align:-3px">restaurant</span> Nutrition</b>
         <span style="font-family:var(--serif);font-size:15px;color:var(--cocoa)">1,240 <span class="sub" style="font-size:11px">/ 2,000 kcal</span></span>
       </div>
       <div style="height:9px;border-radius:99px;overflow:hidden;display:flex;margin-top:12px">
@@ -103,17 +114,54 @@
         <div style="width:44%;background:var(--gold)"></div>
         <div style="width:31%;background:var(--terracotta)"></div>
       </div>
-      <div class="row" style="margin-top:8px;gap:14px;font-size:11px;color:var(--taupe)">
-        <span style="color:var(--d-medical)">● <span style="color:var(--taupe)">Protein 82g</span></span>
-        <span style="color:var(--gold)">● <span style="color:var(--taupe)">Carbs 148g</span></span>
-        <span style="color:var(--terracotta)">● <span style="color:var(--taupe)">Fat 45g</span></span>
+    </a>
+
+    <!-- Hormone cycle map -->
+    <h2 class="sec">Hormones this cycle</h2>
+    <div class="card" style="padding:16px 14px">
+      <div class="row" style="justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <b style="font-family:var(--serif);font-size:16px;color:var(--cocoa)">Follicular phase</b>
+        <span class="badge info" style="background:rgba(217,131,164,.16);color:var(--d-cycle)">Day 9</span>
       </div>
-      <div class="sub" style="font-size:11.5px;margin-top:9px;color:var(--d-diet);font-weight:700">Meals, label scanner &amp; foods for your ovaries →</div>
+      <svg class="hchart" viewBox="0 0 340 160" width="100%" style="display:block">
+        <defs><clipPath id="hclip"><rect x="0" y="8" width="340" height="120" rx="12"/></clipPath></defs>
+        <g clip-path="url(#hclip)">
+          <rect x="0" y="8" width="170" height="120" fill="rgba(217,131,164,.12)"/>
+          <rect x="170" y="8" width="170" height="120" fill="rgba(91,168,154,.13)"/>
+          <path d="M0,134 C50,130 108,42 150,33 C166,30 176,90 186,95 C210,101 236,66 258,70 C292,75 320,116 340,122" fill="none" stroke="#7FA9D0" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M0,143 L150,140 C160,140 163,26 170,26 C177,26 180,140 190,140 L340,142" fill="none" stroke="#D983A4" stroke-width="2.6" stroke-linecap="round"/>
+        </g>
+        <line x1="170" y1="4" x2="170" y2="128" stroke="var(--mauve)" stroke-width="1.4" stroke-dasharray="3 3" opacity=".6"/>
+        <circle cx="170" cy="10" r="4" fill="var(--mauve)"/>
+        <text x="170" y="150" text-anchor="middle" font-size="9" fill="var(--mauve)" font-weight="700">Ovulation</text>
+        <circle cx="109" cy="10" r="5" fill="var(--mauve)" stroke="#fff" stroke-width="2"/>
+        <text x="109" y="150" text-anchor="middle" font-size="9" fill="var(--mauve)" font-weight="800">Today</text>
+      </svg>
+      <div class="row" style="gap:8px;margin-top:12px;flex-wrap:wrap">
+        <span class="hstat"><span class="ms" style="color:#7FA9D0;font-size:15px">trending_up</span> E2 rising</span>
+        <span class="hstat"><span class="ms" style="color:#D983A4;font-size:15px">remove</span> LH low</span>
+      </div>
+      <p style="margin:12px 2px 0;font-size:12.5px;line-height:1.5;color:var(--cocoa)">A follicle is maturing and estrogen is climbing toward its pre-ovulation peak.</p>
+    </div>
+
+    <!-- Longevity grid -->
+    <h2 class="sec">Explore</h2>
+    <div class="grid2" style="gap:10px">
+      <a class="card tint-lavender" href="overview.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--mauve);font-size:22px">grid_view</span><b style="display:block;font-size:14px;margin-top:6px">Daily Overview</b><span class="sub" style="font-size:11px">All systems at a glance</span></a>
+      <a class="card tint-gold" href="bio-age.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--terracotta);font-size:22px">radio_button_checked</span><b style="display:block;font-size:14px;margin-top:6px">Bio-Age</b><span class="sub" style="font-size:11px">Six-domain breakdown</span></a>
+      <a class="card" href="insights.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms twinkle" style="color:var(--mauve);font-size:22px">auto_awesome</span><b style="display:block;font-size:14px;margin-top:6px">AI Insights</b><span class="sub" style="font-size:11px">Personalized guidance</span></a>
+      <a class="card" href="longevity.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--d-diet);font-size:22px">eco</span><b style="display:block;font-size:14px;margin-top:6px">Longevity</b><span class="sub" style="font-size:11px">Your reproductive path</span></a>
+    </div>
+
+    <a class="card tint-blush" href="learn.html" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:13px;padding:16px">
+      <span style="width:44px;height:44px;border-radius:13px;background:rgba(110,70,84,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="ms" style="color:var(--mauve);font-size:24px">menu_book</span></span>
+      <div style="flex:1"><b style="font-size:15px;font-family:var(--serif);font-weight:600;color:var(--mauve)">Knowledge Hub</b><div class="sub" style="font-size:12px">Doctor-reviewed guides</div></div>
+      <span class="ms" style="color:var(--faded);font-size:18px">chevron_right</span>
     </a>
 
     <!-- design-review state switcher (prototype only) -->
-    <div>
-      <div class="sub" style="font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--faded);margin-bottom:6px;display:flex;align-items:center;gap:4px"><span class="ms" style="font-size:12px">visibility</span> Preview state · demo only (not shown to users)</div>
+    <div style="opacity:.7">
+      <div class="sub" style="font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--faded);margin-bottom:6px;display:flex;align-items:center;gap:4px"><span class="ms" style="font-size:12px">visibility</span> Preview state (demo)</div>
       <div style="display:flex;gap:6px;overflow-x:auto" id="hstates">
         <div class="hst on" data-s="follicular" style="flex-shrink:0;padding:7px 13px;border-radius:99px;font:700 11px var(--sans);cursor:pointer">Follicular</div>
         <div class="hst" data-s="menstrual" style="flex-shrink:0;padding:7px 13px;border-radius:99px;font:700 11px var(--sans);cursor:pointer">Active period</div>
@@ -121,76 +169,7 @@
       </div>
     </div>
 
-    <div id="hstage" style="display:flex;flex-direction:column;gap:16px"></div>
-
-    <!-- ── Hormone cycle map ── -->
-    <h2 class="sec">Your hormones this cycle</h2>
-    <div class="card" style="padding:16px 14px">
-      <div class="row" style="justify-content:space-between;align-items:flex-start;margin-bottom:12px">
-        <div>
-          <b style="font-family:var(--serif);font-size:16px;color:var(--cocoa)">Follicular phase</b>
-          <div class="sub" style="font-size:11.5px">Day 9 · modelled from your cycle &amp; symptoms</div>
-        </div>
-        <span class="badge info" style="background:rgba(217,131,164,.16);color:var(--d-cycle)">Follicular</span>
-      </div>
-
-      <svg class="hchart" viewBox="0 0 340 180" width="100%" style="display:block">
-        <defs><clipPath id="hclip"><rect x="0" y="8" width="340" height="140" rx="12"/></clipPath></defs>
-        <g clip-path="url(#hclip)">
-          <rect x="0" y="8" width="170" height="140" fill="rgba(217,131,164,.14)"/>
-          <rect x="170" y="8" width="170" height="140" fill="rgba(91,168,154,.15)"/>
-          <g stroke="rgba(110,70,84,.08)" stroke-width="1">
-            <line x1="68" y1="8" x2="68" y2="148"/><line x1="136" y1="8" x2="136" y2="148"/>
-            <line x1="204" y1="8" x2="204" y2="148"/><line x1="272" y1="8" x2="272" y2="148"/>
-          </g>
-          <path d="M0,138 C30,130 45,128 60,132 C90,138 120,140 150,137 C160,136 165,120 172,122 C182,125 205,140 235,142 L340,143" fill="none" stroke="#E3B563" stroke-width="2.4" stroke-linecap="round" opacity=".9"/>
-          <path d="M0,134 C50,130 108,42 150,33 C166,30 176,90 186,95 C210,101 236,66 258,70 C292,75 320,116 340,122" fill="none" stroke="#7FA9D0" stroke-width="2.6" stroke-linecap="round"/>
-          <path d="M0,143 L165,142 C182,141 192,120 210,95 C230,68 246,47 259,47 C276,47 300,101 320,126 C330,135 336,138 340,139" fill="none" stroke="#5BA89A" stroke-width="2.6" stroke-linecap="round"/>
-          <path d="M0,142 L150,140 C160,140 163,26 170,26 C177,26 180,140 190,140 L340,142" fill="none" stroke="#D983A4" stroke-width="2.6" stroke-linecap="round"/>
-          <line x1="109" y1="8" x2="109" y2="148" stroke="var(--mauve)" stroke-width="1.6"/>
-        </g>
-        <line x1="170" y1="4" x2="170" y2="148" stroke="var(--mauve)" stroke-width="1.4" stroke-dasharray="3 3" opacity=".6"/>
-        <circle cx="170" cy="10" r="4" fill="var(--mauve)"/>
-        <text x="170" y="172" text-anchor="middle" font-size="9" fill="var(--mauve)" font-weight="700">Ovulation</text>
-        <circle cx="109" cy="10" r="5" fill="var(--mauve)" stroke="#fff" stroke-width="2"/>
-        <text x="109" y="172" text-anchor="middle" font-size="9" fill="var(--mauve)" font-weight="800">Today</text>
-        <text x="55" y="24" text-anchor="middle" font-size="9.5" fill="var(--d-cycle)" font-weight="700">Follicular phase</text>
-        <text x="300" y="24" text-anchor="middle" font-size="9.5" fill="#3E8577" font-weight="700">Luteal phase</text>
-      </svg>
-
-      <p style="margin:14px 2px 0;font-size:13px;line-height:1.55;color:var(--cocoa)">A follicle is maturing and <b>estrogen (E2)</b> is climbing toward its pre-ovulation peak — your energy tends to rise now. <b>LH</b> and <b>progesterone</b> stay low until ovulation, ~5 days away.</p>
-
-      <div class="row" style="gap:8px;margin-top:12px;flex-wrap:wrap">
-        <span class="hstat"><span class="ms" style="color:#7FA9D0;font-size:15px">trending_up</span> E2 · Rising</span>
-        <span class="hstat"><span class="ms" style="color:#D983A4;font-size:15px">remove</span> LH · Low</span>
-        <span class="hstat"><span class="ms" style="color:#5BA89A;font-size:15px">remove</span> PG · Low</span>
-      </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px 14px;margin-top:15px;padding-top:13px;border-top:1px solid var(--line-soft)">
-        <div class="leg"><span class="sw" style="background:#E3B563"></span>FSH · Follicle-stimulating</div>
-        <div class="leg"><span class="sw" style="background:#D983A4"></span>LH · Luteinising</div>
-        <div class="leg"><span class="sw" style="background:#5BA89A"></span>PG · Progesterone</div>
-        <div class="leg"><span class="sw" style="background:#7FA9D0"></span>E2 · Estrogen/Estradiol</div>
-      </div>
-
-      <div class="sub" style="font-size:11px;margin-top:12px;display:flex;align-items:center;gap:5px">
-        <span class="ms" style="font-size:14px">info</span> Illustrative hormone patterns — not measured blood levels.
-      </div>
-    </div>
-
-    <h2 class="sec">Longevity & insights</h2>
-    <div class="grid2" style="gap:10px">
-      <a class="card tint-lavender" href="overview.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--mauve);font-size:22px">grid_view</span><b style="display:block;font-size:14px;margin-top:6px">Daily Overview</b><span class="sub" style="font-size:11px">All systems at a glance</span></a>
-      <a class="card tint-gold" href="ovarian-age.html" style="text-decoration:none;color:inherit;padding:15px;position:relative"><span class="ms" style="color:var(--terracotta);font-size:22px">radio_button_checked</span><b style="display:block;font-size:14px;margin-top:6px">Ovarian Age</b><span class="sub" style="font-size:11px">See your estimate</span></a>
-      <a class="card" href="insights.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms twinkle" style="color:var(--mauve);font-size:22px">auto_awesome</span><b style="display:block;font-size:14px;margin-top:6px">AI Insights</b><span class="sub" style="font-size:11px">Personalized guidance</span></a>
-      <a class="card" href="longevity.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--d-diet);font-size:22px">eco</span><b style="display:block;font-size:14px;margin-top:6px">Longevity Roadmap</b><span class="sub" style="font-size:11px">Your reproductive path</span></a>
-    </div>
-
-    <a class="card tint-blush" href="learn.html" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:13px;padding:16px">
-      <span style="width:44px;height:44px;border-radius:13px;background:rgba(110,70,84,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="ms" style="color:var(--mauve);font-size:24px">menu_book</span></span>
-      <div style="flex:1"><b style="font-size:15px;font-family:var(--serif);font-weight:600;color:var(--mauve)">Knowledge Hub</b><div class="sub" style="font-size:12px">Doctor-reviewed guides on your cycle, fertility & longevity</div></div>
-      <span class="ms" style="color:var(--faded);font-size:18px">chevron_right</span>
-    </a>
+    <div id="hstage" style="display:flex;flex-direction:column;gap:16px;margin-top:12px"></div>
 
   </div>
 </div>
@@ -289,7 +268,35 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 })();
 </script>
+<script>
+(function(){
+  // load saved ovarian age
+  try{
+    var saved = JSON.parse(localStorage.getItem('nemow_ovarian_age')||'{}');
+    if(saved.ovAge){
+      document.querySelector('a[href="ovarian-age.html"] div div div + div').textContent = saved.ovAge;
+      var dEl = document.querySelector('a[href="ovarian-age.html"] div div div + div + div');
+      var delta = saved.delta||0;
+      if(delta<=0){ dEl.textContent = '−'+Math.abs(delta)+' vs calendar'; dEl.style.color='var(--ok)'; }
+      else { dEl.textContent = '+'+delta+' vs calendar'; dEl.style.color='var(--low)'; }
+    }
+  }catch(e){}
+
+  // persona chips
+  var savedP = localStorage.getItem('nemow_persona') || 'bloom';
+  document.documentElement.dataset.persona = savedP;
+  document.querySelectorAll('#personaBar .p-chip').forEach(function(c){ c.classList.toggle('on', c.dataset.p===savedP); });
+  document.querySelectorAll('#personaBar .p-chip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      document.querySelectorAll('#personaBar .p-chip').forEach(function(c){ c.classList.remove('on'); });
+      chip.classList.add('on');
+      localStorage.setItem('nemow_persona', chip.dataset.p);
+      document.documentElement.dataset.persona = chip.dataset.p;
+    });
+  });
+})();
+</script>
 <script src="cyclering.js" defer></script>
 <script src="appnav.js" defer></script>
-<script src="ovaria-mascot.js" defer></script>
+<script src="nemow-mascot.js" defer></script>
 </body></html>

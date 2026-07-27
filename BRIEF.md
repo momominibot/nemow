@@ -1,13 +1,13 @@
-# BRIEF — Ovaria v2 · TCM-Integrated Ovarian Health Platform
+# BRIEF — Nemow v2 · TCM-Integrated Ovarian Health Platform
 
 ## Goal
-Evolve Ovaria from a general women's health app into a TCM-integrated ovarian health standalone app. Add acupoint/myofascial relief guidance, evidence-based Chinese + Western food tracking, and a life-stage persona system where each profile (teens, TTC, post-pregnancy, pre/post-menopause) gets its own themed interface. Deploy to Vercel production.
+Evolve Nemow from a general women's health app into a TCM-integrated ovarian health standalone app. Add acupoint/myofascial relief guidance, evidence-based Chinese + Western food tracking, and a life-stage persona system where each profile (teens, TTC, post-pregnancy, pre/post-menopause) gets its own themed interface. Deploy to Vercel production.
 
 ## Core Vision
-Ovaria is the co-pilot app for Nemow surfaces evidence-based science through a beautiful, persona-adaptive interface. TCM wellness is a first-class feature: acupoints, myofascial relief, and food as medicine — all evidence-based, blending Eastern and Western knowledge.
+Nemow is the co-pilot app for Nemow surfaces evidence-based science through a beautiful, persona-adaptive interface. TCM wellness is a first-class feature: acupoints, myofascial relief, and food as medicine — all evidence-based, blending Eastern and Western knowledge.
 
 ## Constraints
-- Must preserve existing Ovaria watercolor design system as the base
+- Must preserve existing Nemow watercolor design system as the base
 - Each life-stage persona gets a DISTINCT theme (palette, typography, illustrations)
 - TCM content must be evidence-based — cite sources
 - Food knowledge must include BOTH Chinese medicine principles AND Western nutritional science
@@ -62,6 +62,6 @@ Each persona gets:
 ## Tech
 - Static HTML/CSS/JS (current architecture)
 - Vercel for hosting
-- CSS custom properties for persona theming (ovaria-persona.css)
+- CSS custom properties for persona theming (nemow-persona.css)
 - 8 Google Fonts loaded for persona typography
 - LocalStorage for persona persistence
