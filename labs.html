@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-persona="grow">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nemow \u00b7 Lab Log</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="nemow-persona.css">
+  <style>
+    .eyebrow { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--taupe); margin-bottom:6px; }
+    .lab-form { margin:16px; padding:16px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); }
+    .field { margin-bottom:14px; }
+    .field label { display:block; font-size:13px; font-weight:700; margin-bottom:6px; }
+    .field input, .field select { width:100%; padding:12px; border:2px solid var(--line-soft); border-radius:12px; background:var(--paper); font-family:inherit; font-size:15px; color:var(--ink); }
+    .field .hint { font-size:12px; color:var(--taupe); margin-top:4px; }
+    .save-btn { width:100%; padding:14px; border:none; border-radius:12px; background:var(--ink); color:var(--card); font-weight:800; font-size:15px; cursor:pointer; }
+    .result-card { margin:12px 16px; padding:16px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); }
+    .result-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line-soft); }
+    .result-row:last-child { border-bottom:none; }
+    .result-value { font-size:20px; font-weight:800; }
+    .status { display:inline-block; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:800; text-transform:uppercase; }
+    .status-ok { background:rgba(78,140,106,.15); color:#2E6B4E; }
+    .status-warn { background:rgba(201,138,46,.15); color:#8B5E16; }
+    .status-low { background:rgba(190,74,62,.12); color:#8B2E24; }
+    .summary { margin:16px; padding:16px; border-radius:var(--r); background:rgba(201,138,46,.12); border:1.5px solid rgba(201,138,46,.35); font-size:13px; line-height:1.55; }
+    .export-btn { margin:16px; padding:14px; border:2px solid var(--ink); border-radius:12px; background:var(--card); font-weight:800; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a href="home.html" class="icon-btn" aria-label="Back"><span class="material-symbols-outlined">arrow_back_ios_new</span></a>
+      <h1>Lab Log</h1>
+      <span></span>
+    </header>
+
+    <main class="content" style="padding-bottom:100px">
+      <div style="text-align:center; padding:24px 16px 8px">
+        <div class="eyebrow">OVARIAN RESERVE</div>
+        <h2 style="font-size:24px; margin-bottom:8px">Track your labs</h2>
+        <p style="color:var(--taupe); font-size:14px; line-height:1.5">Log AMH, FSH, AFC, and related markers. Nemow compares your results to age-normed ranges and flags what to discuss with a clinician.</p>
+      </div>
+
+      <div class="lab-form">
+        <div class="field">
+          <label>Age</label>
+          <input type="number" id="age" value="32" min="13" max="65">
+        </div>
+        <div class="field">
+          <label>AMH (ng/mL)</label>
+          <input type="number" id="amh" step="0.01" placeholder="e.g. 2.4">
+          <div class="hint">Anti-M\u00fcllerian hormone. Most stable marker of remaining follicle pool.</div>
+        </div>
+        <div class="field">
+          <label>FSH day 2\u20134 (IU/L)</label>
+          <input type="number" id="fsh" step="0.1" placeholder="e.g. 7.2">
+          <div class="hint">Follicle-stimulating hormone, early cycle.</div>
+        </div>
+        <div class="field">
+          <label>Estradiol E2 (pg/mL)</label>
+          <input type="number" id="e2" step="1" placeholder="e.g. 45">
+        </div>
+        <div class="field">
+          <label>AFC (total antral follicles)</label>
+          <input type="number" id="afc" placeholder="e.g. 14">
+        </div>
+        <div class="field">
+          <label>Vitamin D (ng/mL)</label>
+          <input type="number" id="vitd" step="0.1" placeholder="e.g. 32">
+        </div>
+        <button class="save-btn" onclick="interpret()">Interpret</button>
+      </div>
+
+      <div id="results" style="display:none">
+        <div class="result-card">
+          <h3 style="margin-bottom:12px">Your results</h3>
+          <div id="resultRows"></div>
+        </div>
+
+        <div class="summary" id="summary"></div>
+
+        <button class="export-btn" onclick="exportSummary()">Export summary for clinician</button>
+      </div>
+
+      <div class="card" style="margin:16px; padding:16px">
+        <h3 style="margin-bottom:8px">\ud83d\udcda What these markers mean</h3>
+        <p style="font-size:13px; color:var(--taupe); line-height:1.5">AMH and AFC reflect ovarian reserve. FSH/E2 reflect how hard the brain is working to stimulate the ovaries. None predict natural fertility or egg quality on their own \u2014 they estimate response to fertility treatment and help contextualize where you are relative to typical age patterns.</p>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="home.html"><span class="material-symbols-outlined">home</span>Home</a>
+      <a href="learn.html"><span class="material-symbols-outlined">menu_book</span>Learn</a>
+      <a href="tcm-hub.html"><span class="material-symbols-outlined">acupuncture</span>TCM</a>
+      <a href="foods.html"><span class="material-symbols-outlined">restaurant</span>Foods</a>
+      <a href="profile.html"><span class="material-symbols-outlined">person</span>Profile</a>
+    </nav>
+  </div>
+
+  <script>
+    function interpret() {
+      const age = +document.getElementById('age').value || 32;
+      const amh = parseFloat(document.getElementById('amh').value);
+      const fsh = parseFloat(document.getElementById('fsh').value);
+      const e2 = parseFloat(document.getElementById('e2').value);
+      const afc = parseFloat(document.getElementById('afc').value);
+      const vitd = parseFloat(document.getElementById('vitd').value);
+
+      let rows = [];
+      let flags = [];
+
+      if(!isNaN(amh)) {
+        let status, cls, text;
+        if(amh < 1.0) { status='Low'; cls='status-low'; text='Below typical for most ages'; flags.push('AMH low \u2014 consider REI discussion'); }
+        else if(amh < 2.0 && age < 35) { status='Low-normal'; cls='status-warn'; text='Lower than typical for your age group'; flags.push('AMH lower than age-expected'); }
+        else if(amh > 4.5) { status='Elevated'; cls='status-warn'; text='May suggest PCO-like picture'; flags.push('High AMH \u2014 discuss with clinician'); }
+        else { status='Typical'; cls='status-ok'; text='Within common range'; }
+        rows.push({name:'AMH', val:amh+' ng/mL', status, cls, text});
+      }
+
+      if(!isNaN(fsh)) {
+        let status, cls, text;
+        if(fsh > 12) { status='Elevated'; cls='status-low'; text='Suggestive of diminished reserve'; flags.push('FSH elevated'); }
+        else if(fsh > 10) { status='High-normal'; cls='status-warn'; text='Upper range \u2014 monitor'; }
+        else { status='Typical'; cls='status-ok'; text='Within common range'; }
+        rows.push({name:'FSH', val:fsh+' IU/L', status, cls, text});
+      }
+
+      if(!isNaN(e2)) {
+        let status='Typical', cls='status-ok', text='Early-cycle estradiol';
+        if(e2 > 80) { status='Elevated'; cls='status-warn'; text='May suppress FSH \u2014 interpret together'; }
+        rows.push({name:'Estradiol', val:e2+' pg/mL', status, cls, text});
+      }
+
+      if(!isNaN(afc)) {
+        let status, cls, text;
+        if(afc < 5) { status='Low'; cls='status-low'; text='Low antral follicle count'; flags.push('AFC low'); }
+        else if(afc < 10) { status='Low-normal'; cls='status-warn'; text='Moderate count'; }
+        else { status='Typical'; cls='status-ok'; text='Good count'; }
+        rows.push({name:'AFC', val:afc, status, cls, text});
+      }
+
+      if(!isNaN(vitd)) {
+        let status, cls, text;
+        if(vitd < 20) { status='Deficient'; cls='status-low'; text='<20 ng/mL \u2014 supplement recommended'; flags.push('Vitamin D deficient'); }
+        else if(vitd < 30) { status='Insufficient'; cls='status-warn'; text='20\u201329 ng/mL'; }
+        else { status='Sufficient'; cls='status-ok'; text:'\u226530 ng/mL'; }
+        rows.push({name:'Vitamin D', val:vitd+' ng/mL', status, cls, text});
+      }
+
+      document.getElementById('resultRows').innerHTML = rows.map(r => `
+        <div class="result-row">
+          <div>
+            <div style="font-size:13px; color:var(--taupe)">${r.name}</div>
+            <div class="result-value">${r.val}</div>
+          </div>
+          <div style="text-align:right">
+            <div class="status ${r.cls}">${r.status}</div>
+            <div style="font-size:12px; color:var(--taupe); margin-top:4px; max-width:140px">${r.text}</div>
+          </div>
+        </div>
+      `).join('');
+
+      let summaryText = '';
+      if(flags.length) {
+        summaryText = `<strong>Discuss with a clinician:</strong> ${flags.join('; ')}. These markers predict response to fertility treatment, not natural fertility. A single abnormal result should be confirmed.`;
+      } else if(rows.length) {
+        summaryText = '<strong>No red flags.</strong> Your logged values fall within typical ranges. Keep tracking over time and discuss any concerns with your provider.';
+      } else {
+        summaryText = 'Enter at least one value to see interpretation.';
+      }
+      document.getElementById('summary').innerHTML = summaryText;
+      document.getElementById('results').style.display = 'block';
+
+      localStorage.setItem('nemow_labs', JSON.stringify({age, amh, fsh, e2, afc, vitd, date:new Date().toISOString()}));
+    }
+
+    function exportSummary() {
+      const data = JSON.parse(localStorage.getItem('nemow_labs')||'{}');
+      const text = `Nemow Lab Summary\nDate: ${new Date(data.date).toLocaleDateString()}\nAge: ${data.age}\nAMH: ${data.amh} ng/mL\nFSH: ${data.fsh} IU/L\nE2: ${data.e2} pg/mL\nAFC: ${data.afc}\nVitamin D: ${data.vitd} ng/mL\n\nThis summary is for discussion with a healthcare provider and is not a diagnosis.`;
+      const blob = new Blob([text], {type:'text/plain'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'nemow-lab-summary.txt';
+      a.click();
+    }
+
+    // load saved
+    try {
+      const saved = JSON.parse(localStorage.getItem('nemow_labs')||'{}');
+      if(saved.age) document.getElementById('age').value = saved.age;
+      if(saved.amh) document.getElementById('amh').value = saved.amh;
+      if(saved.fsh) document.getElementById('fsh').value = saved.fsh;
+      if(saved.e2) document.getElementById('e2').value = saved.e2;
+      if(saved.afc) document.getElementById('afc').value = saved.afc;
+      if(saved.vitd) document.getElementById('vitd').value = saved.vitd;
+    } catch(e){}
+  </script>
+</body>
+</html>
