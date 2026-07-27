@@ -1,0 +1,433 @@
+<!doctype html><html lang="en" data-persona="bloom"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · Knowledge Hub</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined&family=DM+Serif+Display&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=Inter:opsz,wght@14..32,400;14..32,600&family=Cormorant+Garamond:wght@500&family=Work+Sans:wght@400;500;600&family=Lora:wght@500&family=Plus+Jakarta+Sans:wght@400;500;600&family=Playfair+Display:wght@600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<link rel="stylesheet" href="ovaria-persona.css">
+<script src="anim.js" defer></script>
+<style>
+.artcard { display:flex; gap:13px; align-items:flex-start; text-decoration:none; color:var(--ink); }
+.artcard .a-emoji { width:46px; height:46px; border-radius:14px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:23px; background:var(--sunken); }
+.artcard .a-tag { font-size:9.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+.artcard .a-title { font-family:var(--serif); font-weight:600; font-size:15.5px; color:var(--cocoa); line-height:1.28; margin:3px 0; }
+.artcard .a-teaser { font-size:12.5px; color:var(--taupe); line-height:1.45; }
+.artcard .a-rev { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--faded); margin-top:6px; }
+.artcard .a-rev .ms { font-size:13px; color:var(--ok); }
+.topicrow { display:flex; gap:9px; overflow-x:auto; padding:2px 2px 4px; scrollbar-width:none; }
+.topicrow::-webkit-scrollbar { display:none; }
+.topicchip { flex-shrink:0; padding:9px 15px; border-radius:99px; background:var(--card-solid); border:1.5px solid var(--line-soft); font:700 12.5px var(--sans); color:var(--mauve); text-decoration:none; white-space:nowrap; }
+/* education videos */
+#vidrow::-webkit-scrollbar { display:none; }
+.vidcard { flex-shrink:0; width:216px; cursor:pointer; }
+.vidcard .vwrap { position:relative; width:216px; height:216px; border-radius:20px; overflow:hidden;
+  box-shadow:0 14px 30px -16px rgba(110,70,84,.4); }
+.vidcard video { width:100%; height:100%; object-fit:cover; display:block; }
+.vidcard b { display:block; font-family:var(--serif); font-weight:600; font-size:14.5px; color:var(--cocoa); line-height:1.25; margin:6px 2px 2px; }
+.vidcard > span.desc { display:block; font-size:11.5px; color:var(--taupe); line-height:1.4; margin:0 2px; }
+.vidcard .stage { display:inline-block; margin:9px 2px 0; padding:3px 9px; border-radius:99px; font:800 9px var(--sans); letter-spacing:.09em; text-transform:uppercase; }
+.vwrap .vplay { position:absolute; left:50%; bottom:10px; transform:translateX(-50%); display:flex; align-items:center; gap:5px;
+  background:rgba(46,34,30,.5); backdrop-filter:blur(6px); color:#fff; font:700 10.5px var(--sans); padding:5px 11px; border-radius:99px; }
+.vwrap .vplay .ms { font-size:14px; }
+/* fullscreen player */
+.vfull { position:fixed; inset:0; background:rgba(30,20,26,.94); z-index:120; display:none; flex-direction:column; align-items:center; justify-content:center; padding:22px; }
+.vfull.on { display:flex; }
+.vfull .vbox { position:relative; width:min(86vw,480px); border-radius:24px; overflow:hidden; }
+.vfull video { width:100%; display:block; }
+.vfull h3 { font-family:var(--serif); font-weight:600; font-size:20px; color:#F6EDF0; margin:18px 0 6px; text-align:center; }
+.vfull p { font-size:13.5px; color:rgba(246,237,240,.75); line-height:1.55; text-align:center; max-width:38ch; }
+.vfull .vclose { position:absolute; top:20px; right:20px; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,.14); border:none; color:#fff; font-size:20px; cursor:pointer; }
+.wiki-badge { display:inline-flex; align-items:center; gap:5px; padding:5px 12px; border-radius:99px; background:rgba(110,70,84,.12); color:var(--mauve); font:800 9.5px var(--sans); letter-spacing:.08em; text-transform:uppercase; }
+.wiki-chiprow { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+.wiki-chip { display:inline-flex; align-items:center; gap:6px; padding:8px 13px; border-radius:99px; background:var(--card-solid); border:1.5px solid var(--line-soft); font:600 12px var(--sans); color:var(--cocoa); text-decoration:none; transition:.15s; }
+.wiki-chip:hover { border-color:var(--mauve); background:rgba(110,70,84,.06); }
+.wiki-chip:active { transform:scale(.96); }
+.wiki-chip .w-emoji { font-size:16px; }
+</style>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
+</head><body>
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="home.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">Knowledge Hub</div>
+    <a class="t-icon ms" href="#">search</a>
+  </div>
+  <div class="scroll">
+
+    <!-- ===== Women's Wellness Wiki Hero ===== -->
+    <div class="card tint-lavender" style="padding:20px 18px">
+      <div class="row" style="gap:10px;margin-bottom:8px">
+        <span style="font-size:32px">📖</span>
+        <div>
+          <div class="wiki-badge"><span class="ms" style="font-size:12px;color:var(--ok)">verified</span> Women's Wellness Wiki</div>
+          <div style="font-family:var(--serif);font-weight:600;font-size:19px;color:var(--cocoa);margin-top:6px">Evidence-based knowledge for every stage</div>
+          <div class="sub" style="font-size:12px;margin-top:4px">Doctor-reviewed articles covering ovarian science, wearable technology, and longevity — all grounded in peer-reviewed research.</div>
+        </div>
+      </div>
+
+      <!-- Ovarian Science -->
+      <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mauve);margin:14px 0 6px">Ovarian Science</div>
+      <div class="wiki-chiprow">
+        <a href="learn-ovarian-biology.html" class="wiki-chip"><span class="w-emoji">🫘</span> Ovarian Biology 101</a>
+        <a href="learn-biomarkers.html" class="wiki-chip"><span class="w-emoji">🧪</span> Biomarker Reference</a>
+        <a href="learn-straw10.html" class="wiki-chip"><span class="w-emoji">📊</span> STRAW+10 Staging</a>
+      </div>
+
+      <!-- Technology & Tracking -->
+      <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--terracotta);margin:10px 0 6px">Technology &amp; Tracking</div>
+      <div class="wiki-chiprow">
+        <a href="learn-ppg-tech.html" class="wiki-chip"><span class="w-emoji">💡</span> PPG Technology</a>
+        <a href="learn-wearables.html" class="wiki-chip"><span class="w-emoji">⌚</span> Wearable Integration</a>
+        <a href="learn-hormone-phase-locking.html" class="wiki-chip"><span class="w-emoji">🎯</span> Hormone Phase Locking</a>
+      </div>
+
+      <!-- Longevity & Aging -->
+      <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);margin:10px 0 6px">Longevity &amp; Aging</div>
+      <div class="wiki-chiprow">
+        <a href="learn-ovarian-age.html" class="wiki-chip"><span class="w-emoji">⏳</span> Ovarian Age</a>
+        <a href="learn-lifestyle.html" class="wiki-chip"><span class="w-emoji">🌿</span> Lifestyle Optimisation</a>
+        <a href="learn-longevity-pathways.html" class="wiki-chip"><span class="w-emoji">🌺</span> Longevity Pathways</a>
+      </div>
+    </div>
+
+    <!-- ═══ Life Stage Persona Filter ═══ -->
+    <div class="filter-row" style="margin-bottom:4px" id="personaFilter">
+      <span class="filter-chip on" data-persona="bloom">🌸 Bloom</span>
+      <span class="filter-chip" data-persona="grow">🌱 Grow</span>
+      <span class="filter-chip" data-persona="nurture">🌿 Nurture</span>
+      <span class="filter-chip" data-persona="wisdom">🌙 Wisdom</span>
+    </div>
+
+    <!-- ═══ Life Stage Content Sections ═══ -->
+    <div class="persona-section" data-section="bloom">
+      <h2 class="sec">🌸 Bloom (Teens 13–17)</h2>
+      <div class="card" style="padding:16px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ovaria-accent);margin-bottom:8px">Your First Period</div>
+        <div class="wiki-chiprow">
+          <a href="learn-cycle-phases.html" class="wiki-chip"><span class="w-emoji">🌙</span> Understanding Your Cycle</a>
+          <a href="learn-discharge.html" class="wiki-chip"><span class="w-emoji">💧</span> Decoding Discharge</a>
+          <a href="#" class="wiki-chip"><span class="w-emoji">🩸</span> Period Blood Colour Guide</a>
+        </div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ovaria-accent);margin:12px 0 6px">TCM Wellness</div>
+        <div class="wiki-chiprow">
+          <a href="acupoints.html?persona=bloom" class="wiki-chip"><span class="w-emoji">🗺️</span> Acupoints for Teens</a>
+          <a href="myofascial.html?persona=bloom" class="wiki-chip"><span class="w-emoji">🤲</span> Myofascial Relief</a>
+        </div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ovaria-accent);margin:12px 0 6px">Food Knowledge</div>
+        <div class="wiki-chiprow">
+          <a href="foods.html?persona=bloom" class="wiki-chip"><span class="w-emoji">🥗</span> Foods for Young Women</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="persona-section" data-section="grow" style="display:none">
+      <h2 class="sec">🌱 Grow (Trying to Conceive 25–38)</h2>
+      <div class="card" style="padding:16px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ovaria-accent);margin-bottom:8px">Fertility Fundamentals</div>
+        <div class="wiki-chiprow">
+          <a href="learn-fertile-window.html" class="wiki-chip"><span class="w-emoji">🌱</span> Your Fertile Window</a>
+          <a href="learn-cycle-phases.html" class="wiki-chip"><span class="w-emoji">〰️</span> Cycle Phases & Ovulation</a>
+          <a href="learn-ovarian-biology.html" class="wiki-chip"><span class="w-emoji">🫘</span> Ovarian Biology 101</a>
+          <a href="learn-biomarkers.html" class="wiki-chip"><span class="w-emoji">🧪</span> Biomarker Reference</a>
+        </div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ovaria-accent);margin:12px 0 6px">TCM Wellness</div>
+        <div class="wiki-chiprow">
+          <a href="acupoints.html?persona=grow" class="wiki-chip"><span class="w-emoji">🗺️</span> Acupoints for Conception</a>
+          <a href="myofascial.html?persona=grow" class="wiki-chip"><span class="w-emoji">🤲</span> Myofascial Relief</a>
+        </div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ovaria-accent);margin:12px 0 6px">Food Knowledge</div>
+        <div class="wiki-chiprow">
+          <a href="foods.html?persona=grow" class="wiki-chip"><span class="w-emoji">🥑</span> Foods for Fertility</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="persona-section" data-section="nurture" style="display:none">
+      <h2 class="sec">🌿 Nurture (Post-Pregnancy 25–40)</h2>
+      <div class="card" style="padding:16px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ovaria-accent);margin-bottom:8px">Postpartum Recovery</div>
+        <div class="wiki-chiprow">
+          <a href="#" class="wiki-chip"><span class="w-emoji">🕯️</span> Fourth Trimester Guide</a>
+          <a href="#" class="wiki-chip"><span class="w-emoji">💜</span> Postpartum Mental Health</a>
+          <a href="#" class="wiki-chip"><span class="w-emoji">🍼</span> Feeding & Lactation</a>
+        </div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ovaria-accent);margin:12px 0 6px">TCM Wellness</div>
+        <div class="wiki-chiprow">
+          <a href="acupoints.html?persona=nurture" class="wiki-chip"><span class="w-emoji">🗺️</span> Acupoints for Recovery</a>
+          <a href="myofascial.html?persona=nurture" class="wiki-chip"><span class="w-emoji">🤲</span> Myofascial Healing</a>
+        </div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ovaria-accent);margin:12px 0 6px">Food Knowledge</div>
+        <div class="wiki-chiprow">
+          <a href="foods.html?persona=nurture" class="wiki-chip"><span class="w-emoji">🍲</span> Foods for Recovery</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="persona-section" data-section="wisdom" style="display:none">
+      <h2 class="sec">🌙 Wisdom (Perimenopause & Menopause 40–60)</h2>
+      <div class="card" style="padding:16px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ovaria-accent);margin-bottom:8px">Understanding the Transition</div>
+        <div class="wiki-chiprow">
+          <a href="learn-perimenopause.html" class="wiki-chip"><span class="w-emoji">🔥</span> Perimenopause: Signs & Science</a>
+          <a href="learn-ovarian-age.html" class="wiki-chip"><span class="w-emoji">⏳</span> Ovarian Age & STRAW+10</a>
+          <a href="learn-lifestyle.html" class="wiki-chip"><span class="w-emoji">🌿</span> Lifestyle Optimisation</a>
+          <a href="learn-longevity-pathways.html" class="wiki-chip"><span class="w-emoji">🌺</span> Longevity Pathways</a>
+        </div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ovaria-accent);margin:12px 0 6px">TCM Wellness</div>
+        <div class="wiki-chiprow">
+          <a href="acupoints.html?persona=wisdom" class="wiki-chip"><span class="w-emoji">🗺️</span> Acupoints for Symptom Relief</a>
+          <a href="myofascial.html?persona=wisdom" class="wiki-chip"><span class="w-emoji">🤲</span> Myofascial Relief</a>
+        </div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ovaria-accent);margin:12px 0 6px">Food Knowledge</div>
+        <div class="wiki-chiprow">
+          <a href="foods.html?persona=wisdom" class="wiki-chip"><span class="w-emoji">🫐</span> Foods for Hormonal Balance</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured hero (existing) -->
+    <a href="learn-discharge.html" class="card tint-lavender" style="text-decoration:none;display:block;padding:0;overflow:hidden">
+      <div style="height:150px;background:url(assets/articles/discharge.jpg) center/cover;display:flex;align-items:flex-end;padding:14px 16px">
+        <span class="badge" style="background:rgba(255,255,255,.82);color:var(--mauve);backdrop-filter:blur(4px)">Featured · Body literacy</span>
+      </div>
+      <div style="padding:16px 18px 18px">
+        <div style="font-family:var(--serif);font-weight:600;font-size:21px;color:var(--cocoa);line-height:1.2">Decoding your discharge: what each type means</div>
+        <div class="sub" style="margin-top:7px">Clear, creamy and egg-white can be fertility signals — while a few textures are worth a quick check. A field guide to the fluid your body is always talking to you with.</div>
+        <div style="display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--faded);margin-top:11px"><span class="ms" style="font-size:14px;color:var(--ok)">verified</span>Reviewed by Dr. Priya Menon, OB-GYN · 6 min read</div>
+      </div>
+    </a>
+
+    <!-- Watch & learn — Nemow education videos -->
+    <div>
+      <div class="row" style="justify-content:space-between;margin:2px 2px 4px">
+        <b style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--taupe)">Watch & learn · your life stages</b>
+        <span class="ms" style="color:var(--terracotta);font-size:18px">play_circle</span>
+      </div>
+      <div class="sub" style="font-size:11.5px;margin:0 2px 10px">Short films for every chapter — from your first period to the wisdom years.</div>
+      <div style="display:flex;gap:12px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:none" id="vidrow">
+        <div class="vidcard" data-full="0">
+          <div class="vwrap"><video autoplay muted loop playsinline poster="assets/eduvid/menarche.jpg" preload="metadata"><source src="assets/eduvid/menarche-v1.mp4" type="video/mp4"></video><span class="vplay"><span class="ms">play_arrow</span>Watch</span></div>
+          <span class="stage" style="background:rgba(217,131,164,.18);color:var(--d-cycle)">First periods</span>
+          <b>Your very first cycles</b>
+          <span class="desc">What menarche is, what's normal, and why it's nothing to fear</span>
+        </div>
+        <div class="vidcard" data-full="1">
+          <div class="vwrap"><video autoplay muted loop playsinline poster="assets/eduvid/hormones.jpg" preload="metadata"><source src="assets/eduvid/hormones-v4.mp4" type="video/mp4"></video><span class="vplay"><span class="ms">play_arrow</span>Watch</span></div>
+          <span class="stage" style="background:rgba(196,111,79,.16);color:var(--terracotta)">Cycling years</span>
+          <b>Your hormones, wave by wave</b>
+          <span class="desc">How estrogen & progesterone shape your four phases</span>
+        </div>
+        <div class="vidcard" data-full="2">
+          <div class="vwrap"><video autoplay muted loop playsinline poster="assets/eduvid/normal.jpg" preload="metadata"><source src="assets/eduvid/normal-v4.mp4" type="video/mp4"></video><span class="vplay"><span class="ms">play_arrow</span>Watch</span></div>
+          <span class="stage" style="background:rgba(196,111,79,.16);color:var(--terracotta)">Cycling years</span>
+          <b>Normal — or worth checking?</b>
+          <span class="desc">Heavy, irregular, painful: when your cycle is talking</span>
+        </div>
+        <div class="vidcard" data-full="3">
+          <div class="vwrap"><video autoplay muted loop playsinline poster="assets/eduvid/fertile.jpg" preload="metadata"><source src="assets/eduvid/fertile-v4.mp4" type="video/mp4"></video><span class="vplay"><span class="ms">play_arrow</span>Watch</span></div>
+          <span class="stage" style="background:rgba(147,187,143,.22);color:#5E9B93">Trying to conceive</span>
+          <b>Your fertile window</b>
+          <span class="desc">~6 days a cycle — how your body signals them</span>
+        </div>
+        <div class="vidcard" data-full="4">
+          <div class="vwrap"><video autoplay muted loop playsinline poster="assets/eduvid/peri.jpg" preload="metadata"><source src="assets/eduvid/peri-v4.mp4" type="video/mp4"></video><span class="vplay"><span class="ms">play_arrow</span>Watch</span></div>
+          <span class="stage" style="background:rgba(155,107,141,.2);color:var(--d-medical)">Perimenopause</span>
+          <b>Perimenopause, decoded</b>
+          <span class="desc">The transition years — what changes & what helps</span>
+        </div>
+        <div class="vidcard" data-full="5">
+          <div class="vwrap"><video autoplay muted loop playsinline poster="assets/eduvid/menopause.jpg" preload="metadata"><source src="assets/eduvid/menopause-v1.mp4" type="video/mp4"></video><span class="vplay"><span class="ms">play_arrow</span>Watch</span></div>
+          <span class="stage" style="background:rgba(229,180,92,.22);color:#B8862E">Menopause & beyond</span>
+          <b>Menopause & the years beyond</b>
+          <span class="desc">Bone, heart & brain — thriving in your wisdom years</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- For your phase -->
+    <div>
+      <div class="row" style="justify-content:space-between;margin:2px 2px 10px">
+        <b style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--taupe)">For your phase · Follicular</b>
+        <span class="ms" style="color:var(--d-cycle);font-size:18px">spa</span>
+      </div>
+      <div class="topicrow">
+        <a href="learn-cycle-phases.html" class="topicchip">🌱 Rising estrogen</a>
+        <a href="learn-fertile-window.html" class="topicchip">💧 Your fertile window</a>
+        <a href="learn-discharge.html" class="topicchip">🥚 Egg-white mucus</a>
+        <a href="#" class="topicchip">⚡ Energy & workouts</a>
+        <a href="#" class="topicchip">🍳 Follicular nutrition</a>
+      </div>
+    </div>
+
+    <!-- Your cycle -->
+    <h2 class="sec">Your cycle</h2>
+    <div class="card" style="display:flex;flex-direction:column;gap:16px">
+      <a href="learn-cycle-phases.html" class="artcard">
+        <div class="a-emoji" style="background:rgba(217,131,164,.16)"><lottie-player src="assets/lottie/moon.json" background="transparent" speed="1" loop autoplay style="width:32px;height:32px"></lottie-player></div>
+        <div>
+          <div class="a-tag" style="color:var(--d-cycle)">Cycle science</div>
+          <div class="a-title">The four phases of your cycle</div>
+          <div class="a-teaser">Menstrual, follicular, ovulatory, luteal — how your hormones, energy and mood shift week to week.</div>
+          <div class="a-rev"><span class="ms">verified</span>Reviewed by Dr. Priya Menon, OB-GYN</div>
+        </div>
+      </a>
+      <a href="learn-discharge.html" class="artcard">
+        <div class="a-emoji" style="background:rgba(218,206,246,.4)"><lottie-player src="assets/lottie/drop.json" background="transparent" speed="1" loop autoplay style="width:32px;height:32px"></lottie-player></div>
+        <div>
+          <div class="a-tag" style="color:var(--mauve)">Body literacy</div>
+          <div class="a-title">Decoding your discharge</div>
+          <div class="a-teaser">What clear, creamy, clumpy, green and grey each tell you — and when it's just normal.</div>
+          <div class="a-rev"><span class="ms">verified</span>Reviewed by Dr. Priya Menon, OB-GYN</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Fertility & TTC -->
+    <h2 class="sec">Fertility &amp; TTC</h2>
+    <div class="card" style="display:flex;flex-direction:column;gap:16px">
+      <a href="learn-fertile-window.html" class="artcard">
+        <div class="a-emoji" style="background:rgba(255,140,120,.16)"><lottie-player src="assets/lottie/flower.json" background="transparent" speed="1" loop autoplay style="width:32px;height:32px"></lottie-player></div>
+        <div>
+          <div class="a-tag" style="color:var(--terracotta)">Fertility</div>
+          <div class="a-title">Understanding your fertile window</div>
+          <div class="a-teaser">The ~6 fertile days, egg-white mucus, LH and BBT — how the signals line up around your peak day.</div>
+          <div class="a-rev"><span class="ms">verified</span>Reviewed by Dr. Aisha Rahman, OB-GYN</div>
+        </div>
+      </a>
+      <a href="#" class="artcard">
+        <div class="a-emoji" style="background:rgba(255,140,120,.16)"><lottie-player src="assets/lottie/sparkle.json" background="transparent" speed="1" loop autoplay style="width:32px;height:32px"></lottie-player></div>
+        <div>
+          <div class="a-tag" style="color:var(--terracotta)">Fertility</div>
+          <div class="a-title">Basal body temperature, explained</div>
+          <div class="a-teaser">Why a small post-ovulation temperature rise confirms that ovulation happened.</div>
+          <div class="a-rev"><span class="ms">verified</span>Reviewed by Dr. Aisha Rahman, OB-GYN</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Body literacy -->
+    <h2 class="sec">Body literacy</h2>
+    <div class="card" style="display:flex;flex-direction:column;gap:16px">
+      <a href="#" class="artcard">
+        <div class="a-emoji" style="background:rgba(159,167,143,.24)"><lottie-player src="assets/lottie/drop.json" background="transparent" speed="1" loop autoplay style="width:32px;height:32px"></lottie-player></div>
+        <div>
+          <div class="a-tag" style="color:var(--sage)">Body literacy</div>
+          <div class="a-title">What your period blood colour means</div>
+          <div class="a-teaser">Bright red, brown, and everything between — a calm guide to what's normal.</div>
+          <div class="a-rev"><span class="ms">verified</span>Reviewed by Dr. Priya Menon, OB-GYN</div>
+        </div>
+      </a>
+      <a href="#" class="artcard">
+        <div class="a-emoji" style="background:rgba(159,167,143,.24)"><lottie-player src="assets/lottie/sparkle.json" background="transparent" speed="1" loop autoplay style="width:32px;height:32px"></lottie-player></div>
+        <div>
+          <div class="a-tag" style="color:var(--sage)">Body literacy</div>
+          <div class="a-title">Reading breast tenderness across the month</div>
+          <div class="a-teaser">Why sensitivity often peaks in the luteal phase, and when it's worth noting.</div>
+          <div class="a-rev"><span class="ms">verified</span>Reviewed by Dr. Priya Menon, OB-GYN</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Longevity -->
+    <h2 class="sec">Longevity</h2>
+    <div class="card" style="display:flex;flex-direction:column;gap:16px">
+      <a href="learn-ovarian-longevity.html" class="artcard">
+        <div class="a-emoji" style="background:rgba(155,107,141,.18)"><lottie-player src="assets/lottie/leaf.json" background="transparent" speed="1" loop autoplay style="width:32px;height:32px"></lottie-player></div>
+        <div>
+          <div class="a-tag" style="color:var(--d-medical)">Longevity</div>
+          <div class="a-title">Ovarian longevity: what actually moves the needle</div>
+          <div class="a-teaser">AMH in context, and the lifestyle factors with real evidence behind them — no hype.</div>
+          <div class="a-rev"><span class="ms">verified</span>Reviewed by Dr. Lena Okoro, OB-GYN</div>
+        </div>
+      </a>
+      <a href="learn-perimenopause.html" class="artcard">
+        <div class="a-emoji" style="background:rgba(155,107,141,.18)"><lottie-player src="assets/lottie/sun.json" background="transparent" speed="1" loop autoplay style="width:32px;height:32px"></lottie-player></div>
+        <div>
+          <div class="a-tag" style="color:var(--d-medical)">Longevity</div>
+          <div class="a-title">Perimenopause: the signs and the science</div>
+          <div class="a-teaser">A warm, STRAW+10-informed look at what shifts, what's normal, and when to check in.</div>
+          <div class="a-rev"><span class="ms">verified</span>Reviewed by Dr. Lena Okoro, OB-GYN</div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a class="on" href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+<div class="vfull" id="vfull">
+  <button class="vclose" id="vclose">✕</button>
+  <div class="vbox"><video id="vfvid" autoplay loop playsinline controls></video></div>
+  <h3 id="vftitle"></h3>
+  <p id="vfbody"></p>
+</div>
+<script>
+(function(){
+  var VIDS=[
+    {src:'assets/eduvid/menarche-v1.mp4', t:'Your very first cycles',
+     b:'Menarche — your first period — usually arrives between ages 9 and 15, a sign your body is growing exactly as it should. Early cycles are often irregular for a year or two while your hormones find their rhythm. It\'s a beginning, not a burden.'},
+    {src:'assets/eduvid/hormones-v4.mp4', t:'Your hormones, wave by wave',
+     b:'Estrogen rises through your follicular phase and peaks at ovulation — lifting energy, mood and skin. Progesterone leads the luteal phase, warming your body and slowing things down. Reading these waves is reading yourself.'},
+    {src:'assets/eduvid/normal-v4.mp4', t:'Normal — or worth checking?',
+     b:'Cycles of 21–35 days, periods of 2–7 days, and mild PMS are all normal. Soaking through pads hourly, cycles that suddenly change, severe pain, or bleeding between periods deserve a clinician\'s look — not worry, just wisdom.'},
+    {src:'assets/eduvid/fertile-v4.mp4', t:'Your fertile window',
+     b:'You\'re naturally fertile only ~6 days per cycle: the five days before ovulation and the day itself. Egg-white cervical fluid is your clearest signal it\'s opening. Nemow reads your signs to pinpoint yours.'},
+    {src:'assets/eduvid/peri-v4.mp4', t:'Perimenopause, decoded',
+     b:'The transition usually begins in your 40s: cycles shift, sleep lightens, and hot flushes may visit. It can last 4–8 years — and with the right support (movement, strength, sleep, sometimes HRT), many women thrive through it.'},
+    {src:'assets/eduvid/menopause-v1.mp4', t:'Menopause & the years beyond',
+     b:'Menopause is one moment — twelve months with no period, around age 51 on average. What follows is a third of your life. As estrogen settles, bone, heart and brain need new care: strength training, protein, sleep and, for many, hormone therapy. These can be your strongest years.'}
+  ];
+  var full=document.getElementById('vfull'), fv=document.getElementById('vfvid');
+  document.querySelectorAll('.vidcard').forEach(function(c){
+    c.addEventListener('click',function(){
+      var v=VIDS[+c.dataset.full];
+      fv.src=v.src; fv.muted=false; fv.volume=1; fv.play().catch(function(){});
+      document.getElementById('vftitle').textContent=v.t;
+      document.getElementById('vfbody').textContent=v.b;
+      full.classList.add('on');
+    });
+  });
+  document.getElementById('vclose').addEventListener('click',function(){ full.classList.remove('on'); fv.pause(); fv.src=''; });
+  full.addEventListener('click',function(e){ if(e.target===full){ full.classList.remove('on'); fv.pause(); fv.src=''; } });
+})();
+</script>
+<script src="appnav.js" defer></script>
+<script src="ovaria-mascot.js" defer></script>
+<script>
+// Persona filter for life-stage sections
+(function(){
+  document.querySelectorAll('#personaFilter .filter-chip').forEach(function(c){
+    c.addEventListener('click', function(){
+      document.querySelectorAll('#personaFilter .filter-chip').forEach(function(x){ x.classList.remove('on'); });
+      this.classList.add('on');
+      var p = this.dataset.persona;
+      document.querySelectorAll('.persona-section').forEach(function(s){
+        s.style.display = s.dataset.section === p ? 'block' : 'none';
+      });
+      document.documentElement.setAttribute('data-persona', p);
+      localStorage.setItem('ovaria_persona', p);
+    });
+  });
+  // Load saved persona
+  var saved = localStorage.getItem('ovaria_persona');
+  if(saved){
+    document.documentElement.setAttribute('data-persona', saved);
+    document.querySelectorAll('#personaFilter .filter-chip').forEach(function(c){
+      c.classList.toggle('on', c.dataset.persona === saved);
+    });
+    document.querySelectorAll('.persona-section').forEach(function(s){
+      s.style.display = s.dataset.section === saved ? 'block' : 'none';
+    });
+  }
+})();
+</script>
+</body></html>

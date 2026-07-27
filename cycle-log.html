@@ -1,0 +1,362 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · Log Today</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<script src="anim.js" defer></script>
+<style>
+.day { flex:1; text-align:center; padding:12px 4px; border-radius:16px; cursor:pointer; }
+.day b { display:block; font-family:var(--serif); font-size:18px; font-weight:500; color:var(--cocoa); }
+.day span { font-size:10.5px; font-weight:700; letter-spacing:.06em; color:var(--taupe); }
+.day.on { background:var(--mauve); }
+.day.on b, .day.on span { color:#F6EDF0; }
+.swatch { width:40px; height:40px; border-radius:50%; border:2.5px solid transparent; cursor:pointer; transition:.15s; }
+.swatch.on { border-color:var(--mauve); transform:scale(1.12); }
+.sw-wrap { display:flex; flex-direction:column; align-items:center; gap:6px; font-size:10.5px; color:var(--taupe); }
+.tgl { position:relative; width:46px; height:26px; border-radius:99px; background:var(--line); cursor:pointer; transition:.2s; flex-shrink:0; }
+.tgl::after { content:""; position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; transition:.2s; box-shadow:0 2px 6px rgba(0,0,0,.15); }
+.tgl.on { background:var(--terracotta); }
+.tgl.on::after { left:23px; }
+textarea { width:100%; border:1.5px solid var(--line-soft); border-radius:var(--r-sm); background:var(--card-solid);
+  padding:12px 14px; font:400 14px var(--sans); color:var(--ink); resize:none; min-height:74px; }
+textarea:focus { outline:none; border-color:var(--sage); }
+
+/* ── Flo-style category header + round bubble multi-select ── */
+.cathead { display:flex; align-items:center; justify-content:space-between; margin:22px 2px 10px; }
+.cathead h2 { font-family:var(--serif); font-weight:600; font-size:19px; color:var(--cocoa); margin:0; }
+.cathead .cnt { font:700 11px var(--sans); color:var(--faded); }
+.bubgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px 6px; }
+.bub { display:flex; flex-direction:column; align-items:center; gap:7px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.bub .b-ic { position:relative; width:62px; height:62px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  border:2px solid transparent; transition:transform .12s ease, background .15s, border-color .15s; }
+.bub .b-ic .ms { font-size:27px; transition:color .15s; }
+.bub:active .b-ic { transform:scale(.92); }
+.bub.on .b-ic { transform:scale(1.05); }
+.bub.on .b-ic .ms { color:#fff !important; }
+.bub .b-ic .tick { position:absolute; right:-2px; bottom:-2px; width:22px; height:22px; border-radius:50%;
+  background:var(--ok); color:#fff; display:none; align-items:center; justify-content:center; border:2.5px solid var(--paper); }
+.bub .b-ic .tick .ms { font-size:13px; color:#fff; }
+.bub.on .b-ic .tick { display:flex; }
+.bub label { font-size:11px; font-weight:600; color:var(--taupe); text-align:center; line-height:1.25; cursor:pointer; }
+.bub.on label { color:var(--cocoa); }
+
+/* discharge decoder (kept — Nemow differentiator) */
+.dgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.dsw { cursor:pointer; text-align:center; }
+.dsw img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:14px; border:2.5px solid transparent; transition:.15s; box-shadow:0 4px 12px -6px rgba(110,70,84,.3); }
+.dsw.on img { border-color:var(--mauve); transform:scale(1.04); }
+.dsw span { display:block; font-size:10px; font-weight:700; color:var(--taupe); margin-top:5px; line-height:1.2; }
+.dsw.on span { color:var(--mauve); }
+.dnote { display:none; margin-top:13px; padding:12px 14px; border-radius:var(--r-sm); font-size:13px; line-height:1.5; color:var(--ink); background:var(--card-solid); border:1.5px solid var(--line-soft); }
+.dnote.show { display:block; animation:rise .3s ease; }
+.dnote.ok { border-color:#9FBF8F; background:linear-gradient(0deg,rgba(126,155,94,.09),#fff); }
+.dnote.warn { border-color:#E3B563; background:linear-gradient(0deg,rgba(229,180,92,.12),#fff); }
+.dnote.flag { border-color:#D98E78; background:linear-gradient(0deg,rgba(217,111,79,.12),#fff); }
+.dnote b { display:flex; align-items:center; gap:5px; margin-bottom:3px; font-size:13px; }
+.savebar { position:sticky; bottom:0; padding:12px 0 4px; background:linear-gradient(0deg,var(--paper) 68%,transparent); }
+</style>
+</head><body>
+
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="cycle-home.html">close</a>
+    <div class="t-title" style="text-align:center">Log Today</div>
+    <a class="t-icon ms" href="#">calendar_today</a>
+  </div>
+
+  <div class="scroll">
+    <div class="card" style="padding:12px 14px;display:flex;align-items:center;gap:10px;background:linear-gradient(145deg, rgba(217,131,164,.12), rgba(255,255,255,.85))">
+      <span class="ms" style="color:var(--d-cycle);font-size:22px">water_drop</span>
+      <div style="flex:1"><b style="font-size:14px">Period · Day 2</b><div class="sub" style="font-size:12px">Started Tue, May 19</div></div>
+      <a href="cycle-home.html" style="font:700 12.5px var(--sans);color:var(--terracotta);text-decoration:none">Period ended?</a>
+    </div>
+
+    <div class="card" style="padding:10px;display:flex;gap:6px">
+      <div class="day"><span>MON</span><b>12</b></div>
+      <div class="day"><span>TUE</span><b>13</b></div>
+      <div class="day on"><span>WED</span><b>14</b></div>
+      <div class="day"><span>THU</span><b>15</b></div>
+      <div class="day"><span>FRI</span><b>16</b></div>
+    </div>
+
+    <div style="text-align:center;margin:20px 0 4px">
+      <div style="font-family:var(--serif);font-weight:500;font-size:24px;color:var(--mauve)">How are you feeling today?</div>
+      <div class="sub" style="font-size:12.5px">Tap anything that fits — the more you log, the smarter Nemow gets.</div>
+    </div>
+
+    <h2 class="sec">Flow</h2>
+    <div class="card" style="padding:14px">
+      <div class="chiprow" data-single>
+        <div class="chip"><span class="c-ic ms" style="color:var(--blush)">opacity</span>Spotting</div>
+        <div class="chip"><span class="c-ic ms" style="color:var(--coral-deep)">water_drop</span>Light</div>
+        <div class="chip on"><span class="c-ic ms" style="color:var(--d-cycle)">water_drop</span>Medium</div>
+        <div class="chip"><span class="c-ic ms" style="color:var(--mauve)">water_drop</span>Heavy</div>
+      </div>
+    </div>
+
+    <h2 class="sec">Bleeding details</h2>
+    <div class="card" style="padding:16px;display:flex;flex-direction:column;gap:14px">
+      <div>
+        <div class="sub" style="font-weight:700;margin-bottom:9px">Colour</div>
+        <div class="row" style="justify-content:space-between">
+          <div class="sw-wrap"><div class="swatch" style="background:#D8352C"></div>Bright red</div>
+          <div class="sw-wrap"><div class="swatch on" style="background:#8E1F1B"></div>Dark red</div>
+          <div class="sw-wrap"><div class="swatch" style="background:#5C342B"></div>Dark brown</div>
+          <div class="sw-wrap"><div class="swatch" style="background:#EFA5B8"></div>Pink</div>
+          <div class="sw-wrap"><div class="swatch" style="background:conic-gradient(#D8352C,#EFA5B8,#5C342B,#D8352C)"></div>Other</div>
+        </div>
+      </div>
+      <div class="row" style="justify-content:space-between">
+        <div><b style="font-size:14px">Clots</b><div class="sub" style="font-size:12px">Optional</div></div>
+        <div class="tgl on" id="clots"></div>
+      </div>
+      <div class="chiprow" data-single id="clotsize">
+        <div class="chip" style="padding:9px">Small</div>
+        <div class="chip on" style="padding:9px">Medium</div>
+        <div class="chip" style="padding:9px">Large</div>
+      </div>
+    </div>
+
+    <!-- Flo-style multi-select bubble categories render here -->
+    <div id="cats"></div>
+
+    <!-- Discharge decoder (kept — image-based, Nemow differentiator) -->
+    <div class="cathead"><h2>Vaginal discharge <span class="badge info" style="font-size:10px;margin-left:4px">Decoder</span></h2></div>
+    <div class="card" style="padding:16px">
+      <div class="sub" style="margin-bottom:11px">Tap what's closest to today — we'll tell you what it usually means.</div>
+      <div class="dgrid" id="dgrid">
+        <div class="dsw" data-k="clear"><img src="assets/discharge/clear.jpg" alt="Clear discharge"><span>Clear</span></div>
+        <div class="dsw" data-k="creamy"><img src="assets/discharge/creamy.jpg" alt="Creamy white discharge"><span>Creamy</span></div>
+        <div class="dsw" data-k="clumpy"><img src="assets/discharge/clumpy.jpg" alt="White clumpy discharge"><span>Clumpy</span></div>
+        <div class="dsw" data-k="yellow"><img src="assets/discharge/yellow.jpg" alt="Yellow discharge"><span>Yellow</span></div>
+        <div class="dsw" data-k="green"><img src="assets/discharge/green.jpg" alt="Green discharge"><span>Green</span></div>
+        <div class="dsw" data-k="grey"><img src="assets/discharge/grey.jpg" alt="Grey discharge"><span>Grey</span></div>
+        <div class="dsw" data-k="brown"><img src="assets/discharge/brown.jpg" alt="Brown discharge"><span>Brown</span></div>
+        <div class="dsw" data-k="pink"><img src="assets/discharge/pink.jpg" alt="Pink discharge"><span>Pink</span></div>
+      </div>
+      <div class="dnote" id="dnote"></div>
+
+      <div style="border-top:1.5px solid var(--line-soft);margin:15px 0 13px"></div>
+      <div class="row" style="justify-content:space-between;margin-bottom:10px">
+        <div><b style="font-size:13.5px">How did it feel?</b><div class="sub" style="font-size:11.5px">Trying to conceive? This tracks your fertile window.</div></div>
+        <span class="ms" style="color:var(--terracotta)">spa</span>
+      </div>
+      <div class="chiprow" data-single id="feelrow">
+        <div class="chip" data-f="dry">Dry</div>
+        <div class="chip" data-f="sticky">Sticky</div>
+        <div class="chip" data-f="creamy">Creamy</div>
+        <div class="chip" data-f="watery">Watery</div>
+        <div class="chip" data-f="eggwhite">Egg-white</div>
+      </div>
+      <div class="dnote" id="fnote" style="margin-top:12px"></div>
+      <div class="sub" style="font-size:11px;margin-top:12px;display:flex;align-items:center;gap:5px">
+        <span class="ms" style="font-size:14px">info</span> Guidance, not a diagnosis. When in doubt, check with a clinician.
+      </div>
+    </div>
+
+    <!-- more Flo-style categories (mood, sex, activity, lifestyle) render here -->
+    <div id="cats2"></div>
+
+    <div class="cathead"><h2>Notes <span class="badge info" style="font-size:10px;margin-left:4px">Private</span></h2></div>
+    <div class="card" style="padding:14px">
+      <textarea placeholder="Anything else about today…"></textarea>
+    </div>
+
+    <div class="savebar">
+      <button class="btn" id="saveBtn"><span class="ms" style="font-size:19px">check_circle</span> <span id="saveLbl">Save today's log</span></button>
+      <div class="sub" style="text-align:center;font-size:11.5px;display:flex;align-items:center;justify-content:center;gap:5px;margin-top:8px">
+        <span class="ms" style="font-size:14px">cloud_off</span> Works offline — syncs when you're back
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  // ── Flo-style bubble categories ──
+  // Each category: title, accent colour, soft tint, and multi-select items.
+  // An item with excl:true (e.g. "All good", "Didn't exercise") clears the rest of its group.
+  function C(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+  var CATS_TOP = [
+    { id:'symptoms', title:'Symptoms', accent:C('--terracotta'), tint:'rgba(196,111,79,.13)', items:[
+      {k:'fine', i:'sentiment_satisfied', l:'All good', excl:true},
+      {k:'cramps', i:'bolt', l:'Cramps'},
+      {k:'tender', i:'favorite', l:'Tender breasts'},
+      {k:'headache', i:'neurology', l:'Headache'},
+      {k:'bloating', i:'air', l:'Bloating'},
+      {k:'fatigue', i:'bedtime', l:'Fatigue'},
+      {k:'acne', i:'face', l:'Acne'},
+      {k:'backache', i:'accessibility_new', l:'Backache'},
+      {k:'nausea', i:'sick', l:'Nausea'},
+      {k:'cravings', i:'lunch_dining', l:'Cravings'},
+      {k:'insomnia', i:'bedtime_off', l:'Insomnia'},
+      {k:'digestion', i:'gastroenterology', l:'Digestion'}
+    ]}
+  ];
+  var CATS_MORE = [
+    { id:'mood', title:'Mood', accent:C('--d-medical'), tint:'rgba(155,107,141,.14)', items:[
+      {k:'calm', i:'sentiment_calm', l:'Calm'},
+      {k:'happy', i:'sentiment_very_satisfied', l:'Happy'},
+      {k:'energetic', i:'bolt', l:'Energetic'},
+      {k:'playful', i:'mood', l:'Playful'},
+      {k:'swings', i:'sync', l:'Mood swings'},
+      {k:'irritable', i:'sentiment_stressed', l:'Irritable'},
+      {k:'sad', i:'sentiment_sad', l:'Sad'},
+      {k:'anxious', i:'psychology', l:'Anxious'},
+      {k:'lowenergy', i:'battery_2_bar', l:'Low energy'},
+      {k:'selfcrit', i:'sentiment_worried', l:'Self-critical'}
+    ]},
+    { id:'sex', title:'Sex & sex drive', accent:C('--d-cycle'), tint:'rgba(217,131,164,.15)', items:[
+      {k:'nosex', i:'block', l:'No sex', excl:true},
+      {k:'protected', i:'shield', l:'Protected'},
+      {k:'unprotected', i:'favorite', l:'Unprotected'},
+      {k:'high', i:'local_fire_department', l:'High drive'},
+      {k:'neutral', i:'remove', l:'Neutral drive'},
+      {k:'low', i:'trending_down', l:'Low drive'}
+    ]},
+    { id:'activity', title:'Physical activity', accent:'#5E9B73', tint:'rgba(147,187,143,.2)', items:[
+      {k:'rest', i:'weekend', l:'Rest day', excl:true},
+      {k:'walk', i:'directions_walk', l:'Walking'},
+      {k:'run', i:'directions_run', l:'Running'},
+      {k:'yoga', i:'self_improvement', l:'Yoga'},
+      {k:'gym', i:'fitness_center', l:'Strength'},
+      {k:'cycle', i:'directions_bike', l:'Cycling'},
+      {k:'swim', i:'pool', l:'Swimming'},
+      {k:'dance', i:'music_note', l:'Dancing'}
+    ]},
+    { id:'lifestyle', title:'Lifestyle & other', accent:C('--d-sleep'), tint:'rgba(127,174,201,.2)', items:[
+      {k:'goodsleep', i:'bedtime', l:'Good sleep'},
+      {k:'stress', i:'bolt', l:'Stress'},
+      {k:'travel', i:'flight', l:'Travel'},
+      {k:'water', i:'water_drop', l:'Hydrated'},
+      {k:'meditate', i:'spa', l:'Meditation'},
+      {k:'journal', i:'edit_note', l:'Journaling'},
+      {k:'alcohol', i:'local_bar', l:'Alcohol'},
+      {k:'caffeine', i:'local_cafe', l:'Caffeine'}
+    ]}
+  ];
+
+  function renderCats(list, mount){
+    var html='';
+    list.forEach(function(cat){
+      html += '<div class="cathead" data-cat="'+cat.id+'"><h2>'+cat.title+'</h2><span class="cnt" data-cnt="'+cat.id+'"></span></div>';
+      html += '<div class="card" style="padding:16px 12px"><div class="bubgrid" data-group="'+cat.id+'">';
+      cat.items.forEach(function(it){
+        html += '<div class="bub" data-k="'+it.k+'"'+(it.excl?' data-excl="1"':'')+'>'
+             +   '<div class="b-ic" style="background:'+cat.tint+'">'
+             +     '<span class="ms" style="color:'+cat.accent+'">'+it.i+'</span>'
+             +     '<span class="tick"><span class="ms">check</span></span>'
+             +   '</div><label>'+it.l+'</label></div>';
+      });
+      html += '</div></div>';
+      mount.insertAdjacentHTML('beforeend', html);
+      // colour the selected bubble in the category accent
+      var grp = mount.querySelector('[data-group="'+cat.id+'"]');
+      grp.dataset.accent = cat.accent;
+      html='';
+    });
+  }
+  renderCats(CATS_TOP, document.getElementById('cats'));
+  renderCats(CATS_MORE, document.getElementById('cats2'));
+
+  function updateCount(group){
+    var id=group.dataset.group;
+    var n=group.querySelectorAll('.bub.on').length;
+    var el=document.querySelector('[data-cnt="'+id+'"]');
+    if(el) el.textContent = n ? n+' selected' : '';
+    updateSave();
+  }
+  document.querySelectorAll('.bubgrid').forEach(function(group){
+    var accent=group.dataset.accent;
+    group.querySelectorAll('.bub').forEach(function(b){
+      b.addEventListener('click', function(){
+        var isExcl = b.dataset.excl==='1';
+        var turningOn = !b.classList.contains('on');
+        if(turningOn){
+          if(isExcl){ // "All good" / "Rest day" clears everything else
+            group.querySelectorAll('.bub').forEach(function(x){ x.classList.remove('on'); x.querySelector('.b-ic').style.background=''; });
+          } else { // any real symptom clears the exclusive one
+            var ex=group.querySelector('.bub[data-excl="1"]');
+            if(ex && ex.classList.contains('on')){ ex.classList.remove('on'); ex.querySelector('.b-ic').style.background=''; }
+          }
+          b.classList.add('on');
+          b.querySelector('.b-ic').style.background=accent;
+        } else {
+          b.classList.remove('on');
+          b.querySelector('.b-ic').style.background='';
+        }
+        updateCount(group);
+      });
+    });
+  });
+
+  function updateSave(){
+    var n=document.querySelectorAll('.bub.on').length;
+    var lbl=document.getElementById('saveLbl');
+    lbl.textContent = n ? ('Save today’s log · '+n+' logged') : 'Save today’s log';
+  }
+
+  // clots toggle
+  var t=document.getElementById('clots'), cs=document.getElementById('clotsize');
+  t.addEventListener('click', function(){ t.classList.toggle('on'); cs.style.display = t.classList.contains('on') ? 'flex' : 'none'; });
+
+  // ── discharge decoder (kept) ──
+  var DDATA = {
+    clear:  {tone:'ok',   icon:'check_circle', title:'Healthy & normal', text:'Clear, stretchy fluid often peaks around ovulation — a sign your cycle is working. Log it to learn your fertile window.'},
+    creamy: {tone:'ok',   icon:'check_circle', title:'Normal', text:'Creamy milky-white discharge is common right after your period and in the second half of your cycle.'},
+    clumpy: {tone:'flag', icon:'medical_services', title:'Worth a check', text:'Thick, cottage-cheese texture — especially with itching or soreness — can signal a yeast infection. A clinician can confirm and treat it easily.'},
+    yellow: {tone:'warn', icon:'error', title:'Usually okay', text:'A pale tinge is often normal (white discharge looks yellowish once it dries). Bright yellow with an odour, itch or pain is worth getting checked.'},
+    green:  {tone:'flag', icon:'medical_services', title:'See a clinician', text:'Green discharge is usually a sign of infection, such as bacterial vaginosis or an STI. Best to get it assessed soon.'},
+    grey:   {tone:'flag', icon:'medical_services', title:'Worth a check', text:'Greyish-white, thin, watery discharge — often with a fishy odour — can point to bacterial vaginosis. A clinician can help.'},
+    brown:  {tone:'warn', icon:'error', title:'Usually old blood', text:'Brown discharge is typically older blood at the start or end of your period — normal. Unexpected brown spotting is worth logging and watching.'},
+    pink:   {tone:'ok',   icon:'check_circle', title:'Often normal', text:'A pink tinge means a little blood mixed in — common at the start/end of a period, around ovulation, or in the first months of new birth control.'}
+  };
+  var FDATA = {
+    dry:      {tone:'',     bars:1, icon:'circle', title:'Low fertility', text:'Little to no mucus — common just after your period. Conception is unlikely on dry days.'},
+    sticky:   {tone:'',     bars:2, icon:'circle', title:'Low fertility', text:'Thick, pasty or tacky mucus. Your body is early in the cycle — fertility is still low.'},
+    creamy:   {tone:'warn', bars:3, icon:'trending_up', title:'Getting closer', text:'Lotion-like and smooth but not stretchy. Estrogen is rising — your fertile window is approaching.'},
+    watery:   {tone:'warn', bars:4, icon:'water_drop', title:'High fertility', text:'Thin, wet and slippery. You are likely in your fertile window — a good time to try.'},
+    eggwhite: {tone:'ok',   bars:5, icon:'egg', title:'Peak fertility', text:'Clear and stretchy like raw egg white — the clearest natural sign of your most fertile days.'}
+  };
+  var frow=document.getElementById('feelrow'), fnote=document.getElementById('fnote');
+  frow.querySelectorAll('.chip').forEach(function(c){
+    c.addEventListener('click', function(){
+      var on=c.classList.contains('on');
+      frow.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('on'); });
+      if(on){ fnote.className='dnote'; return; }
+      c.classList.add('on');
+      var d=FDATA[c.dataset.f];
+      var dots=''; for(var i=1;i<=5;i++){ dots+='<span style="display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:3px;background:'+(i<=d.bars?'var(--terracotta)':'var(--line)')+'"></span>'; }
+      fnote.className='dnote show '+(d.tone||'');
+      fnote.innerHTML='<b><span class="ms" style="font-size:16px">'+d.icon+'</span>'+d.title+' &nbsp;'+dots+'</b>'+d.text;
+    });
+  });
+  var grid=document.getElementById('dgrid'), note=document.getElementById('dnote');
+  grid.querySelectorAll('.dsw').forEach(function(sw){
+    sw.addEventListener('click', function(){
+      var on = sw.classList.contains('on');
+      grid.querySelectorAll('.dsw').forEach(function(x){ x.classList.remove('on'); });
+      if(on){ note.className='dnote'; return; }
+      sw.classList.add('on');
+      var d=DDATA[sw.dataset.k];
+      note.className='dnote show '+d.tone;
+      note.innerHTML='<b><span class="ms" style="font-size:16px">'+d.icon+'</span>'+d.title+'</b>'+d.text;
+    });
+  });
+});
+</script>
+<script src="appnav.js" defer></script>
+<script src="ovaria-mascot.js" defer></script>
+</body></html>

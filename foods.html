@@ -1,0 +1,209 @@
+<!doctype html><html lang="en" data-persona="bloom"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · Food Knowledge</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined&family=DM+Serif+Display&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=Inter:opsz,wght@14..32,400;14..32,600&family=Cormorant+Garamond:wght@500&family=Work+Sans:wght@400;500;600&family=Lora:wght@500&family=Plus+Jakarta+Sans:wght@400;500;600&family=Playfair+Display:wght@600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<link rel="stylesheet" href="ovaria-persona.css">
+<script src="anim.js" defer></script>
+<style>
+.food-card .cn { font-size:12px; color:var(--ovaria-accent); font-weight:600; }
+.warn-tag { display:inline-flex; align-items:center; gap:3px; padding:2px 8px; border-radius:99px; font-size:10px; font-weight:700; background:rgba(240,194,122,.2); color:#8B6914; }
+.warn-tag.danger { background:rgba(190,74,62,.12); color:#BE4A3E; }
+.phase-card { padding:14px 16px; border-radius:var(--ovaria-radius-md); margin-bottom:10px; }
+.phase-card.follicular { background:linear-gradient(135deg, rgba(166,180,230,.15), rgba(255,255,255,.8)); border:1px solid rgba(166,180,230,.3); }
+.phase-card.luteal { background:linear-gradient(135deg, rgba(229,180,92,.15), rgba(255,255,255,.8)); border:1px solid rgba(229,180,92,.3); }
+.phase-card.menstrual { background:linear-gradient(135deg, rgba(217,131,164,.12), rgba(255,255,255,.8)); border:1px solid rgba(217,131,164,.25); }
+.phase-card h4 { font-family:var(--ovaria-font-heading); font-size:15px; color:var(--ovaria-text-emphasis); margin:0 0 6px; }
+.meal-idea { display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid var(--ovaria-border); font-size:12.5px; }
+.meal-idea:last-child { border-bottom:none; }
+</style>
+</head><body>
+
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="learn.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">Food Knowledge</div>
+    <a class="t-icon ms" href="diet.html">restaurant_menu</a>
+  </div>
+
+  <div class="scroll">
+    <!-- Hero -->
+    <div class="card tint-sage" style="padding:20px 18px">
+      <div class="row" style="gap:10px;margin-bottom:6px">
+        <span style="font-size:34px">🥗</span>
+        <div>
+          <div style="font-family:var(--ovaria-font-heading);font-weight:600;font-size:19px;color:var(--ovaria-text-emphasis)">Food as Medicine</div>
+          <div class="sub" style="font-size:12px;margin-top:3px">35+ evidence-backed foods for ovarian health — bridging Traditional Chinese Medicine and Western nutritional science. Filtered by your life stage.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter row -->
+    <div class="filter-row" id="stageFilter">
+      <span class="filter-chip on" data-filter="all">All Foods</span>
+      <span class="filter-chip" data-filter="bloom">🌸 Bloom</span>
+      <span class="filter-chip" data-filter="grow">🌱 Grow</span>
+      <span class="filter-chip" data-filter="nurture">🌿 Nurture</span>
+      <span class="filter-chip" data-filter="wisdom">🌙 Wisdom</span>
+    </div>
+    <div class="filter-row" id="phaseFilter">
+      <span class="filter-chip on" data-phase="all">All Phases</span>
+      <span class="filter-chip" data-phase="follicular">🌱 Follicular</span>
+      <span class="filter-chip" data-phase="luteal">🌕 Luteal</span>
+      <span class="filter-chip" data-phase="menstrual">🩸 Menstrual</span>
+    </div>
+
+    <!-- Phase-Synced Eating Guide -->
+    <h2 class="sec">🔄 Phase-Synced Nutrition</h2>
+    <div class="phase-card follicular">
+      <h4>🌱 Follicular Phase (Days 1–14)</h4>
+      <div style="font-size:12px;line-height:1.5;color:var(--ovaria-text-primary)">
+        <b>TCM:</b> Yin-growing phase — nourish Kidney yin, build Liver blood. <span style="color:var(--ovaria-text-secondary)">Cooling to neutral, yin-nourishing foods.</span>
+        <br><b>Western:</b> Support estrogen metabolism, provide building blocks for follicle & endometrium.
+        <br><b>Key foods:</b> Black beans, goji berries, eggs, bone broth, oysters, spinach, seaweed, tofu.
+      </div>
+      <div style="margin-top:8px"><span class="warn-tag" style="background:rgba(127,174,201,.15);color:#5A8AAA">Avoid: excessive warming foods, alcohol, raw/cold foods</span></div>
+      <div class="meal-idea"><span style="font-size:20px">🥣</span><span><b>Breakfast:</b> Congee with goji berries, black sesame, soft-boiled egg + sautéed kale</span></div>
+      <div class="meal-idea"><span style="font-size:20px">🥗</span><span><b>Lunch:</b> Quinoa bowl with black beans, avocado, pumpkin seeds, ginger-sesame dressing</span></div>
+      <div class="meal-idea"><span style="font-size:20px">🐟</span><span><b>Dinner:</b> Steamed salmon with broccoli, shiitake mushrooms, brown rice</span></div>
+    </div>
+
+    <div class="phase-card luteal">
+      <h4>🌕 Luteal Phase (Days 15–28)</h4>
+      <div style="font-size:12px;line-height:1.5;color:var(--ovaria-text-primary)">
+        <b>TCM:</b> Yang phase — warm Kidney yang, move Liver qi. <span style="color:var(--ovaria-text-secondary)">Warming, yang-nourishing foods.</span>
+        <br><b>Western:</b> Support progesterone, manage blood sugar, reduce inflammation. Increase magnesium, B6, complex carbs.
+        <br><b>Key foods:</b> Ginger, cinnamon, walnuts, lamb, chicken, turmeric, dark chocolate, sweet potatoes.
+      </div>
+      <div style="margin-top:8px"><span class="warn-tag" style="background:rgba(240,194,122,.15);color:#8B6914">Avoid: cold/raw foods, smoothies, ice water, excess caffeine</span></div>
+      <div class="meal-idea"><span style="font-size:20px">🥣</span><span><b>Breakfast:</b> Warm oatmeal with cinnamon, walnuts, banana, honey + ginger tea</span></div>
+      <div class="meal-idea"><span style="font-size:20px">🍗</span><span><b>Lunch:</b> Chicken & roasted sweet potato bowl with chickpeas, turmeric-tahini dressing</span></div>
+      <div class="meal-idea"><span style="font-size:20px">🍲</span><span><b>Dinner:</b> Lamb & root vegetable stew with rosemary + sautéed Swiss chard</span></div>
+    </div>
+
+    <div class="phase-card menstrual">
+      <h4>🩸 Menstrual Phase (Days 1–5)</h4>
+      <div style="font-size:12px;line-height:1.5;color:var(--ovaria-text-primary)">
+        <b>TCM:</b> Rest, replenish, gently move blood. <span style="color:var(--ovaria-text-secondary)">Warming blood-nourishing soups.</span>
+        <br><b>Western:</b> Replenish iron. Anti-inflammatory support. <span style="color:var(--ovaria-text-secondary)">Iron-rich + vitamin C, ginger, turmeric, omega-3.</span>
+      </div>
+      <div style="margin-top:8px"><span class="warn-tag">Avoid: excessive salt (bloating), excess caffeine (vasoconstriction), raw/cold foods</span></div>
+      <div class="meal-idea"><span style="font-size:20px">🍲</span><span><b>Meal:</b> Warming ginger-chicken soup with red dates, rice congee</span></div>
+      <div class="meal-idea"><span style="font-size:20px">🍵</span><span><b>Drink:</b> Ginger tea with brown sugar, warm turmeric golden milk</span></div>
+    </div>
+
+    <!-- Food Database -->
+    <h2 class="sec">🍽️ Food Database — TCM + Western Dual View</h2>
+    <div id="foodGrid" style="display:flex;flex-direction:column;gap:14px"></div>
+
+    <!-- Contraindications Summary -->
+    <h2 class="sec">⚠️ Contraindications & Interactions</h2>
+    <div class="card" style="font-size:12px;line-height:1.6">
+      <div style="padding:6px 0;border-bottom:1px solid var(--ovaria-border)"><b>Blood thinners (warfarin):</b> Caution with goji berry, dang gui, ginger (high dose)</div>
+      <div style="padding:6px 0;border-bottom:1px solid var(--ovaria-border)"><b>Pregnancy:</b> Avoid dang gui, raspberry leaf (early), licorice root (high dose)</div>
+      <div style="padding:6px 0;border-bottom:1px solid var(--ovaria-border)"><b>Soy + breast cancer:</b> 1-2 servings/day associated with reduced recurrence — discuss with oncologist</div>
+      <div style="padding:6px 0;border-bottom:1px solid var(--ovaria-border)"><b>Spleen qi deficiency (TCM):</b> Avoid all cooling/raw foods. Add ginger, cardamom, cinnamon</div>
+      <div style="padding:6px 0;border-bottom:1px solid var(--ovaria-border)"><b>Kidney stones:</b> Moderate spinach, beet greens, almonds. Pair with calcium</div>
+      <div style="padding:6px 0;border-bottom:1px solid var(--ovaria-border)"><b>Gout:</b> Limit organ meats, bone broth (excessive), sardines, oysters</div>
+      <div style="padding:6px 0"><b>Hashimoto's:</b> Cook cruciferous vegetables. Moderate soy. Ensure adequate iodine</div>
+    </div>
+
+    <div class="ovaria-footer"><span>Nemow</span></div>
+  </div>
+</div>
+
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a class="on" href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+
+<script>
+const FOODS = [
+  // Bloom
+  { id:1, name:"Goji Berry", cn:"枸杞子", emoji:"🫐", tcmThermal:"neutral", tcmFlavor:"sweet", tcm:"Nourishes Liver blood & Kidney yin. Antioxidant protection for developing follicles.", western:"Polysaccharides, zeaxanthin, vitamin C, iron, beta-carotene. Antioxidant-rich.", benefit:"Folate + antioxidants for oocyte DNA synthesis", stages:["bloom","grow","wisdom"], phase:["follicular"], contra:[], evLevel:"moderate" },
+  { id:2, name:"Chinese Red Date", cn:"红枣", emoji:"🟤", tcmThermal:"warming", tcmFlavor:"sweet", tcm:"Tonifies Spleen qi & nourishes blood. Builds hemoglobin.", western:"Iron, vitamin C, B-complex, cAMP. Supports cellular signaling.", benefit:"Iron for menstrual losses; blood-building", stages:["bloom"], phase:["menstrual","luteal"], contra:["bloating"], evLevel:"traditional" },
+  { id:3, name:"Black Sesame Seeds", cn:"黑芝麻", emoji:"🖤", tcmThermal:"neutral", tcmFlavor:"sweet", tcm:"Nourishes Liver & Kidney yin. Vitamin E protects ovarian follicles.", western:"Calcium, iron, vitamin E, zinc, selenium, lignans, healthy fats.", benefit:"Vitamin E protects oocytes from oxidative stress", stages:["bloom","grow","wisdom"], phase:["all"], contra:[], evLevel:"moderate" },
+  { id:4, name:"Spinach / Dark Leafy Greens", cn:"菠菜", emoji:"🥬", tcmThermal:"cooling", tcmFlavor:"sweet", tcm:"Cools, nourishes Liver blood. Raw weakens Spleen — cook lightly.", western:"Iron (non-heme), folate, magnesium, vitamin K, vitamin C, lutein.", benefit:"Folate for oocyte maturation; iron for menstrual losses", stages:["bloom","grow","nurture"], phase:["follicular"], contra:["kidney stones","spleen deficiency"], evLevel:"strong" },
+  { id:5, name:"Free-Range Eggs", cn:"鸡蛋", emoji:"🥚", tcmThermal:"neutral", tcmFlavor:"sweet", tcm:"Nourishes Heart, Kidney, Spleen. Builds qi & blood.", western:"Complete protein, choline, vitamin D, B12, iron, selenium.", benefit:"Choline for cell membrane integrity in follicles; vitamin D for AMH", stages:["bloom","grow","nurture"], phase:["all"], contra:[], evLevel:"strong" },
+  // Grow
+  { id:6, name:"Black Beans", cn:"黑豆", emoji:"🫘", tcmThermal:"neutral", tcmFlavor:"sweet", tcm:"Classic Kidney-nourishing food. Black color enters Kidney meridian.", western:"Folate, iron, magnesium, isoflavones, anthocyanins, protein.", benefit:"Phytoestrogens moderate estrogen signaling; anthocyanins protect follicles", stages:["grow","wisdom"], phase:["follicular"], contra:["flatulence"], evLevel:"moderate" },
+  { id:7, name:"Walnuts", cn:"核桃", emoji:"🥜", tcmThermal:"warming", tcmFlavor:"sweet", tcm:"Nourishes Kidney essence, warms Kidney yang. Premier fertility food.", western:"ALA omega-3, vitamin E, melatonin, zinc, copper, polyphenols.", benefit:"Omega-3 for anti-inflammatory follicular environment; melatonin antioxidant", stages:["grow"], phase:["luteal"], contra:["allergy","heat signs"], evLevel:"moderate" },
+  { id:8, name:"Salmon (wild)", cn:"三文鱼", emoji:"🐟", tcmThermal:"neutral-warm", tcmFlavor:"sweet", tcm:"Tonifies Spleen & Stomach. Builds qi & blood.", western:"DHA/EPA omega-3, vitamin D, selenium, astaxanthin, protein.", benefit:"DHA supports oocyte membrane fluidity & implantation", stages:["grow","nurture","wisdom"], phase:["follicular","luteal"], contra:[], evLevel:"strong" },
+  { id:9, name:"Chinese Yam", cn:"山药", emoji:"🥔", tcmThermal:"neutral", tcmFlavor:"sweet", tcm:"Tonifies Spleen, Lung & Kidney — a trinity tonic. Diosgenin precursor.", western:"Diosgenin (steroidal saponin), mucilage, B vitamins, manganese.", benefit:"Mucilage supports gut-lining integrity; precursor to progesterone/estrogen", stages:["grow","nurture","wisdom"], phase:["follicular"], contra:[], evLevel:"moderate" },
+  { id:10, name:"Oysters", cn:"牡蛎", emoji:"🦪", tcmThermal:"cooling", tcmFlavor:"sweet/salty", tcm:"Nourishes Liver & Kidney yin. Highest zinc food.", western:"Zinc (highest food source), selenium, iron, B12, copper, taurine.", benefit:"Zinc critical for oocyte meiosis, fertilization & embryonic development", stages:["grow"], phase:["follicular"], contra:["allergy","balance with warmth"], evLevel:"strong" },
+  // Nurture
+  { id:11, name:"Bone Broth / Marrow", cn:"骨汤", emoji:"🍖", tcmThermal:"warming", tcmFlavor:"sweet/salty", tcm:"Nourishes Kidney essence & marrow. Fills brain & nourishes essence.", western:"Collagen/gelatin, glycine, proline, glucosamine, calcium, magnesium.", benefit:"Glycine supports glutathione synthesis (master antioxidant); collagen for uterine lining", stages:["nurture","grow"], phase:["all"], contra:["gout","high histamine"], evLevel:"traditional" },
+  { id:12, name:"Ginger (fresh)", cn:"生姜", emoji:"🫚", tcmThermal:"warming", tcmFlavor:"acrid", tcm:"Warms middle jiao, dispels cold, moves blood. Essential postpartum.", western:"Gingerols, shogaols, zingerone. Anti-inflammatory.", benefit:"Critical post-delivery to expel lochia & prevent blood stasis", stages:["nurture","grow","wisdom"], phase:["luteal","menstrual"], contra:["excessive sweating"], evLevel:"strong" },
+  { id:13, name:"Sesame Oil", cn:"麻油", emoji:"🫗", tcmThermal:"warming", tcmFlavor:"sweet", tcm:"Nourishes Liver & Kidney, lubricates intestines. Confinement cuisine staple.", western:"Sesamin, sesamolin, vitamin E, phytosterols, healthy fats.", benefit:"Vitamin E supports tissue healing; traditional postpartum cooking medium", stages:["nurture"], phase:["all"], contra:["high calorie"], evLevel:"traditional" },
+  { id:14, name:"Rice Congee / Jook", cn:"粥", emoji:"🥣", tcmThermal:"neutral", tcmFlavor:"sweet", tcm:"Foundational postpartum food — easily digested, supports Spleen, generates fluids.", western:"Easily digestible carbs, B vitamins (brown rice).", benefit:"Gentle energy without taxing compromised digestive system", stages:["nurture","bloom"], phase:["all"], contra:[], evLevel:"traditional" },
+  // Wisdom
+  { id:15, name:"Soy / Tofu / Tempeh", cn:"豆腐", emoji:"🧈", tcmThermal:"cooling", tcmFlavor:"sweet", tcm:"Benefits Spleen & Stomach. Fermented (tempeh) has better digestibility.", western:"Isoflavones (genistein, daidzein), complete protein, calcium, iron.", benefit:"SERMs — estrogenic support to bone/brain/heart. Correlated with reduced hot flashes", stages:["wisdom","grow"], phase:["follicular"], contra:["breast cancer history (discuss with oncologist)","cooling — add ginger"], evLevel:"strong" },
+  { id:16, name:"Flaxseed", cn:"亚麻籽", emoji:"🌾", tcmThermal:"neutral", tcmFlavor:"sweet", tcm:"Benefits Liver & Large Intestine. Gentle estrogenic support.", western:"Lignans (SDG), ALA omega-3, fiber, magnesium.", benefit:"Lignans are phytoestrogens; 40g/day reduced hot flashes in studies", stages:["wisdom"], phase:["all"], contra:["must grind first","start slowly"], evLevel:"moderate" },
+  { id:17, name:"Mulberry", cn:"桑葚", emoji:"🫐", tcmThermal:"cooling", tcmFlavor:"sweet/sour", tcm:"Nourishes Liver & Kidney yin, enriches blood — near-perfect menopausal food.", western:"Anthocyanins, resveratrol, iron, vitamin C, calcium.", benefit:"Anthocyanins protect remaining ovarian follicles; indicated for dryness symptoms", stages:["wisdom"], phase:["all"], contra:["spleen-deficient diarrhea"], evLevel:"moderate" },
+  { id:18, name:"Mackerel / Sardines", cn:"鲭鱼", emoji:"🐟", tcmThermal:"neutral-warm", tcmFlavor:"sweet", tcm:"Benefits Spleen & Kidney. Anti-inflammatory support.", western:"EPA/DHA omega-3, vitamin D, calcium (with bones), selenium, CoQ10.", benefit:"Omega-3 reduces vasomotor symptoms; vitamin D + calcium protect bone", stages:["wisdom"], phase:["all"], contra:["gout","canned — watch sodium"], evLevel:"strong" },
+  { id:19, name:"Pomegranate", cn:"石榴", emoji:"🍎", tcmThermal:"neutral-cool", tcmFlavor:"sweet/sour", tcm:"Benefits Heart & Stomach. The sour aspect astringes yin.", western:"Ellagic acid, punicalagins, anthocyanins, vitamin C.", benefit:"Ellagic acid & punicalagins are potent ovarian antioxidants", stages:["wisdom","bloom"], phase:["all"], contra:["CYP interactions with statins"], evLevel:"moderate" },
+  { id:20, name:"Avocado", cn:"牛油果", emoji:"🥑", tcmThermal:"cooling", tcmFlavor:"sweet", tcm:"Benefits Liver & Spleen. Balance with warming foods.", western:"Monounsaturated fats, folate, vitamin E, glutathione, lutein.", benefit:"MUFA improves insulin sensitivity (critical for PCOS); glutathione in follicular fluid", stages:["grow","nurture","wisdom"], phase:["follicular"], contra:["cooling — balance"], evLevel:"strong" },
+  { id:21, name:"Beef Liver (organic)", cn:"牛肝", emoji:"🫁", tcmThermal:"warming", tcmFlavor:"sweet", tcm:"Most concentrated blood-building food. Nourishes Liver & Kidney.", western:"Heme iron, vitamin A, B12, folate, copper, zinc, CoQ10.", benefit:"CoQ10 for mitochondrial function in oocytes. ⚠️ Teratogenic — AVOID in pregnancy.", stages:["bloom","nurture"], phase:["menstrual"], contra:["⚠️ PREGNANCY — excess vitamin A teratogenic","gout","limit 1x/week"], evLevel:"strong" },
+  { id:22, name:"Dark Chocolate (≥70%)", cn:"黑巧克力", emoji:"🍫", tcmThermal:"warming", tcmFlavor:"bitter/sweet", tcm:"Moves qi, lifts mood. Beneficial in moderation during luteal phase.", western:"Magnesium, flavonoids, theobromine, iron.", benefit:"200mg magnesium daily significantly reduced PMS symptoms (2017 RCT)", stages:["bloom","grow","wisdom"], phase:["luteal"], contra:["caffeine-sensitive"], evLevel:"strong" },
+];
+
+const stageNames = { bloom:"🌸 Bloom", grow:"🌱 Grow", nurture:"🌿 Nurture", wisdom:"🌙 Wisdom" };
+let activeFilter = "all";
+let activePhase = "all";
+
+function renderFoods(){
+  const grid = document.getElementById('foodGrid');
+  let html = '';
+  FOODS.forEach(f => {
+    if(activeFilter !== 'all' && !f.stages.includes(activeFilter)) return;
+    if(activePhase !== 'all' && !f.phase.includes(activePhase) && !f.phase.includes('all')) return;
+    html += `<div class="food-card">
+      <div class="food-header">
+        <span class="food-icon">${f.emoji}</span>
+        <div style="flex:1">
+          <h3 class="food-title">${f.name}<span class="food-cn">${f.cn}</span></h3>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px">
+            <span class="thermal-badge ${f.tcmThermal==='warming'?'thermal-warm':f.tcmThermal==='cooling'?'thermal-cool':'thermal-neutral'}">${f.tcmThermal==='warming'?'🔥 Warming':f.tcmThermal==='cooling'?'❄️ Cooling':'⚖️ Neutral'}</span>
+            <span style="font-size:10.5px;color:var(--ovaria-text-secondary);display:flex;align-items:center;gap:3px">🍽️ ${f.tcmFlavor}</span>
+          </div>
+        </div>
+        <span class="evidence-badge ${f.evLevel==='strong'?'strong':'moderate'}">${f.evLevel==='strong'?'🟢 Strong':f.evLevel==='moderate'?'🟡 Moderate':'🔵 Traditional'}</span>
+      </div>
+      <div class="food-dual">
+        <div class="food-tcm"><div class="f-label">🏮 TCM Perspective</div>${f.tcm}</div>
+        <div class="food-western"><div class="f-label">🔬 Western Science</div>${f.western}</div>
+      </div>
+      <div class="food-benefit"><b>✨ Ovarian benefit:</b> ${f.benefit}</div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px">
+        ${f.stages.map(s=>`<span class="stage-tag ${s}">${stageNames[s]}</span>`).join('')}
+      </div>
+      ${f.contra.length ? `<div class="warn-tag${f.contra[0].startsWith('⚠️')?' danger':''}" style="margin-top:6px">⚠️ ${f.contra.join(' · ')}</div>` : ''}
+    </div>`;
+  });
+  grid.innerHTML = html || '<div class="card" style="text-align:center;padding:30px"><span style="font-size:32px">🔍</span><div class="sub" style="margin-top:8px">No foods match these filters.</div></div>';
+}
+
+document.querySelectorAll('#stageFilter .filter-chip').forEach(c => {
+  c.addEventListener('click',function(){
+    document.querySelectorAll('#stageFilter .filter-chip').forEach(x=>x.classList.remove('on'));
+    this.classList.add('on'); activeFilter = this.dataset.filter; renderFoods();
+  });
+});
+document.querySelectorAll('#phaseFilter .filter-chip').forEach(c => {
+  c.addEventListener('click',function(){
+    document.querySelectorAll('#phaseFilter .filter-chip').forEach(x=>x.classList.remove('on'));
+    this.classList.add('on'); activePhase = this.dataset.phase; renderFoods();
+  });
+});
+
+renderFoods();
+</script>
+<script src="appnav.js" defer></script>
+</body></html>

@@ -1,0 +1,192 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · Supplements</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<script src="anim.js" defer></script>
+</head><body>
+
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="diet.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">Supplement Stack</div>
+    <a class="t-icon ms" href="#">add</a>
+  </div>
+
+  <div class="scroll">
+    <!-- Adherence hero -->
+    <div class="card tint-sage" style="display:flex;align-items:center;gap:18px;padding:22px 20px">
+      <svg width="128" height="128" viewBox="0 0 128 128" style="flex-shrink:0" role="img" aria-label="82 percent adherence, 3 of 5 taken">
+        <circle cx="64" cy="64" r="54" fill="none" stroke="rgba(147,187,143,.22)" stroke-width="9"/>
+        <circle cx="64" cy="64" r="54" fill="none" stroke="var(--d-diet)" stroke-width="9" stroke-linecap="round"
+                stroke-dasharray="278 339" transform="rotate(-90 64 64)"/>
+        <text x="64" y="70" text-anchor="middle" style="font:400 34px Newsreader;fill:var(--mauve)">82%</text>
+      </svg>
+      <div>
+        <b style="font-family:var(--serif);font-size:22px;font-weight:500;color:var(--cocoa)">Well Balanced</b>
+        <div class="sub" style="margin-top:2px">3 of 5 taken today</div>
+        <div class="sub" style="color:var(--ok);font-weight:600;margin-top:4px">Great job staying consistent!</div>
+      </div>
+    </div>
+
+    <!-- Cycle-phase timing note -->
+    <div class="insight">
+      <span class="i-ic ms" style="color:var(--mauve)">schedule</span>
+      <p><b>Luteal Phase Timing</b><br/>Take Magnesium Glycinate in the evening this week to ease luteal cramps and support sleep. Fat-soluble Omega-3 and Vitamin D absorb best taken with your largest meal.</p>
+    </div>
+
+    <!-- Your stack -->
+    <h2 class="sec">Your Stack</h2>
+    <div class="card" style="display:flex;flex-direction:column;gap:0;padding:6px 18px">
+      <div class="lrow">
+        <div class="l-ic" style="background:rgba(147,187,143,.18);color:var(--d-diet)"><span class="ms">medication</span></div>
+        <div class="l-t"><b>Omega-3 Fish Oil</b><span>1000 mg · With lunch</span></div>
+        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+          <span class="badge ok">Good Choice</span>
+          <span class="sub" style="font-size:10.5px;display:flex;align-items:center;gap:3px;color:var(--ok)">Taken <span class="ms" style="font-size:15px">check_circle</span></span>
+        </div>
+      </div>
+      <div class="lrow">
+        <div class="l-ic" style="background:rgba(196,111,79,.16);color:var(--terracotta)"><span class="ms">wb_sunny</span></div>
+        <div class="l-t"><b>Vitamin D3 + K2</b><span>2000 IU · Morning</span></div>
+        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+          <span class="badge low">Needs Adjust</span>
+          <a href="#" style="font:700 10.5px var(--sans);color:var(--taupe);border:1px solid var(--line);border-radius:99px;padding:3px 10px;text-decoration:none">Log Dose</a>
+        </div>
+      </div>
+      <div class="lrow">
+        <div class="l-ic" style="background:rgba(147,187,143,.18);color:var(--d-diet)"><span class="ms">bolt</span></div>
+        <div class="l-t"><b>Magnesium Glycinate</b><span>200 mg · Evening</span></div>
+        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+          <span class="badge ok">Good Choice</span>
+          <span class="sub" style="font-size:10.5px;display:flex;align-items:center;gap:3px;color:var(--ok)">Taken <span class="ms" style="font-size:15px">check_circle</span></span>
+        </div>
+      </div>
+      <div class="lrow">
+        <div class="l-ic" style="background:rgba(155,107,141,.16);color:var(--d-medical)"><span class="ms">bloodtype</span></div>
+        <div class="l-t"><b>Iron Bisglycinate</b><span>18 mg · Morning</span></div>
+        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+          <span class="badge warn">Pending</span>
+          <a href="#" style="font:700 10.5px var(--sans);color:var(--taupe);border:1px solid var(--line);border-radius:99px;padding:3px 10px;text-decoration:none">Log Dose</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Evidence-based stack builder -->
+    <h2 class="sec">Evidence-based for ovarian health</h2>
+    <div class="sub" style="font-size:11.5px;margin:-6px 0 2px">Researched options by goal — tap to add. Always confirm with your clinician first.</div>
+    <div id="ebList" class="card" style="display:flex;flex-direction:column;gap:0;padding:6px 18px"></div>
+    <div class="insight">
+      <span class="i-ic ms" style="color:var(--mauve)">science</span>
+      <p><b>How to read the evidence tags</b><br/><b style="color:var(--ok)">Strong</b> = randomized trials / meta-analyses in women. <b style="color:var(--warn)">Moderate</b> = promising trials, unclear dosing. <b style="color:var(--taupe)">Contextual</b> = mainly helps a specific group (e.g. PCOS, TTC, deficiency). Supplements support — they don't replace diagnosis or a Mediterranean-style diet, which has the strongest evidence of all.</p>
+    </div>
+
+    <!-- Nutrient status / coverage -->
+    <h2 class="sec">Nutrient Status Indicators</h2>
+    <div class="card" style="display:flex;flex-direction:column;gap:14px">
+      <div>
+        <div class="row" style="justify-content:space-between;font-size:12px;font-weight:600">
+          <span style="color:var(--cocoa)">Omega-3 Index</span><span style="color:var(--ok)">Optimal</span>
+        </div>
+        <div style="height:8px;background:var(--sunken);border-radius:99px;margin-top:5px;overflow:hidden">
+          <div style="height:100%;width:85%;background:var(--d-diet);border-radius:99px"></div>
+        </div>
+      </div>
+      <div>
+        <div class="row" style="justify-content:space-between;font-size:12px;font-weight:600">
+          <span style="color:var(--cocoa)">Vitamin D</span><span style="color:var(--low)">Low</span>
+        </div>
+        <div style="height:8px;background:var(--sunken);border-radius:99px;margin-top:5px;overflow:hidden">
+          <div style="height:100%;width:35%;background:var(--terracotta);border-radius:99px"></div>
+        </div>
+      </div>
+      <div>
+        <div class="row" style="justify-content:space-between;font-size:12px;font-weight:600">
+          <span style="color:var(--cocoa)">Magnesium</span><span style="color:var(--ok)">Good</span>
+        </div>
+        <div style="height:8px;background:var(--sunken);border-radius:99px;margin-top:5px;overflow:hidden">
+          <div style="height:100%;width:70%;background:var(--d-diet);border-radius:99px"></div>
+        </div>
+      </div>
+      <div>
+        <div class="row" style="justify-content:space-between;font-size:12px;font-weight:600">
+          <span style="color:var(--cocoa)">Iron</span><span style="color:var(--warn)">Fair</span>
+        </div>
+        <div style="height:8px;background:var(--sunken);border-radius:99px;margin-top:5px;overflow:hidden">
+          <div style="height:100%;width:60%;background:var(--gold);border-radius:99px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interaction / coverage insight -->
+    <div class="insight" style="background:linear-gradient(140deg, rgba(196,111,79,.2), rgba(255,255,255,.8))">
+      <span class="i-ic ms" style="color:var(--warn)">info</span>
+      <p><b>Coverage Gap</b> · Your Vitamin D is still low despite supplementing. Pair D3 with K2 and dietary fat for absorption, and avoid taking Iron at the same time as Magnesium — space them 2 hours apart to prevent competition.</p>
+    </div>
+  </div>
+</div>
+
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+<script>
+(function(){
+  // deep-researched stack: RCTs/meta-analyses for ovarian health, fertility & cycle wellbeing
+  var EB=[
+    {n:'CoQ10 (Ubiquinol)', d:'200–600 mg · with a fatty meal', ic:'bolt', col:'var(--gold)', bg:'rgba(229,180,92,.2)', ev:'Strong', tag:'Egg quality / 35+',
+     why:'RCT: 600 mg × 60 days improved ovarian response & embryo quality in diminished reserve; meta-analysis ~2× clinical pregnancy odds (OR 2.22). Start ≥90 days ahead.'},
+    {n:'Myo-Inositol', d:'2 g twice daily (+ folic acid)', ic:'spa', col:'var(--d-cycle)', bg:'rgba(217,131,164,.16)', ev:'Strong', tag:'PCOS / cycles',
+     why:'Restored ovulation in ~70% of women with PCOS in 16 weeks; improves insulin sensitivity, oocyte maturation & cycle regularity. Not a stand-alone fertility treatment.'},
+    {n:'Vitamin D3 + K2', d:'1000–2000 IU · with largest meal', ic:'wb_sunny', col:'var(--terracotta)', bg:'rgba(196,111,79,.16)', ev:'Strong', tag:'If low (most are)',
+     why:'Deficient in 67–85% of women with PCOS; correcting deficiency improves ovulation rates. Receptors sit in ovary & endometrium. >4000 IU needs monitoring.'},
+    {n:'Omega-3 (EPA+DHA)', d:'1–2 g daily', ic:'set_meal', col:'var(--d-sleep)', bg:'rgba(127,174,201,.16)', ev:'Moderate', tag:'Anti-inflammatory',
+     why:'Anti-inflammatory support; associated with better ART outcomes in observational studies. Pause >3 g/day before surgery or with blood thinners.'},
+    {n:'Methylfolate', d:'400–800 mcg daily', ic:'eco', col:'var(--d-diet)', bg:'rgba(147,187,143,.18)', ev:'Strong', tag:'TTC essential',
+     why:'Foundational for DNA synthesis & early development — start before conception. Methylated form preferred with MTHFR variants.'},
+    {n:'Magnesium Glycinate', d:'200–400 mg · evening', ic:'nightlight', col:'var(--mauve)', bg:'rgba(110,70,84,.14)', ev:'Contextual', tag:'Luteal / sleep / PMS',
+     why:'Supports sleep quality, luteal cramps and PMS symptoms; glycinate form is gentle on digestion. Space 2h away from iron.'},
+    {n:'NAC', d:'600 mg 1–2× daily', ic:'shield', col:'var(--sage)', bg:'rgba(159,167,143,.24)', ev:'Contextual', tag:'PCOS adjunct',
+     why:'Antioxidant; small trials show improved ovulation as an adjunct in PCOS. Discuss with your clinician alongside other treatment.'}
+  ];
+  var IN_STACK=['Omega-3','Vitamin D3','Magnesium','Iron'];
+  var list=document.getElementById('ebList');
+  list.innerHTML=EB.map(function(s,i){
+    var have=IN_STACK.some(function(x){return s.n.indexOf(x)===0;});
+    var evCol=s.ev==='Strong'?'ok':(s.ev==='Moderate'?'warn':'info');
+    return '<div class="lrow" style="align-items:flex-start">'
+      +'<div class="l-ic" style="background:'+s.bg+';color:'+s.col+'"><span class="ms">'+s.ic+'</span></div>'
+      +'<div class="l-t" style="flex:1"><b>'+s.n+'</b><span>'+s.d+'</span>'
+      +'<p class="sub" style="font-size:11px;line-height:1.5;margin-top:4px">'+s.why+'</p>'
+      +'<div class="row" style="gap:6px;margin-top:6px"><span class="badge '+evCol+'" style="font-size:9.5px">'+s.ev+' evidence</span><span class="badge" style="font-size:9.5px">'+s.tag+'</span></div></div>'
+      +'<button data-i="'+i+'" class="ebAdd" '+(have?'disabled':'')+' style="font:700 11px var(--sans);border-radius:99px;padding:6px 13px;border:1.5px solid '+(have?'var(--line-soft)':'var(--mauve)')+';background:'+(have?'var(--sunken)':'var(--mauve)')+';color:'+(have?'var(--taupe)':'#F6EDF0')+';cursor:'+(have?'default':'pointer')+';flex-shrink:0">'+(have?'In stack ✓':'+ Add')+'</button>'
+      +'</div>';
+  }).join('');
+  list.addEventListener('click',function(e){
+    var b=e.target.closest('.ebAdd'); if(!b||b.disabled) return;
+    var s=EB[+b.dataset.i];
+    var stack=document.querySelector('.scroll .card[style*="flex-direction:column"]');
+    var row=document.createElement('div'); row.className='lrow';
+    row.innerHTML='<div class="l-ic" style="background:'+s.bg+';color:'+s.col+'"><span class="ms">'+s.ic+'</span></div>'
+      +'<div class="l-t"><b>'+s.n+'</b><span>'+s.d+'</span></div>'
+      +'<div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:5px"><span class="badge info">New</span>'
+      +'<a href="#" style="font:700 10.5px var(--sans);color:var(--taupe);border:1px solid var(--line);border-radius:99px;padding:3px 10px;text-decoration:none">Log Dose</a></div>';
+    stack.appendChild(row);
+    b.disabled=true; b.textContent='In stack ✓'; b.style.background='var(--sunken)'; b.style.color='var(--taupe)'; b.style.border='1.5px solid var(--line-soft)';
+    var t=document.createElement('div'); t.textContent=s.n+' added — confirm dosing with your clinician';
+    t.style.cssText='position:fixed;left:50%;bottom:150px;transform:translateX(-50%);background:rgba(46,34,30,.92);color:#F6EDF0;padding:10px 18px;border-radius:99px;font:700 12px Manrope;z-index:80';
+    document.body.appendChild(t); setTimeout(function(){t.style.transition='.3s';t.style.opacity='0';setTimeout(function(){t.remove();},320);},2200);
+  });
+})();
+</script>
+<script src="appnav.js" defer></script>
+<script src="ovaria-mascot.js" defer></script>
+</body></html>

@@ -1,0 +1,237 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · AI Insights</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<script src="anim.js" defer></script>
+<style>
+.hstat{ display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:99px;background:var(--card-solid);border:1.5px solid var(--line-soft);font:700 12px var(--sans);color:var(--cocoa); }
+.leg{ display:flex;align-items:center;gap:8px;font:600 11.5px var(--sans);color:var(--taupe); }
+.leg .sw{ width:15px;height:4px;border-radius:2px;flex-shrink:0; }
+.hchart text{ font-family:var(--sans); }
+.hcurve{ fill:none;stroke-linecap:round;transform-origin:left; }
+@keyframes drawline{ from{ stroke-dashoffset:var(--len); } to{ stroke-dashoffset:0; } }
+.ringwrap{ position:relative; width:280px; max-width:100%; margin:2px auto 0; }
+.ringwrap svg{ width:100%; display:block; }
+.ringc{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; pointer-events:none; }
+.ringc .rday{ font:700 11.5px var(--sans); color:var(--mauve); letter-spacing:.02em; }
+.ringc .rbig{ font-family:var(--serif); font-weight:500; font-size:24px; color:var(--cocoa); line-height:1.15; margin:4px 0 5px; }
+.ringc .rph{ font:700 11.5px var(--sans); color:#3E8577; }
+.rlegend{ display:flex; justify-content:center; gap:18px; margin-top:2px; }
+.rlegend span{ font:700 11px var(--sans); color:var(--taupe); display:inline-flex; align-items:center; gap:6px; }
+.rlegend i{ width:9px; height:9px; border-radius:50%; }
+</style>
+</head><body>
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="home.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">AI Insights</div>
+    <a class="t-icon ms" href="#">tune</a>
+  </div>
+  <div class="scroll">
+    <a href="ovarian-age.html" class="card tint-lavender" style="display:flex;align-items:center;gap:12px;padding:12px 14px;text-decoration:none;color:inherit">
+      <div id="ovMini" style="width:80px;height:80px;flex-shrink:0"></div>
+      <div style="flex:1">
+        <b style="font-size:15px;font-family:var(--serif);font-weight:600;color:var(--cocoa)" id="ovTitle">Your ovarian age</b>
+        <div class="sub" id="ovSub" style="font-size:12px;margin-top:2px">Discover it — a research-based estimate of where you are in your reproductive trajectory</div>
+      </div>
+      <span class="ms" style="color:var(--mauve)">arrow_forward</span>
+    </a>
+    <script src="ovarian-ring.js"></script>
+    <script>
+    (function(){
+      var el=document.getElementById('ovMini'), r=null;
+      try{ r=JSON.parse(localStorage.getItem('ov_result')||'null'); }catch(e){}
+      if(r){ drawOvarianRing(el, r.chrono, r.ovAge);
+        var d=r.ovAge-r.chrono, dtxt=d===0?'on track with your age':(d>0?('+'+d+' yr ahead'):(Math.abs(d)+' yr behind'));
+        document.getElementById('ovTitle').textContent='Ovarian age · '+r.ovAge;
+        document.getElementById('ovSub').innerHTML='actual '+r.chrono+' · <b style="color:var(--mauve)">'+dtxt+'</b> — tap to update';
+      } else { drawOvarianRing(el, 33, 33); }
+    })();
+    </script>
+
+    <div>
+      <div style="font-family:var(--serif);font-weight:600;font-size:22px;color:var(--cocoa)">Suggestions &amp; Insights</div>
+      <div class="sub">Hormonal optimization recommendations</div>
+    </div>
+
+    <!-- Cycle ring dial -->
+    <div class="card" style="padding:16px 14px 14px">
+      <div class="ringwrap">
+        <div id="cyclering" data-day="21" data-len="28" data-period="0,5" data-fertile="11,16" data-ovulation="14"></div>
+        <div class="ringc">
+          <div class="rday">Today · Jul 19</div>
+          <div class="rbig">7 days<br>until next period</div>
+          <div class="rph">Early luteal phase</div>
+        </div>
+      </div>
+      <div class="rlegend">
+        <span><i style="background:#D8607A"></i>Period</span>
+        <span><i style="background:#5BA89A"></i>Fertile window</span>
+        <span><i style="background:var(--mauve)"></i>Today</span>
+      </div>
+    </div>
+    <script src="cyclering.js" defer></script>
+
+    <!-- Current state analysis -->
+    <div class="card tint-lavender">
+      <div class="sub" style="letter-spacing:.12em;text-transform:uppercase;font-weight:800;font-size:10.5px;color:var(--mauve);margin-bottom:6px">Current state analysis</div>
+      <p class="sub" style="color:var(--cocoa)">You are entering the <b style="color:var(--mauve)">Luteal Phase</b> (Day 21). Biometric data shows a recent drop in HRV and mild systemic inflammation markers. The engine suggests preemptive nutrition and load adjustments to mitigate premenstrual fatigue.</p>
+      <div class="row" style="margin-top:12px;gap:20px">
+        <div><div class="sub" style="font-size:11px">Phase</div><b style="font-family:var(--serif);font-size:18px;color:var(--mauve)">Luteal</b></div>
+        <div><div class="sub" style="font-size:11px">HRV trend</div><b style="font-family:var(--serif);font-size:18px;color:var(--warn)">▼ −12%</b></div>
+      </div>
+    </div>
+
+    <!-- ── Hormone cycle map (curve visualization) ── -->
+    <h2 class="sec">Your hormones this cycle</h2>
+    <div class="card" style="padding:16px 14px">
+      <div class="row" style="justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <div>
+          <b style="font-family:var(--serif);font-size:16px;color:var(--cocoa)">Early luteal phase</b>
+          <div class="sub" style="font-size:11.5px">Day 21 · modelled from your cycle &amp; symptoms</div>
+        </div>
+        <span class="badge info" style="background:rgba(91,168,154,.16);color:#3E8577">Luteal</span>
+      </div>
+
+      <svg class="hchart" viewBox="0 0 340 180" width="100%" style="display:block">
+        <defs>
+          <clipPath id="hclip"><rect x="0" y="8" width="340" height="140" rx="12"/></clipPath>
+        </defs>
+        <g clip-path="url(#hclip)">
+          <!-- phase backgrounds -->
+          <rect x="0" y="8" width="170" height="140" fill="rgba(217,131,164,.14)"/>
+          <rect x="170" y="8" width="170" height="140" fill="rgba(91,168,154,.15)"/>
+          <!-- soft week gridlines -->
+          <g stroke="rgba(110,70,84,.08)" stroke-width="1">
+            <line x1="68" y1="8" x2="68" y2="148"/><line x1="136" y1="8" x2="136" y2="148"/>
+            <line x1="204" y1="8" x2="204" y2="148"/><line x1="272" y1="8" x2="272" y2="148"/>
+          </g>
+          <!-- FSH -->
+          <path d="M0,138 C30,130 45,128 60,132 C90,138 120,140 150,137 C160,136 165,120 172,122 C182,125 205,140 235,142 L340,143" fill="none" stroke="#E3B563" stroke-width="2.4" stroke-linecap="round" opacity=".9"/>
+          <!-- E2 estrogen -->
+          <path d="M0,134 C50,130 108,42 150,33 C166,30 176,90 186,95 C210,101 236,66 258,70 C292,75 320,116 340,122" fill="none" stroke="#7FA9D0" stroke-width="2.6" stroke-linecap="round"/>
+          <!-- PG progesterone -->
+          <path d="M0,143 L165,142 C182,141 192,120 210,95 C230,68 246,47 259,47 C276,47 300,101 320,126 C330,135 336,138 340,139" fill="none" stroke="#5BA89A" stroke-width="2.6" stroke-linecap="round"/>
+          <!-- LH -->
+          <path d="M0,142 L150,140 C160,140 163,26 170,26 C177,26 180,140 190,140 L340,142" fill="none" stroke="#D983A4" stroke-width="2.6" stroke-linecap="round"/>
+          <!-- today marker -->
+          <line x1="255" y1="8" x2="255" y2="148" stroke="var(--mauve)" stroke-width="1.6"/>
+        </g>
+        <!-- ovulation marker -->
+        <line x1="170" y1="4" x2="170" y2="148" stroke="var(--mauve)" stroke-width="1.4" stroke-dasharray="3 3" opacity=".6"/>
+        <circle cx="170" cy="10" r="4" fill="var(--mauve)"/>
+        <text x="168" y="172" text-anchor="middle" font-size="9" fill="var(--mauve)" font-weight="700">Ovulation</text>
+        <!-- today dot + label -->
+        <circle cx="255" cy="10" r="5" fill="var(--mauve)" stroke="#fff" stroke-width="2"/>
+        <text x="255" y="172" text-anchor="middle" font-size="9" fill="var(--mauve)" font-weight="800">Today</text>
+        <!-- phase labels (top whitespace of each zone) -->
+        <text x="58" y="24" text-anchor="middle" font-size="9.5" fill="var(--d-cycle)" font-weight="700">Follicular phase</text>
+        <text x="300" y="24" text-anchor="middle" font-size="9.5" fill="#3E8577" font-weight="700">Luteal phase</text>
+      </svg>
+
+      <p style="margin:14px 2px 0;font-size:13px;line-height:1.55;color:var(--cocoa)">In the days after ovulation, <b>progesterone (PG)</b> rises rapidly as the corpus luteum becomes active. <b>Estrogen (E2)</b> also climbs into a second, smaller peak this cycle — while <b>LH</b> has dropped back down.</p>
+
+      <div class="row" style="gap:8px;margin-top:12px;flex-wrap:wrap">
+        <span class="hstat"><span class="ms" style="color:#7FA9D0;font-size:15px">trending_up</span> E2 · Rising</span>
+        <span class="hstat"><span class="ms" style="color:#5BA89A;font-size:15px">trending_up</span> PG · Rising</span>
+        <span class="hstat"><span class="ms" style="color:#D983A4;font-size:15px">trending_down</span> LH · Dropped</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px 14px;margin-top:15px;padding-top:13px;border-top:1px solid var(--line-soft)">
+        <div class="leg"><span class="sw" style="background:#E3B563"></span>FSH · Follicle-stimulating</div>
+        <div class="leg"><span class="sw" style="background:#D983A4"></span>LH · Luteinising</div>
+        <div class="leg"><span class="sw" style="background:#5BA89A"></span>PG · Progesterone</div>
+        <div class="leg"><span class="sw" style="background:#7FA9D0"></span>E2 · Estrogen/Estradiol</div>
+      </div>
+
+      <div class="sub" style="font-size:11px;margin-top:12px;display:flex;align-items:center;gap:5px">
+        <span class="ms" style="font-size:14px">info</span> Illustrative hormone patterns — not measured blood levels.
+      </div>
+    </div>
+
+    <h2 class="sec">Prioritized for you</h2>
+
+    <!-- Card 1: High Priority -->
+    <div class="insight" style="flex-direction:column;align-items:stretch;background:linear-gradient(140deg, rgba(217,131,164,.16), rgba(255,255,255,.85))">
+      <div class="row" style="gap:10px">
+        <span class="i-ic ms" style="color:var(--d-cycle)">medication</span>
+        <div style="flex:1">
+          <b style="font-family:var(--serif);font-size:16px;color:var(--cocoa)">Cycle Phase Alert: Magnesium Support</b>
+          <div class="sub">Nutritional protocol</div>
+        </div>
+        <span class="badge warn">High priority</span>
+      </div>
+      <p style="margin:10px 0 0;font-size:13px;color:var(--cocoa)">Given current Luteal-phase metrics, increase dietary or supplemental Magnesium to 400mg daily. This targets potential cramping and supports nervous-system down-regulation amid dropping estrogen.</p>
+      <div class="row" style="gap:8px;margin-top:12px">
+        <a class="btn mauve" href="#" style="flex:1;padding:11px">Apply to plan</a>
+        <a class="btn ghost" href="#" style="flex:1;padding:11px">Clinical logic</a>
+      </div>
+    </div>
+
+    <!-- Card 2: Action Required -->
+    <div class="insight" style="flex-direction:column;align-items:stretch;background:linear-gradient(140deg, rgba(236,150,120,.18), rgba(255,255,255,.85))">
+      <div class="row" style="gap:10px">
+        <span class="i-ic ms" style="color:var(--d-stress)">monitor_heart</span>
+        <div style="flex:1">
+          <b style="font-family:var(--serif);font-size:16px;color:var(--cocoa)">Activity Load Adjustment: Lower METs</b>
+          <div class="sub">Biometric trigger · low HRV</div>
+        </div>
+        <span class="badge warn">Action required</span>
+      </div>
+      <p style="margin:10px 0 0;font-size:13px;color:var(--cocoa)">Overnight HRV dropped below the 7-day rolling average (baseline 45ms, current 38ms). Cap cardiovascular exertion at <b>Zone 2 (max 135 bpm)</b> for the next 48 hours to prioritize recovery over stimulus.</p>
+      <a class="card" href="#" style="text-decoration:none;color:inherit;margin-top:10px;padding:12px;display:flex;align-items:center;gap:8px">
+        <span class="ms" style="color:var(--d-diet)">self_improvement</span>
+        <span style="flex:1;font-size:13px">Suggested alternative: restorative yoga or walking</span>
+        <span class="ms" style="color:var(--terracotta)">arrow_forward</span>
+      </a>
+      <a class="btn mauve" href="#" style="margin-top:12px;padding:11px">Update schedule</a>
+    </div>
+
+    <!-- Card 3: Optimization -->
+    <div class="insight" style="flex-direction:column;align-items:stretch;background:linear-gradient(140deg, rgba(147,187,143,.18), rgba(255,255,255,.85))">
+      <div class="row" style="gap:10px">
+        <span class="i-ic ms" style="color:var(--d-diet)">timer</span>
+        <div style="flex:1">
+          <b style="font-family:var(--serif);font-size:16px;color:var(--cocoa)">Nutrient Timing: Carb Backloading</b>
+          <div class="sub">Metabolic strategy</div>
+        </div>
+        <span class="badge info">Optimization</span>
+      </div>
+      <p style="margin:10px 0 0;font-size:13px;color:var(--cocoa)">Insulin sensitivity typically decreases during the mid-luteal phase. Shift complex carbohydrate intake primarily to post-exercise windows and evening meals to stabilize fasting glucose.</p>
+      <a class="btn ghost" href="#" style="margin-top:12px;padding:11px">Review diet plan</a>
+    </div>
+
+    <!-- Data confidence -->
+    <h2 class="sec">Data Confidence</h2>
+    <div class="card">
+      <div class="row" style="margin-bottom:4px"><span style="flex:1;font-size:13px">Wearable sync</span><b style="font-size:13px;color:var(--ok)">98%</b></div>
+      <div style="height:6px;border-radius:99px;background:var(--line-soft);overflow:hidden"><div style="height:100%;width:98%;background:var(--ok);border-radius:99px"></div></div>
+      <div class="row" style="margin:12px 0 4px"><span style="flex:1;font-size:13px">Nutrition logging</span><b style="font-size:13px;color:var(--warn)">45%</b></div>
+      <div style="height:6px;border-radius:99px;background:var(--line-soft);overflow:hidden"><div style="height:100%;width:45%;background:var(--warn);border-radius:99px"></div></div>
+      <div class="sub" style="margin-top:8px">Incomplete logs may reduce AI accuracy for diet insights.</div>
+    </div>
+
+    <h2 class="sec">Recent Biomarkers</h2>
+    <div class="card" style="padding:6px 16px;display:flex;flex-direction:column">
+      <div class="row" style="padding:11px 0;border-bottom:1px solid var(--line-soft)"><span style="flex:1;font-size:13px">Resting heart rate</span><b style="font-size:14px">54 bpm</b></div>
+      <div class="row" style="padding:11px 0;border-bottom:1px solid var(--line-soft)"><span style="flex:1;font-size:13px">Body temp (basal)</span><b style="font-size:14px">97.8°F</b></div>
+      <div class="row" style="padding:11px 0"><span style="flex:1;font-size:13px">Sleep duration</span><b style="font-size:14px">6h 45m</b></div>
+    </div>
+  </div>
+</div>
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+<script src="appnav.js" defer></script>
+<script src="ovaria-mascot.js" defer></script>
+</body></html>

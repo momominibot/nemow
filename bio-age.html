@@ -1,0 +1,118 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · Bio-Age Recalculation</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<script src="anim.js" defer></script>
+</head><body>
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="home.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">Bio-Age Recalculation</div>
+    <a class="t-icon ms" href="#">info</a>
+  </div>
+  <div class="scroll">
+    <!-- Recalibrated badge -->
+    <div class="row" style="justify-content:center">
+      <span class="badge info"><span class="ms twinkle" style="font-size:14px;vertical-align:-2px">auto_awesome</span> Recalibrated from 42 markers</span>
+    </div>
+
+    <!-- Six-domain Bio-Age ring (reused from home) -->
+    <div class="card" style="display:flex;flex-direction:column;align-items:center;padding:26px 18px 20px">
+      <svg width="280" height="280" viewBox="0 0 280 280" role="img" aria-label="Ovarian Bio-Age 32, chronological 35">
+        <g fill="none" stroke-linecap="round" transform="rotate(-90 140 140)">
+          <circle cx="140" cy="140" r="128" stroke="rgba(127,174,201,.20)" stroke-width="10"/>
+          <circle cx="140" cy="140" r="128" stroke="#7FAEC9" stroke-width="10" stroke-dasharray="563 804" />
+          <circle cx="140" cy="140" r="112" stroke="rgba(147,187,143,.20)" stroke-width="10"/>
+          <circle cx="140" cy="140" r="112" stroke="#93BB8F" stroke-width="10" stroke-dasharray="475 704"/>
+          <circle cx="140" cy="140" r="96" stroke="rgba(227,181,99,.20)" stroke-width="10"/>
+          <circle cx="140" cy="140" r="96" stroke="#E3B563" stroke-width="10" stroke-dasharray="332 603"/>
+          <circle cx="140" cy="140" r="80" stroke="rgba(236,150,120,.20)" stroke-width="10"/>
+          <circle cx="140" cy="140" r="80" stroke="#EC9678" stroke-width="10" stroke-dasharray="352 503"/>
+          <circle cx="140" cy="140" r="64" stroke="rgba(217,131,164,.20)" stroke-width="10"/>
+          <circle cx="140" cy="140" r="64" stroke="#D983A4" stroke-width="10" stroke-dasharray="281 402"/>
+          <circle cx="140" cy="140" r="48" stroke="rgba(155,107,141,.20)" stroke-width="10"/>
+          <circle cx="140" cy="140" r="48" stroke="#9B6B8D" stroke-width="10" stroke-dasharray="236 302"/>
+        </g>
+        <circle cx="140" cy="140" r="42" fill="rgba(255,255,255,.92)"/>
+        <text x="140" y="124" text-anchor="middle" style="font:700 8.5px Manrope;letter-spacing:.14em;fill:var(--taupe)">BIO-AGE</text>
+        <text x="140" y="158" text-anchor="middle" style="font:500 40px Newsreader;fill:var(--ink)">32</text>
+        <text x="140" y="174" text-anchor="middle" style="font:600 8px Manrope;letter-spacing:.08em;fill:var(--faded)">CHRONO 35</text>
+      </svg>
+      <div class="row" style="justify-content:center;gap:20px;margin-top:8px">
+        <div style="text-align:center"><div class="sub">Bio-age</div><div style="font-family:var(--serif);font-size:24px;font-weight:500;color:var(--mauve)">32.0</div></div>
+        <div style="width:1px;background:var(--line-soft)"></div>
+        <div style="text-align:center"><div class="sub">Chronological</div><div style="font-family:var(--serif);font-size:24px;font-weight:500;color:var(--taupe)">35.0</div></div>
+        <div style="width:1px;background:var(--line-soft)"></div>
+        <div style="text-align:center"><div class="sub">Delta</div><div style="font-family:var(--serif);font-size:24px;font-weight:500;color:var(--ok)">−3.0</div></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:14px">
+        <span class="sub" style="display:flex;align-items:center;gap:5px"><i style="width:8px;height:8px;border-radius:50%;background:var(--d-medical);display:inline-block"></i>Medical</span>
+        <span class="sub" style="display:flex;align-items:center;gap:5px"><i style="width:8px;height:8px;border-radius:50%;background:var(--d-cycle);display:inline-block"></i>Cycle</span>
+        <span class="sub" style="display:flex;align-items:center;gap:5px"><i style="width:8px;height:8px;border-radius:50%;background:var(--d-stress);display:inline-block"></i>Stress</span>
+        <span class="sub" style="display:flex;align-items:center;gap:5px"><i style="width:8px;height:8px;border-radius:50%;background:var(--d-exercise);display:inline-block"></i>Exercise</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:8px">
+        <span class="sub" style="display:flex;align-items:center;gap:5px"><i style="width:8px;height:8px;border-radius:50%;background:var(--d-diet);display:inline-block"></i>Diet</span>
+        <span class="sub" style="display:flex;align-items:center;gap:5px"><i style="width:8px;height:8px;border-radius:50%;background:var(--d-sleep);display:inline-block"></i>Sleep</span>
+      </div>
+    </div>
+
+    <div class="insight"><span class="i-ic ms twinkle" style="color:var(--mauve)">auto_awesome</span>
+      <p><b>What moved your number</b><br/>New biomarker data lowered your bio-age by <b style="color:var(--ok)">0.4 years</b> since your last calculation. Sleep and diet drove the gain; slightly elevated stress held it back.</p></div>
+
+    <!-- Per-domain contribution deltas -->
+    <h2 class="sec">What changed since last calc</h2>
+    <div class="card" style="padding:6px 16px;display:flex;flex-direction:column">
+      <div class="row" style="padding:12px 0;border-bottom:1px solid var(--line-soft)">
+        <i style="width:9px;height:9px;border-radius:50%;background:var(--d-medical)"></i>
+        <span style="flex:1;font-size:13px;margin-left:8px">Medical <span class="sub">· AMH stable</span></span>
+        <b style="font-size:13px;color:var(--taupe)">0.0 yr</b></div>
+      <div class="row" style="padding:12px 0;border-bottom:1px solid var(--line-soft)">
+        <i style="width:9px;height:9px;border-radius:50%;background:var(--d-cycle)"></i>
+        <span style="flex:1;font-size:13px;margin-left:8px">Cycle <span class="sub">· regular length</span></span>
+        <b style="font-size:13px;color:var(--ok)">−0.2 yr</b></div>
+      <div class="row" style="padding:12px 0;border-bottom:1px solid var(--line-soft)">
+        <i style="width:9px;height:9px;border-radius:50%;background:var(--d-stress)"></i>
+        <span style="flex:1;font-size:13px;margin-left:8px">Stress <span class="sub">· HRV dipped</span></span>
+        <b style="font-size:13px;color:var(--warn)">+0.3 yr</b></div>
+      <div class="row" style="padding:12px 0;border-bottom:1px solid var(--line-soft)">
+        <i style="width:9px;height:9px;border-radius:50%;background:var(--d-exercise)"></i>
+        <span style="flex:1;font-size:13px;margin-left:8px">Exercise <span class="sub">· Zone 2 +35m</span></span>
+        <b style="font-size:13px;color:var(--ok)">−0.2 yr</b></div>
+      <div class="row" style="padding:12px 0;border-bottom:1px solid var(--line-soft)">
+        <i style="width:9px;height:9px;border-radius:50%;background:var(--d-diet)"></i>
+        <span style="flex:1;font-size:13px;margin-left:8px">Diet <span class="sub">· protein on target</span></span>
+        <b style="font-size:13px;color:var(--ok)">−0.3 yr</b></div>
+      <div class="row" style="padding:12px 0">
+        <i style="width:9px;height:9px;border-radius:50%;background:var(--d-sleep)"></i>
+        <span style="flex:1;font-size:13px;margin-left:8px">Sleep <span class="sub">· deep +12%</span></span>
+        <b style="font-size:13px;color:var(--ok)">−0.4 yr</b></div>
+    </div>
+
+    <div class="card tint-sage">
+      <div class="row"><span class="sub" style="letter-spacing:.1em;text-transform:uppercase;font-weight:800;font-size:10px">Net change this calculation</span>
+        <b style="font-family:var(--serif);font-size:22px;color:var(--ok);margin-left:auto">−0.4 yr</b></div>
+      <div class="sub" style="margin-top:4px">Based on 42 unique markers from your latest labs, wearables and logs.</div>
+    </div>
+
+    <a class="btn mauve" href="#" style="padding:14px"><span class="ms">hub</span> Recalculate now</a>
+    <a class="btn ghost" href="longevity.html" style="padding:13px">View longevity roadmap</a>
+    <div class="sub" style="text-align:center;margin-top:2px">Last recalculated May 18, 2025</div>
+  </div>
+</div>
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+<script src="appnav.js" defer></script>
+<script src="ovaria-mascot.js" defer></script>
+</body></html>

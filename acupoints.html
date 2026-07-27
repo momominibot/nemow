@@ -1,0 +1,329 @@
+<!doctype html><html lang="en" data-persona="bloom"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · TCM Acupoint Atlas</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined&family=DM+Serif+Display&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=Inter:opsz,wght@14..32,400;14..32,600&family=Cormorant+Garamond:wght@500&family=Work+Sans:wght@400;500;600&family=Lora:wght@500&family=Plus+Jakarta+Sans:wght@400;500;600&family=Playfair+Display:wght@600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<link rel="stylesheet" href="ovaria-persona.css">
+<script src="anim.js" defer></script>
+<style>
+.acupoint-card h3 { font-family:var(--ovaria-font-heading); font-size:var(--ovaria-font-size-h3); color:var(--ovaria-text-emphasis); margin:0 0 2px; }
+.acupoint-card .cn-name { font-size:13px; color:var(--ovaria-accent); font-weight:600; margin-bottom:8px; }
+.acupoint-grid { display:grid; grid-template-columns:1fr; gap:14px; }
+.field-row { display:flex; gap:8px; margin-top:6px; }
+.field-label { font-size:10.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ovaria-text-secondary); }
+.field-value { font-size:13px; color:var(--ovaria-text-primary); line-height:1.5; }
+.method-tag { display:inline-flex; align-items:center; gap:4px; padding:3px 8px; border-radius:99px; font-size:10px; font-weight:700; background:var(--ovaria-accent-glow); color:var(--ovaria-text-primary); cursor:pointer; transition:.15s; }
+.method-tag.on { background:var(--ovaria-accent); color:var(--ovaria-text-on-cta); }
+.tag-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+.stage-tag { display:inline-flex; align-items:center; gap:3px; padding:3px 8px; border-radius:99px; font-size:10px; font-weight:700; }
+.stage-tag.bloom { background:rgba(201,165,212,.25); color:#7B5A8A; }
+.stage-tag.grow { background:rgba(212,165,116,.25); color:#8B6914; }
+.stage-tag.nurture { background:rgba(184,169,201,.25); color:#6B5A82; }
+.stage-tag.wisdom { background:rgba(123,107,94,.18); color:#5C4A3E; }
+.preg-warn { font-size:11px; color:#C46F4F; font-weight:600; margin-top:4px; }
+.routine-card { background:var(--ovaria-surface-card); border:2px dashed var(--ovaria-accent); border-radius:var(--ovaria-radius-md); padding:14px; }
+.routine-item { display:flex; align-items:center; gap:8px; padding:8px 0; font-size:13px; }
+.routine-item .r-status { width:22px; height:22px; border-radius:50%; border:2px solid var(--ovaria-border); display:flex; align-items:center; justify-content:center; font-size:11px; color:transparent; cursor:pointer; }
+.routine-item.done .r-status { background:var(--ovaria-accent); border-color:var(--ovaria-accent); color:#fff; }
+.timer-display { font-family:var(--ovaria-font-heading); font-size:36px; text-align:center; color:var(--ovaria-accent); padding:16px 0; }
+</style>
+</head><body>
+
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="learn.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">TCM Acupoint Atlas</div>
+    <a class="t-icon ms" href="#" id="routineBtn">favorite</a>
+  </div>
+
+  <div class="scroll">
+    <!-- Hero -->
+    <div class="card tint-lavender" style="padding:20px 18px">
+      <div class="row" style="gap:10px;margin-bottom:6px">
+        <span style="font-size:34px">🗺️</span>
+        <div>
+          <div style="font-family:var(--ovaria-font-heading);font-weight:600;font-size:19px;color:var(--ovaria-text-emphasis)">Your Body's Healing Map</div>
+          <div class="sub" style="font-size:12px;margin-top:3px">13 evidence-backed acupoints for ovarian health across every life stage. TCM wisdom meets modern research.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Safety warning -->
+    <div class="safety-warn">
+      <span class="ms" style="font-size:20px;color:#C46F4F">warning</span>
+      <div><b style="color:#C46F4F">Safety First</b><br>SP6 (Sanyinjiao) and LI4 (Hegu) are <b>contraindicated during pregnancy</b>. If you're using the Grow persona and may be pregnant, these points are automatically flagged. Always consult a licensed TCM practitioner for professional treatment.</div>
+    </div>
+
+    <!-- Filter row -->
+    <div class="filter-row" id="stageFilter">
+      <span class="filter-chip on" data-filter="all">All Points</span>
+      <span class="filter-chip" data-filter="bloom">🌸 Bloom</span>
+      <span class="filter-chip" data-filter="grow">🌱 Grow</span>
+      <span class="filter-chip" data-filter="nurture">🌿 Nurture</span>
+      <span class="filter-chip" data-filter="wisdom">🌙 Wisdom</span>
+    </div>
+    <div class="filter-row" id="symptomFilter">
+      <span class="filter-chip on" data-symptom="all">All Symptoms</span>
+      <span class="filter-chip" data-symptom="cramps">Cramps</span>
+      <span class="filter-chip" data-symptom="fatigue">Fatigue</span>
+      <span class="filter-chip" data-symptom="hot-flashes">Hot Flashes</span>
+      <span class="filter-chip" data-symptom="mood">Mood & Anxiety</span>
+      <span class="filter-chip" data-symptom="fertility">Fertility</span>
+      <span class="filter-chip" data-symptom="pms">PMS</span>
+    </div>
+
+    <!-- Body Map -->
+    <div class="card" style="padding:0;overflow:hidden;border-radius:var(--ovaria-radius-md)">
+      <div class="body-map" style="position:relative;width:100%;max-width:320px;margin:0 auto">
+        <img src="assets/illustrations/body-silhouette-600.png" alt="Body map for acupoint reference" style="width:100%;display:block" loading="eager" id="bodyMapImg">
+        <!-- Acupoint markers overlaid on body -->
+        <!-- CV4 Guanyuan — lower abdomen -->
+        <a href="#card-cv4" class="point-dot" data-point="cv4" style="position:absolute;left:49%;top:40%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:var(--ovaria-accent);opacity:0.8;box-shadow:0 0 6px var(--ovaria-accent-glow)"></a>
+        <span style="position:absolute;left:56%;top:39.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">CV4</span>
+        <!-- CV6 Qihai -->
+        <a href="#card-cv6" class="point-dot" data-point="cv6" style="position:absolute;left:49%;top:37%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--ovaria-accent);opacity:0.7;box-shadow:0 0 5px var(--ovaria-accent-glow)"></a>
+        <span style="position:absolute;left:56%;top:36.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">CV6</span>
+        <!-- CV3 Zhongji -->
+        <a href="#card-cv3" class="point-dot" data-point="cv3" style="position:absolute;left:49%;top:43.5%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.6"></a>
+        <span style="position:absolute;left:56%;top:43%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">CV3</span>
+        <!-- ST29 Guilai — bilateral -->
+        <a href="#card-st29" class="point-dot" data-point="st29" style="position:absolute;left:42%;top:44%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.6"></a>
+        <span style="position:absolute;left:34%;top:43.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">ST29</span>
+        <!-- PC6 Neiguan — forearms -->
+        <a href="#card-pc6" class="point-dot" data-point="pc6" style="position:absolute;left:17%;top:30%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.6"></a>
+        <span style="position:absolute;left:8%;top:29%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">PC6</span>
+        <!-- SP6 Sanyinjiao — lower legs -->
+        <a href="#card-sp6" class="point-dot" data-point="sp6" style="position:absolute;left:33%;top:74%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:var(--ovaria-accent);opacity:0.8;box-shadow:0 0 6px var(--ovaria-accent-glow)"></a>
+        <span style="position:absolute;left:24%;top:73.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">SP6</span>
+        <!-- SP10 Xuehai — thighs -->
+        <a href="#card-sp10" class="point-dot" data-point="sp10" style="position:absolute;left:38%;top:58%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.6"></a>
+        <span style="position:absolute;left:30%;top:57%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">SP10</span>
+        <!-- ST36 Zusanli — below knees -->
+        <a href="#card-st36" class="point-dot" data-point="st36" style="position:absolute;left:36%;top:66%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--ovaria-accent);opacity:0.7"></a>
+        <span style="position:absolute;left:28%;top:65.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">ST36</span>
+        <!-- KI3 Taixi — ankles -->
+        <a href="#card-ki3" class="point-dot" data-point="ki3" style="position:absolute;left:32%;top:84%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.6"></a>
+        <span style="position:absolute;left:23%;top:83.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">KI3</span>
+        <!-- LV3 Taichong — feet -->
+        <a href="#card-lv3" class="point-dot" data-point="lv3" style="position:absolute;left:30%;top:90%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.6"></a>
+        <span style="position:absolute;left:22%;top:89.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">LV3</span>
+        <!-- BL23 Shenshu — lower back center -->
+        <a href="#card-bl23" class="point-dot" data-point="bl23" style="position:absolute;left:47%;top:27%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.5"></a>
+        <span style="position:absolute;left:54%;top:26.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">BL23</span>
+        <!-- GV4 Mingmen — lower back -->
+        <a href="#card-gv4" class="point-dot" data-point="gv4" style="position:absolute;left:49%;top:29%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--ovaria-accent);opacity:0.5"></a>
+        <span style="position:absolute;left:56%;top:28.5%;font-size:9px;font-weight:700;color:var(--ovaria-text-primary)">GV4</span>
+      </div>
+    </div>
+          </div>
+
+          <!-- Description -->
+    <div class="sub" style="text-align:center;font-size:12px">Tap a point on the map or scroll below for details</div>
+
+    <!-- Demo Video -->
+    <div class="card" style="margin-top:16px;padding:0;overflow:hidden;border-radius:var(--ovaria-radius-md)">
+      <video src="assets/videos/acupressure-demo.mp4" autoplay loop muted playsinline style="width:100%;display:block;border-radius:var(--ovaria-radius-md)"></video>
+      <div style="padding:12px 16px"><span style="font-weight:700;font-size:13px">👆 Self-Acupressure Demo</span><span class="sub" style="display:block;font-size:11px;margin-top:2px">CV4 Guanyuan — gentle circular pressure for 1-3 minutes</span></div>
+    </div>
+
+    <!-- Acupoint cards -->
+    <h2 class="sec">Acupoint Details</h2>
+    <div class="acupoint-grid" id="acupointGrid"></div>
+
+    <!-- My Routine section -->
+    <h2 class="sec" id="routineTitle">🌸 My Routine</h2>
+    <div class="routine-card" id="routinePanel">
+      <div class="sub" style="font-size:12px;margin-bottom:10px">Save 3–7 points for your daily self-care routine. Tap the bookmark icon on any acupoint card to add it here.</div>
+      <div id="routineList"></div>
+      <div id="timerSection" style="display:none;margin-top:14px">
+        <div class="timer-display" id="timerDisplay">02:00</div>
+        <div class="row" style="justify-content:center;gap:10px">
+          <button class="btn" id="timerStart" style="width:auto;padding:10px 24px;font-size:13px">▶ Start Timer</button>
+          <button class="btn ghost" id="timerReset" style="width:auto;padding:10px 24px;font-size:13px">↺ Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ovaria-footer"><span>Nemow</span></div>
+  </div>
+
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a class="on" href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+
+<script>
+// Acupoint data
+const ACUPOINTS = [
+  { id:"cv4", name:"Guānyuán (关元)", en:"Gate of Origin", location:"3 cun below navel, anterior midline", tcm:"Tonifies kidney yang & essence, nourishes blood, regulates uterus & Chong/Ren vessels. Primary point for all gynecological disorders.", methods:["pressure","moxa","needle"], pressure:"Circular thumb pressure 1-3 min, 2-3× daily", moxa:"Ginger-partition or stick moxa 10-20 min", needle:"1-1.5 cun (professional only)", stages:["grow","wisdom"], stagePrimary:"grow", evidence:"53 RCTs — core PCOS/IVF protocol point (Du 2026)", evidenceLevel:"strong", symptoms:["fertility","hot-flashes","cramps"], pregSafe:true },
+  { id:"cv6", name:"Qìhǎi (气海)", en:"Sea of Qi", location:"1.5 cun below navel, anterior midline", tcm:"Tonifies qi & yang, regulates lower jiao, lifts prolapse, warms uterus. Master point for qi deficiency.", methods:["pressure","moxa","needle"], pressure:"Gentle sustained pressure 2-5 min with deep breathing", moxa:"Moxa stick 10-15 min — excellent postpartum", needle:"1-1.5 cun (professional)", stages:["nurture","grow"], stagePrimary:"nurture", evidence:"Commonly paired with CV4 in TCM gynecological protocols", evidenceLevel:"moderate", symptoms:["fatigue","fertility"], pregSafe:true },
+  { id:"cv3", name:"Zhōngjí (中极)", en:"Central Pole", location:"4 cun below navel, anterior midline", tcm:"Regulates uterus, resolves damp-heat in lower jiao, benefits urination & menstruation.", methods:["pressure","moxa"], pressure:"Gentle circular pressure 2-3 min", moxa:"10-15 min for cold patterns", stages:["bloom","nurture"], stagePrimary:"bloom", evidence:"Standard point in dysmenorrhea protocols", evidenceLevel:"moderate", symptoms:["cramps","pms"], pregSafe:true },
+  { id:"st29", name:"Guīlái (归来)", en:"Return", location:"4 cun below navel, 2 cun lateral", tcm:"Regulates menstruation, resolves stagnation, directly benefits ovaries. Name means 'return to normal cycles.'", methods:["pressure","moxa"], pressure:"Gentle circular pressure 2-3 min each side", moxa:"10-15 min", stages:["grow","bloom"], stagePrimary:"grow", evidence:"Direct ovarian region — supports follicular development", evidenceLevel:"moderate", symptoms:["fertility","pms"], pregSafe:true },
+  { id:"sp6", name:"Sānyīnjiāo (三阴交)", en:"Three Yin Intersection", location:"3 cun above medial malleolus, posterior to tibia", tcm:"Regulates menstruation, strengthens spleen, resolves dampness, harmonizes Spleen/Liver/Kidney. Most important distal gynecological point.", methods:["pressure","moxa","needle"], pressure:"Firm thumb pressure 2-3 min each leg, 1-3× daily", moxa:"5-10 min (⚠️ NOT in pregnancy)", needle:"1-1.5 cun (professional)", stages:["bloom","grow","wisdom"], stagePrimary:"bloom", evidence:"Systematic review: significant dysmenorrhea pain reduction (PMID 22339102)", evidenceLevel:"strong", symptoms:["cramps","pms","hot-flashes"], pregSafe:false, pregNote:"⚠️ ALL forms contraindicated during pregnancy & suspected pregnancy. Stop during luteal phase if TTC." },
+  { id:"sp10", name:"Xuèhǎi (血海)", en:"Sea of Blood", location:"2 cun above superior-medial patella border", tcm:"Regulates & invigorates blood, cools blood, resolves stasis. Premier point for blood disorders in gynecology.", methods:["pressure"], pressure:"Firm broad pressure 2-3 min each leg", stages:["bloom","wisdom"], stagePrimary:"bloom", evidence:"Traditional consensus — blood-moving gynecological point", evidenceLevel:"consensus", symptoms:["cramps","pms","hot-flashes"], pregSafe:true },
+  { id:"li4", name:"Hégǔ (合谷)", en:"Joining Valley", location:"Between 1st & 2nd metacarpal bones, hand dorsum", tcm:"Regulates qi, alleviates pain, expels wind. Powerful analgesic — 'Four Gates' point with LV3. Historically induces labor.", methods:["pressure","needle"], pressure:"Firm thumb pressure 1-2 min", needle:"0.5-1 cun (professional)", stages:["bloom","grow"], stagePrimary:"bloom", evidence:"Classical analgesic point; widespread clinical use", evidenceLevel:"moderate", symptoms:["cramps","mood"], pregSafe:false, pregNote:"⚠️ FORBIDDEN in pregnancy. Stop at ovulation if TTC. Hidden from Nurture persona." },
+  { id:"ki3", name:"Tàixī (太溪)", en:"Supreme Stream", location:"Between medial malleolus & Achilles tendon", tcm:"Tonifies kidney yin & yang, nourishes essence (jing), benefits uterus. Yuan-source point of Kidney — fundamental for reproductive aging.", methods:["pressure","moxa","needle"], pressure:"Gentle firm pressure 2 min each side, 1-2× daily", moxa:"Mild moxa 5-10 min", needle:"0.5-0.8 cun (professional)", stages:["wisdom","nurture"], stagePrimary:"wisdom", evidence:"Standard in menopause protocols. Befus 2018 umbrella review supports VMS reduction.", evidenceLevel:"strong", symptoms:["hot-flashes","fatigue"], pregSafe:true },
+  { id:"lv3", name:"Tàichōng (太冲)", en:"Great Rushing", location:"Between 1st & 2nd metatarsals, foot dorsum", tcm:"Soothes liver qi stagnation, regulates menstruation, alleviates pain, calms mind. Essential for emotional regulation & PMS.", methods:["pressure","needle"], pressure:"Firm pressure 1-2 min each foot, 2× daily — best before menstruation", needle:"0.5-0.8 cun (professional)", stages:["bloom","wisdom"], stagePrimary:"bloom", evidence:"Included in comprehensive PCOS/PMS/menopausal protocols", evidenceLevel:"moderate", symptoms:["mood","pms","hot-flashes"], pregSafe:true },
+  { id:"st36", name:"Zúsānlǐ (足三里)", en:"Leg Three Miles", location:"3 cun below patella, 1 finger-width lateral to tibial crest", tcm:"Tonifies qi & blood, harmonizes stomach, strengthens spleen, boosts immunity. Most important vitality point — supports all life stages.", methods:["pressure","moxa","needle"], pressure:"Sustained thumb pressure 2-5 min each leg, 2-3× daily", moxa:"Moxa stick 10-15 min daily", needle:"1-1.5 cun (professional)", stages:["nurture","grow","wisdom","bloom"], stagePrimary:"nurture", evidence:"Most researched single acupoint — included in virtually all comprehensive protocols", evidenceLevel:"strong", symptoms:["fatigue","fertility"], pregSafe:true },
+  { id:"bl23", name:"Shènshū (肾俞)", en:"Kidney Shu", location:"1.5 cun lateral to L2 spinous process, lower back", tcm:"Tonifies kidney essence, strengthens lower back, benefits uterus. Most important back point for reproductive health.", methods:["pressure","moxa","needle"], pressure:"Tennis ball against wall 2-3 min each side", moxa:"Moxa box or stick 15-20 min", needle:"0.8-1.2 cun (professional)", stages:["wisdom","nurture"], stagePrimary:"wisdom", evidence:"Cornerstone point for kidney essence deficiency — root pattern of menopause & infertility", evidenceLevel:"moderate", symptoms:["hot-flashes","fatigue"], pregSafe:true },
+  { id:"gv4", name:"Mìngmén (命门)", en:"Gate of Life", location:"Below L2 spinous process, posterior midline", tcm:"Tonifies kidney yang, warms uterus, fortifies original fire. Most important yang point — for cold constitution & low libido.", methods:["moxa","pressure"], pressure:"Tennis ball against wall (self-reach)", moxa:"Moxa box 15-20 min — best stimulation method", stages:["grow","wisdom"], stagePrimary:"grow", evidence:"Key point for cold uterus pattern in infertility", evidenceLevel:"moderate", symptoms:["fertility","fatigue"], pregSafe:true },
+  { id:"pc6", name:"Nèiguān (内关)", en:"Inner Gate", location:"2 cun proximal to wrist crease, between tendons", tcm:"Calms mind, regulates heart qi, alleviates nausea, opens chest. Powerful for emotional regulation & stress.", methods:["pressure"], pressure:"Firm thumb pressure 2-5 min — most accessible self-care point. Acupressure wristbands available.", stages:["grow","bloom","nurture","wisdom"], stagePrimary:"grow", evidence:"Well-established for anxiety; included in fertility stress protocols", evidenceLevel:"moderate", symptoms:["mood","fertility"], pregSafe:true }
+];
+
+const stageNames = { bloom:"🌸 Bloom", grow:"🌱 Grow", nurture:"🌿 Nurture", wisdom:"🌙 Wisdom" };
+let activeFilter = "all";
+let activeSymptom = "all";
+let routine = JSON.parse(localStorage.getItem('ov_acupoint_routine')||'[]');
+
+function renderAcupoints(){
+  const grid = document.getElementById('acupointGrid');
+  let html = '';
+  ACUPOINTS.forEach(p => {
+    if(activeFilter !== 'all' && !p.stages.includes(activeFilter)) return;
+    if(activeSymptom !== 'all' && !p.symptoms.includes(activeSymptom)) return;
+    const inRoutine = routine.includes(p.id);
+    html += `<div class="acupoint-card" id="card-${p.id}">
+      <div class="row" style="justify-content:space-between;align-items:flex-start">
+        <div>
+          <h3>${p.name}</h3>
+          <div class="cn-name">${p.en}</div>
+        </div>
+        <span class="ms" style="font-size:22px;color:${inRoutine?'var(--ovaria-accent)':'var(--ovaria-border)'};cursor:pointer" onclick="toggleRoutine('${p.id}',this)">${inRoutine?'bookmark':'bookmark_border'}</span>
+      </div>
+      <div class="field-row"><span class="field-label">Location</span></div>
+      <div class="field-value">${p.location}</div>
+      <div class="field-row"><span class="field-label">TCM Function</span></div>
+      <div class="field-value">${p.tcm}</div>
+      ${p.pregSafe ? '' : `<div class="preg-warn" style="margin-top:8px">⚠️ ${p.pregNote||'Contraindicated during pregnancy & suspected pregnancy.'}</div>`}
+      <div class="field-row"><span class="field-label">Stimulation</span></div>
+      <div class="tag-row" id="methods-${p.id}"></div>
+      ${p.pressure ? `<div class="field-value" style="margin-top:4px"><b>Self-care:</b> `+p.pressure+`</div>` : ''}
+      <div class="tag-row">
+        ${p.stages.map(s => `<span class="stage-tag ${s}">${stageNames[s]}</span>`).join('')}
+      </div>
+      <div style="margin-top:8px">
+        <span class="evidence-badge ${p.evidenceLevel}">${p.evidenceLevel==='strong'?'🟢 Strong':p.evidenceLevel==='moderate'?'🟡 Moderate':'🔵 Consensus'}</span>
+        <span style="font-size:10px;color:var(--ovaria-text-secondary);margin-left:6px">${p.evidence}</span>
+      </div>
+    </div>`;
+  });
+  grid.innerHTML = html || '<div class="card" style="text-align:center;padding:30px"><span style="font-size:32px">🔍</span><div class="sub" style="margin-top:8px">No acupoints match this filter. Try a different life stage or symptom.</div></div>';
+  
+  // Populate method tags (avoid nested template literal)
+  ACUPOINTS.forEach(p => {
+    const el = document.getElementById('methods-'+p.id);
+    if(!el) return;
+    const labels = {pressure:'👆 Pressure', moxa:'🔥 Moxa', needle:'💉 Needle (Pro)'};
+    el.innerHTML = p.methods.map(m => '<span class="method-tag">'+labels[m]+'</span>').join('');
+  });
+}
+
+function renderRoutine(){
+  const list = document.getElementById('routineList');
+  const routinePoints = ACUPOINTS.filter(p => routine.includes(p.id));
+  if(!routinePoints.length){ list.innerHTML = '<div class="sub" style="text-align:center;padding:10px">No points saved yet. Tap the bookmark icon to add.</div>'; document.getElementById('timerSection').style.display='none'; return; }
+  document.getElementById('timerSection').style.display='block';
+  list.innerHTML = routinePoints.map(p => `
+    <div class="routine-item ${p.id}" style="border-bottom:1px solid var(--ovaria-border)">
+      <span class="r-status" onclick="markDone('${p.id}')">✓</span>
+      <span style="flex:1"><b>${p.name}</b> <span style="font-size:11px;color:var(--ovaria-text-secondary)">${p.location}</span></span>
+      <span style="font-size:11px;color:var(--ovaria-accent);cursor:pointer" onclick="removeFromRoutine('${p.id}')">✕</span>
+    </div>
+  `).join('');
+}
+
+function toggleRoutine(id, el){
+  const idx = routine.indexOf(id);
+  if(idx >= 0){ routine.splice(idx,1); if(el) el.textContent = 'bookmark_border'; el.style.color = 'var(--ovaria-border)'; }
+  else { routine.push(id); if(el) el.textContent = 'bookmark'; el.style.color = 'var(--ovaria-accent)'; }
+  localStorage.setItem('ov_acupoint_routine', JSON.stringify(routine));
+  renderAcupoints();
+  renderRoutine();
+}
+
+function removeFromRoutine(id){ toggleRoutine(id); }
+
+function markDone(id){
+  const el = document.querySelector(`.routine-item.${id} .r-status`);
+  if(!el) return;
+  const item = document.querySelector(`.routine-item.${id}`);
+  item.classList.toggle('done');
+}
+
+// Timer
+let timerInterval = null;
+let timerSeconds = 120;
+const timerDisplay = document.getElementById('timerDisplay');
+const timerStart = document.getElementById('timerStart');
+const timerReset = document.getElementById('timerReset');
+function updateTimer(){ const m=Math.floor(timerSeconds/60), s=timerSeconds%60; timerDisplay.textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'); }
+timerStart.addEventListener('click',function(){
+  if(timerInterval){ clearInterval(timerInterval); timerInterval=null; timerStart.textContent='▶ Start Timer'; return; }
+  timerInterval = setInterval(function(){
+    if(timerSeconds <= 0){ clearInterval(timerInterval); timerInterval=null; timerStart.textContent='▶ Start Timer'; return; }
+    timerSeconds--; updateTimer();
+  },1000);
+  timerStart.textContent='⏸ Pause';
+});
+timerReset.addEventListener('click',function(){
+  clearInterval(timerInterval); timerInterval=null;
+  timerSeconds=120; updateTimer(); timerStart.textContent='▶ Start Timer';
+});
+
+// Filter chips
+document.querySelectorAll('#stageFilter .filter-chip').forEach(c => {
+  c.addEventListener('click',function(){
+    document.querySelectorAll('#stageFilter .filter-chip').forEach(x=>x.classList.remove('on'));
+    this.classList.add('on'); activeFilter = this.dataset.filter; renderAcupoints();
+  });
+});
+document.querySelectorAll('#symptomFilter .filter-chip').forEach(c => {
+  c.addEventListener('click',function(){
+    document.querySelectorAll('#symptomFilter .filter-chip').forEach(x=>x.classList.remove('on'));
+    this.classList.add('on'); activeSymptom = this.dataset.symptom; renderAcupoints();
+  });
+});
+
+// Init
+renderAcupoints(); renderRoutine();
+updateTimer();
+
+// Persona-aware pregnancy warnings
+function updatePregWarnings(){
+  const persona = document.documentElement.getAttribute('data-persona') || 'bloom';
+  if(persona === 'nurture'){
+    document.querySelectorAll('[data-point="sp6"],[data-point="li4"]').forEach(el => {
+      el.style.fill = '#C46F4F';
+      el.style.opacity = '0.9';
+    });
+  }
+}
+updatePregWarnings();
+
+// Persona-aware body map
+(function(){
+  const map = document.getElementById('bodyMapImg');
+  if(!map) return;
+  const persona = document.documentElement.getAttribute('data-persona') || 'bloom';
+  const imgMap = {bloom:'assets/illustrations/body-bloom-600.png', grow:'assets/illustrations/body-grow-600.png', nurture:'assets/illustrations/body-nurture-600.png', wisdom:'assets/illustrations/body-wisdom-600.png'};
+  if(imgMap[persona]) map.src = imgMap[persona];
+})();
+
+// Scroll to acupoint from body map
+document.querySelectorAll('.point-dot').forEach(dot => {
+  dot.addEventListener('click',function(){
+    const pid = this.dataset.point;
+    const card = document.getElementById('card-'+pid);
+    if(card) card.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+});
+</script>
+<script src="appnav.js" defer></script>
+</body></html>

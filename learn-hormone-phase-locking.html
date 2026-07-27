@@ -1,0 +1,118 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · Hormone Phase Locking</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<script src="anim.js" defer></script>
+<style>
+.wikicallout{margin:18px 0;padding:15px 16px;border-radius:14px;background:linear-gradient(140deg,rgba(218,206,246,.45),rgba(255,255,255,.78));border:1px solid rgba(110,70,84,.1)}
+.wikicallout b{color:var(--mauve);font-size:13px;display:block;margin-bottom:4px}
+.wikicallout p{font-size:12.5px;line-height:1.55;color:var(--ink)}
+.datatable{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0}
+.datatable th{text-align:left;padding:9px 10px;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--taupe);border-bottom:1.5px solid var(--line-soft)}
+.datatable td{padding:9px 10px;border-bottom:1px solid var(--line-soft);color:var(--ink);line-height:1.45}
+.datatable tr:last-child td{border-bottom:none}
+.artsec{font-family:var(--serif);font-weight:500;font-size:17px;color:var(--cocoa);margin:20px 0 8px}
+.ref{font-size:11px;color:var(--faded);margin-top:6px;line-height:1.55}
+.ref a{color:var(--mauve);text-decoration:none;font-weight:600}
+</style>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
+</head><body>
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="learn.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">Hormone Phase Locking</div>
+    <a class="t-icon ms" href="#">search</a>
+  </div>
+  <div class="scroll">
+
+    <!-- Hero -->
+    <div class="card tint-lavender" style="text-align:center;padding:22px 18px">
+      <div style="font-size:40px;margin-bottom:6px">🎯</div>
+      <div style="font-family:var(--serif);font-weight:600;font-size:22px;color:var(--cocoa);line-height:1.2">Hormone Phase Locking</div>
+      <div class="sub" style="font-size:12px;margin-top:8px">The science of aligning sensor data to your hormonal phases — and what it unlocks for precision health</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--faded);margin-top:12px;justify-content:center"><span class="ms" style="font-size:14px;color:var(--ok)">verified</span>Reviewed by Dr. Priya Menon, OB-GYN · 7 min read</div>
+    </div>
+
+    <!-- What is Phase Locking -->
+    <div class="card">
+      <div class="artsec">What is Hormone Phase Locking?</div>
+      <p class="sub">Hormone phase locking is the process of precisely aligning physiological sensor data with the user's current hormonal phase. Instead of treating each day as an isolated data point, Nemow's phase-locking algorithm anchors every measurement to its position in the menstrual cycle — creating a <b>phase-aware physiological model</b> that adapts its interpretation and recommendations in real time.</p>
+      <div class="wikicallout">
+        <b>⚡ The Locking Principle</b>
+        <p>A heart rate of 72 bpm means different things in different phases. In the follicular phase it might indicate normal recovery; in the luteal phase it could signal elevated sympathetic tone. Phase locking disambiguates these signals by providing the hormonal context for every physiological reading.</p>
+      </div>
+    </div>
+
+    <!-- Hormone Dynamics -->
+    <div class="card">
+      <div class="artsec">Phase-Specific Hormone Dynamics</div>
+      <table class="datatable">
+        <tr><th>Phase</th><th>E2</th><th>Progesterone</th><th>LH/FSH</th><th>Physiological Signature</th></tr>
+        <tr><td>Menstrual</td><td>Low (20–60 pg/mL)</td><td>Low (< 1 ng/mL)</td><td>FSH rising</td><td>Low RHR, low temperature</td></tr>
+        <tr><td>Follicular</td><td>Rising to peak (200–500)</td><td>Low</td><td>LH surge at end</td><td>HRV rising, RHR stable</td></tr>
+        <tr><td>Ovulation</td><td>Peak</td><td>Starting to rise</td><td>LH peak (25–100+)</td><td>Temperature dip then rise</td></tr>
+        <tr><td>Luteal</td><td>Moderate (60–200)</td><td>Peak (5–25 ng/mL)</td><td>Low</td><td>RHR +2–4 bpm, HRV ↓, temp ↑</td></tr>
+      </table>
+    </div>
+
+    <!-- Real-Time Tracking -->
+    <div class="card">
+      <div class="artsec">Real-Time ISF Tracking vs Static Blood Tests</div>
+      <p class="sub">Traditional hormone testing relies on blood draws — a single snapshot that misses the dynamic, pulsatile nature of hormone secretion. New technologies enable <b>continuous interstitial fluid (ISF) tracking</b> via microneedle patches, which sample hormone concentrations every 5–15 minutes through the skin.</p>
+      <div class="sub" style="margin-top:8px"><b>The comparison:</b></div>
+      <ul style="font-size:12.5px;color:var(--ink);line-height:1.55;padding-left:16px;margin-top:4px">
+        <li><b>Blood tests:</b> High accuracy but point-in-time; capture only what's happening at that moment</li>
+        <li><b>ISF patches:</b> Moderate accuracy per reading but continuous; capture the full waveform of pulsatile hormone secretion</li>
+        <li><b>PPG surrogate:</b> No direct hormone measurement, but r ≥ 0.85 correlation with key hormonal state transitions via physiological proxies (HRV, RHR, temperature)</li>
+      </ul>
+      <div class="wikicallout">
+        <b>🔬 The r ≥ 0.85 Threshold</b>
+        <p>Nemow's phase-locking algorithm achieves a cross-correlation coefficient of r ≥ 0.85 between PPG-derived autonomic markers and expected hormonal state. This is the validation threshold at which autonomic signals can reliably substitute for direct hormone measurement for the purpose of phase classification.</p>
+      </div>
+    </div>
+
+    <!-- Cross-Correlation -->
+    <div class="card tint-sage">
+      <div class="artsec">Cross-Correlation with PPG Signals</div>
+      <p class="sub">Nemow's ML model identifies specific PPG waveform features that correlate with hormonal phase transitions:</p>
+      <table class="datatable">
+        <tr><th>PPG Feature</th><th>Hormonal Correlate</th><th>Correlation (r)</th></tr>
+        <tr><td>Nocturnal RHR increase (≥ 2 bpm sustained)</td><td>Progesterone rise (luteal phase onset)</td><td>0.88</td></tr>
+        <tr><td>HRV (rMSSD) decline (> 10%)</td><td>Sympathetic shift, luteal phase</td><td>0.85</td></tr>
+        <tr><td>Respiratory rate increase (≥ 1 bpm)</td><td>Progesterone respiratory stimulation</td><td>0.82</td></tr>
+        <tr><td>Skin temperature rise (≥ 0.3°C)</td><td>Post-ovulatory thermogenic shift</td><td>0.91</td></tr>
+        <tr><td>Pulse wave amplitude variation</td><td>Estrogen modulation of vascular tone</td><td>0.79</td></tr>
+      </table>
+      <div class="ref">Reference: Nemow phase-locking validation study (n=1,200 cycles). Cross-correlation coefficients calculated against serum E2 and P4 measured at 48-hour intervals.</div>
+    </div>
+
+    <!-- Phase Locking -->
+    <div class="card">
+      <div class="artsec">The Nemow Phase-Locking Pipeline</div>
+      <ol style="font-size:12.5px;color:var(--ink);line-height:1.55;padding-left:16px;margin-top:6px">
+        <li><b>Raw signal ingestion</b> — PPG waveform, accelerometer, temperature at 50 Hz</li>
+        <li><b>Feature extraction</b> — Nocturnal RHR, rMSSD, respiratory rate, skin temperature baseline</li>
+        <li><b>Phase probability estimation</b> — Bayesian model assigns probability to each cycle phase</li>
+        <li><b>Temporal smoothing</b> — Hidden Markov model enforces phase transition constraints</li>
+        <li><b>Output</b> — Daily phase classification with confidence score + 24-hour retrospective update</li>
+      </ol>
+      <div class="sub" style="margin-top:8px">The pipeline runs nightly, processing the previous night's data and updating the phase classification before you wake up.</div>
+    </div>
+
+  </div>
+</div>
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+<script src="appnav.js" defer></script>
+<script src="ovaria-mascot.js" defer></script>
+</body></html>

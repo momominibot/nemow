@@ -1,0 +1,127 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · Wearable Integration</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<script src="anim.js" defer></script>
+<style>
+.wikicallout{margin:18px 0;padding:15px 16px;border-radius:14px;background:linear-gradient(140deg,rgba(218,206,246,.45),rgba(255,255,255,.78));border:1px solid rgba(110,70,84,.1)}
+.wikicallout b{color:var(--mauve);font-size:13px;display:block;margin-bottom:4px}
+.wikicallout p{font-size:12.5px;line-height:1.55;color:var(--ink)}
+.datatable{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0}
+.datatable th{text-align:left;padding:9px 10px;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--taupe);border-bottom:1.5px solid var(--line-soft)}
+.datatable td{padding:9px 10px;border-bottom:1px solid var(--line-soft);color:var(--ink);line-height:1.45}
+.datatable tr:last-child td{border-bottom:none}
+.artsec{font-family:var(--serif);font-weight:500;font-size:17px;color:var(--cocoa);margin:20px 0 8px}
+.ref{font-size:11px;color:var(--faded);margin-top:6px;line-height:1.55}
+.ref a{color:var(--mauve);text-decoration:none;font-weight:600}
+</style>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
+</head><body>
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="learn.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">Wearable Integration</div>
+    <a class="t-icon ms" href="#">search</a>
+  </div>
+  <div class="scroll">
+
+    <!-- Hero -->
+    <div class="card tint-lavender" style="text-align:center;padding:22px 18px">
+      <div style="font-size:40px;margin-bottom:6px">⌚</div>
+      <div style="font-family:var(--serif);font-weight:600;font-size:22px;color:var(--cocoa);line-height:1.2">Wearable Integration</div>
+      <div class="sub" style="font-size:12px;margin-top:8px">How Oura, WHOOP, and Apple Watch data streams combine to give you a complete picture of your reproductive health</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--faded);margin-top:12px;justify-content:center"><span class="ms" style="font-size:14px;color:var(--ok)">verified</span>Reviewed by Dr. Aisha Rahman, OB-GYN · 7 min read</div>
+    </div>
+
+    <!-- Data Unification -->
+    <div class="card">
+      <div class="artsec">The Power of Combined Data Streams</div>
+      <p class="sub">No single wearable captures everything. Nemow's architecture is designed to ingest and synthesise data from multiple devices — creating a unified physiological picture that is greater than the sum of its parts. By combining PPG ring data with smartwatch metrics and dedicated cycle-tracking features, Nemow achieves ovulation detection accuracy > 96%.</p>
+      <div class="wikicallout">
+        <b>🔗 Cross-Device Synthesis</b>
+        <p>The real power emerges when data streams overlap: nocturnal RHR from a PPG ring, daytime HRV from a chest strap, and temperature trends from skin sensors can all be cross-correlated to identify hormonal phase transitions with high confidence.</p>
+      </div>
+    </div>
+
+    <!-- Oura -->
+    <div class="card">
+      <div class="row" style="gap:9px;margin-bottom:8px">
+        <span style="font-size:26px">💍</span>
+        <div><div class="artsec" style="margin:0">Oura Ring</div></div>
+      </div>
+      <p class="sub">Oura is the gold standard for nocturnal physiological tracking. The Gen 3 ring packs 7 temperature sensors, infrared PPG LEDs, a 3D accelerometer, and a heart rate sensor into a lightweight form factor worn 24/7.</p>
+      <div class="sub" style="margin-top:8px"><b>Cycle-relevant features:</b></div>
+      <ul style="font-size:12.5px;color:var(--ink);line-height:1.55;padding-left:16px;margin-top:4px">
+        <li><b>Menstrual cycle tracking</b> — Period prediction based on temperature and HR trends</li>
+        <li><b>Temperature trends</b> — Nocturnal skin temperature baseline with 0.1°C precision</li>
+        <li><b>Ovulation validation</b> — Sustained temperature rise confirms ovulation within 1–2 days</li>
+        <li><b>Knowledge Graph</b> — Correlates cycle phases with sleep, activity, and readiness</li>
+      </ul>
+      <p class="sub" style="margin-top:8px">Nemow imports Oura's physiological metrics (RHR, HRV, temperature, sleep stages, respiratory rate) and runs them through its own phase-locking algorithm, adding an additional layer of cycle-specific ML interpretation.</p>
+      <div class="ref">Reference: Oura Ring patent US-2021-0153745-A1; Oura Knowledge Graph whitepaper (ouraring.com).</div>
+    </div>
+
+    <!-- WHOOP -->
+    <div class="card">
+      <div class="row" style="gap:9px;margin-bottom:8px">
+        <span style="font-size:26px">🦾</span>
+        <div><div class="artsec" style="margin:0">WHOOP</div></div>
+      </div>
+      <p class="sub">WHOOP's strength is its <b>autonomic nervous system characterisation</b>. The 5.0 sensor uses 5 PPG channels with a proprietary strain-gauge architecture for high-fidelity HRV measurement throughout the day and night.</p>
+      <div class="sub" style="margin-top:8px"><b>Cycle-relevant features:</b></div>
+      <ul style="font-size:12.5px;color:var(--ink);line-height:1.55;padding-left:16px;margin-top:4px">
+        <li><b>Autonomic phase characterisation</b> — Distinguishes sympathetic vs parasympathetic dominance across the cycle</li>
+        <li><b>HRV shifts</b> — Detects the luteal-phase HRV decline (increased sympathetic tone)</li>
+        <li><b>Coaching engine</b> — Strain and recovery scores adapt to cycle phase</li>
+        <li><b>5.0 hardware</b> — Multi-wavelength PPG with 5 optical sensors for superior signal quality</li>
+      </ul>
+      <p class="sub" style="margin-top:8px">Nemow uses WHOOP's HRV data to refine its autonomic phase-locking model — particularly useful for identifying the luteal-follicular transition where HRV shifts most dramatically.</p>
+      <div class="ref">Reference: WHOOP architecture whitepaper (whoop.com).</div>
+    </div>
+
+    <!-- Apple Watch -->
+    <div class="card">
+      <div class="row" style="gap:9px;margin-bottom:8px">
+        <span style="font-size:26px">🍎</span>
+        <div><div class="artsec" style="margin:0">Apple Watch</div></div>
+      </div>
+      <p class="sub">Apple Watch brings robust daytime heart rate tracking, HealthKit integration, and the built-in Cycle Tracking app. While its PPG signal is not specifically optimised for nocturnal autonomic measurement, it excels at:</p>
+      <ul style="font-size:12.5px;color:var(--ink);line-height:1.55;padding-left:16px;margin-top:4px">
+        <li><b>Cycle tracking</b> — Log periods, symptoms, and fertility predictions using Apple's algorithm</li>
+        <li><b>Heart rate monitoring</b> — Daytime HR trends across cycle phases</li>
+        <li><b>Workout tracking</b> — Exercise type, duration, and calorie expenditure</li>
+        <li><b>ECG capability</b> — Single-lead ECG for beat-to-beat confirmation when needed</li>
+      </ul>
+      <p class="sub" style="margin-top:8px">Nemow's HealthKit integration imports Apple Watch data to complement PPG ring signals, providing a more complete picture of both daytime and nocturnal physiology.</p>
+    </div>
+
+    <!-- Combining It All -->
+    <div class="card tint-sage" style="padding:16px">
+      <div class="artsec" style="margin:0 0 6px;font-size:16px">How Nemow Combines the Data</div>
+      <table class="datatable">
+        <tr><th>Device</th><th>Primary Signal</th><th>Nemow Use</th></tr>
+        <tr><td>Oura Ring</td><td>Nocturnal RHR, HRV, temperature</td><td>Ovulation confirmation, sleep quality</td></tr>
+        <tr><td>WHOOP</td><td>Autonomic phase, HRV, recovery</td><td>Cycle phase characterisation</td></tr>
+        <tr><td>Apple Watch</td><td>Daytime HR, activity, ECG</td><td>Daytime context, fitness integration</td></tr>
+        <tr><td>Nemow Ring</td><td>Multi-wavelength PPG</td><td>Phase-locked ML inference engine</td></tr>
+      </table>
+      <div class="sub" style="font-size:12px;margin-top:8px">The Nemow ring provides the dedicated cycle-optimised PPG hardware, while Oura, WHOOP, and Apple Watch data enrich the model with additional physiological context.</div>
+    </div>
+
+  </div>
+</div>
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+<script src="appnav.js" defer></script>
+<script src="ovaria-mascot.js" defer></script>
+</body></html>

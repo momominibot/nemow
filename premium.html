@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · Premium</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<script src="anim.js" defer></script>
+<style>
+.perk { display:flex; align-items:center; gap:13px; padding:12px 2px; }
+.perk .p-ic { width:42px; height:42px; border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:21px; flex-shrink:0; }
+.perk b { font-size:14.5px; }
+.perk span { display:block; font-size:12px; color:var(--taupe); }
+.plan { position:relative; flex:1; background:var(--card-solid); border:2px solid var(--line-soft); border-radius:var(--r);
+  padding:18px 14px 15px; text-align:center; cursor:pointer; transition:.18s; }
+.plan.on { border-color:var(--mauve); background:linear-gradient(160deg, rgba(110,70,84,.07), #fff); }
+.plan .save { position:absolute; top:-11px; left:50%; transform:translateX(-50%); white-space:nowrap;
+  background:var(--terracotta); color:#FFF3E9; font:800 10.5px var(--sans); letter-spacing:.04em; padding:4px 12px; border-radius:99px; }
+.plan .p-name { font:800 12px var(--sans); letter-spacing:.1em; text-transform:uppercase; color:var(--taupe); }
+.plan .p-price { font-family:var(--serif); font-weight:500; font-size:28px; color:var(--cocoa); margin:6px 0 2px; }
+.plan .p-sub { font-size:11.5px; color:var(--taupe); }
+/* comparison table */
+.cmp { width:100%; border-collapse:collapse; }
+.cmp th, .cmp td { padding:12px 8px; text-align:center; border-bottom:1px solid var(--line-soft); }
+.cmp thead th { padding-bottom:10px; }
+.cmp tbody td:first-child, .cmp thead th:first-child { text-align:left; font-size:12.5px; color:var(--cocoa); font-weight:600; width:56%; }
+.cmp .colhead { font:800 11px var(--sans); letter-spacing:.06em; text-transform:uppercase; color:var(--taupe); }
+.cmp .colprem { position:relative; }
+.cmp col.premcol { }
+.cmp .prem-wrap { background:linear-gradient(180deg, rgba(110,70,84,.08), rgba(110,70,84,.02)); }
+.cmp td .yes { color:var(--d-diet); font-size:20px; }
+.cmp td .no { color:var(--line); font-size:19px; }
+.cmp td .lim { font-size:10.5px; color:var(--taupe); font-weight:700; }
+.cmp tr:last-child td { border-bottom:none; }
+.cmp .prem-col { background:rgba(110,70,84,.06); }
+.crown { display:inline-flex; align-items:center; gap:3px; color:var(--mauve); font:800 11px var(--sans); letter-spacing:.06em; text-transform:uppercase; }
+</style>
+</head><body>
+
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="profile.html">close</a>
+    <span style="flex:1"></span>
+  </div>
+
+  <div class="scroll" style="gap:18px">
+    <div style="text-align:center">
+      <span class="ms sway" style="display:inline-flex;font-size:38px;color:var(--terracotta)">spa</span>
+      <h1 style="font-family:var(--serif);font-weight:500;font-size:28px;color:var(--mauve);margin-top:8px;line-height:1.15">Unlock your<br/>ovarian potential.</h1>
+      <div class="sub" style="margin-top:8px;max-width:32ch;display:inline-block">Nemow Premium — advanced longevity insights, tuned to your biology.</div>
+    </div>
+
+    <div class="card" style="padding:8px 18px">
+      <div class="perk"><span class="p-ic ms" style="background:rgba(110,70,84,.1);color:var(--mauve)">auto_graph</span>
+        <div><b>Advanced Bio-Age analytics</b><span>Six-domain drivers, weekly deltas, projections</span></div></div>
+      <div class="perk"><span class="p-ic ms" style="background:rgba(229,180,92,.18);color:var(--warn)">science</span>
+        <div><b>Full lab marker trend reports</b><span>AMH, FSH, Vitamin D and more, over years</span></div></div>
+      <div class="perk"><span class="p-ic ms" style="background:rgba(166,180,230,.22);color:#5A6BB0">psychiatry</span>
+        <div><b>AI-driven supplement optimization</b><span>Cycle-aware, evidence-graded suggestions</span></div></div>
+      <div class="perk"><span class="p-ic ms" style="background:rgba(147,187,143,.16);color:var(--d-diet)">fitness_center</span>
+        <div><b>Phase-synced workouts</b><span>Train with your energy, not against it</span></div></div>
+    </div>
+
+    <!-- Free vs Premium comparison -->
+    <div>
+      <h2 class="sec" style="justify-content:center;text-align:center">Free vs Premium</h2>
+      <div class="card prem-wrap" style="padding:6px 14px 10px;overflow:hidden">
+        <table class="cmp">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="colhead">Free</th>
+              <th class="colhead prem-col"><span class="crown"><span class="ms" style="font-size:14px">workspace_premium</span>Premium</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Ovarian Bio-Age number</td><td><span class="ms yes">check</span></td><td class="prem-col"><span class="ms yes">check</span></td></tr>
+            <tr><td>Six-domain breakdown &amp; weekly deltas</td><td><span class="lim">Preview</span></td><td class="prem-col"><span class="ms yes">check</span></td></tr>
+            <tr><td>Cycle &amp; period tracking</td><td><span class="ms yes">check</span></td><td class="prem-col"><span class="ms yes">check</span></td></tr>
+            <tr><td>Lab marker trends (AMH, FSH, Vit-D…)</td><td><span class="lim">3 markers</span></td><td class="prem-col"><span class="lim" style="color:var(--mauve)">Unlimited</span></td></tr>
+            <tr><td>Bio-Age projections &amp; longevity roadmap</td><td><span class="ms no">close</span></td><td class="prem-col"><span class="ms yes">check</span></td></tr>
+            <tr><td>AI supplement optimisation</td><td><span class="ms no">close</span></td><td class="prem-col"><span class="ms yes">check</span></td></tr>
+            <tr><td>Phase-synced workouts &amp; nutrition</td><td><span class="ms no">close</span></td><td class="prem-col"><span class="ms yes">check</span></td></tr>
+            <tr><td>Fertility-window &amp; hormone forecasts</td><td><span class="ms no">close</span></td><td class="prem-col"><span class="ms yes">check</span></td></tr>
+            <tr><td>Full history export &amp; clinician report</td><td><span class="ms no">close</span></td><td class="prem-col"><span class="ms yes">check</span></td></tr>
+            <tr><td>Priority AI coach</td><td><span class="lim">Basic</span></td><td class="prem-col"><span class="lim" style="color:var(--mauve)">24/7</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sub" style="text-align:center;font-size:11px;margin-top:6px">Members unlock <b style="color:var(--mauve)">7 of 10</b> insight engines that shape your Bio-Age.</div>
+    </div>
+
+    <!-- value framing + social proof -->
+    <div class="card tint-blush" style="text-align:center;padding:18px">
+      <div style="font-family:var(--serif);font-size:19px;color:var(--cocoa);line-height:1.3">Less than <b style="color:var(--mauve)">a coffee a week</b> — for insight into the biology that shapes your future fertility.</div>
+      <div class="row" style="justify-content:center;gap:18px;margin-top:14px">
+        <div><div style="font-family:var(--serif);font-size:22px;color:var(--mauve)">92%</div><div class="sub" style="font-size:10px">feel more in control</div></div>
+        <div style="width:1px;background:var(--line-soft)"></div>
+        <div><div style="font-family:var(--serif);font-size:22px;color:var(--mauve)">4.9★</div><div class="sub" style="font-size:10px">App Store rating</div></div>
+        <div style="width:1px;background:var(--line-soft)"></div>
+        <div><div style="font-family:var(--serif);font-size:22px;color:var(--mauve)">40k+</div><div class="sub" style="font-size:10px">women tracking</div></div>
+      </div>
+    </div>
+
+    <div class="card" style="padding:16px 18px;display:flex;gap:12px;align-items:flex-start">
+      <img src="assets/avatars/av4.jpg" alt="" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0"/>
+      <div>
+        <div class="row" style="gap:2px;color:var(--gold)"><span class="ms" style="font-size:14px">star</span><span class="ms" style="font-size:14px">star</span><span class="ms" style="font-size:14px">star</span><span class="ms" style="font-size:14px">star</span><span class="ms" style="font-size:14px">star</span></div>
+        <p style="font-size:13px;color:var(--cocoa);line-height:1.5;margin:4px 0 3px;font-style:italic">"Premium showed my AMH trend and synced my training to my cycle — I finally understand my own body."</p>
+        <span class="sub" style="font-size:11px">Priya, 34 · Premium member</span>
+      </div>
+    </div>
+
+    <div class="row" style="align-items:stretch;gap:12px;margin-top:6px">
+      <div class="plan on" id="p-annual">
+        <div class="save">Save 45%</div>
+        <div class="p-name">Annual</div>
+        <div class="p-price">$8.33<span style="font-size:13px;color:var(--taupe)">/mo</span></div>
+        <div class="p-sub">$99.99 billed yearly</div>
+      </div>
+      <div class="plan" id="p-monthly">
+        <div class="p-name">Monthly</div>
+        <div class="p-price">$14.99<span style="font-size:13px;color:var(--taupe)">/mo</span></div>
+        <div class="p-sub">Cancel anytime</div>
+      </div>
+    </div>
+
+    <button class="btn">Start free trial <span class="ms" style="font-size:18px">arrow_forward</span></button>
+    <div class="sub" style="text-align:center;font-size:11.5px" id="trialline">7 days free, then $99.99/year. Cancel anytime.</div>
+    <div class="sub" style="text-align:center;font-size:10.5px">Recurring billing. By continuing you agree to our Terms of Service & Privacy Policy.</div>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var a=document.getElementById('p-annual'), m=document.getElementById('p-monthly'), t=document.getElementById('trialline');
+  a.onclick=function(){a.classList.add('on');m.classList.remove('on');t.textContent='7 days free, then $99.99/year. Cancel anytime.';};
+  m.onclick=function(){m.classList.add('on');a.classList.remove('on');t.textContent='7 days free, then $14.99/month. Cancel anytime.';};
+});
+</script>
+<script src="appnav.js" defer></script>
+<script src="ovaria-mascot.js" defer></script>
+</body></html>

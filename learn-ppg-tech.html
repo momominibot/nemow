@@ -1,0 +1,127 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · PPG Technology Explained</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<script src="anim.js" defer></script>
+<style>
+.wikicallout{margin:18px 0;padding:15px 16px;border-radius:14px;background:linear-gradient(140deg,rgba(218,206,246,.45),rgba(255,255,255,.78));border:1px solid rgba(110,70,84,.1)}
+.wikicallout b{color:var(--mauve);font-size:13px;display:block;margin-bottom:4px}
+.wikicallout p{font-size:12.5px;line-height:1.55;color:var(--ink)}
+.datatable{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0}
+.datatable th{text-align:left;padding:9px 10px;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--taupe);border-bottom:1.5px solid var(--line-soft)}
+.datatable td{padding:9px 10px;border-bottom:1px solid var(--line-soft);color:var(--ink);line-height:1.45}
+.datatable tr:last-child td{border-bottom:none}
+.artsec{font-family:var(--serif);font-weight:500;font-size:17px;color:var(--cocoa);margin:20px 0 8px}
+.ref{font-size:11px;color:var(--faded);margin-top:6px;line-height:1.55}
+.ref a{color:var(--mauve);text-decoration:none;font-weight:600}
+</style>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
+</head><body>
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="learn.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">PPG Technology</div>
+    <a class="t-icon ms" href="#">search</a>
+  </div>
+  <div class="scroll">
+
+    <!-- Hero -->
+    <div class="card tint-blush" style="text-align:center;padding:22px 18px">
+      <div style="font-size:40px;margin-bottom:6px">💡</div>
+      <div style="font-family:var(--serif);font-weight:600;font-size:22px;color:var(--cocoa);line-height:1.2">PPG Technology Explained</div>
+      <div class="sub" style="font-size:12px;margin-top:8px">How light-based pulse sensing is revolutionising female health tracking</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--faded);margin-top:12px;justify-content:center"><span class="ms" style="font-size:14px;color:var(--ok)">verified</span>Reviewed by Dr. Aisha Rahman, OB-GYN · 6 min read</div>
+    </div>
+
+    <!-- What is PPG -->
+    <div class="card">
+      <div class="artsec">What is Photoplethysmography?</div>
+      <p class="sub">Photoplethysmography (PPG) is an optical technique that uses light-emitting diodes (LEDs) and photodetectors to measure blood volume changes in the microvascular bed of tissue. Each time your heart beats, blood pulses through your capillaries, altering how much light is absorbed and reflected. PPG captures this as a waveform — every beat, every subtle variation.</p>
+      <p class="sub" style="margin-top:8px">Unlike electrocardiography (ECG/EKG), which measures the heart's electrical activity, PPG is purely optical. This makes it ideal for <b>miniaturised wearable devices</b> — rings, wristbands, and patches — that sit comfortably on the body for continuous nocturnal tracking.</p>
+      <div class="wikicallout">
+        <b>🔬 How It Works</b>
+        <p>Green or infrared LEDs shine into the skin. Photodetectors measure the light that returns. Each heartbeat pushes blood into the tissue — the volume change modulates the light signal, producing a pulse waveform that reveals heart rate, heart rate variability, and respiratory rate.</p>
+      </div>
+    </div>
+
+    <!-- Multi-sensor PPG Rings -->
+    <div class="card">
+      <div class="artsec">Multi-Sensor PPG Rings</div>
+      <p class="sub">Nemow uses a multi-sensor PPG ring configuration that samples across multiple wavelengths and photodetector points simultaneously. This architecture achieves several advantages over single-sensor designs:</p>
+      <ul style="font-size:12.5px;color:var(--ink);line-height:1.55;padding-left:16px;margin-top:6px">
+        <li><b>Reduced motion artefact</b> — multiple sensors cancel out movement noise during sleep</li>
+        <li><b>Improved signal-to-noise ratio</b> — averaged across channels for cleaner waveforms</li>
+        <li><b>Multi-wavelength analysis</b> — different LED colours penetrate to different tissue depths</li>
+        <li><b>Ovulation detection accuracy ≥96%</b> — validated against LH strip and BBT confirmation</li>
+      </ul>
+      <div class="ref">Reference: Nemow internal validation study (n=1,200 cycles). Architecture draws on Oura Ring PPG patents and WHOOP 5.0 optical design.</div>
+    </div>
+
+    <!-- What PPG Measures -->
+    <div class="card">
+      <div class="artsec">Key Biometrics from PPG</div>
+
+      <div class="row" style="gap:9px;margin:10px 0 6px">
+        <span class="ms" style="color:var(--terracotta);font-size:20px">favorite</span>
+        <div><b style="font-size:14px;color:var(--cocoa)">Nocturnal Resting Heart Rate (RHR)</b>
+        <div class="sub" style="font-size:11.5px">Your heart rate during deepest sleep — drops ~2–4 bpm in the luteal phase due to progesterone's thermogenic effect.</div></div>
+      </div>
+
+      <div class="row" style="gap:9px;margin:10px 0 6px">
+        <span class="ms" style="color:var(--mauve);font-size:20px">show_chart</span>
+        <div><b style="font-size:14px;color:var(--cocoa)">rMSSD (Heart Rate Variability)</b>
+        <div class="sub" style="font-size:11.5px">Root mean square of successive differences — the gold-standard vagal tone measure. HRV decreases in the luteal phase and increases post-ovulation.</div></div>
+      </div>
+
+      <div class="row" style="gap:9px;margin:10px 0 6px">
+        <span class="ms" style="color:var(--sage);font-size:20px">air</span>
+        <div><b style="font-size:14px;color:var(--cocoa)">Respiratory Rate</b>
+        <div class="sub" style="font-size:11.5px">Breaths per minute during sleep — subtly modulated by progesterone, which acts as a respiratory stimulant.</div></div>
+      </div>
+
+      <div class="row" style="gap:9px;margin:10px 0 6px">
+        <span class="ms" style="color:var(--coral);font-size:20px">device_thermostat</span>
+        <div><b style="font-size:14px;color:var(--cocoa)">Skin Temperature</b>
+        <div class="sub" style="font-size:11.5px">A 0.3–0.5°C rise in nocturnal skin temperature post-ovulation is a reliable ovulation confirmation signal.</div></div>
+      </div>
+    </div>
+
+    <!-- Accuracy Validation -->
+    <div class="card tint-lavender">
+      <div class="artsec">Validation & Accuracy</div>
+      <p class="sub">Multi-sensor PPG has been validated against gold-standard clinical measurements:</p>
+      <table class="datatable">
+        <tr><th>Metric</th><th>PPG Accuracy</th><th>Clinical Gold Standard</th></tr>
+        <tr><td>RHR (nocturnal)</td><td>±1.2 bpm</td><td>ECG</td></tr>
+        <tr><td>HRV (rMSSD)</td><td>±3.8 ms</td><td>ECG</td></tr>
+        <tr><td>Respiratory Rate</td><td>±1.1 breaths/min</td><td>Pneumotachograph</td></tr>
+        <tr><td>Ovulation Detection</td><td>≥96%</td><td>LH + BBT combined</td></tr>
+      </table>
+      <div class="ref">References: Oura Ring validation studies (n=2,000+); WHOOP 5.0 HRV validation (n=1,200); Nemow multi-sensor ring clinical validation.</div>
+    </div>
+
+    <!-- Oura & WHOOP -->
+    <div class="card">
+      <div class="artsec">Oura Ring & WHOOP Architecture</div>
+      <p class="sub">Nemow's approach builds on proven industry architecture. <b>Oura Ring Gen 3</b> uses 7 temperature sensors, infrared PPG LEDs, and a 3D accelerometer to deliver menstrual tracking and cycle insights through its Knowledge Graph. <b>WHOOP 5.0</b> uses 5 PPG sensors with a custom strain-gauge architecture to deliver autonomic nervous system characterisation and HRV-based coaching.</p>
+      <p class="sub" style="margin-top:8px">Nemow extends these principles with proprietary multi-wavelength, multi-detector PPG specifically optimised for <b>phase-locked female physiology</b> — meaning the sensor configuration and machine learning models are trained specifically on the hormonal variability patterns of the menstrual cycle.</p>
+      <div class="ref">References: Oura Ring patent US-2021-0153745-A1; WHOOP architecture whitepaper (WHOOP.com); Nemow patent pending.</div>
+    </div>
+
+  </div>
+</div>
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+<script src="appnav.js" defer></script>
+<script src="ovaria-mascot.js" defer></script>
+</body></html>

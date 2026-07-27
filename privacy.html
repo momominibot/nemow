@@ -1,0 +1,99 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · Privacy & Security</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<script src="anim.js" defer></script>
+<style>
+.tgl { position:relative; width:46px; height:26px; border-radius:99px; background:var(--line); cursor:pointer; transition:.2s; flex-shrink:0; }
+.tgl::after { content:""; position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; transition:.2s; box-shadow:0 2px 6px rgba(0,0,0,.15); }
+.tgl.on { background:var(--terracotta); }
+.tgl.on::after { left:23px; }
+</style>
+</head><body>
+
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="settings.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">Privacy & Security</div>
+    <a class="t-icon ms" href="#">shield</a>
+  </div>
+
+  <div class="scroll">
+    <div class="card tint-sage" style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 18px">
+      <span class="ms breathe" style="font-size:38px;color:var(--d-diet)">verified_user</span>
+      <b style="font-family:var(--serif);font-weight:600;font-size:20px;color:var(--cocoa);margin-top:8px">Your data, protected</b>
+      <div class="sub" style="max-width:30ch">Processing happens on-device. No raw video is uploaded — only anonymous analytics are stored.</div>
+      <span class="badge ok" style="margin-top:10px"><span class="ms" style="font-size:14px">lock</span> HIPAA, GDPR & CCPA compliant</span>
+    </div>
+
+    <h2 class="sec">Device Security</h2>
+    <div class="card" style="padding:4px 18px">
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(110,70,84,.1);color:var(--mauve)">fingerprint</span>
+        <div class="l-t"><b>Biometric Unlock</b><span>Use Face ID or fingerprint to access app</span></div><div class="tgl on"></div></div>
+      <a class="lrow" href="#"><span class="l-ic ms" style="background:rgba(166,180,230,.22);color:#5A6BB0">password</span>
+        <div class="l-t"><b>Two-Factor Authentication</b><span>Protect your account with an extra layer</span></div><span class="badge ok">On</span></a>
+      <a class="lrow" href="#"><span class="l-ic ms" style="background:rgba(229,180,92,.18);color:var(--warn)">key</span>
+        <div class="l-t"><b>Change Password</b><span>Last changed 3 months ago</span></div><span class="l-arr ms">chevron_right</span></a>
+    </div>
+
+    <h2 class="sec">Data & Encryption</h2>
+    <div class="card" style="padding:4px 18px">
+      <a class="lrow" href="#"><span class="l-ic ms" style="background:rgba(110,70,84,.1);color:var(--mauve)">enhanced_encryption</span>
+        <div class="l-t"><b>Sensitive Data Encryption</b><span>Manage local encryption keys</span></div><span class="l-arr ms">chevron_right</span></a>
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(127,174,201,.16);color:var(--d-sleep)">cloud_sync</span>
+        <div class="l-t"><b>Encrypted Daily Sync</b><span>Securely backup health data to cloud</span></div><span class="badge ok">Active</span></div>
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(147,187,143,.14);color:var(--d-diet)">phonelink_lock</span>
+        <div class="l-t"><b>Local Data Only Mode</b><span>Keep measurements on this device. Disables AI insights & cloud backup.</span></div><div class="tgl"></div></div>
+    </div>
+
+    <h2 class="sec">Biometric Data</h2>
+    <div class="card" style="padding:4px 18px">
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(78,140,106,.14);color:var(--ok)">verified</span>
+        <div class="l-t"><b>HIPAA Compliant Infrastructure</b><span>Your data is encrypted end-to-end</span></div><span class="badge ok">Secured</span></div>
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(166,180,230,.22);color:#5A6BB0">science</span>
+        <div class="l-t"><b>Anonymized Research Sharing</b><span>Contribute de-identified cycle & HRV data to longevity research</span></div><div class="tgl on"></div></div>
+    </div>
+
+    <h2 class="sec">Your Data Rights</h2>
+    <div class="card" style="padding:4px 18px">
+      <a class="lrow" href="#"><span class="l-ic ms" style="background:rgba(127,174,201,.16);color:var(--d-sleep)">download</span>
+        <div class="l-t"><b>Request Data Export</b><span>Download a copy of your personal data (PDF)</span></div><span class="l-arr ms">chevron_right</span></a>
+      <a class="lrow" href="#"><span class="l-ic ms" style="background:rgba(229,180,92,.18);color:var(--warn)">delete</span>
+        <div class="l-t"><b>Clear Data Cache</b><span>Remove locally stored measurements</span></div><span class="l-arr ms">chevron_right</span></a>
+      <a class="lrow" href="#"><span class="l-ic ms" style="background:rgba(190,74,62,.13);color:var(--low)">delete_forever</span>
+        <div class="l-t"><b style="color:var(--low)">Delete Account & Data</b><span>Permanently remove all your data</span></div><span class="l-arr ms">chevron_right</span></a>
+    </div>
+
+    <h2 class="sec">Legal Agreements</h2>
+    <div class="card" style="padding:4px 18px">
+      <a class="lrow" href="#"><span class="l-ic ms" style="background:rgba(99,54,36,.08);color:var(--cocoa)">gavel</span>
+        <div class="l-t"><b>Terms of Service</b><span>Updated March 2024</span></div><span class="l-arr ms">chevron_right</span></a>
+      <a class="lrow" href="#"><span class="l-ic ms" style="background:rgba(110,70,84,.1);color:var(--mauve)">policy</span>
+        <div class="l-t"><b>Privacy Policy</b><span>How we handle your biometric data</span></div><span class="l-arr ms">chevron_right</span></a>
+      <a class="lrow" href="#"><span class="l-ic ms" style="background:rgba(147,187,143,.14);color:var(--d-diet)">health_and_safety</span>
+        <div class="l-t"><b>HIPAA Compliance</b><span>Medical data protection standards</span></div><span class="l-arr ms">chevron_right</span></a>
+      <a class="lrow" href="#"><span class="l-ic ms" style="background:rgba(99,54,36,.08);color:var(--cocoa)">code_blocks</span>
+        <div class="l-t"><b>Open Source Licenses</b><span>Third-party attributions</span></div><span class="l-arr ms">chevron_right</span></a>
+    </div>
+
+    <div class="sub" style="text-align:center;font-size:11px">Biological Harmony · Designed for your health. Version 2.4.0 (Build 842)</div>
+  </div>
+</div>
+
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+<script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.tgl').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('on');});});});</script>
+<script src="appnav.js" defer></script>
+<script src="ovaria-mascot.js" defer></script>
+</body></html>

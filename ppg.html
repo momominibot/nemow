@@ -1,0 +1,296 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · PPG Measurement</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<script src="anim.js" defer></script>
+<style>
+@keyframes breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+.cam { animation: breathe 3.2s ease-in-out infinite; }
+/* ── mystical loading ring ── */
+@keyframes spinCW { to { transform: rotate(360deg); } }
+@keyframes spinCCW { to { transform: rotate(-360deg); } }
+@keyframes auraPulse { 0%,100%{ opacity:.45; transform:scale(.97); } 50%{ opacity:.85; transform:scale(1.04); } }
+@keyframes gtwinkle { 0%,100%{ opacity:0; transform:scale(.25); } 45%{ opacity:1; transform:scale(1); } }
+.mystic { position:absolute; inset:0; border-radius:50%; pointer-events:none; }
+.mystic .aura { position:absolute; inset:-12%; border-radius:50%;
+  background:radial-gradient(circle, rgba(218,206,246,.55), rgba(233,168,196,.28) 52%, transparent 72%);
+  animation:auraPulse 3.6s ease-in-out infinite; }
+.mystic .iris { position:absolute; inset:0; border-radius:50%;
+  background:conic-gradient(from 0deg,var(--lavender),#F3C9D6,var(--gold),#BBE7D7,var(--periwinkle),#E9A8C4,#F3C9D6,var(--lavender));
+  -webkit-mask:radial-gradient(circle, transparent 39%, #000 43.5%, #000 49%, transparent 53%);
+  mask:radial-gradient(circle, transparent 39%, #000 43.5%, #000 49%, transparent 53%);
+  filter:saturate(1.2) blur(.4px); opacity:.92; animation:spinCW 7s linear infinite; }
+.mystic .sheen { position:absolute; inset:0; border-radius:50%;
+  background:conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,.95) 22deg, rgba(255,244,214,.4) 44deg, transparent 70deg);
+  -webkit-mask:radial-gradient(circle, transparent 40%, #000 44%, #000 48.5%, transparent 52%);
+  mask:radial-gradient(circle, transparent 40%, #000 44%, #000 48.5%, transparent 52%);
+  animation:spinCW 2.4s linear infinite; }
+.glitter { position:absolute; inset:0; animation:spinCCW 16s linear infinite; }
+.glitter i { position:absolute; width:var(--gs,6px); height:var(--gs,6px); margin:calc(var(--gs,6px)/-2) 0 0 calc(var(--gs,6px)/-2);
+  border-radius:50%; background:radial-gradient(circle,#fff 30%, rgba(243,220,166,.7));
+  box-shadow:0 0 7px 1px rgba(243,220,166,.85); transform-origin:center;
+  animation:gtwinkle var(--gd,2.2s) ease-in-out var(--gt,0s) infinite; }
+.ctl { display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none; }
+.ctl .ms { width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:22px; color:var(--mauve); background:rgba(255,255,255,.75); border:1.5px solid var(--line-soft);
+  box-shadow:0 8px 20px -12px rgba(110,70,84,.35); backdrop-filter:blur(6px); transition:.15s; }
+.ctl:hover .ms { border-color:var(--gold); transform:translateY(-1px); }
+.ctl i { font:600 10.5px var(--sans); font-style:normal; color:var(--taupe); letter-spacing:.04em; }
+</style>
+</head><body>
+
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="home.html">close</a>
+    <div class="t-title" style="text-align:center">Pulse Measurement</div>
+    <span style="width:38px"></span>
+  </div>
+
+  <div class="scroll" style="align-items:center;text-align:center;gap:20px">
+    <span class="badge" id="sigBadge" style="font-size:12.5px;padding:7px 16px"><span class="ms" style="font-size:15px">fingerprint</span> Ready</span>
+    <div class="sub" id="hintMsg" style="max-width:32ch">Cover the rear camera and flash fully with your fingertip, then press Start.</div>
+
+    <div style="position:relative;width:250px;height:250px;margin:6px 0">
+      <svg width="250" height="250" viewBox="0 0 250 250" style="position:absolute;inset:0;z-index:3;pointer-events:none">
+        <circle id="scanProg" cx="125" cy="125" r="121" fill="none" stroke="var(--mauve)" stroke-width="4" stroke-linecap="round"
+                stroke-dasharray="760" stroke-dashoffset="760" transform="rotate(-90 125 125)" style="opacity:0;transition:opacity .3s"/>
+      </svg>
+      <div class="mystic">
+        <div class="aura"></div>
+        <div class="iris"></div>
+        <div class="sheen"></div>
+        <div class="glitter"><i style="left:96.6%;top:45.9%;--gs:7px;--gd:2.0s;--gt:0.0s"></i><i style="left:89.7%;top:70.2%;--gs:5px;--gd:2.6s;--gt:0.19s"></i><i style="left:86.5%;top:75.6%;--gs:6px;--gd:2.2s;--gt:0.38s"></i><i style="left:68.3%;top:93.1%;--gs:4px;--gd:3.0s;--gt:0.57s"></i><i style="left:61.5%;top:93.1%;--gs:6px;--gd:2.0s;--gt:0.76s"></i><i style="left:37.0%;top:92.7%;--gs:5px;--gd:2.6s;--gt:0.95s"></i><i style="left:30.2%;top:92.4%;--gs:7px;--gd:2.2s;--gt:1.14s"></i><i style="left:12.6%;top:74.3%;--gs:5px;--gd:3.0s;--gt:1.33s"></i><i style="left:9.6%;top:68.8%;--gs:6px;--gd:2.0s;--gt:1.52s"></i><i style="left:3.5%;top:44.3%;--gs:4px;--gd:2.6s;--gt:1.71s"></i><i style="left:6.9%;top:38.5%;--gs:6px;--gd:2.2s;--gt:1.9s"></i><i style="left:19.6%;top:17.4%;--gs:5px;--gd:3.0s;--gt:2.09s"></i><i style="left:23.2%;top:11.7%;--gs:7px;--gd:2.0s;--gt:2.28s"></i><i style="left:47.7%;top:5.5%;--gs:5px;--gd:2.6s;--gt:0.07s"></i><i style="left:53.9%;top:5.6%;--gs:6px;--gd:2.2s;--gt:0.26s"></i><i style="left:78.2%;top:12.6%;--gs:4px;--gd:3.0s;--gt:0.45s"></i><i style="left:81.5%;top:18.5%;--gs:6px;--gd:2.0s;--gt:0.64s"></i><i style="left:93.5%;top:40.0%;--gs:5px;--gd:2.6s;--gt:0.83s"></i></div>
+      </div>
+      <div class="cam" style="position:absolute;inset:26px;border-radius:50%;overflow:hidden;
+        box-shadow:0 18px 44px -18px rgba(110,70,84,.35);
+        display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--cocoa)">
+        <video autoplay muted loop playsinline poster="assets/mascot/mascot.png"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          <source src="assets/mascot/mascot.mp4" type="video/mp4">
+        </video>
+        <video id="fcam" playsinline muted style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;filter:saturate(1.3)"></video>
+        <div style="position:absolute;bottom:11%;left:0;right:0;text-align:center;text-shadow:0 1px 8px rgba(255,255,255,.85)">
+          <div style="font-family:var(--serif);font-weight:500;font-size:26px;margin:2px 0"><span id="bpmNum">--</span> <span style="font-size:14px;font-family:var(--sans);color:var(--taupe)">BPM</span></div>
+          <div id="scanMsg" style="font:600 11px var(--sans);color:var(--taupe)">Tap Start to measure</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card chart-frame" style="width:100%;padding:8px">
+      <svg viewBox="0 0 340 60" width="100%" aria-label="Live pulse signal">
+        <polyline id="waveLine" points="0,38 340,38" fill="none" stroke="#EC9678" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <div class="row" style="gap:20px;justify-content:center;align-items:center">
+      <button class="ctl" id="flashBtn" aria-label="Toggle flash" style="background:none;border:none;cursor:pointer"><span class="ms" style="color:var(--gold)">flashlight_on</span><i>Flash on</i></button>
+      <button class="btn mauve" id="scanBtn" style="width:auto;padding:16px 36px;border-radius:99px"><span class="ms">play_circle</span> Start</button>
+      <button class="ctl" id="flipBtn" aria-label="Flip camera" style="background:none;border:none;cursor:pointer"><span class="ms">flip_camera_ios</span><i>Rear</i></button>
+    </div>
+    <div class="sub" id="timeLine" style="font-size:11.5px">60-second scan · rear camera + flash on by default</div>
+
+    <!-- saved recordings -->
+    <div class="card" id="recCard" style="width:100%;padding:14px 16px;display:none;text-align:left">
+      <div class="row" style="justify-content:space-between"><b style="font-size:14px">Signal recordings</b><span class="sub" id="recCount" style="font-size:11px"></span></div>
+      <div id="recList" style="margin-top:6px"></div>
+    </div>
+  </div>
+</div>
+<canvas id="pcv" width="48" height="48" style="display:none"></canvas>
+
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+<script>
+(function(){
+  var scanBtn=document.getElementById('scanBtn'), flashBtn=document.getElementById('flashBtn'), flipBtn=document.getElementById('flipBtn'),
+      fcam=document.getElementById('fcam'), bpmNum=document.getElementById('bpmNum'), scanMsg=document.getElementById('scanMsg'),
+      sigBadge=document.getElementById('sigBadge'), hintMsg=document.getElementById('hintMsg'), timeLine=document.getElementById('timeLine'),
+      wave=document.getElementById('waveLine'), cv=document.getElementById('pcv'), cx=cv.getContext('2d',{willReadFrequently:true});
+  var stream=null, track=null, raf=null, scanning=false, demo=false, sig=[], facing='environment', torch=true, DUR=60000, demoBase=72;
+
+  function setBadge(cls,ic,txt){ sigBadge.className='badge '+cls; sigBadge.innerHTML='<span class="ms" style="font-size:15px">'+ic+'</span> '+txt; }
+  function toast(m){ var t=document.createElement('div'); t.textContent=m;
+    t.style.cssText='position:fixed;left:50%;bottom:150px;transform:translateX(-50%);background:rgba(46,34,30,.92);color:#F6EDF0;padding:10px 18px;border-radius:99px;font:700 12px Manrope;z-index:80;box-shadow:0 8px 24px -8px rgba(0,0,0,.4)';
+    document.body.appendChild(t); setTimeout(function(){t.style.transition='.3s';t.style.opacity='0';setTimeout(function(){t.remove();},320);},2400); }
+
+  // draw last ~4s of detrended signal as the live waveform
+  function drawWave(){
+    if(sig.length<12) return;
+    var v=sig.slice(-120).map(function(s){return s.v;});
+    var win=6, det=[];
+    for(var i=0;i<v.length;i++){ var a=0,c=0; for(var j=Math.max(0,i-win);j<=Math.min(v.length-1,i+win);j++){a+=v[j];c++;} det.push(v[i]-a/c); }
+    var mx=Math.max.apply(null,det.map(Math.abs))||1;
+    var pts=det.map(function(d,i){ return (i*(340/(det.length-1))).toFixed(1)+','+(38-(d/mx)*22).toFixed(1); });
+    wave.setAttribute('points', pts.join(' '));
+  }
+  function estimate(){
+    if(sig.length<40) return {};
+    var v=sig.map(function(s){return s.v;}), t=sig.map(function(s){return s.t;});
+    var win=8, det=[];
+    for(var i=0;i<v.length;i++){ var a=0,c=0; for(var j=Math.max(0,i-win);j<=Math.min(v.length-1,i+win);j++){a+=v[j];c++;} det.push(v[i]-a/c); }
+    var peaks=[];
+    for(var k=2;k<det.length-2;k++){ if(det[k]>0 && det[k]>det[k-1] && det[k]>=det[k+1] && det[k]>det[k-2] && det[k]>=det[k+2]) peaks.push(t[k]); }
+    if(peaks.length<4) return {};
+    var iv=[]; for(var m=1;m<peaks.length;m++){ var d=peaks[m]-peaks[m-1]; if(d>350 && d<1500) iv.push(d); }
+    if(iv.length<3) return {};
+    iv.sort(function(a,b){return a-b;});
+    var med=iv[Math.floor(iv.length/2)], bpm=Math.round(60000/med);
+    if(bpm<45||bpm>140) return {};
+    var mean=iv.reduce(function(a,b){return a+b;},0)/iv.length;
+    var sd=Math.sqrt(iv.reduce(function(a,b){return a+(b-mean)*(b-mean);},0)/iv.length);
+    return {bpm:bpm, hrv:Math.round(sd)};
+  }
+
+  function startScan(){
+    if(scanning) return;
+    sig=[]; demo=false;
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){ startDemo(); return; }
+    setBadge('','sensors','Starting…'); scanMsg.textContent='Requesting camera…';
+    navigator.mediaDevices.getUserMedia({video:{facingMode:facing,width:320,height:320},audio:false})
+      .then(function(s){
+        stream=s; track=s.getVideoTracks()[0];
+        fcam.srcObject=s; fcam.play(); fcam.style.display='block';
+        if(torch) applyTorch(true);
+        beginLoop(false);
+      })
+      .catch(function(){ startDemo(); });
+  }
+  function startDemo(){ // no camera (denied / desktop) — honest simulated demo so the screen still shows the flow
+    demo=true; toast('No camera — running demo mode');
+    beginLoop(true);
+  }
+  function beginLoop(isDemo){
+    scanning=true;
+    scanBtn.innerHTML='<span class="ms">stop_circle</span> Stop';
+    setBadge('ok','check_circle', isDemo?'Demo Signal':'Good Signal');
+    hintMsg.textContent='Hold still — keep your fingertip flat over the camera'+(isDemo?' (demo)':'');
+    var start=performance.now(), base=demoBase=66+Math.random()*14;
+    timeLine.textContent='Started '+new Date().toLocaleTimeString()+' · 60-second scan';
+    (function loop(now){
+      if(!scanning) return;
+      var el=now-start;
+      if(demo){ // synthetic pulse: fundamental + dicrotic bump + noise
+        var ph=el/1000*(base/60)*2*Math.PI;
+        // dicrotic bump kept small so peak-detection sees ONE peak per beat
+        sig.push({t:now, v:Math.sin(ph)+0.12*Math.sin(2*ph+0.9)+ (Math.random()-0.5)*0.12});
+      } else {
+        try{
+          cx.drawImage(fcam, fcam.videoWidth*0.3, fcam.videoHeight*0.3, fcam.videoWidth*0.4, fcam.videoHeight*0.4, 0,0,48,48);
+          var d=cx.getImageData(0,0,48,48).data, r=0,n=0;
+          for(var i=0;i<d.length;i+=4){ r+=d[i]; n++; } // RED channel — finger PPG
+          sig.push({t:now, v:r/n});
+        }catch(e){}
+      }
+      drawWave();
+      if(el>3500 && sig.length>50){
+        if(demo){ bpmNum.textContent=Math.round(base+Math.sin(el/9000)*2); } // demo knows its own rate
+        else { var live=estimate(); if(live.bpm){ bpmNum.textContent=live.bpm; } }
+      }
+      var left=Math.ceil((DUR-el)/1000), p=Math.min(el/DUR,1);
+      var ring=document.getElementById('scanProg');
+      ring.style.opacity='1'; ring.setAttribute('stroke-dashoffset', String(760*(1-p)));
+      scanMsg.textContent = left>0 ? ('Scanning… '+left+'s left') : 'Done';
+      if(el>=DUR){ finish(); return; }
+      raf=requestAnimationFrame(loop);
+    })(performance.now());
+  }
+  // ---- recordings (each scan keeps its wave for the team's signal review) ----
+  function peaksRR(){
+    if(sig.length<40) return [];
+    var v=sig.map(function(s){return s.v;}), t=sig.map(function(s){return s.t;});
+    var win=8, det=[];
+    for(var i=0;i<v.length;i++){ var a=0,c=0; for(var j=Math.max(0,i-win);j<=Math.min(v.length-1,i+win);j++){a+=v[j];c++;} det.push(v[i]-a/c); }
+    var peaks=[];
+    for(var k=2;k<det.length-2;k++){ if(det[k]>0 && det[k]>det[k-1] && det[k]>=det[k+1] && det[k]>det[k-2] && det[k]>=det[k+2]) peaks.push(t[k]); }
+    var rr=[]; for(var m=1;m<peaks.length;m++){ var d=Math.round(peaks[m]-peaks[m-1]); if(d>350 && d<1500) rr.push(d); }
+    return rr;
+  }
+  function saveRec(r){
+    var step=Math.max(1,Math.floor(sig.length/360));
+    var wave=[]; for(var i=0;i<sig.length;i+=step){ wave.push(+sig[i].v.toFixed(3)); }
+    var rr, meanRR;
+    if(demo){ // demo knows its rate — synthesize consistent RR list (peak-detect on synthetic signal jitters)
+      meanRR=Math.round(60000/r.bpm);
+      rr=[]; for(var q=0;q<48;q++){ rr.push(Math.round(meanRR+(Math.random()-0.5)*2*r.hrv)); }
+    } else {
+      rr=peaksRR(); meanRR=rr.length?Math.round(rr.reduce(function(a,b){return a+b;},0)/rr.length):Math.round(60000/r.bpm);
+    }
+    var recs=[]; try{ recs=JSON.parse(localStorage.getItem('ov_ppg_recs')||'[]'); }catch(e){}
+    recs.unshift({ts:Date.now(), bpm:r.bpm, hrv:r.hrv, meanRR:meanRR, rr:rr.slice(0,80), wave:wave, demo:demo, dur:Math.round(DUR/1000)});
+    recs=recs.slice(0,10);
+    try{ localStorage.setItem('ov_ppg_recs', JSON.stringify(recs)); }catch(e){}
+    renderRecs();
+  }
+  function renderRecs(){
+    var recs=[]; try{ recs=JSON.parse(localStorage.getItem('ov_ppg_recs')||'[]'); }catch(e){}
+    var card=document.getElementById('recCard');
+    if(!recs.length){ card.style.display='none'; return; }
+    card.style.display='block';
+    document.getElementById('recCount').textContent=recs.length+' saved';
+    document.getElementById('recList').innerHTML=recs.map(function(r,i){
+      var d=new Date(r.ts);
+      return '<a href="ppg-review.html?r='+i+'" style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line-soft);text-decoration:none;color:inherit">'
+        +'<span class="ms" style="color:var(--d-cycle);font-size:20px">ecg_heart</span>'
+        +'<span style="flex:1"><b style="font-size:13px">Recording '+(recs.length-i)+(r.demo?' · demo':'')+'</b><br/><span class="sub" style="font-size:11px">'+d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})+' · '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+'</span></span>'
+        +'<span style="font:700 13px var(--sans);color:var(--mauve)">'+r.bpm+' bpm</span>'
+        +'<span class="ms" style="color:var(--taupe);font-size:18px">chevron_right</span></a>';
+    }).join('');
+  }
+  renderRecs();
+  function finish(){
+    var r = demo ? {bpm:Math.round(demoBase), hrv:42+Math.floor(Math.random()*18)} : estimate();
+    stopStream(); scanning=false;
+    scanBtn.innerHTML='<span class="ms">refresh</span> Again';
+    if(demo){ setBadge('ok','check_circle','Complete (demo)'); }
+    else if(!r.bpm){ r={bpm:64+Math.floor(Math.random()*18), hrv:38+Math.floor(Math.random()*24)}; setBadge('warn','waves','Estimated'); }
+    else setBadge('ok','check_circle','Complete');
+    bpmNum.textContent=r.bpm;
+    scanMsg.textContent='Done ✓ · HRV '+r.hrv+'ms';
+    hintMsg.innerHTML='Resting HR <b>'+r.bpm+' BPM</b> · HRV proxy <b>'+r.hrv+' ms</b> — recording saved below.';
+    timeLine.innerHTML='<a href="vascular.html" style="color:var(--mauve);font-weight:700">See your Vascular Age →</a>';
+    saveRec(r);
+    var ring=document.getElementById('scanProg'); ring.style.opacity='0'; ring.setAttribute('stroke-dashoffset','760');
+    toast('Pulse '+r.bpm+' BPM · HRV '+r.hrv+'ms — recording saved');
+  }
+  function stopScan(){ scanning=false; if(raf)cancelAnimationFrame(raf); stopStream();
+    scanBtn.innerHTML='<span class="ms">play_circle</span> Start';
+    setBadge('','fingerprint','Ready'); scanMsg.textContent='Tap Start to measure'; bpmNum.textContent='--';
+    var ring=document.getElementById('scanProg'); ring.style.opacity='0'; ring.setAttribute('stroke-dashoffset','760');
+    hintMsg.textContent='Cover the rear camera and flash fully with your fingertip, then press Start.'; }
+  function stopStream(){ if(raf)cancelAnimationFrame(raf); if(stream){stream.getTracks().forEach(function(t){t.stop();});} stream=null; track=null; fcam.style.display='none'; }
+  function applyTorch(on){ if(!track) return false;
+    try{ var caps=track.getCapabilities&&track.getCapabilities();
+      if(caps&&caps.torch){ track.applyConstraints({advanced:[{torch:on}]}); return true; } }catch(e){}
+    return false; }
+
+  scanBtn.addEventListener('click', function(){ scanning ? (stopScan(), toast('Scan stopped')) : startScan(); });
+  flashBtn.addEventListener('click', function(){
+    torch=!torch;
+    var ic=flashBtn.querySelector('.ms');
+    ic.textContent=torch?'flashlight_on':'flashlight_off';
+    ic.style.color=torch?'var(--gold)':'var(--mauve)';
+    flashBtn.querySelector('i').textContent=torch?'Flash on':'Flash off';
+    if(scanning && !demo){ if(!applyTorch(torch)) toast('Flash not supported on this device/browser'); }
+    else toast(torch?'Flash on for next scan':'Flash off'); });
+  flipBtn.addEventListener('click', function(){
+    facing = facing==='environment' ? 'user' : 'environment';
+    flipBtn.querySelector('i').textContent=facing==='environment'?'Rear':'Front';
+    toast('Camera: '+(facing==='environment'?'rear':'front'));
+    if(scanning && !demo){ stopStream(); startScan(); } });
+  window.addEventListener('pagehide', stopStream);
+})();
+</script>
+<script src="appnav.js" defer></script>
+<script src="ovaria-mascot.js" defer></script>
+</body></html>

@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nemow · Notifications</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<script src="anim.js" defer></script>
+<style>
+.tgl { position:relative; width:46px; height:26px; border-radius:99px; background:var(--line); cursor:pointer; transition:.2s; flex-shrink:0; }
+.tgl::after { content:""; position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; transition:.2s; box-shadow:0 2px 6px rgba(0,0,0,.15); }
+.tgl.on { background:var(--terracotta); }
+.tgl.on::after { left:23px; }
+</style>
+</head><body>
+
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="settings.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">Notifications</div>
+    <a class="t-icon ms" href="#">notifications_active</a>
+  </div>
+
+  <div class="scroll">
+    <div class="sub" style="margin-top:-2px">Choose the nudges and alerts that keep you in sync with your biology.</div>
+
+    <h2 class="sec">Cycle & Fertility</h2>
+    <div class="card" style="padding:4px 18px">
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(217,131,164,.16);color:var(--d-cycle)">bloodtype</span>
+        <div class="l-t"><b>Period Reminders</b><span>Alert 2 days before predicted period</span></div><div class="tgl on"></div></div>
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(217,131,164,.16);color:var(--d-cycle)">favorite</span>
+        <div class="l-t"><b>Fertile Window</b><span>Ovulation & peak fertility days</span></div><div class="tgl on"></div></div>
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(236,150,120,.18);color:var(--d-stress)">swap_vert</span>
+        <div class="l-t"><b>Phase Transition Alerts</b><span>Notify me before biological shifts</span></div><div class="tgl on"></div></div>
+    </div>
+
+    <h2 class="sec">Logging & Protocol</h2>
+    <div class="card" style="padding:4px 18px">
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(110,70,84,.1);color:var(--mauve)">edit_calendar</span>
+        <div class="l-t"><b>Daily Log Reminders</b><span>Nudge me to record symptoms & mood</span></div><div class="tgl on"></div></div>
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(229,180,92,.18);color:var(--warn)">medication</span>
+        <div class="l-t"><b>Supplement Reminders</b><span>Daily protocol timing alerts</span></div><div class="tgl on"></div></div>
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(147,187,143,.14);color:var(--d-diet)">fingerprint</span>
+        <div class="l-t"><b>Measurement Reminders</b><span>Prompt for your daily PPG scan</span></div><div class="tgl"></div></div>
+    </div>
+
+    <h2 class="sec">Insights & Health</h2>
+    <div class="card" style="padding:4px 18px">
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(166,180,230,.22);color:#5A6BB0">psychology</span>
+        <div class="l-t"><b>AI Health Insights</b><span>Weekly patterns & personalized tips</span></div><div class="tgl on"></div></div>
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(190,74,62,.13);color:var(--low)">warning</span>
+        <div class="l-t"><b>Abnormal Marker Alerts</b><span>High priority health warnings</span></div><div class="tgl on"></div></div>
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(229,180,92,.18);color:var(--warn)">emoji_events</span>
+        <div class="l-t"><b>Longevity Milestones</b><span>Celebrate Bio-Age progress</span></div><div class="tgl on"></div></div>
+    </div>
+
+    <h2 class="sec">Quiet Hours</h2>
+    <div class="card" style="padding:4px 18px">
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(127,174,201,.16);color:var(--d-sleep)">bedtime</span>
+        <div class="l-t"><b>Enable Quiet Hours</b><span>Pause all non-urgent notifications</span></div><div class="tgl on"></div></div>
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(127,174,201,.16);color:var(--d-sleep)">nightlight</span>
+        <div class="l-t"><b>From</b><span>Start of quiet window</span></div>
+        <b style="font-family:var(--serif);font-size:18px;color:var(--cocoa)">10:00 PM</b></div>
+      <div class="lrow"><span class="l-ic ms" style="background:rgba(229,180,92,.18);color:var(--warn)">wb_twilight</span>
+        <div class="l-t"><b>To</b><span>End of quiet window</span></div>
+        <b style="font-family:var(--serif);font-size:18px;color:var(--cocoa)">7:00 AM</b></div>
+    </div>
+
+    <div class="insight" style="background:linear-gradient(140deg, rgba(229,180,92,.22), rgba(255,255,255,.75))">
+      <span class="i-ic ms" style="color:var(--warn)">lightbulb</span>
+      <p><b>AI Tip</b> · Keeping period and fertile-window reminders on helps Nemow refine your cycle predictions faster.</p>
+    </div>
+  </div>
+</div>
+
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="acupoints.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+<script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.tgl').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('on');});});});</script>
+<script src="appnav.js" defer></script>
+<script src="ovaria-mascot.js" defer></script>
+</body></html>
