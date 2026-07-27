@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-persona="nurture">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nemow \u00b7 Sleep Diary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="nemow-persona.css">
+  <style>
+    .eyebrow { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--taupe); margin-bottom:6px; }
+    .question-card { margin:12px 16px; padding:16px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); }
+    .question-card label { display:block; font-size:13px; font-weight:700; margin-bottom:10px; }
+    .option { display:flex; align-items:center; gap:10px; padding:10px; margin:6px 0; border:2px solid var(--line-soft); border-radius:12px; cursor:pointer; }
+    .option:hover { border-color:var(--ink); }
+    .option input { width:18px; height:18px; accent-color:var(--ink); }
+    .option.selected { border-color:var(--ink); background:rgba(29,27,24,.04); }
+    .save-btn { margin:16px; width:calc(100% - 32px); padding:14px; border:none; border-radius:12px; background:var(--ink); color:var(--card); font-weight:800; font-size:15px; cursor:pointer; }
+    .result { margin:16px; padding:16px; border-radius:var(--r); background:rgba(78,140,106,.1); border:1.5px solid rgba(78,140,106,.3); font-size:13px; line-height:1.55; }
+    .time-input { width:100%; padding:12px; border:2px solid var(--line-soft); border-radius:12px; background:var(--paper); font-family:inherit; font-size:15px; color:var(--ink); }
+    .history { margin:16px; }
+    .history-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--line-soft); font-size:14px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a href="home.html" class="icon-btn" aria-label="Back"><span class="material-symbols-outlined">arrow_back_ios_new</span></a>
+      <h1>Sleep Diary</h1>
+      <span></span>
+    </header>
+
+    <main class="content" style="padding-bottom:100px">
+      <div style="text-align:center; padding:24px 16px 8px">
+        <div class="eyebrow">SLEEP & OVARIAN HEALTH</div>
+        <h2 style="font-size:24px; margin-bottom:8px">Track your sleep</h2>
+        <p style="color:var(--taupe); font-size:14px; line-height:1.5">Poor sleep quality is associated with lower ovarian reserve. Log duration, regularity, and quality \u2014 no wearable required.</p>
+      </div>
+
+      <div class="question-card">
+        <label>What time did you get in bed?</label>
+        <input type="time" id="bedTime" class="time-input" value="22:30">
+      </div>
+
+      <div class="question-card">
+        <label>What time did you wake up?</label>
+        <input type="time" id="wakeTime" class="time-input" value="06:30">
+      </div>
+
+      <div class="question-card" data-domain="latency">
+        <label>How long did it take to fall asleep?</label>
+        <label class="option"><input type="radio" name="latency" value="0" onchange="calc()"> <15 minutes</label>
+        <label class="option"><input type="radio" name="latency" value="1" onchange="calc()"> 16\u201330 minutes</label>
+        <label class="option"><input type="radio" name="latency" value="2" onchange="calc()"> 31\u201360 minutes</label>
+        <label class="option"><input type="radio" name="latency" value="3" onchange="calc()"> >60 minutes</label>
+      </div>
+
+      <div class="question-card" data-domain="quality">
+        <label>How would you rate your sleep quality?</label>
+        <label class="option"><input type="radio" name="quality" value="0" onchange="calc()"> Very good</label>
+        <label class="option"><input type="radio" name="quality" value="1" onchange="calc()"> Fairly good</label>
+        <label class="option"><input type="radio" name="quality" value="2" onchange="calc()"> Fairly bad</label>
+        <label class="option"><input type="radio" name="quality" value="3" onchange="calc()"> Very bad</label>
+      </div>
+
+      <div class="question-card" data-domain="disturbances">
+        <label>Did you wake up during the night?</label>
+        <label class="option"><input type="radio" name="disturbances" value="0" onchange="calc()"> Not at all</label>
+        <label class="option"><input type="radio" name="disturbances" value="1" onchange="calc()"> 1\u20132 times briefly</label>
+        <label class="option"><input type="radio" name="disturbances" value="2" onchange="calc()"> 3+ times or >30 min awake</label>
+      </div>
+
+      <div class="question-card" data-domain="daytime">
+        <label>How tired did you feel during the day?</label>
+        <label class="option"><input type="radio" name="daytime" value="0" onchange="calc()"> Not tired</label>
+        <label class="option"><input type="radio" name="daytime" value="1" onchange="calc()"> Slightly tired</label>
+        <label class="option"><input type="radio" name="daytime" value="2" onchange="calc()"> Moderately tired</label>
+        <label class="option"><input type="radio" name="daytime" value="3" onchange="calc()"> Very tired</label>
+      </div>
+
+      <button class="save-btn" onclick="saveSleep()">Save sleep log</button>
+
+      <div id="result" class="result" style="display:none"></div>
+
+      <div class="history">
+        <div style="font-weight:800; font-size:14px; margin-bottom:8px">Recent logs</div>
+        <div id="historyList"></div>
+      </div>
+
+      <div class="card" style="margin:16px; padding:16px">
+        <h3 style="margin-bottom:8px; font-size:14px">\ud83d\udcda Why sleep matters</h3>
+        <p style="font-size:12px; color:var(--taupe); line-height:1.5">Sleep disruption is linked to insulin resistance, inflammation, and HPA-axis activation \u2014 pathways that can affect ovarian function. Aim for 7\u20139 hours with consistent bed and wake times.</p>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="home.html"><span class="material-symbols-outlined">home</span>Home</a>
+      <a href="learn.html"><span class="material-symbols-outlined">menu_book</span>Learn</a>
+      <a href="tcm-hub.html"><span class="material-symbols-outlined">acupuncture</span>TCM</a>
+      <a href="foods.html"><span class="material-symbols-outlined">restaurant</span>Foods</a>
+      <a href="profile.html"><span class="material-symbols-outlined">person</span>Profile</a>
+    </nav>
+  </div>
+
+  <script>
+    function calc() {
+      document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      document.querySelectorAll('input[type=radio]:checked').forEach(r => r.closest('.option').classList.add('selected'));
+
+      const get = n => { const r = document.querySelector('input[name="'+n+'"]:checked'); return r ? +r.value : 0; };
+      const latency = get('latency');
+      const quality = get('quality');
+      const disturbances = get('disturbances');
+      const daytime = get('daytime');
+
+      // calculate duration
+      const bed = document.getElementById('bedTime').value;
+      const wake = document.getElementById('wakeTime').value;
+      let bedMin = parseInt(bed.split(':')[0])*60 + parseInt(bed.split(':')[1]);
+      let wakeMin = parseInt(wake.split(':')[0])*60 + parseInt(wake.split(':')[1]);
+      if(wakeMin < bedMin) wakeMin += 24*60;
+      const durationH = (wakeMin - bedMin) / 60;
+
+      let durationScore = 0;
+      if(durationH >= 7 && durationH <= 9) durationScore = 0;
+      else if(durationH >= 6 && durationH < 7) durationScore = 1;
+      else if(durationH > 9 && durationH <= 10) durationScore = 1;
+      else durationScore = 2;
+
+      const total = latency + quality + disturbances + daytime + durationScore;
+      return { total, durationH };
+    }
+
+    function saveSleep() {
+      const { total, durationH } = calc();
+      const logs = JSON.parse(localStorage.getItem('nemow_sleep_logs')||'[]');
+      const entry = { date: new Date().toISOString(), total, durationH };
+      logs.push(entry);
+      localStorage.setItem('nemow_sleep_logs', JSON.stringify(logs.slice(-30)));
+      renderHistory();
+
+      const r = document.getElementById('result');
+      r.style.display = 'block';
+      let msg = '';
+      if(total <= 3) msg = `<strong>Good sleep.</strong> ${durationH.toFixed(1)} hours with few issues \u2014 keep this rhythm.`;
+      else if(total <= 7) msg = `<strong>Mixed night.</strong> ${durationH.toFixed(1)} hours logged. Prioritize a consistent wind-down routine.`;
+      else msg = `<strong>Poor sleep.</strong> ${durationH.toFixed(1)} hours with multiple issues. If this pattern persists, discuss with a clinician.`;
+      r.innerHTML = msg + ' <span style="color:var(--taupe)">Saved.</span>';
+    }
+
+    function renderHistory() {
+      const logs = JSON.parse(localStorage.getItem('nemow_sleep_logs')||'[]');
+      const list = document.getElementById('historyList');
+      if(!logs.length) { list.innerHTML = '<div style="font-size:13px; color:var(--taupe)">No logs yet.</div>'; return; }
+      list.innerHTML = logs.slice().reverse().map(l => `
+        <div class="history-row">
+          <span>${new Date(l.date).toLocaleDateString()}</span>
+          <span><strong>${l.durationH.toFixed(1)}h</strong> \u00b7 score ${l.total}</span>
+        </div>
+      `).join('');
+    }
+
+    renderHistory();
+  </script>
+</body>
+</html>
