@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" data-persona="grow">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nemow \u00b7 Wellness Check-in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="nemow-persona.css">
+  <style>
+    .eyebrow { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--taupe); margin-bottom:6px; }
+    .score-ring { width:180px; height:180px; margin:20px auto; position:relative; }
+    .score-ring svg { transform:rotate(-90deg); }
+    .score-text { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    .score-num { font-size:48px; font-weight:800; line-height:1; }
+    .score-label { font-size:12px; color:var(--taupe); font-weight:700; text-transform:uppercase; letter-spacing:0.05em; }
+    .domain-card { margin:12px 16px; padding:16px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); }
+    .domain-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+    .domain-name { font-weight:800; font-size:15px; }
+    .domain-score { font-size:13px; font-weight:800; color:var(--taupe); }
+    .option { display:flex; align-items:center; gap:10px; padding:10px; margin:6px 0; border:2px solid var(--line-soft); border-radius:12px; cursor:pointer; transition:.1s; }
+    .option:hover { border-color:var(--ink); }
+    .option input { width:18px; height:18px; accent-color:var(--ink); }
+    .option.selected { border-color:var(--ink); background:rgba(29,27,24,.04); }
+    .save-btn { margin:16px; width:calc(100% - 32px); padding:14px; border:none; border-radius:12px; background:var(--ink); color:var(--card); font-weight:800; font-size:15px; cursor:pointer; }
+    .summary { margin:16px; padding:16px; border-radius:var(--r); background:rgba(78,140,106,.1); border:1.5px solid rgba(78,140,106,.3); font-size:13px; line-height:1.55; }
+    .summary.warn { background:rgba(201,138,46,.12); border-color:rgba(201,138,46,.35); }
+    .history { margin:16px; }
+    .history-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--line-soft); font-size:14px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a href="home.html" class="icon-btn" aria-label="Back"><span class="material-symbols-outlined">arrow_back_ios_new</span></a>
+      <h1>Wellness Check-in</h1>
+      <span></span>
+    </header>
+
+    <main class="content" style="padding-bottom:100px">
+      <div style="text-align:center; padding:24px 16px 8px">
+        <div class="eyebrow">OVARIAN WELLNESS</div>
+        <h2 style="font-size:24px; margin-bottom:8px">Daily score</h2>
+        <p style="color:var(--taupe); font-size:14px; line-height:1.5">Track the lifestyle factors that research links to ovarian health. This is a wellness guide, not a diagnosis.</p>
+      </div>
+
+      <div class="score-ring">
+        <svg width="180" height="180" viewBox="0 0 180 180">
+          <circle cx="90" cy="90" r="80" fill="none" stroke="var(--line-soft)" stroke-width="12"/>
+          <circle id="scoreArc" cx="90" cy="90" r="80" fill="none" stroke="var(--sage)" stroke-width="12" stroke-linecap="round" stroke-dasharray="502" stroke-dashoffset="502"/>
+        </svg>
+        <div class="score-text">
+          <div class="score-num" id="scoreNum">\u2014</div>
+          <div class="score-label">Wellness Score</div>
+        </div>
+      </div>
+
+      <div class="domain-card" data-domain="nutrition" data-weight="25">
+        <div class="domain-header">
+          <div class="domain-name">\ud83e\udd57 Nutrition</div>
+          <div class="domain-score" id="score-nutrition">0/25</div>
+        </div>
+        <div class="question" data-max="25">How many servings of vegetables, fruit, whole grains, or legumes did you eat today?</div>
+        <label class="option"><input type="radio" name="nutrition" value="25" onchange="calc()"> 5+ servings</label>
+        <label class="option"><input type="radio" name="nutrition" value="18" onchange="calc()"> 3\u20134 servings</label>
+        <label class="option"><input type="radio" name="nutrition" value="10" onchange="calc()"> 1\u20132 servings</label>
+        <label class="option"><input type="radio" name="nutrition" value="5" onchange="calc()"> None today</label>
+      </div>
+
+      <div class="domain-card" data-domain="sleep" data-weight="20">
+        <div class="domain-header">
+          <div class="domain-name">\ud83d\ude34 Sleep</div>
+          <div class="domain-score" id="score-sleep">0/20</div>
+        </div>
+        <div class="question" data-max="20">How did you sleep last night?</div>
+        <label class="option"><input type="radio" name="sleep" value="20" onchange="calc()"> 7\u20139 hrs, restful</label>
+        <label class="option"><input type="radio" name="sleep" value="14" onchange="calc()"> 6\u20137 hrs, mostly restful</label>
+        <label class="option"><input type="radio" name="sleep" value="8" onchange="calc()"> <6 hrs or fragmented</label>
+        <label class="option"><input type="radio" name="sleep" value="4" onchange="calc()"> Barely slept</label>
+      </div>
+
+      <div class="domain-card" data-domain="stress" data-weight="15">
+        <div class="domain-header">
+          <div class="domain-name">\ud83e\uddd8 Stress</div>
+          <div class="domain-score" id="score-stress">0/15</div>
+        </div>
+        <div class="question" data-max="15">Did you use a stress-management practice today?</div>
+        <label class="option"><input type="radio" name="stress" value="15" onchange="calc()"> Breathwork, meditation, or nature >15 min</label>
+        <label class="option"><input type="radio" name="stress" value="10" onchange="calc()"> Brief pause or light movement</label>
+        <label class="option"><input type="radio" name="stress" value="5" onchange="calc()"> High stress, no practice</label>
+      </div>
+
+      <div class="domain-card" data-domain="exercise" data-weight="15">
+        <div class="domain-header">
+          <div class="domain-name">\ud83c\udfcb\ufe0f Exercise</div>
+          <div class="domain-score" id="score-exercise">0/15</div>
+        </div>
+        <div class="question" data-max="15">How much movement today?</div>
+        <label class="option"><input type="radio" name="exercise" value="15" onchange="calc()"> 30+ min moderate activity</label>
+        <label class="option"><input type="radio" name="exercise" value="10" onchange="calc()"> 10\u201330 min light movement</label>
+        <label class="option"><input type="radio" name="exercise" value="5" onchange="calc()"> Mostly sedentary</label>
+      </div>
+
+      <div class="domain-card" data-domain="toxins" data-weight="15">
+        <div class="domain-header">
+          <div class="domain-name">\ud83e\udd5a Avoidance</div>
+          <div class="domain-score" id="score-toxins">0/15</div>
+        </div>
+        <div class="question" data-max="15">Ultra-processed foods and endocrine disruptors today?</div>
+        <label class="option"><input type="radio" name="toxins" value="15" onchange="calc()"> Mostly whole foods, avoided plastic heat</label>
+        <label class="option"><input type="radio" name="toxins" value="10" onchange="calc()"> Some UPF, aware of plastics</label>
+        <label class="option"><input type="radio" name="toxins" value="5" onchange="calc()"> Mostly UPF or unknown exposures</label>
+      </div>
+
+      <div class="domain-card" data-domain="cycle" data-weight="10">
+        <div class="domain-header">
+          <div class="domain-name">\ud83e\udea8 Cycle</div>
+          <div class="domain-score" id="score-cycle">0/10</div>
+        </div>
+        <div class="question" data-max="10">How is your cycle this month?</div>
+        <label class="option"><input type="radio" name="cycle" value="10" onchange="calc()"> Regular, predictable, manageable symptoms</label>
+        <label class="option"><input type="radio" name="cycle" value="6" onchange="calc()"> Slightly irregular or PMS</label>
+        <label class="option"><input type="radio" name="cycle" value="3" onchange="calc()"> Very irregular, painful, or skipped</label>
+        <label class="option"><input type="radio" name="cycle" value="10" onchange="calc()"> Not tracking / postmenopause / pregnant</label>
+      </div>
+
+      <button class="save-btn" onclick="saveScore()">Save today's score</button>
+
+      <div id="summary" class="summary" style="display:none"></div>
+
+      <div class="history">
+        <div class="domain-name" style="margin-bottom:8px">Recent scores</div>
+        <div id="historyList"></div>
+      </div>
+
+      <div class="card" style="margin:16px; padding:16px">
+        <h3 style="margin-bottom:8px; font-size:14px">\ud83d\udcda About this score</h3>
+        <p style="font-size:12px; color:var(--taupe); line-height:1.5">Based on research linking Mediterranean/anti-inflammatory diets, sleep quality, stress management, moderate exercise, reduced ultra-processed food intake, and regular cycles with better ovarian wellness markers. This is a wellness tracking tool, not a medical diagnosis.</p>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="home.html"><span class="material-symbols-outlined">home</span>Home</a>
+      <a href="learn.html"><span class="material-symbols-outlined">menu_book</span>Learn</a>
+      <a href="tcm-hub.html"><span class="material-symbols-outlined">acupuncture</span>TCM</a>
+      <a href="foods.html"><span class="material-symbols-outlined">restaurant</span>Foods</a>
+      <a href="profile.html"><span class="material-symbols-outlined">person</span>Profile</a>
+    </nav>
+  </div>
+
+  <script>
+    function calc() {
+      let total = 0;
+      document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      document.querySelectorAll('input[type=radio]:checked').forEach(r => {
+        r.closest('.option').classList.add('selected');
+        const card = r.closest('.domain-card');
+        const weight = +card.dataset.weight;
+        const max = +card.querySelector('.question').dataset.max;
+        const val = +r.value;
+        const weighted = Math.round(val * weight / max);
+        total += weighted;
+        document.getElementById('score-'+card.dataset.domain).textContent = weighted+'/'+weight;
+      });
+      document.getElementById('scoreNum').textContent = total;
+      const arc = document.getElementById('scoreArc');
+      const offset = 502 - (502 * total / 100);
+      arc.style.strokeDashoffset = offset;
+      arc.style.stroke = total >= 75 ? 'var(--sage)' : total >= 50 ? 'var(--gold)' : 'var(--coral-deep)';
+      return total;
+    }
+
+    function saveScore() {
+      const total = calc();
+      const scores = JSON.parse(localStorage.getItem('nemow_wellness_scores')||'[]');
+      const entry = { date: new Date().toISOString(), total };
+      scores.push(entry);
+      localStorage.setItem('nemow_wellness_scores', JSON.stringify(scores.slice(-30)));
+      renderHistory();
+
+      const s = document.getElementById('summary');
+      s.style.display = 'block';
+      let msg = '';
+      if(total >= 80) msg = '<strong>Great day.</strong> Your habits are strongly aligned with ovarian wellness research.';
+      else if(total >= 60) msg = '<strong>Solid.</strong> Small tweaks in your lowest domain could push you higher.';
+      else msg = '<strong>Gentle reset needed.</strong> Prioritize sleep and whole foods today; try the breathwork tool if stress is high.';
+      s.innerHTML = msg + ' <span style="color:var(--taupe)">Score saved.</span>';
+    }
+
+    function renderHistory() {
+      const scores = JSON.parse(localStorage.getItem('nemow_wellness_scores')||'[]');
+      const list = document.getElementById('historyList');
+      if(!scores.length) { list.innerHTML = '<div style="font-size:13px; color:var(--taupe)">No scores yet.</div>'; return; }
+      list.innerHTML = scores.slice().reverse().map(s => `
+        <div class="history-row">
+          <span>${new Date(s.date).toLocaleDateString()}</span>
+          <strong>${s.total}/100</strong>
+        </div>
+      `).join('');
+    }
+
+    renderHistory();
+  </script>
+</body>
+</html>
