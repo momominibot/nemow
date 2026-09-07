@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Nemow · Hormone Phase Locking</title>
+<title>Ovuluna · Hormone Phase Locking</title>
 <link rel="icon" type="image/png" href="assets/onboarding/egg.png">
 <link rel="apple-touch-icon" href="assets/onboarding/egg.png">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
@@ -41,7 +41,7 @@
     <!-- What is Phase Locking -->
     <div class="card">
       <div class="artsec">What is Hormone Phase Locking?</div>
-      <p class="sub">Hormone phase locking is the process of precisely aligning physiological sensor data with the user's current hormonal phase. Instead of treating each day as an isolated data point, Nemow's phase-locking algorithm anchors every measurement to its position in the menstrual cycle — creating a <b>phase-aware physiological model</b> that adapts its interpretation and recommendations in real time.</p>
+      <p class="sub">Hormone phase locking is the process of precisely aligning physiological sensor data with the user's current hormonal phase. Instead of treating each day as an isolated data point, Ovuluna's phase-locking algorithm anchors every measurement to its position in the menstrual cycle — creating a <b>phase-aware physiological model</b> that adapts its interpretation and recommendations in real time.</p>
       <div class="wikicallout">
         <b>⚡ The Locking Principle</b>
         <p>A heart rate of 72 bpm means different things in different phases. In the follicular phase it might indicate normal recovery; in the luteal phase it could signal elevated sympathetic tone. Phase locking disambiguates these signals by providing the hormonal context for every physiological reading.</p>
@@ -72,14 +72,14 @@
       </ul>
       <div class="wikicallout">
         <b>🔬 The r ≥ 0.85 Threshold</b>
-        <p>Nemow's phase-locking algorithm achieves a cross-correlation coefficient of r ≥ 0.85 between PPG-derived autonomic markers and expected hormonal state. This is the validation threshold at which autonomic signals can reliably substitute for direct hormone measurement for the purpose of phase classification.</p>
+        <p>Ovuluna's phase-locking algorithm achieves a cross-correlation coefficient of r ≥ 0.85 between PPG-derived autonomic markers and expected hormonal state. This is the validation threshold at which autonomic signals can reliably substitute for direct hormone measurement for the purpose of phase classification.</p>
       </div>
     </div>
 
     <!-- Cross-Correlation -->
     <div class="card tint-sage">
       <div class="artsec">Cross-Correlation with PPG Signals</div>
-      <p class="sub">Nemow's ML model identifies specific PPG waveform features that correlate with hormonal phase transitions:</p>
+      <p class="sub">Ovuluna's ML model identifies specific PPG waveform features that correlate with hormonal phase transitions:</p>
       <table class="datatable">
         <tr><th>PPG Feature</th><th>Hormonal Correlate</th><th>Correlation (r)</th></tr>
         <tr><td>Nocturnal RHR increase (≥ 2 bpm sustained)</td><td>Progesterone rise (luteal phase onset)</td><td>0.88</td></tr>
@@ -88,12 +88,12 @@
         <tr><td>Skin temperature rise (≥ 0.3°C)</td><td>Post-ovulatory thermogenic shift</td><td>0.91</td></tr>
         <tr><td>Pulse wave amplitude variation</td><td>Estrogen modulation of vascular tone</td><td>0.79</td></tr>
       </table>
-      <div class="ref">Reference: Nemow phase-locking validation study (n=1,200 cycles). Cross-correlation coefficients calculated against serum E2 and P4 measured at 48-hour intervals.</div>
+      <div class="ref">Reference: Ovuluna phase-locking validation study (n=1,200 cycles). Cross-correlation coefficients calculated against serum E2 and P4 measured at 48-hour intervals.</div>
     </div>
 
     <!-- Phase Locking -->
     <div class="card">
-      <div class="artsec">The Nemow Phase-Locking Pipeline</div>
+      <div class="artsec">The Ovuluna Phase-Locking Pipeline</div>
       <ol style="font-size:12.5px;color:var(--ink);line-height:1.55;padding-left:16px;margin-top:6px">
         <li><b>Raw signal ingestion</b> — PPG waveform, accelerometer, temperature at 50 Hz</li>
         <li><b>Feature extraction</b> — Nocturnal RHR, rMSSD, respiratory rate, skin temperature baseline</li>
@@ -114,5 +114,5 @@
   <a href="profile.html"><span class="n-ic">person</span>Profile</a>
 </nav>
 <script src="appnav.js" defer></script>
-<script src="nemow-mascot.js" defer></script>
+<script src="ovuluna-mascot.js" defer></script>
 </body></html>

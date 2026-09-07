@@ -1,4 +1,4 @@
-/* Nemow — app navigation + interaction layer (loaded on every screen) */
+/* Ovuluna — app navigation + interaction layer (loaded on every screen) */
 (function(){
   // ---- inject self-contained CSS (works even if a screen skips anim.css) ----
   var css = `
@@ -161,7 +161,7 @@
   var fab=document.createElement('button'); fab.className='mapfab'; fab.setAttribute('aria-label','All screens');
   fab.innerHTML='<span class="ms">apps</span>'; document.body.appendChild(fab);
   var veil=document.createElement('div'); veil.className='mapveil';
-  var h='<div class="mapsheet"><h3>Explore Nemow</h3><div class="sub">Every screen — tap to jump anywhere</div>';
+  var h='<div class="mapsheet"><h3>Explore Ovuluna</h3><div class="sub">Every screen — tap to jump anywhere</div>';
   SCREENS.forEach(function(g){ h+='<div class="mapgrp">'+g[0]+'</div><div class="maprow">';
     g[1].forEach(function(s){ h+='<a class="mapitem'+(s[0]===here?' here':'')+'" href="'+s[0]+'"><span class="ms">'+s[1]+'</span>'+s[2]+'</a>'; });
     h+='</div>'; });

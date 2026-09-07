@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Nemow · Cycle</title>
+<title>Ovuluna · Cycle</title>
 <link rel="icon" type="image/png" href="assets/onboarding/egg.png">
 <link rel="apple-touch-icon" href="assets/onboarding/egg.png">
 
@@ -89,7 +89,7 @@
       <div class="te"><span class="tdot" style="background:var(--d-cycle)"></span><div style="flex:1"><b>Period · Day 1 — medium flow</b><span>Tue, May 19 · manual</span></div></div>
       <div class="te"><span class="tdot" style="background:var(--d-stress)"></span><div style="flex:1"><b>Cramps (moderate), fatigue</b><span>Tue, May 19 · manual</span></div></div>
       <div class="te"><span class="tdot" style="background:var(--d-sleep)"></span><div style="flex:1"><b>Sleep 7h 24m imported</b><span>Mon, May 18 · Apple Health</span></div></div>
-      <div class="te"><span class="tdot" style="background:var(--d-exercise)"></span><div style="flex:1"><b>Cycle prediction updated</b><span>Sun, May 17 · Nemow engine</span></div></div>
+      <div class="te"><span class="tdot" style="background:var(--d-exercise)"></span><div style="flex:1"><b>Cycle prediction updated</b><span>Sun, May 17 · Ovuluna engine</span></div></div>
     </div>
 
     <h2 class="sec">Data sources</h2>
@@ -183,7 +183,7 @@ const FW = {
     signals:['💧 Spotting logged']},
   unknown:  {cls:'',     badge:['hourglass_empty','Learning'], title:'Not enough data yet', pct:'—', pcol:'var(--taupe)',
     bars:[.3,.3,.3,.3,.3,.3,.3], peak:-1,
-    why:'Log your discharge feel, temperature or LH tests across a cycle and Nemow will map your fertile window with a confidence score.',
+    why:'Log your discharge feel, temperature or LH tests across a cycle and Ovuluna will map your fertile window with a confidence score.',
     signals:['➕ Add today’s signs']},
   offline:  {cls:'warn', badge:['sync','Pending sync'], title:'Forecast refreshes when you reconnect', pct:'Low', pcol:'var(--cocoa)',
     bars:[.15,.12,.1,.1,.12,.15,.2], peak:-1,
@@ -220,5 +220,5 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 <script src="appnav.js" defer></script>
-<script src="nemow-mascot.js" defer></script>
+<script src="ovuluna-mascot.js" defer></script>
 </body></html>

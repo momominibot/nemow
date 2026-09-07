@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Nemow · Ovarian Age</title>
+<title>Ovuluna · Ovarian Age</title>
 <link rel="icon" type="image/png" href="assets/onboarding/egg.png">
 <link rel="apple-touch-icon" href="assets/onboarding/egg.png">
 
@@ -255,7 +255,7 @@
       document.querySelectorAll('#personaBar .p-chip').forEach(function(c){ c.classList.remove('on'); });
       chip.classList.add('on');
       var p = chip.dataset.p;
-      localStorage.setItem('nemow_persona', p);
+      localStorage.setItem('ovuluna_persona', p);
       document.documentElement.dataset.persona = p;
       // sensible defaults per persona
       if(p==='bloom'){ ageIn.value=16; cycleIn.value='regular'; }
@@ -267,7 +267,7 @@
   });
 
   // Load saved persona
-  var savedP = localStorage.getItem('nemow_persona') || 'bloom';
+  var savedP = localStorage.getItem('ovuluna_persona') || 'bloom';
   document.querySelectorAll('#personaBar .p-chip').forEach(function(c){ c.classList.toggle('on', c.dataset.p===savedP); });
   document.documentElement.dataset.persona = savedP;
 
@@ -275,7 +275,7 @@
   document.getElementById('saveBtn').addEventListener('click', function(){
     var i = getInputs();
     var r = OvarianModel.computeOvarianAge(i);
-    localStorage.setItem('nemow_ovarian_age', JSON.stringify(r));
+    localStorage.setItem('ovuluna_ovarian_age', JSON.stringify(r));
     var t = document.createElement('div');
     t.className='otoast'; t.textContent='Saved to profile ✓'; document.body.appendChild(t);
     requestAnimationFrame(function(){ t.style.opacity='1'; t.style.transform='translateX(-50%)'; });

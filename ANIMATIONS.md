@@ -1,4 +1,4 @@
-# Nemow V2 — Animation & Icon Guide
+# Ovuluna V2 — Animation & Icon Guide
 
 ## Strategy: CSS-first, Lottie for complex vectors
 

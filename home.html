@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Nemow · Home</title>
+<title>Ovuluna · Home</title>
 <link rel="icon" type="image/png" href="assets/onboarding/egg.png">
 <link rel="apple-touch-icon" href="assets/onboarding/egg.png">
 
@@ -28,7 +28,7 @@
 
 <div class="app">
   <div class="top">
-    <div class="brandline"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">NEMOW</b></div>
+    <div class="brandline"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">OVULUNA</b></div>
     <a class="t-icon ms" href="notifications.html">notifications</a>
     <a class="t-icon ms" href="cycle-trends.html">calendar_today</a>
   </div>
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', function(){
 (function(){
   // load saved ovarian age
   try{
-    var saved = JSON.parse(localStorage.getItem('nemow_ovarian_age')||'{}');
+    var saved = JSON.parse(localStorage.getItem('ovuluna_ovarian_age')||'{}');
     if(saved.ovAge){
       document.querySelector('a[href="ovarian-age.html"] div div div + div').textContent = saved.ovAge;
       var dEl = document.querySelector('a[href="ovarian-age.html"] div div div + div + div');
@@ -285,14 +285,14 @@ document.addEventListener('DOMContentLoaded', function(){
   }catch(e){}
 
   // persona chips
-  var savedP = localStorage.getItem('nemow_persona') || 'bloom';
+  var savedP = localStorage.getItem('ovuluna_persona') || 'bloom';
   document.documentElement.dataset.persona = savedP;
   document.querySelectorAll('#personaBar .p-chip').forEach(function(c){ c.classList.toggle('on', c.dataset.p===savedP); });
   document.querySelectorAll('#personaBar .p-chip').forEach(function(chip){
     chip.addEventListener('click', function(){
       document.querySelectorAll('#personaBar .p-chip').forEach(function(c){ c.classList.remove('on'); });
       chip.classList.add('on');
-      localStorage.setItem('nemow_persona', chip.dataset.p);
+      localStorage.setItem('ovuluna_persona', chip.dataset.p);
       document.documentElement.dataset.persona = chip.dataset.p;
     });
   });
@@ -300,5 +300,5 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 <script src="cyclering.js" defer></script>
 <script src="appnav.js" defer></script>
-<script src="nemow-mascot.js" defer></script>
+<script src="ovuluna-mascot.js" defer></script>
 </body></html>

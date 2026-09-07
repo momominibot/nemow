@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nemow \u00b7 Wellness Check-in</title>
+  <title>Ovuluna \u00b7 Wellness Check-in</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   <link rel="stylesheet" href="theme.css">
-  <link rel="stylesheet" href="nemow-persona.css">
+  <link rel="stylesheet" href="ovuluna-persona.css">
   <style>
     .eyebrow { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--taupe); margin-bottom:6px; }
     .score-ring { width:180px; height:180px; margin:20px auto; position:relative; }
@@ -174,10 +174,10 @@
 
     function saveScore() {
       const total = calc();
-      const scores = JSON.parse(localStorage.getItem('nemow_wellness_scores')||'[]');
+      const scores = JSON.parse(localStorage.getItem('ovuluna_wellness_scores')||'[]');
       const entry = { date: new Date().toISOString(), total };
       scores.push(entry);
-      localStorage.setItem('nemow_wellness_scores', JSON.stringify(scores.slice(-30)));
+      localStorage.setItem('ovuluna_wellness_scores', JSON.stringify(scores.slice(-30)));
       renderHistory();
 
       const s = document.getElementById('summary');
@@ -190,7 +190,7 @@
     }
 
     function renderHistory() {
-      const scores = JSON.parse(localStorage.getItem('nemow_wellness_scores')||'[]');
+      const scores = JSON.parse(localStorage.getItem('ovuluna_wellness_scores')||'[]');
       const list = document.getElementById('historyList');
       if(!scores.length) { list.innerHTML = '<div style="font-size:13px; color:var(--taupe)">No scores yet.</div>'; return; }
       list.innerHTML = scores.slice().reverse().map(s => `

@@ -1,4 +1,4 @@
-/* ══ Nemow — cute motion layer ══ */
+/* ══ Ovuluna — cute motion layer ══ */
 
 /* entrance: cards float up in sequence */
 @keyframes rise { from { opacity:0; transform:translateY(16px) scale(.985); } to { opacity:1; transform:none; } }

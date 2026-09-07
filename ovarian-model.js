@@ -1,4 +1,4 @@
-/* Nemow — shared Ovarian Age model (single source of truth).
+/* Ovuluna — shared Ovarian Age model (single source of truth).
    Used by onboarding and ovarian-age.html (full assessment).
    Keep both in sync via THIS file only. */
 (function(g){

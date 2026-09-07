@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════
-   NEMOW — Persona Theme System (Warm Minimal)
+   OVULUNA — Persona Theme System (Warm Minimal)
    4 life-stage themes via data-persona attribute on <html>
    Subtle accents on the warm cream base — not full background changes.
    ══════════════════════════════════════════════════════════════ */
@@ -35,32 +35,32 @@ html[data-persona] .metric {
   gap: 4px;
   padding: 16px 10px;
   border-radius: 14px;
-  border: 2px solid #E0DAD0;
+  border: 2px solid rgba(107,82,142,0.15);
   background: #FFFFFF;
   cursor: pointer;
   transition: .2s;
 }
 .persona-opt .p-emoji { font-size: 32px; }
-.persona-opt .p-name { font-weight: 800; font-size: 13px; color: #1D1B18; }
-.persona-opt .p-age  { font-size: 11px; color: #8B8178; }
+.persona-opt .p-name { font-weight: 800; font-size: 13px; color: #3d2f52; }
+.persona-opt .p-age  { font-size: 11px; color: #8a78a0; }
 .persona-opt.on {
-  border-color: #1D1B18;
-  background: #F6EFE0;
+  border-color: #3d2f52;
+  background: #f7f2fa;
 }
 .persona-opt .p-check {
   position: absolute; top: 8px; right: 8px;
   width: 20px; height: 20px; border-radius: 50%;
-  background: #1D1B18;
+  background: #3d2f52;
   color: #fff; font-size: 12px;
   display: none; align-items: center; justify-content: center;
 }
 .persona-opt.on .p-check { display: flex; }
 
 /* ── Co-branding footer ── */
-.nemow-footer {
+.ovuluna-footer {
   font-family: 'Nunito', system-ui, sans-serif;
   font-size: 12px;
-  color: #8B8178;
+  color: #8a78a0;
   opacity: 0.6;
   text-align: center;
   padding: 24px 0 8px;
@@ -70,48 +70,48 @@ html[data-persona] .metric {
    PERSONA: BLOOM — Teens 13–17 (pink accent)
    ═══════════════════════════════════════════════ */
 [data-persona="bloom"] {
-  --nemow-surface:              #F6EFE0;
-  --nemow-surface-alt:          #F0E8D8;
-  --nemow-surface-card:         #FFFFFF;
-  --nemow-surface-dark:         #2A2432;
-  --nemow-accent:               #D4A0B2;
-  --nemow-accent-secondary:     #7EC8A8;
-  --nemow-accent-glow:          rgba(212, 160, 178, 0.18);
-  --nemow-cta:                  #1D1B18;
-  --nemow-cta-hover:            #3A3630;
-  --nemow-cta-text:             #FFFFFF;
-  --nemow-success:              #5CB89B;
-  --nemow-warning:              #D4A85C;
-  --nemow-text-primary:         #1D1B18;
-  --nemow-text-secondary:       #8B8178;
-  --nemow-text-emphasis:        #1D1B18;
-  --nemow-text-on-cta:          #FFFFFF;
-  --nemow-text-on-accent:       #1D1B18;
-  --nemow-border:               #E0DAD0;
-  --nemow-border-focus:         #D4A0B2;
-  --nemow-radius-sm:            8px;
-  --nemow-radius-md:            14px;
-  --nemow-radius-lg:            20px;
-  --nemow-radius-pill:          999px;
-  --nemow-shadow-card:          0 4px 14px rgba(29,27,24,.08);
-  --nemow-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
-  --nemow-font-heading:         'Nunito', system-ui, sans-serif;
-  --nemow-font-body:            'Nunito', system-ui, sans-serif;
-  --nemow-font-data:            'Nunito', system-ui, sans-serif;
-  --nemow-font-size-h1:         32px;
-  --nemow-font-size-h2:         24px;
-  --nemow-font-size-h3:         20px;
-  --nemow-font-size-body:       16px;
-  --nemow-font-size-caption:    14px;
-  --nemow-font-size-label:      13px;
-  --nemow-font-size-micro:      12px;
-  --nemow-easing-bounce:        cubic-bezier(0.34, 1.56, 0.64, 1);
-  --nemow-easing-smooth:        cubic-bezier(0.4, 0, 0.2, 1);
-  --nemow-duration-fast:        150ms;
-  --nemow-duration-normal:      300ms;
-  --nemow-duration-slow:        500ms;
-  --nemow-icon-style:           'filled';
-  --nemow-icon-weight:          600;
+  --ovuluna-surface:              #f7f2fa;
+  --ovuluna-surface-alt:          #f0e8f5;
+  --ovuluna-surface-card:         #FFFFFF;
+  --ovuluna-surface-dark:         #2a2335;
+  --ovuluna-accent:               #D4A0B2;
+  --ovuluna-accent-secondary:     #7EC8A8;
+  --ovuluna-accent-glow:          rgba(212, 160, 178, 0.18);
+  --ovuluna-cta:                  #3d2f52;
+  --ovuluna-cta-hover:            #4a3f5e;
+  --ovuluna-cta-text:             #FFFFFF;
+  --ovuluna-success:              #5CB89B;
+  --ovuluna-warning:              #D4A85C;
+  --ovuluna-text-primary:         #3d2f52;
+  --ovuluna-text-secondary:       #8a78a0;
+  --ovuluna-text-emphasis:        #3d2f52;
+  --ovuluna-text-on-cta:          #FFFFFF;
+  --ovuluna-text-on-accent:       #3d2f52;
+  --ovuluna-border:               rgba(107,82,142,0.15);
+  --ovuluna-border-focus:         #D4A0B2;
+  --ovuluna-radius-sm:            8px;
+  --ovuluna-radius-md:            14px;
+  --ovuluna-radius-lg:            20px;
+  --ovuluna-radius-pill:          999px;
+  --ovuluna-shadow-card:          0 4px 14px rgba(29,27,24,.08);
+  --ovuluna-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
+  --ovuluna-font-heading:         'Nunito', system-ui, sans-serif;
+  --ovuluna-font-body:            'Nunito', system-ui, sans-serif;
+  --ovuluna-font-data:            'Nunito', system-ui, sans-serif;
+  --ovuluna-font-size-h1:         32px;
+  --ovuluna-font-size-h2:         24px;
+  --ovuluna-font-size-h3:         20px;
+  --ovuluna-font-size-body:       16px;
+  --ovuluna-font-size-caption:    14px;
+  --ovuluna-font-size-label:      13px;
+  --ovuluna-font-size-micro:      12px;
+  --ovuluna-easing-bounce:        cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ovuluna-easing-smooth:        cubic-bezier(0.4, 0, 0.2, 1);
+  --ovuluna-duration-fast:        150ms;
+  --ovuluna-duration-normal:      300ms;
+  --ovuluna-duration-slow:        500ms;
+  --ovuluna-icon-style:           'filled';
+  --ovuluna-icon-weight:          600;
 }
 
 /* ── Bloom: pink accent touches ── */
@@ -126,52 +126,52 @@ html[data-persona] .metric {
    PERSONA: GROW — Women 25–38 (terracotta accent)
    ═══════════════════════════════════════════════ */
 [data-persona="grow"] {
-  --nemow-surface:              #F6EFE0;
-  --nemow-surface-alt:          #F0E8D8;
-  --nemow-surface-card:         #FFFFFF;
-  --nemow-surface-dark:         #2C2620;
-  --nemow-accent:               #C88B6E;
-  --nemow-accent-secondary:     #9BB7AD;
-  --nemow-accent-glow:          rgba(200, 139, 110, 0.16);
-  --nemow-cta:                  #1D1B18;
-  --nemow-cta-hover:            #3A3630;
-  --nemow-cta-text:             #FFFFFF;
-  --nemow-success:              #9BB7AD;
-  --nemow-warning:              #D4A85C;
-  --nemow-highlight:            #D4A85C;
-  --nemow-text-primary:         #1D1B18;
-  --nemow-text-secondary:       #8B8178;
-  --nemow-text-emphasis:        #1D1B18;
-  --nemow-text-on-cta:          #FFFFFF;
-  --nemow-text-on-accent:       #FFFFFF;
-  --nemow-data-primary:         #C17767;
-  --nemow-data-secondary:       #C88B6E;
-  --nemow-data-tertiary:        #9BB7AD;
-  --nemow-border:               #E0DAD0;
-  --nemow-border-focus:         #C88B6E;
-  --nemow-radius-sm:            8px;
-  --nemow-radius-md:            12px;
-  --nemow-radius-lg:            16px;
-  --nemow-radius-pill:          999px;
-  --nemow-shadow-card:          0 4px 14px rgba(29,27,24,.08);
-  --nemow-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
-  --nemow-font-heading:         'Nunito', system-ui, sans-serif;
-  --nemow-font-body:            'Nunito', system-ui, sans-serif;
-  --nemow-font-data:            'Nunito', system-ui, sans-serif;
-  --nemow-font-size-h1:         32px;
-  --nemow-font-size-h2:         24px;
-  --nemow-font-size-h3:         20px;
-  --nemow-font-size-body:       16px;
-  --nemow-font-size-caption:    14px;
-  --nemow-font-size-label:      13px;
-  --nemow-font-size-micro:      12px;
-  --nemow-easing-bounce:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --nemow-easing-smooth:        cubic-bezier(0.4, 0, 0.2, 1);
-  --nemow-duration-fast:        200ms;
-  --nemow-duration-normal:      400ms;
-  --nemow-duration-slow:        800ms;
-  --nemow-icon-style:           'outlined';
-  --nemow-icon-weight:          300;
+  --ovuluna-surface:              #f7f2fa;
+  --ovuluna-surface-alt:          #f0e8f5;
+  --ovuluna-surface-card:         #FFFFFF;
+  --ovuluna-surface-dark:         #2C2620;
+  --ovuluna-accent:               #C88B6E;
+  --ovuluna-accent-secondary:     #9BB7AD;
+  --ovuluna-accent-glow:          rgba(200, 139, 110, 0.16);
+  --ovuluna-cta:                  #3d2f52;
+  --ovuluna-cta-hover:            #4a3f5e;
+  --ovuluna-cta-text:             #FFFFFF;
+  --ovuluna-success:              #9BB7AD;
+  --ovuluna-warning:              #D4A85C;
+  --ovuluna-highlight:            #D4A85C;
+  --ovuluna-text-primary:         #3d2f52;
+  --ovuluna-text-secondary:       #8a78a0;
+  --ovuluna-text-emphasis:        #3d2f52;
+  --ovuluna-text-on-cta:          #FFFFFF;
+  --ovuluna-text-on-accent:       #FFFFFF;
+  --ovuluna-data-primary:         #C17767;
+  --ovuluna-data-secondary:       #C88B6E;
+  --ovuluna-data-tertiary:        #9BB7AD;
+  --ovuluna-border:               rgba(107,82,142,0.15);
+  --ovuluna-border-focus:         #C88B6E;
+  --ovuluna-radius-sm:            8px;
+  --ovuluna-radius-md:            12px;
+  --ovuluna-radius-lg:            16px;
+  --ovuluna-radius-pill:          999px;
+  --ovuluna-shadow-card:          0 4px 14px rgba(29,27,24,.08);
+  --ovuluna-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
+  --ovuluna-font-heading:         'Nunito', system-ui, sans-serif;
+  --ovuluna-font-body:            'Nunito', system-ui, sans-serif;
+  --ovuluna-font-data:            'Nunito', system-ui, sans-serif;
+  --ovuluna-font-size-h1:         32px;
+  --ovuluna-font-size-h2:         24px;
+  --ovuluna-font-size-h3:         20px;
+  --ovuluna-font-size-body:       16px;
+  --ovuluna-font-size-caption:    14px;
+  --ovuluna-font-size-label:      13px;
+  --ovuluna-font-size-micro:      12px;
+  --ovuluna-easing-bounce:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ovuluna-easing-smooth:        cubic-bezier(0.4, 0, 0.2, 1);
+  --ovuluna-duration-fast:        200ms;
+  --ovuluna-duration-normal:      400ms;
+  --ovuluna-duration-slow:        800ms;
+  --ovuluna-icon-style:           'outlined';
+  --ovuluna-icon-weight:          300;
 }
 
 /* ── Grow: terracotta accent touches ── */
@@ -186,61 +186,61 @@ html[data-persona] .metric {
    PERSONA: NURTURE — Post-Pregnancy Recovery (lavender accent)
    ═══════════════════════════════════════════════ */
 [data-persona="nurture"] {
-  --nemow-surface:              #F6EFE0;
-  --nemow-surface-alt:          #F0E8D8;
-  --nemow-surface-card:         #FFFFFF;
-  --nemow-surface-night:        #2A2330;
-  --nemow-accent:               #B0A0C0;
-  --nemow-accent-secondary:     #A3C4BC;
-  --nemow-accent-glow:          rgba(176, 160, 192, 0.16);
-  --nemow-cta:                  #1D1B18;
-  --nemow-cta-hover:            #3A3630;
-  --nemow-cta-text:             #FFFFFF;
-  --nemow-success:              #A3C4BC;
-  --nemow-warning:              #D4A85C;
-  --nemow-warm-pop:             #E8C4B8;
-  --nemow-earth:                #C88B6E;
-  --nemow-text-primary:         #1D1B18;
-  --nemow-text-secondary:       #8B8178;
-  --nemow-text-emphasis:        #1D1B18;
-  --nemow-text-on-cta:          #FFFFFF;
-  --nemow-text-on-accent:       #1D1B18;
-  --nemow-timer-display:        #1D1B18;
-  --nemow-timer-bg:             #F6EFE0;
-  --nemow-timer-active:         #B0A0C0;
-  --nemow-night-surface:        #2A2330;
-  --nemow-night-text:           #D4CCDD;
-  --nemow-night-accent:         #C9BED9;
-  --nemow-night-amber:          #D4A85C;
-  --nemow-border:               #E0DAD0;
-  --nemow-border-focus:         #B0A0C0;
-  --nemow-radius-sm:            8px;
-  --nemow-radius-md:            14px;
-  --nemow-radius-lg:            18px;
-  --nemow-radius-pill:          999px;
-  --nemow-shadow-card:          0 4px 14px rgba(29,27,24,.08);
-  --nemow-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
-  --nemow-font-heading:         'Nunito', system-ui, sans-serif;
-  --nemow-font-body:            'Nunito', system-ui, sans-serif;
-  --nemow-font-data:            'Nunito', system-ui, sans-serif;
-  --nemow-font-timer:           'Nunito', system-ui, sans-serif;
-  --nemow-font-size-h1:         32px;
-  --nemow-font-size-h2:         24px;
-  --nemow-font-size-h3:         20px;
-  --nemow-font-size-body:       16px;
-  --nemow-font-size-caption:    14px;
-  --nemow-font-size-label:      13px;
-  --nemow-font-size-micro:      12px;
-  --nemow-font-size-timer-lg:   48px;
-  --nemow-font-size-timer-md:   32px;
-  --nemow-easing-bounce:        cubic-bezier(0.4, 0, 0.2, 1);
-  --nemow-easing-smooth:        cubic-bezier(0.4, 0, 0.2, 1);
-  --nemow-easing-pulse:         cubic-bezier(0.4, 0, 0.6, 1);
-  --nemow-duration-fast:        300ms;
-  --nemow-duration-normal:      600ms;
-  --nemow-duration-slow:        1000ms;
-  --nemow-icon-style:           'filled';
-  --nemow-icon-weight:          400;
+  --ovuluna-surface:              #f7f2fa;
+  --ovuluna-surface-alt:          #f0e8f5;
+  --ovuluna-surface-card:         #FFFFFF;
+  --ovuluna-surface-night:        #2A2330;
+  --ovuluna-accent:               #B0A0C0;
+  --ovuluna-accent-secondary:     #A3C4BC;
+  --ovuluna-accent-glow:          rgba(176, 160, 192, 0.16);
+  --ovuluna-cta:                  #3d2f52;
+  --ovuluna-cta-hover:            #4a3f5e;
+  --ovuluna-cta-text:             #FFFFFF;
+  --ovuluna-success:              #A3C4BC;
+  --ovuluna-warning:              #D4A85C;
+  --ovuluna-warm-pop:             #E8C4B8;
+  --ovuluna-earth:                #C88B6E;
+  --ovuluna-text-primary:         #3d2f52;
+  --ovuluna-text-secondary:       #8a78a0;
+  --ovuluna-text-emphasis:        #3d2f52;
+  --ovuluna-text-on-cta:          #FFFFFF;
+  --ovuluna-text-on-accent:       #3d2f52;
+  --ovuluna-timer-display:        #3d2f52;
+  --ovuluna-timer-bg:             #f7f2fa;
+  --ovuluna-timer-active:         #B0A0C0;
+  --ovuluna-night-surface:        #2A2330;
+  --ovuluna-night-text:           #D4CCDD;
+  --ovuluna-night-accent:         #C9BED9;
+  --ovuluna-night-amber:          #D4A85C;
+  --ovuluna-border:               rgba(107,82,142,0.15);
+  --ovuluna-border-focus:         #B0A0C0;
+  --ovuluna-radius-sm:            8px;
+  --ovuluna-radius-md:            14px;
+  --ovuluna-radius-lg:            18px;
+  --ovuluna-radius-pill:          999px;
+  --ovuluna-shadow-card:          0 4px 14px rgba(29,27,24,.08);
+  --ovuluna-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
+  --ovuluna-font-heading:         'Nunito', system-ui, sans-serif;
+  --ovuluna-font-body:            'Nunito', system-ui, sans-serif;
+  --ovuluna-font-data:            'Nunito', system-ui, sans-serif;
+  --ovuluna-font-timer:           'Nunito', system-ui, sans-serif;
+  --ovuluna-font-size-h1:         32px;
+  --ovuluna-font-size-h2:         24px;
+  --ovuluna-font-size-h3:         20px;
+  --ovuluna-font-size-body:       16px;
+  --ovuluna-font-size-caption:    14px;
+  --ovuluna-font-size-label:      13px;
+  --ovuluna-font-size-micro:      12px;
+  --ovuluna-font-size-timer-lg:   48px;
+  --ovuluna-font-size-timer-md:   32px;
+  --ovuluna-easing-bounce:        cubic-bezier(0.4, 0, 0.2, 1);
+  --ovuluna-easing-smooth:        cubic-bezier(0.4, 0, 0.2, 1);
+  --ovuluna-easing-pulse:         cubic-bezier(0.4, 0, 0.6, 1);
+  --ovuluna-duration-fast:        300ms;
+  --ovuluna-duration-normal:      600ms;
+  --ovuluna-duration-slow:        1000ms;
+  --ovuluna-icon-style:           'filled';
+  --ovuluna-icon-weight:          400;
 }
 
 /* ── Nurture: lavender accent touches ── */
@@ -255,53 +255,53 @@ html[data-persona] .metric {
    PERSONA: WISDOM — Women 40–60 (gold accent)
    ═══════════════════════════════════════════════ */
 [data-persona="wisdom"] {
-  --nemow-surface:              #F6EFE0;
-  --nemow-surface-alt:          #F0E8D8;
-  --nemow-surface-card:         #FFFFFF;
-  --nemow-surface-dark:         #26211E;
-  --nemow-accent:               #B8956A;
-  --nemow-accent-secondary:     #C4A882;
-  --nemow-accent-glow:          rgba(184, 149, 106, 0.14);
-  --nemow-cta:                  #1D1B18;
-  --nemow-cta-hover:            #3A3630;
-  --nemow-cta-text:             #FFFFFF;
-  --nemow-success:              #5D7B6F;
-  --nemow-warning:              #C4A882;
-  --nemow-depth:                #8C5C61;
-  --nemow-cool:                 #5D7B6F;
-  --nemow-text-primary:         #1D1B18;
-  --nemow-text-secondary:       #8B8178;
-  --nemow-text-emphasis:        #1D1B18;
-  --nemow-text-on-cta:          #FFFFFF;
-  --nemow-text-on-accent:       #FFFFFF;
-  --nemow-data-primary:         #B8956A;
-  --nemow-data-secondary:       #8C5C61;
-  --nemow-data-tertiary:        #5D7B6F;
-  --nemow-border:               #E0DAD0;
-  --nemow-border-focus:         #B8956A;
-  --nemow-radius-sm:            6px;
-  --nemow-radius-md:            8px;
-  --nemow-radius-lg:            12px;
-  --nemow-radius-pill:          999px;
-  --nemow-shadow-card:          0 4px 14px rgba(29,27,24,.08);
-  --nemow-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
-  --nemow-font-heading:         'Nunito', system-ui, sans-serif;
-  --nemow-font-body:            'Nunito', system-ui, sans-serif;
-  --nemow-font-data:            'Nunito', system-ui, sans-serif;
-  --nemow-font-size-h1:         32px;
-  --nemow-font-size-h2:         24px;
-  --nemow-font-size-h3:         20px;
-  --nemow-font-size-body:       17px;
-  --nemow-font-size-caption:    15px;
-  --nemow-font-size-label:      15px;
-  --nemow-font-size-micro:      13px;
-  --nemow-easing-bounce:        cubic-bezier(0.4, 0, 0.2, 1);
-  --nemow-easing-smooth:        cubic-bezier(0.4, 0, 0.2, 1);
-  --nemow-duration-fast:        250ms;
-  --nemow-duration-normal:      500ms;
-  --nemow-duration-slow:        900ms;
-  --nemow-icon-style:           'outlined';
-  --nemow-icon-weight:          300;
+  --ovuluna-surface:              #f7f2fa;
+  --ovuluna-surface-alt:          #f0e8f5;
+  --ovuluna-surface-card:         #FFFFFF;
+  --ovuluna-surface-dark:         #26211E;
+  --ovuluna-accent:               #B8956A;
+  --ovuluna-accent-secondary:     #C4A882;
+  --ovuluna-accent-glow:          rgba(184, 149, 106, 0.14);
+  --ovuluna-cta:                  #3d2f52;
+  --ovuluna-cta-hover:            #4a3f5e;
+  --ovuluna-cta-text:             #FFFFFF;
+  --ovuluna-success:              #5D7B6F;
+  --ovuluna-warning:              #C4A882;
+  --ovuluna-depth:                #8C5C61;
+  --ovuluna-cool:                 #5D7B6F;
+  --ovuluna-text-primary:         #3d2f52;
+  --ovuluna-text-secondary:       #8a78a0;
+  --ovuluna-text-emphasis:        #3d2f52;
+  --ovuluna-text-on-cta:          #FFFFFF;
+  --ovuluna-text-on-accent:       #FFFFFF;
+  --ovuluna-data-primary:         #B8956A;
+  --ovuluna-data-secondary:       #8C5C61;
+  --ovuluna-data-tertiary:        #5D7B6F;
+  --ovuluna-border:               rgba(107,82,142,0.15);
+  --ovuluna-border-focus:         #B8956A;
+  --ovuluna-radius-sm:            6px;
+  --ovuluna-radius-md:            8px;
+  --ovuluna-radius-lg:            12px;
+  --ovuluna-radius-pill:          999px;
+  --ovuluna-shadow-card:          0 4px 14px rgba(29,27,24,.08);
+  --ovuluna-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
+  --ovuluna-font-heading:         'Nunito', system-ui, sans-serif;
+  --ovuluna-font-body:            'Nunito', system-ui, sans-serif;
+  --ovuluna-font-data:            'Nunito', system-ui, sans-serif;
+  --ovuluna-font-size-h1:         32px;
+  --ovuluna-font-size-h2:         24px;
+  --ovuluna-font-size-h3:         20px;
+  --ovuluna-font-size-body:       17px;
+  --ovuluna-font-size-caption:    15px;
+  --ovuluna-font-size-label:      15px;
+  --ovuluna-font-size-micro:      13px;
+  --ovuluna-easing-bounce:        cubic-bezier(0.4, 0, 0.2, 1);
+  --ovuluna-easing-smooth:        cubic-bezier(0.4, 0, 0.2, 1);
+  --ovuluna-duration-fast:        250ms;
+  --ovuluna-duration-normal:      500ms;
+  --ovuluna-duration-slow:        900ms;
+  --ovuluna-icon-style:           'outlined';
+  --ovuluna-icon-weight:          300;
 }
 
 /* ── Wisdom: gold accent touches ── */
@@ -314,29 +314,29 @@ html[data-persona] .metric {
 
 /* ── Persona-aware body styles ── */
 html[data-persona] body {
-  background: var(--nemow-surface);
-  color: var(--nemow-text-primary);
-  font-family: var(--nemow-font-body);
+  background: var(--ovuluna-surface);
+  color: var(--ovuluna-text-primary);
+  font-family: var(--ovuluna-font-body);
 }
 html[data-persona] .card {
-  border-radius: var(--nemow-radius-md);
-  box-shadow: var(--nemow-shadow-card);
-  border-color: var(--nemow-border);
-  background: var(--nemow-surface-card);
+  border-radius: var(--ovuluna-radius-md);
+  box-shadow: var(--ovuluna-shadow-card);
+  border-color: var(--ovuluna-border);
+  background: var(--ovuluna-surface-card);
 }
 html[data-persona] .btn {
-  border-radius: var(--nemow-radius-pill);
-  background: var(--nemow-cta);
-  color: var(--nemow-text-on-cta);
+  border-radius: var(--ovuluna-radius-pill);
+  background: var(--ovuluna-cta);
+  color: var(--ovuluna-text-on-cta);
 }
 html[data-persona] .top {
-  background: linear-gradient(180deg, var(--nemow-surface) 62%, transparent);
+  background: linear-gradient(180deg, var(--ovuluna-surface) 62%, transparent);
 }
 html[data-persona] h2.sec {
-  font-family: var(--nemow-font-heading);
+  font-family: var(--ovuluna-font-heading);
 }
 html[data-persona] .sub {
-  color: var(--nemow-text-secondary);
+  color: var(--ovuluna-text-secondary);
 }
 
 /* ── Card tints (persona-aware) ── */
@@ -348,7 +348,7 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
 /* ── Page-specific persona cards ── */
 .acupoint-card {
   background: #FFFFFF;
-  border: 2px solid #E0DAD0;
+  border: 2px solid rgba(107,82,142,0.15);
   border-radius: 14px;
   padding: 18px;
   box-shadow: 0 4px 14px rgba(29,27,24,.08);
@@ -358,7 +358,7 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
   font-family: 'Nunito', system-ui, sans-serif;
   font-size: 20px;
   font-weight: 800;
-  color: #1D1B18;
+  color: #3d2f52;
   margin: 0 0 2px;
   letter-spacing: -.01em;
 }
@@ -384,15 +384,15 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
 .filter-chip {
   flex-shrink: 0; padding: 8px 15px; border-radius: 99px;
   background: #FFFFFF;
-  border: 2px solid #E0DAD0;
+  border: 2px solid rgba(107,82,142,0.15);
   font: 700 12px 'Nunito', system-ui, sans-serif;
-  color: #1D1B18;
+  color: #3d2f52;
   cursor: pointer; transition: .15s; white-space: nowrap;
 }
 .filter-chip.on {
-  background: #1D1B18;
+  background: #3d2f52;
   color: #FFFFFF;
-  border-color: #1D1B18;
+  border-color: #3d2f52;
 }
 
 /* Evidence badge */
@@ -411,13 +411,13 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
   padding: 12px 14px; border-radius: 8px;
   background: rgba(212,168,92,.14);
   border: 1.5px solid rgba(212,168,92,.35);
-  font-size: 12px; line-height: 1.5; color: #1D1B18;
+  font-size: 12px; line-height: 1.5; color: #3d2f52;
 }
 
 /* Technique card */
 .tech-card {
   background: #FFFFFF;
-  border: 2px solid #E0DAD0;
+  border: 2px solid rgba(107,82,142,0.15);
   border-radius: 14px;
   padding: 20px;
   box-shadow: 0 4px 14px rgba(29,27,24,.08);
@@ -428,7 +428,7 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
 .tech-card::after {
   content: "";
   position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--nemow-accent-secondary, #A0AD90), var(--nemow-accent, #8B6C82));
+  background: linear-gradient(90deg, var(--ovuluna-accent-secondary, #A0AD90), var(--ovuluna-accent, #8B6C82));
   opacity: 0.4;
 }
 .tech-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(29,27,24,.12); }
@@ -436,7 +436,7 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
   font-family: 'Nunito', system-ui, sans-serif;
   font-size: 20px;
   font-weight: 800;
-  color: #1D1B18;
+  color: #3d2f52;
   margin: 0 0 4px;
   letter-spacing: -.01em;
 }
@@ -444,24 +444,24 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
 .tech-step {
   display: flex; gap: 12px; padding: 10px 0;
   font-size: 14px;
-  color: #1D1B18; line-height: 1.55;
-  border-bottom: 1px solid #E0DAD0;
+  color: #3d2f52; line-height: 1.55;
+  border-bottom: 1px solid rgba(107,82,142,0.15);
 }
 .tech-step:last-child { border-bottom: none; }
 .tech-step .step-num {
   width: 26px; height: 26px; border-radius: 50%;
-  background: #1D1B18; color: #FFFFFF;
+  background: #3d2f52; color: #FFFFFF;
   display: flex; align-items: center; justify-content: center;
   font-size: 12px; font-weight: 800; flex-shrink: 0;
   margin-top: 1px;
 }
 .tech-meta { display: flex; gap: 14px; flex-wrap: wrap; margin: 12px 0; }
-.tech-meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #8B8178; font-weight: 600; }
+.tech-meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #8a78a0; font-weight: 600; }
 .tech-meta-item .ms { font-size: 17px; color: #8B6C82; }
 .contraindication {
   margin-top: 12px; padding: 10px 14px; border-radius: 8px;
   background: rgba(212,168,92,.12); border-left: 3px solid #D4A85C;
-  font-size: 11.5px; line-height: 1.5; color: #1D1B18;
+  font-size: 11.5px; line-height: 1.5; color: #3d2f52;
 }
 .contraindication b { color: #C98A2E; font-weight: 800; }
 .lifestage-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
@@ -475,16 +475,16 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
 /* Session card */
 .session-card {
   text-align: center; padding: 20px; border-radius: 14px;
-  background: #F6EFE0;
-  border: 2px solid #E0DAD0;
+  background: #f7f2fa;
+  border: 2px solid rgba(107,82,142,0.15);
   cursor: pointer; transition: .2s;
 }
-.session-card:hover { transform: translateY(-2px); border-color: #1D1B18; }
+.session-card:hover { transform: translateY(-2px); border-color: #3d2f52; }
 
 /* Food card dual-view */
 .food-card {
   background: #FFFFFF;
-  border: 2px solid #E0DAD0;
+  border: 2px solid rgba(107,82,142,0.15);
   border-radius: 14px;
   padding: 18px 16px;
   box-shadow: 0 4px 14px rgba(29,27,24,.08);
@@ -495,13 +495,13 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
 .food-card::before {
   content: "";
   position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--nemow-accent, #8B6C82), var(--nemow-accent-secondary, #A0AD90));
+  background: linear-gradient(90deg, var(--ovuluna-accent, #8B6C82), var(--ovuluna-accent-secondary, #A0AD90));
   opacity: 0.5;
 }
 .food-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(29,27,24,.12); }
 .food-card .food-header { display: flex; align-items: center; gap: 10px; }
 .food-card .food-icon { font-size: 36px; flex-shrink: 0; }
-.food-card .food-title { font-family: 'Nunito', system-ui, sans-serif; font-size: 17px; font-weight: 800; color: #1D1B18; margin: 0; letter-spacing: -.01em; }
+.food-card .food-title { font-family: 'Nunito', system-ui, sans-serif; font-size: 17px; font-weight: 800; color: #3d2f52; margin: 0; letter-spacing: -.01em; }
 .food-card .food-cn { font-size: 13px; color: #8B6C82; font-weight: 700; margin-left: 6px; letter-spacing: .02em; }
 .food-dual { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
 .food-tcm, .food-western {
@@ -520,7 +520,7 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
   padding: 8px 12px; border-radius: 8px;
   background: rgba(232,200,192,.16);
   border-left: 3px solid #E89580;
-  color: #1D1B18;
+  color: #3d2f52;
 }
 .food-benefit b { color: #8B6C82; font-weight: 800; }
 .thermal-badge {
@@ -530,4 +530,4 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
 }
 .thermal-warm { background: rgba(196,111,79,.14); color: #C46F4F; }
 .thermal-cool { background: rgba(127,174,201,.14); color: #5A8AAA; }
-.thermal-neutral { background: rgba(150,150,150,.1); color: #8B8178; }
+.thermal-neutral { background: rgba(150,150,150,.1); color: #8a78a0; }

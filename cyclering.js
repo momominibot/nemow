@@ -1,4 +1,4 @@
-/* Nemow — cycle ring renderer for #cyclering */
+/* Ovuluna — cycle ring renderer for #cyclering */
 (function(){
   var el = document.getElementById('cyclering');
   if(!el) return;

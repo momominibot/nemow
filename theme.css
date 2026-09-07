@@ -1,55 +1,55 @@
 /* ══════════════════════════════════════════════════════════════
-   NEMOW — Warm Minimal Design System
-   Inspired by nemow · ovarian age (warm cream, dark brown, Nunito)
-   Clean cards, small caps labels, minimal decoration.
+   OVULUNA — Pastel Lavender/Peach Design System
+   Dreamy lavender · soft peach · rounded · diffused · gentle
+   Watercolor washes, soft borders, feminine illustration aesthetic.
    ══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* paper & surfaces — warm cream/oat */
-  --paper:      #F6EFE0;
-  --paper-deep: #EDE5D6;
-  --card:       #FFFFFF;
-  --card-solid: #FFFFFF;
-  --sunken:     #EFE9DE;
-  --line:       #2D2A26;
-  --line-soft:  #E0DAD0;
+  /* paper & surfaces — dreamy lavender/peach */
+  --paper:      #f7f2fa;
+  --paper-deep: #f0e8f5;
+  --card:       rgba(255, 255, 255, 0.82);
+  --card-solid: #ffffff;
+  --sunken:     #f0eaf5;
+  --line:       rgba(107, 82, 142, 0.15);
+  --line-soft:  rgba(107, 82, 142, 0.08);
 
-  /* type — dark brown system */
-  --ink:        #1D1B18;
-  --cocoa:      #1D1B18;
-  --taupe:      #8B8178;
-  --faded:      #B0A89E;
+  /* type — deep lavender-plum */
+  --ink:        #3d2f52;
+  --cocoa:      #3d2f52;
+  --taupe:      #8a78a0;
+  --faded:      #a898bc;
 
-  /* subtle accents */
-  --mauve:      #8B6C82;
-  --terracotta: #C88B6E;
-  --coral:      #E89580;
-  --coral-deep: #D48070;
-  --gold:       #D4A85C;
+  /* accents — soft mauve-lavender and peach */
+  --mauve:      #7a5c96;
+  --terracotta: #d49a8a;
+  --coral:      #e8a898;
+  --coral-deep: #d89888;
+  --gold:       #e5c98a;
 
-  /* soft pastels (subtle card tints only) */
-  --lavender:   #C4B8D0;
-  --periwinkle: #9EAEC8;
-  --sage:       #A0AD90;
-  --sky:        #B0C8DC;
-  --blush:      #E8C8C0;
+  /* signature pastels */
+  --lavender:   #c4b5e0;
+  --periwinkle: #a8b8d8;
+  --sage:       #a8c0a0;
+  --sky:        #b8cde0;
+  --blush:      #f5c6b8;
 
-  /* six domains (preserved for charts) */
-  --d-medical:  #9B6B8D;
-  --d-cycle:    #D983A4;
-  --d-stress:   #EC9678;
-  --d-exercise: #E3B563;
-  --d-diet:     #93BB8F;
-  --d-sleep:    #7FAEC9;
+  /* six domains (softened) */
+  --d-medical:  #9b7bb0;
+  --d-cycle:    #d49ab8;
+  --d-stress:   #e0a890;
+  --d-exercise: #e0c080;
+  --d-diet:     #9cbb90;
+  --d-sleep:    #9ab0d0;
 
-  /* status */
-  --ok:         #4E8C6A;
-  --warn:       #C98A2E;
-  --low:        #BE4A3E;
+  /* status — softened */
+  --ok:         #6ba88a;
+  --warn:       #d4a85a;
+  --low:        #c47a6a;
 
   --serif: 'Nunito', system-ui, sans-serif;
   --sans:  'Nunito', system-ui, sans-serif;
-  --r: 18px; --r-sm: 12px;
+  --r: 22px; --r-sm: 16px;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -63,6 +63,20 @@ body {
   display: flex;
   justify-content: center;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* ── dreamy watercolor wash ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(42% 30% at 82% 6%, rgba(196, 181, 224, 0.45), transparent 70%),
+    radial-gradient(38% 26% at 8% 16%, rgba(245, 198, 184, 0.4), transparent 70%),
+    radial-gradient(46% 30% at 90% 52%, rgba(214, 200, 235, 0.3), transparent 70%),
+    radial-gradient(40% 26% at 4% 66%, rgba(200, 215, 240, 0.28), transparent 70%),
+    radial-gradient(44% 30% at 70% 96%, rgba(248, 210, 200, 0.32), transparent 72%),
+    radial-gradient(26% 18% at 50% 40%, rgba(255, 240, 235, 0.3), transparent 70%);
 }
 
 /* ── watercolor washes — removed for minimal design ── */
@@ -108,16 +122,17 @@ body {
 h2.sec { font-family:var(--serif); font-weight:800; font-size:19px; color:var(--ink); margin:8px 2px 0; letter-spacing:-.01em; }
 .sub { font-size:13.5px; color:var(--taupe); line-height:1.5; }
 
-/* ── cards — clean with dark border ── */
+/* ── cards — soft pastel with diffused borders ── */
 .card {
   background: var(--card);
-  border: 2px solid var(--ink);
+  border: 1px solid var(--line-soft);
   border-radius: var(--r);
   padding: 18px;
-  box-shadow: 0 4px 14px rgba(29,27,24,.08);
+  box-shadow: 0 8px 24px -12px rgba(107, 82, 142, 0.18);
+  backdrop-filter: blur(8px);
 }
-.card.tint-lavender { background: #F8F3FA; border-color: var(--lavender); }
-.card.tint-sage     { background: #F6F8F3; border-color: var(--sage); }
+.card.tint-lavender { background: rgba(196, 181, 224, 0.18); border-color: rgba(196, 181, 224, 0.4); }
+.card.tint-sage     { background: rgba(168, 192, 160, 0.16); border-color: rgba(168, 192, 160, 0.35); }
 .card.tint-blush    { background: #FCF6F5; border-color: var(--blush); }
 .card.tint-gold     { background: #FDFAF3; border-color: var(--gold); }
 

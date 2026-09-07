@@ -1,4 +1,4 @@
-/* Nemow — playful interactions */
+/* Ovuluna — playful interactions */
 document.addEventListener('DOMContentLoaded', function () {
 
   // chips toggle with a pop + wiggle
