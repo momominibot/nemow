@@ -83,41 +83,41 @@
 
 
     <!-- Daily Logging -->
-    <div class="card" style="padding:16px 14px 12px">
-      <div class="row" style="justify-content:space-between;margin-bottom:10px">
-        <b style="font-family:var(--serif);font-size:16px;color:var(--cocoa)">Today's Log</b>
+    <div class="card" style="padding:16px 14px 12px" id="dailyLogCard">
+      <div class="row" style="justify-content:space-between;margin-bottom:12px">
+        <b style="font-family:var(--serif);font-size:16px;color:var(--cocoa)">Today's Check-in</b>
         <span class="sub" style="font-size:10.5px;font-weight:700" id="logProgress">0/6 done</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" id="dailyLogGrid">
-        <div class="log-item" data-log="mood" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(196,181,224,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
-          <span class="log-check" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s"><span class="ms" style="font-size:14px;opacity:0">check</span></span>
-          <span class="ms" style="font-size:18px;color:var(--mauve)">mood</span>
-          <span style="font-size:12px;font-weight:700;color:var(--cocoa)">Mood</span>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px" id="dailyLogGrid">
+        <div class="log-btn" data-log="mood" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:16px;background:rgba(196,181,224,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
+          <span class="ms" style="font-size:24px;color:var(--mauve)">mood</span>
+          <span style="font-size:11px;font-weight:700;color:var(--cocoa)">Mood</span>
+          <span class="log-tick" style="position:absolute;bottom:4px;right:4px;width:18px;height:18px;border-radius:50%;background:var(--ok);display:none;align-items:center;justify-content:center"><span class="ms" style="font-size:12px;color:#fff;font-weight:800">check</span></span>
         </div>
-        <div class="log-item" data-log="sleep" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(127,174,201,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
-          <span class="log-check" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s"><span class="ms" style="font-size:14px;opacity:0">check</span></span>
-          <span class="ms" style="font-size:18px;color:var(--d-sleep)">bedtime</span>
-          <span style="font-size:12px;font-weight:700;color:var(--cocoa)">Sleep</span>
+        <div class="log-btn" data-log="sleep" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:16px;background:rgba(127,174,201,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
+          <span class="ms" style="font-size:24px;color:var(--d-sleep)">bedtime</span>
+          <span style="font-size:11px;font-weight:700;color:var(--cocoa)">Sleep</span>
+          <span class="log-tick" style="position:absolute;bottom:4px;right:4px;width:18px;height:18px;border-radius:50%;background:var(--ok);display:none;align-items:center;justify-content:center"><span class="ms" style="font-size:12px;color:#fff;font-weight:800">check</span></span>
         </div>
-        <div class="log-item" data-log="symptoms" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(236,150,120,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
-          <span class="log-check" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s"><span class="ms" style="font-size:14px;opacity:0">check</span></span>
-          <span class="ms" style="font-size:18px;color:var(--d-stress)">monitor_heart</span>
-          <span style="font-size:12px;font-weight:700;color:var(--cocoa)">Symptoms</span>
+        <div class="log-btn" data-log="symptoms" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:16px;background:rgba(236,150,120,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
+          <span class="ms" style="font-size:24px;color:var(--d-stress)">monitor_heart</span>
+          <span style="font-size:11px;font-weight:700;color:var(--cocoa)">Symptoms</span>
+          <span class="log-tick" style="position:absolute;bottom:4px;right:4px;width:18px;height:18px;border-radius:50%;background:var(--ok);display:none;align-items:center;justify-content:center"><span class="ms" style="font-size:12px;color:#fff;font-weight:800">check</span></span>
         </div>
-        <div class="log-item" data-log="water" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(127,174,201,.08);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
-          <span class="log-check" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s"><span class="ms" style="font-size:14px;opacity:0">check</span></span>
-          <span class="ms" style="font-size:18px;color:#5fa8d3">water_drop</span>
-          <span style="font-size:12px;font-weight:700;color:var(--cocoa)">Water</span>
+        <div class="log-btn" data-log="water" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:16px;background:rgba(127,174,201,.08);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
+          <span class="ms" style="font-size:24px;color:#5fa8d3">water_drop</span>
+          <span style="font-size:11px;font-weight:700;color:var(--cocoa)">Water</span>
+          <span class="log-tick" style="position:absolute;bottom:4px;right:4px;width:18px;height:18px;border-radius:50%;background:var(--ok);display:none;align-items:center;justify-content:center"><span class="ms" style="font-size:12px;color:#fff;font-weight:800">check</span></span>
         </div>
-        <div class="log-item" data-log="activity" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(168,192,160,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
-          <span class="log-check" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s"><span class="ms" style="font-size:14px;opacity:0">check</span></span>
-          <span class="ms" style="font-size:18px;color:var(--ok)">directions_run</span>
-          <span style="font-size:12px;font-weight:700;color:var(--cocoa)">Activity</span>
+        <div class="log-btn" data-log="activity" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:16px;background:rgba(168,192,160,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
+          <span class="ms" style="font-size:24px;color:var(--ok)">directions_run</span>
+          <span style="font-size:11px;font-weight:700;color:var(--cocoa)">Activity</span>
+          <span class="log-tick" style="position:absolute;bottom:4px;right:4px;width:18px;height:18px;border-radius:50%;background:var(--ok);display:none;align-items:center;justify-content:center"><span class="ms" style="font-size:12px;color:#fff;font-weight:800">check</span></span>
         </div>
-        <div class="log-item" data-log="food" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(240,200,120,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
-          <span class="log-check" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s"><span class="ms" style="font-size:14px;opacity:0">check</span></span>
-          <span class="ms" style="font-size:18px;color:var(--gold)">restaurant</span>
-          <span style="font-size:12px;font-weight:700;color:var(--cocoa)">Food</span>
+        <div class="log-btn" data-log="food" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:16px;background:rgba(240,200,120,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
+          <span class="ms" style="font-size:24px;color:var(--gold)">restaurant</span>
+          <span style="font-size:11px;font-weight:700;color:var(--cocoa)">Food</span>
+          <span class="log-tick" style="position:absolute;bottom:4px;right:4px;width:18px;height:18px;border-radius:50%;background:var(--ok);display:none;align-items:center;justify-content:center"><span class="ms" style="font-size:12px;color:#fff;font-weight:800">check</span></span>
         </div>
       </div>
     </div>
@@ -350,61 +350,231 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 <script src="mystical-ring.js" defer></script>
 
-<script>
-// Daily logging toggle with localStorage persistence
-(function() {
-  var today = new Date().toISOString().split('T')[0];
-  var items = document.querySelectorAll('.log-item');
-  var progress = document.getElementById('logProgress');
-  
-  function getLogged() {
-    try { return JSON.parse(localStorage.getItem('ovuluna_daily_log_' + today) || '{}'); }
-    catch(e) { return {}; }
-  }
-  function saveLogged(logged) {
-    localStorage.setItem('ovuluna_daily_log_' + today, JSON.stringify(logged));
-  }
-  function updateProgress() {
-    var logged = getLogged();
-    var done = Object.values(logged).filter(Boolean).length;
-    if (progress) progress.textContent = done + '/' + items.length + ' done';
-  }
-  function applyState(item, isLogged) {
-    var check = item.querySelector('.log-check');
-    var checkIcon = check.querySelector('.ms');
-    if (isLogged) {
-      check.style.background = 'var(--ok)';
-      check.style.borderColor = 'var(--ok)';
-      checkIcon.style.opacity = '1';
-      checkIcon.style.color = '#fff';
-      item.style.borderColor = 'rgba(127,174,127,.4)';
-      item.style.background = 'rgba(127,174,127,.08)';
-    } else {
-      check.style.background = 'transparent';
-      check.style.borderColor = 'var(--line-soft)';
-      checkIcon.style.opacity = '0';
-      item.style.borderColor = 'var(--line-soft)';
-    }
-  }
-  items.forEach(function(item) {
-    var key = item.dataset.log;
-    var logged = getLogged();
-    applyState(item, !!logged[key]);
-    item.addEventListener('click', function() {
-      var logged = getLogged();
-      logged[key] = !logged[key];
-      saveLogged(logged);
-      applyState(item, logged[key]);
-      updateProgress();
-    });
-  });
-  updateProgress();
-})();
-</script>
-
 <script src="appnav.js" defer></script>
 <script src="evidence-db.js" defer></script>
 <script src="evidence.js" defer></script>
 <script src="luna-chat.js" defer></script>
 <script src="darkmode.js" defer></script>
 </body></html>
+
+<!-- Daily Logging Modal -->
+<div id="logModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(30,18,60,0.5);backdrop-filter:blur(4px);align-items:flex-end;justify-content:center">
+  <div id="logModalSheet" style="background:var(--paper);border-radius:24px 24px 0 0;padding:24px 20px 32px;max-width:480px;width:100%;max-height:85vh;overflow-y:auto;transform:translateY(100%);transition:transform .3s ease">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <b id="logModalTitle" style="font-family:var(--serif);font-size:20px;color:var(--cocoa)">Log Mood</b>
+      <span id="logModalClose" style="cursor:pointer;font-size:22px;color:var(--taupe);padding:4px 8px;border-radius:50%;background:rgba(0,0,0,0.05)">✕</span>
+    </div>
+    <div id="logModalBody"></div>
+    <button id="logModalSave" style="width:100%;margin-top:20px;padding:14px;border-radius:16px;border:none;background:linear-gradient(135deg,var(--mauve),var(--coral));color:#fff;font-family:var(--sans);font-size:14px;font-weight:800;cursor:pointer;letter-spacing:.3px">Save & Complete ✓</button>
+  </div>
+</div>
+
+<script>
+// Daily logging with question popups
+(function() {
+  var LOG_KEY = 'ovuluna_daily_log_' + new Date().toISOString().slice(0,10);
+  var logData = {};
+  try { logData = JSON.parse(localStorage.getItem(LOG_KEY)) || {}; } catch(e) {}
+
+  var questions = {
+    mood: {
+      title: 'How\'s your mood today?',
+      fields: [
+        { type: 'emoji', label: 'Overall mood', options: ['😢','😕','😐','🙂','😄'] },
+        { type: 'radio', label: 'Mood swings today?', options: ['None','Mild','Moderate','Strong'] },
+        { type: 'text', label: 'Anything affecting your mood? (optional)', placeholder: 'e.g., work stress, good news, tired...' }
+      ]
+    },
+    sleep: {
+      title: 'How did you sleep?',
+      fields: [
+        { type: 'number', label: 'Hours slept', placeholder: 'e.g., 7.5', min: 0, max: 16, step: 0.5 },
+        { type: 'emoji', label: 'Sleep quality', options: ['😫','😕','😐','🙂','😴'] },
+        { type: 'radio', label: 'Woke up during the night?', options: ['No','Once','2-3 times','More than 3'] }
+      ]
+    },
+    symptoms: {
+      title: 'Any symptoms today?',
+      fields: [
+        { type: 'slider', label: 'Cramp pain (0-10)', min: 0, max: 10 },
+        { type: 'checkbox', label: 'Other symptoms', options: ['Bloating','Headache','Fatigue','Breast tenderness','Backache','Acne','None'] },
+        { type: 'text', label: 'Notes (optional)', placeholder: 'e.g., mild cramps in the afternoon...' }
+      ]
+    },
+    water: {
+      title: 'Hydration check',
+      fields: [
+        { type: 'number', label: 'Glasses of water today (250ml each)', placeholder: 'e.g., 6', min: 0, max: 20 },
+        { type: 'radio', label: 'Other drinks', options: ['Only water','Some tea/coffee','Sugary drinks','Alcohol'] },
+        { type: 'emoji', label: 'Thirst level', options: ['💧','💧💧','💧💧💧','🥵'] }
+      ]
+    },
+    activity: {
+      title: 'Today\'s activity',
+      fields: [
+        { type: 'radio', label: 'Activity type', options: ['Rest day','Walking','Yoga/stretching','Cardio','Strength training','HIIT','Sports'] },
+        { type: 'number', label: 'Duration (minutes)', placeholder: 'e.g., 30', min: 0, max: 300 },
+        { type: 'emoji', label: 'Energy level during activity', options: ['😫','😕','😐','💪','🔥'] }
+      ]
+    },
+    food: {
+      title: 'Today\'s nutrition',
+      fields: [
+        { type: 'checkbox', label: 'Did you eat these cycle-supportive foods?', options: ['Leafy greens','Omega-3 (fish/nuts)','Whole grains','Fruits','Protein at each meal','Fermented foods','Water-rich foods'] },
+        { type: 'radio', label: 'Sugar intake today', options: ['Minimal','Moderate','High','Very high'] },
+        { type: 'text', label: 'Anything notable? (optional)', placeholder: 'e.g., had salmon for dinner, craved chocolate...' }
+      ]
+    }
+  };
+
+  var currentLog = null;
+  var modal = document.getElementById('logModal');
+  var sheet = document.getElementById('logModalSheet');
+  var body = document.getElementById('logModalBody');
+  var title = document.getElementById('logModalTitle');
+
+  function openLog(type) {
+    currentLog = type;
+    var q = questions[type];
+    title.textContent = 'Log ' + type.charAt(0).toUpperCase() + type.slice(1);
+    var html = '';
+    q.fields.forEach(function(f, i) {
+      html += '<div style="margin-bottom:18px">';
+      html += '<div style="font-size:13px;font-weight:700;color:var(--cocoa);margin-bottom:8px">' + f.label + '</div>';
+      if (f.type === 'emoji') {
+        html += '<div style="display:flex;gap:8px;flex-wrap:wrap">';
+        f.options.forEach(function(opt, j) {
+          var checked = logData[type] && logData[type].fields && logData[type].fields[i] === opt ? 'background:rgba(196,181,224,.3);border-color:var(--mauve)' : '';
+          html += '<div class="emoji-opt" data-val="' + opt + '" style="font-size:28px;padding:8px 12px;border-radius:14px;border:2px solid var(--line-soft);cursor:pointer;transition:.15s;' + checked + '">' + opt + '</div>';
+        });
+        html += '</div>';
+      } else if (f.type === 'radio') {
+        html += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
+        f.options.forEach(function(opt, j) {
+          var checked = logData[type] && logData[type].fields && logData[type].fields[i] === opt ? 'background:var(--mauve);color:#fff;border-color:var(--mauve)' : '';
+          html += '<div class="radio-opt" data-val="' + opt + '" style="padding:8px 14px;border-radius:99px;border:1.5px solid var(--line-soft);font-size:12px;font-weight:700;color:var(--cocoa);cursor:pointer;transition:.15s;' + checked + '">' + opt + '</div>';
+        });
+        html += '</div>';
+      } else if (f.type === 'checkbox') {
+        html += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
+        f.options.forEach(function(opt, j) {
+          var isChecked = logData[type] && logData[type].fields && Array.isArray(logData[type].fields[i]) && logData[type].fields[i].indexOf(opt) !== -1;
+          var checked = isChecked ? 'background:var(--mauve);color:#fff;border-color:var(--mauve)' : '';
+          html += '<div class="check-opt" data-val="' + opt + '" style="padding:8px 14px;border-radius:99px;border:1.5px solid var(--line-soft);font-size:12px;font-weight:700;color:var(--cocoa);cursor:pointer;transition:.15s;' + checked + '">' + opt + '</div>';
+        });
+        html += '</div>';
+      } else if (f.type === 'number') {
+        html += '<input type="number" class="num-input" data-field="' + i + '" placeholder="' + (f.placeholder || '') + '" min="' + (f.min || 0) + '" max="' + (f.max || 100) + '" step="' + (f.step || 1) + '" value="' + (logData[type] && logData[type].fields ? logData[type].fields[i] : '') + '" style="width:100%;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line-soft);font-size:14px;font-family:var(--sans);background:var(--card);color:var(--ink);box-sizing:border-box"/>';
+      } else if (f.type === 'text') {
+        html += '<textarea class="text-input" data-field="' + i + '" placeholder="' + (f.placeholder || '') + '" rows="2" style="width:100%;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line-soft);font-size:13px;font-family:var(--sans);background:var(--card);color:var(--ink);resize:none;box-sizing:border-box">' + (logData[type] && logData[type].fields ? logData[type].fields[i] : '') + '</textarea>';
+      } else if (f.type === 'slider') {
+        var val = logData[type] && logData[type].fields ? logData[type].fields[i] : 0;
+        html += '<div style="display:flex;align-items:center;gap:12px">';
+        html += '<input type="range" class="slider-input" data-field="' + i + '" min="' + f.min + '" max="' + f.max + '" value="' + val + '" style="flex:1;accent-color:var(--mauve)"/>';
+        html += '<span class="slider-val" style="font-size:18px;font-weight:800;color:var(--mauve);min-width:30px;text-align:center">' + val + '</span>';
+        html += '</div>';
+      }
+      html += '</div>';
+    });
+    body.innerHTML = html;
+
+    // Bind option clicks
+    body.querySelectorAll('.emoji-opt, .radio-opt').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var parent = el.parentElement;
+        parent.querySelectorAll('.emoji-opt, .radio-opt').forEach(function(s) {
+          s.style.background = '';
+          s.style.color = '';
+          s.style.borderColor = '';
+        });
+        el.style.background = 'rgba(196,181,224,.3)';
+        el.style.borderColor = 'var(--mauve)';
+        if (el.classList.contains('radio-opt')) {
+          el.style.background = 'var(--mauve)';
+          el.style.color = '#fff';
+        }
+        el.dataset.selected = 'true';
+      });
+    });
+    body.querySelectorAll('.check-opt').forEach(function(el) {
+      el.addEventListener('click', function() {
+        if (el.dataset.selected === 'true') {
+          el.style.background = '';
+          el.style.color = '';
+          el.style.borderColor = '';
+          el.dataset.selected = '';
+        } else {
+          el.style.background = 'var(--mauve)';
+          el.style.color = '#fff';
+          el.style.borderColor = 'var(--mauve)';
+          el.dataset.selected = 'true';
+        }
+      });
+    });
+    body.querySelectorAll('.slider-input').forEach(function(el) {
+      el.addEventListener('input', function() {
+        el.parentElement.querySelector('.slider-val').textContent = el.value;
+      });
+    });
+
+    modal.style.display = 'flex';
+    requestAnimationFrame(function() { sheet.style.transform = 'translateY(0)'; });
+  }
+
+  function closeLog() {
+    sheet.style.transform = 'translateY(100%)';
+    setTimeout(function() { modal.style.display = 'none'; }, 300);
+  }
+
+  function saveLog() {
+    var q = questions[currentLog];
+    var fields = [];
+    q.fields.forEach(function(f, i) {
+      if (f.type === 'emoji' || f.type === 'radio') {
+        var selected = body.querySelector('.emoji-opt[data-selected="true"], .radio-opt[data-selected="true"]');
+        fields.push(selected ? selected.dataset.val : '');
+      } else if (f.type === 'checkbox') {
+        var checks = [];
+        body.querySelectorAll('.check-opt[data-selected="true"]').forEach(function(c) { checks.push(c.dataset.val); });
+        fields.push(checks);
+      } else if (f.type === 'number' || f.type === 'text' || f.type === 'slider') {
+        var input = body.querySelector('[data-field="' + i + '"]');
+        fields.push(input ? input.value : '');
+      }
+    });
+    logData[currentLog] = { completed: true, fields: fields, ts: Date.now() };
+    localStorage.setItem(LOG_KEY, JSON.stringify(logData));
+    updateTicks();
+    closeLog();
+  }
+
+  function updateTicks() {
+    var done = 0;
+    document.querySelectorAll('.log-btn').forEach(function(btn) {
+      var type = btn.dataset.log;
+      var tick = btn.querySelector('.log-tick');
+      if (logData[type] && logData[type].completed) {
+        tick.style.display = 'flex';
+        btn.style.borderColor = 'var(--ok)';
+        btn.style.background = 'rgba(120,180,120,.12)';
+        done++;
+      } else {
+        tick.style.display = 'none';
+      }
+    });
+    var prog = document.getElementById('logProgress');
+    if (prog) prog.textContent = done + '/6 done';
+  }
+
+  // Bind buttons
+  document.querySelectorAll('.log-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() { openLog(btn.dataset.log); });
+  });
+  document.getElementById('logModalClose').addEventListener('click', closeLog);
+  document.getElementById('logModalSave').addEventListener('click', saveLog);
+  modal.addEventListener('click', function(e) { if (e.target === modal) closeLog(); });
+
+  // Init
+  updateTicks();
+})();
+</script>

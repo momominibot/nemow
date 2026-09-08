@@ -236,6 +236,36 @@
     return true;
   }
 
+  /* ── Demo mode responses (used when API unavailable, e.g. localhost) ── */
+  function getDemoResponse(text) {
+    var t = text.toLowerCase();
+    if (t.match(/cramp|pain|period|menstrual|dysmenorrhea/)) {
+      return 'Cramps happen when prostaglandins make the uterus contract. Try: (1) Warm compress at 40-45°C on lower abdomen for 15-20 min — as effective as ibuprofen in studies. (2) SP6 acupressure: 5 min per leg, 6 sec press + 2 sec rest. (3) Diaphragmatic breathing: 5 min slow breaths. (4) Omega-3 (1-2g/day) reduces pain intensity. Stay warm, avoid cold drinks during your period. This is wellness info, not medical advice — see a clinician for severe pain.';
+    }
+    if (t.match(/food|eat|diet|nutrition|what.*eat/)) {
+      return 'Cycle-aligned eating: Menstrual phase → iron-rich foods (spinach, lentils, red meat), omega-3 (salmon, walnuts), warming ginger tea. Follicular → protein + complex carbs for energy, flaxseeds for estrogen metabolism. Ovulation → antioxidants (berries, colorful veggies), zinc (pumpkin seeds). Luteal → magnesium (dark chocolate, almonds), B6 (salmon, chickpeas), calcium. Avoid excessive sugar and caffeine which can worsen PMS. Every food claim in Ovuluna has an (i) evidence button — tap it to see the clinical source.';
+    }
+    if (t.match(/sleep|insomnia|tired|fatigue/)) {
+      return 'Sleep varies across your cycle: luteal phase (after ovulation) often brings lighter sleep due to progesterone's thermogenic effect (body temp rises 0.3-0.5°C). Tips: (1) Keep bedroom cool (18-20°C). (2) Consistent sleep/wake times. (3) Limit screens 1 hr before bed — blue light suppresses melatonin. (4) Magnesium glycinate 200-400mg may improve sleep quality. (5) Avoid caffeine after 2pm. Aim for 7-9 hours. Track your sleep in the Today section — tap the (i) for evidence.';
+    }
+    if (t.match(/stress|anxiety|mood|emotional|pms/)) {
+      return 'Mood shifts across the cycle are normal — the luteal phase drop in estrogen and progesterone can trigger irritability and anxiety. Evidence-based tools: (1) Diaphragmatic breathing 5 min/day activates parasympathetic nervous system. (2) Regular exercise (150 min/week) reduces PMS mood symptoms. (3) B6 (50-100mg/day) may improve PMS mood. (4) Magnesium (200-400mg) may reduce anxiety. (5) Journaling and social connection. If mood changes significantly affect your life, talk to a clinician — PMDD is a recognized condition that can be treated.';
+    }
+    if (t.match(/ovarian|age|amh|fertility|reserve/)) {
+      return 'Ovarian reserve declines with age — AMH (anti-Müllerian hormone) is one marker, but it doesn\'t predict fertility perfectly. Lifestyle factors that support ovarian health: (1) Don\'t smoke — smoking accelerates ovarian aging by 1-2 years. (2) Maintain healthy BMI — both underweight and obesity affect fertility. (3) Antioxidant-rich diet (vitamin C, E, CoQ10). (4) Limit alcohol. (5) Manage chronic stress. Ovuluna\'s ovarian age estimate combines cycle regularity, lifestyle, and trends — it\'s a wellness estimate, not a medical diagnosis. See a reproductive endocrinologist for fertility concerns.';
+    }
+    if (t.match(/herb|tea|tcm|traditional/)) {
+      return 'Evidence-based herbs for women\'s health: (1) Ginger (500-2000mg/day) reduces menstrual pain — meta-analysis shows significant effect. (2) Cinnamon (1.5g/day) may improve PCOS insulin sensitivity. (3) Peppermint tea may reduce PMS symptoms. (4) Chamomile tea may improve sleep quality. Important: Dong Quai ALONE does NOT reduce hot flashes (null RCT PMID 9418683) — it works in compound formulas like Danggui Buxue Tang. Always check the (i) evidence button on each herb in the Foods page. Consult a qualified TCM practitioner for personalized formulas, especially if pregnant or on medication.';
+    }
+    if (t.match(/exercise|workout|train|fitness/)) {
+      return 'Cycle-aligned exercise: Menstrual → gentle yoga, walking, stretching (your body is recovering). Follicular → HIIT, strength training, running (estrogen rising = more energy, better recovery). Ovulation → moderate cardio, group classes, social activities (peak energy). Luteal → Pilates, yoga, lighter strength, reduce intensity as period approaches (progesterone = higher fatigue, higher body temp). Regular exercise (150 min/week) reduces PMS and dysmenorrhea. Listen to your body — rest is productive too.';
+    }
+    if (t.match(/hello|hi|hey|who are you|what.*you/)) {
+      return 'Hi! I\'m Luna 🌙 — your ovarian health companion. I can help with cycle phases, nutrition, cramps, sleep, stress, herbs, exercise, and ovarian wellness. Everything I share is evidence-based — look for the (i) buttons throughout the app to see clinical citations. I\'m a wellness tool, not a doctor — for medical concerns, please see a qualified clinician. What would you like to explore today?';
+    }
+    return 'Great question! Here\'s what I can help with: cycle phase guidance, nutrition for each phase, natural cramps relief, sleep optimization, stress management, evidence-based herbs & teas, cycle-aligned exercise, and ovarian health basics. Everything in Ovuluna has (i) evidence buttons — tap them to see clinical studies. I\'m running in demo mode right now (API not connected), but the full app will give you personalized answers. Try asking about cramps, food, sleep, stress, herbs, or exercise!';
+  }
+
   /* ── Send message ── */
   function sendMessage() {
     var input = document.getElementById('lunaInput');
@@ -252,6 +282,20 @@
     state.loading = true;
     document.getElementById('lunaSend').disabled = true;
     renderTyping();
+
+    // Detect localhost/demo mode — use canned responses
+    var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+    if (isLocal) {
+      setTimeout(function () {
+        removeTyping();
+        addMessage('bot', getDemoResponse(text));
+        state.loading = false;
+        document.getElementById('lunaSend').disabled = false;
+        renderSuggestions();
+      }, 800 + Math.random() * 600);
+      return;
+    }
 
     // Build conversation history (last 10 messages for context)
     var history = state.messages.slice(-10).map(function (m) {
@@ -274,7 +318,8 @@
       })
       .then(function (data) {
         removeTyping();
-        var reply = (data.reply || data.choices?.[0]?.message?.content || 'I\'m here to help — could you rephrase that?').trim();
+        var reply = (data.reply || data.choices?.[0]?.message?.content || '').trim();
+        if (!reply) reply = getDemoResponse(text);
         addMessage('bot', reply);
       })
       .catch(function (err) {
@@ -284,7 +329,8 @@
         state.credits++;
         saveState();
         updateCreditsDisplay();
-        addMessage('error', 'Sorry, I couldn\'t reach the AI service right now. Your credit has been refunded. Please try again in a moment.');
+        // Use demo response instead of error
+        addMessage('bot', getDemoResponse(text));
       })
       .finally(function () {
         state.loading = false;

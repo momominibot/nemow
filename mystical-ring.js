@@ -88,31 +88,34 @@
     var cx = size / 2;
     var cy = size / 2;
 
-    // Moon base (full circle - light side)
     var svg = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">';
-    // Glow filter
-    svg += '<defs><radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">';
-    svg += '<stop offset="0%" stop-color="#fff8e7" stop-opacity="1"/>';
-    svg += '<stop offset="70%" stop-color="#f0e4c8" stop-opacity="0.9"/>';
-    svg += '<stop offset="100%" stop-color="#e8d5a8" stop-opacity="0.8"/>';
-    svg += '</radialGradient></defs>';
+    svg += '<defs>';
+    svg += '<clipPath id="moonClip' + size + '"><circle cx="' + cx + '" cy="' + cy + '" r="' + r + '"/></clipPath>';
+    svg += '<radialGradient id="moonGlow' + size + '" cx="50%" cy="50%" r="55%">';
+    svg += '<stop offset="0%" stop-color="#fff8e7" stop-opacity="0.6"/>';
+    svg += '<stop offset="60%" stop-color="#f0c878" stop-opacity="0.2"/>';
+    svg += '<stop offset="100%" stop-color="#f0c878" stop-opacity="0"/>';
+    svg += '</radialGradient>';
+    svg += '</defs>';
 
-    // Full moon circle (light side)
-    svg += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="url(#moonGlow)" stroke="rgba(240,200,120,0.5)" stroke-width="1"/>';
+    // Outer glow
+    svg += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (r + 4) + '" fill="url(#moonGlow' + size + ')"/>';
 
-    // Shadow side - draw an ellipse to create phase
+    // Realistic watercolor moon image clipped to circle
+    svg += '<image href="assets/moon-follicular.png" x="0" y="0" width="' + size + '" height="' + size + '" clip-path="url(#moonClip' + size + ')" preserveAspectRatio="xMidYMid slice"/>';
+
+    // Shadow side for phase transition
     var shadowWidth = r * 2 * (1 - illumination);
-    if (isWaxing) {
-      // Shadow on left
-      svg += '<path d="M ' + cx + ' ' + (cy - r) + ' A ' + r + ' ' + r + ' 0 0 0 ' + cx + ' ' + (cy + r) + ' A ' + (r - shadowWidth / 2) + ' ' + r + ' 0 0 1 ' + cx + ' ' + (cy - r) + ' Z" fill="rgba(45,27,78,0.85)"/>';
-    } else {
-      // Shadow on right
-      svg += '<path d="M ' + cx + ' ' + (cy - r) + ' A ' + r + ' ' + r + ' 0 0 1 ' + cx + ' ' + (cy + r) + ' A ' + (r - shadowWidth / 2) + ' ' + r + ' 0 0 0 ' + cx + ' ' + (cy - r) + ' Z" fill="rgba(45,27,78,0.85)"/>';
+    if (shadowWidth > 0.5) {
+      if (isWaxing) {
+        svg += '<path d="M ' + cx + ' ' + (cy - r) + ' A ' + r + ' ' + r + ' 0 0 0 ' + cx + ' ' + (cy + r) + ' A ' + (r - shadowWidth / 2) + ' ' + r + ' 0 0 1 ' + cx + ' ' + (cy - r) + ' Z" fill="rgba(25,15,55,0.72)"/>';
+      } else {
+        svg += '<path d="M ' + cx + ' ' + (cy - r) + ' A ' + r + ' ' + r + ' 0 0 1 ' + cx + ' ' + (cy + r) + ' A ' + (r - shadowWidth / 2) + ' ' + r + ' 0 0 0 ' + cx + ' ' + (cy - r) + ' Z" fill="rgba(25,15,55,0.72)"/>';
+      }
     }
 
-    // Subtle craters
-    svg += '<circle cx="' + (cx - r * 0.3) + '" cy="' + (cy - r * 0.2) + '" r="' + (r * 0.12) + '" fill="rgba(200,180,140,0.3)"/>';
-    svg += '<circle cx="' + (cx + r * 0.25) + '" cy="' + (cy + r * 0.3) + '" r="' + (r * 0.08) + '" fill="rgba(200,180,140,0.25)"/>';
+    // Subtle rim light
+    svg += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="rgba(255,240,200,0.35)" stroke-width="0.8"/>';
 
     svg += '</svg>';
     return svg;

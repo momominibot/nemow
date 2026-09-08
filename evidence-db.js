@@ -634,7 +634,7 @@ window.EVIDENCE_DB = {
     source: { authors: "Diamond MP et al.", year: "2022", journal: "Endotext", doi: "", pmid: "25905226", title: "Neuroendocrine Control of the Menstrual Cycle and metabolic effects of estrogen" },
     level: "moderate",
     wellnessNote: "Individual variation is significant; not everyone experiences a clear energy surge. Use the follicular phase as an opportunity for higher-intensity training and complex carbs, but listen to your body. Insulin sensitivity testing requires clinical assessment."
-  }
+  },
   /* ── Moxibustion for PCOS / fertility ── */
   "moxibustion-pcos": {
     claim: "Moxibustion as adjunct therapy may improve hormonal profiles and ovulation in PCOS, but evidence quality is low-to-moderate due to heterogeneous trials.",
