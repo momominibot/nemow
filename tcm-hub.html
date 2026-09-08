@@ -21,6 +21,39 @@
     .tcm-safety { display:flex; gap:10px; align-items:flex-start; padding:14px; border-radius:12px; background:rgba(201,138,46,.12); border:1.5px solid rgba(201,138,46,.35); font-size:12.5px; line-height:1.55; color:var(--ink); margin:16px; }
     .tcm-safety span { color:var(--warn); font-size:20px; flex-shrink:0; }
     .routine-card { margin:16px; padding:16px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); }
+
+    /* Cramps acupoints */
+    .cramps-section { margin:20px 16px 0; }
+    .cramps-section-head { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .cramps-section-head .cs-icon { width:40px; height:40px; border-radius:12px; background:rgba(212,154,138,.18); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+    .cramps-section-head .cs-text h3 { font:800 17px var(--sans); color:var(--ink); margin:0; }
+    .cramps-section-head .cs-text p { font-size:11.5px; color:var(--taupe); margin:2px 0 0; line-height:1.4; }
+    .acupoint-card { background:var(--card); border:2px solid var(--line-soft); border-radius:var(--r); padding:16px; margin-bottom:12px; }
+    .acupoint-card.primary { border-color:rgba(212,154,138,.5); background:linear-gradient(135deg, rgba(245,198,184,.08), var(--card)); }
+    .ac-head { display:flex; align-items:flex-start; gap:12px; margin-bottom:10px; }
+    .ac-num { width:34px; height:34px; border-radius:10px; background:rgba(196,181,224,.2); display:flex; align-items:center; justify-content:center; font:800 15px var(--serif); color:var(--mauve); flex-shrink:0; }
+    .acupoint-card.primary .ac-num { background:rgba(212,154,138,.2); color:var(--terracotta); }
+    .ac-info { flex:1; }
+    .ac-name { font:800 14.5px var(--sans); color:var(--ink); display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+    .ac-cn { font-size:12px; color:var(--taupe); font-weight:600; }
+    .ac-primary-badge { font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; padding:2px 7px; border-radius:99px; background:rgba(212,154,138,.2); color:var(--terracotta); }
+    .ac-row { display:flex; gap:8px; align-items:flex-start; padding:6px 0; border-bottom:1px solid var(--line-soft); font-size:12px; line-height:1.45; }
+    .ac-row:last-child { border-bottom:none; }
+    .ac-row .ac-ic { font-size:14px; flex-shrink:0; width:18px; text-align:center; margin-top:1px; }
+    .ac-row .ac-label { font-weight:800; color:var(--ink); flex-shrink:0; min-width:62px; }
+    .ac-row .ac-val { color:var(--taupe); flex:1; }
+    .ac-tcm { font-size:11.5px; color:var(--cocoa); line-height:1.5; padding:8px 10px; background:rgba(196,181,224,.1); border-radius:10px; margin-top:8px; border-left:3px solid var(--mauve); }
+    .ac-caution { font-size:11px; color:var(--warn); line-height:1.45; padding:7px 10px; background:rgba(201,138,46,.1); border-radius:10px; margin-top:8px; border-left:3px solid var(--warn); }
+    .routine-steps { display:flex; align-items:center; gap:4px; flex-wrap:wrap; margin-top:10px; }
+    .routine-step { display:flex; align-items:center; gap:4px; padding:5px 9px; border-radius:99px; background:var(--sunken); font:700 10.5px var(--sans); color:var(--ink); white-space:nowrap; }
+    .routine-arrow { color:var(--taupe); font-size:11px; font-weight:800; }
+    .when-guide { background:var(--card); border:2px solid var(--line-soft); border-radius:var(--r); padding:16px; margin-top:12px; }
+    .when-guide h4 { font:800 14px var(--sans); color:var(--ink); margin:0 0 10px; display:flex; align-items:center; gap:6px; }
+    .wg-item { display:flex; gap:10px; align-items:flex-start; padding:7px 0; border-bottom:1px solid var(--line-soft); font-size:12px; line-height:1.45; }
+    .wg-item:last-child { border-bottom:none; }
+    .wg-item .wg-ic { font-size:15px; flex-shrink:0; }
+    .wg-item .wg-text { color:var(--taupe); }
+    .wg-item .wg-text b { color:var(--ink); }
   </style>
 <link rel="stylesheet" href="evidence.css">
 <link rel="stylesheet" href="luna-chat.css">
@@ -80,6 +113,208 @@
           <a href="breathwork.html" class="badge" style="flex-shrink:0; background:var(--sage); color:#fff; text-decoration:none">Breathwork</a>
           <a href="acupoints.html" class="badge" style="flex-shrink:0; background:var(--terracotta); color:#fff; text-decoration:none">CV4 pressure</a>
           <a href="tcm-footsoak.html" class="badge" style="flex-shrink:0; background:var(--gold); color:#fff; text-decoration:none">Foot soak</a>
+        </div>
+      </div>
+
+      <!-- Cramps Relief Acupoints -->
+      <div class="cramps-section">
+        <div class="cramps-section-head">
+          <div class="cs-icon">🩸</div>
+          <div class="cs-text">
+            <h3>Cramps Relief Acupoints</h3>
+            <p>Five evidence-based acupressure points to ease menstrual pain, warm the uterus, and move Qi and blood.</p>
+          </div>
+        </div>
+
+        <!-- a. SP6 Sanyinjiao — PRIMARY -->
+        <div class="acupoint-card primary">
+          <div class="ac-head">
+            <div class="ac-num">1</div>
+            <div class="ac-info">
+              <div class="ac-name">SP6 Sanyinjiao <span class="ac-cn">三阴交</span> <span class="ac-primary-badge">Primary</span></div>
+            </div>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">📍</span>
+            <span class="ac-label">Location</span>
+            <span class="ac-val">3 cun (4 finger-widths) above the inner ankle bone, just behind the shin bone (tibia).</span>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">👆</span>
+            <span class="ac-label">Massage</span>
+            <span class="ac-val">Thumb press, firm until a clear aching sensation (de qi). 6s pressure + 2s rest. 5 min per leg, 2 cycles both legs = 20 min total.</span>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">⏰</span>
+            <span class="ac-label">When</span>
+            <span class="ac-val">During pain (first 2 days for spasmodic cramps; 2 days before expected period for congestive type).</span>
+          </div>
+          <div class="ac-tcm">
+            <b>TCM:</b> Convergence point of the Spleen, Liver, and Kidney yin meridians — the most important gynecological acupoint. Moves blood, resolves stasis, regulates menstruation, and calms the uterus.
+          </div>
+          <div style="margin-top:8px; font-size:12px; color:var(--taupe); line-height:1.5">
+            Multiple RCTs confirm statistically significant pain reduction with SP6 acupressure <span class="qi" data-evidence="sp6-acupressure-cramps">i</span> <span class="qi" data-evidence="acupressure-dysmenorrhea-meta">i</span>.
+          </div>
+        </div>
+
+        <!-- b. CV4 Guanyuan -->
+        <div class="acupoint-card">
+          <div class="ac-head">
+            <div class="ac-num">2</div>
+            <div class="ac-info">
+              <div class="ac-name">CV4 Guanyuan <span class="ac-cn">关元</span></div>
+            </div>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">📍</span>
+            <span class="ac-label">Location</span>
+            <span class="ac-val">3 cun below the navel on the midline of the abdomen.</span>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">👆</span>
+            <span class="ac-label">Massage</span>
+            <span class="ac-val">Circular press with the palm or thumb, gentle to moderate pressure. 1-2 minutes.</span>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">⏰</span>
+            <span class="ac-label">When</span>
+            <span class="ac-val">Before and during menstruation. Can be combined with a warm compress for enhanced effect.</span>
+          </div>
+          <div class="ac-tcm">
+            <b>TCM:</b> "Gate of Origin" — tonifies Yuan (source) Qi, warms the uterus, nourishes blood, and strengthens the lower Jiao. One of the most important points for gynecological health and reproductive wellness.
+          </div>
+          <div class="ac-caution">
+            ⚠️ <b>Caution:</b> Avoid strong abdominal massage if experiencing heavy bleeding. Use gentle circular pressure only. Contraindicated in pregnancy.
+          </div>
+        </div>
+
+        <!-- c. LV3 Taichong -->
+        <div class="acupoint-card">
+          <div class="ac-head">
+            <div class="ac-num">3</div>
+            <div class="ac-info">
+              <div class="ac-name">LV3 Taichong <span class="ac-cn">太冲</span></div>
+            </div>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">📍</span>
+            <span class="ac-label">Location</span>
+            <span class="ac-val">Dorsum of the foot, in the depression between the 1st and 2nd metatarsal bones.</span>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">👆</span>
+            <span class="ac-label">Massage</span>
+            <span class="ac-val">Thumb press, moderate to firm pressure. 1 minute per foot.</span>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">⏰</span>
+            <span class="ac-label">When</span>
+            <span class="ac-val">During cramps, especially when accompanied by emotional stress, irritability, or breast tenderness.</span>
+          </div>
+          <div class="ac-tcm">
+            <b>TCM:</b> Source point of the Liver meridian. Spreads Liver Qi, resolves stagnation, clears Liver fire, and relieves pain. Essential for cramps caused by Liver Qi stagnation (the most common pattern in primary dysmenorrhea).
+          </div>
+        </div>
+
+        <!-- d. SP8 Diji -->
+        <div class="acupoint-card">
+          <div class="ac-head">
+            <div class="ac-num">4</div>
+            <div class="ac-info">
+              <div class="ac-name">SP8 Diji <span class="ac-cn">地机</span></div>
+            </div>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">📍</span>
+            <span class="ac-label">Location</span>
+            <span class="ac-val">3 cun below the medial knee, on the posterior border of the tibia (shin bone).</span>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">👆</span>
+            <span class="ac-label">Massage</span>
+            <span class="ac-val">Thumb press, firm pressure. 1-2 minutes per leg.</span>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">⏰</span>
+            <span class="ac-label">When</span>
+            <span class="ac-val">During acute cramps — this point is especially effective for sudden, severe pain.</span>
+          </div>
+          <div class="ac-tcm">
+            <b>TCM:</b> Xi-cleft (accumulation) point of the Spleen meridian. Xi-cleft points are specifically used for acute pain and acute conditions. Regulates the Spleen, moves blood, and resolves stasis — excellent for acute dysmenorrhea flare-ups.
+          </div>
+        </div>
+
+        <!-- e. ST36 Zusanli -->
+        <div class="acupoint-card">
+          <div class="ac-head">
+            <div class="ac-num">5</div>
+            <div class="ac-info">
+              <div class="ac-name">ST36 Zusanli <span class="ac-cn">足三里</span></div>
+            </div>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">📍</span>
+            <span class="ac-label">Location</span>
+            <span class="ac-val">3 cun below the knee, 1 finger-width lateral to the anterior crest of the tibia.</span>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">👆</span>
+            <span class="ac-label">Massage</span>
+            <span class="ac-val">Thumb press, firm pressure until aching. 1-2 minutes per leg.</span>
+          </div>
+          <div class="ac-row">
+            <span class="ac-ic">⏰</span>
+            <span class="ac-label">When</span>
+            <span class="ac-val">Daily for long-term benefit, and during cramps for support. Especially helpful if cramps are accompanied by fatigue, bloating, or loose stools.</span>
+          </div>
+          <div class="ac-tcm">
+            <b>TCM:</b> One of the most important tonifying points in the body. Strengthens Spleen and Stomach, boosts Qi and blood production, supports immunity, and promotes general wellness. A strong Spleen ensures adequate blood production and smooth menstruation.
+          </div>
+        </div>
+
+        <!-- 5-Minute Routine -->
+        <div class="routine-card" style="margin:16px 0 0">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px">
+            <b style="font-size:14px">⚡ 5-Minute Quick Routine</b>
+            <span style="font-size:11px; color:var(--taupe)">For acute relief</span>
+          </div>
+          <p style="font-size:12px; color:var(--taupe); margin:0 0 2px; line-height:1.4">Press each point for ~1 minute per side, moving through the sequence. Repeat both sides where applicable.</p>
+          <div class="routine-steps">
+            <span class="routine-step">1️⃣ SP6</span>
+            <span class="routine-arrow">→</span>
+            <span class="routine-step">2️⃣ CV4</span>
+            <span class="routine-arrow">→</span>
+            <span class="routine-step">3️⃣ LV3</span>
+            <span class="routine-arrow">→</span>
+            <span class="routine-step">4️⃣ SP8</span>
+            <span class="routine-arrow">→</span>
+            <span class="routine-step">5️⃣ ST36</span>
+          </div>
+        </div>
+
+        <!-- When to Massage Guide -->
+        <div class="when-guide">
+          <h4>📅 When to Massage</h4>
+          <div class="wg-item">
+            <span class="wg-ic">🌱</span>
+            <div class="wg-text"><b>Preventive:</b> Start 2-3 days BEFORE your expected period. Daily acupressure in the premenstrual phase can reduce pain intensity when bleeding begins.</div>
+          </div>
+          <div class="wg-item">
+            <span class="wg-ic">🩸</span>
+            <div class="wg-text"><b>Acute relief:</b> During the first 2-3 days of menses, when cramps are typically strongest. Use the full 20-minute routine or the 5-minute quick routine as needed.</div>
+          </div>
+          <div class="wg-item">
+            <span class="wg-ic">⏱️</span>
+            <div class="wg-text"><b>Duration:</b> 20-minute full routine (SP6 5min/leg × 2 cycles + other points), or 5-minute quick routine. Consistency over multiple cycles yields the best results.</div>
+          </div>
+          <div class="wg-item">
+            <span class="wg-ic">⚠️</span>
+            <div class="wg-text"><b>Caution:</b> Avoid strong abdominal massage (CV4) if experiencing heavy bleeding. All abdominal points are contraindicated in pregnancy. Use warm hands for comfort.</div>
+          </div>
+          <div class="wg-item">
+            <span class="wg-ic">🔥</span>
+            <div class="wg-text"><b>Enhance:</b> Use warm hands, and apply a warm compress or heating pad to the lower abdomen after acupressure for synergistic pain relief. Warmth improves local blood flow and relaxes uterine muscles.</div>
+          </div>
         </div>
       </div>
 

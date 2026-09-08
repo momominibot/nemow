@@ -72,9 +72,18 @@
 
     <!-- Cycle ring dial -->
     <div class="card" style="padding:16px 14px 14px">
-      <div class="ringwrap">
-        <div id="cyclering" data-day="9" data-len="28" data-period="0,5" data-fertile="11,16" data-ovulation="14"></div>
+      <div class="mystical-ring-wrap" id="mysticalRingWrap">
+        <div class="mystical-glow"></div>
+        <div id="cyclering" data-day="9" data-len="28" data-period="0,5" data-fertile="11,16" data-ovulation="14" style="position:relative;z-index:2"></div>
+        <div class="mystical-center" id="mysticalCenter"></div>
       </div>
+      <div class="mystical-stepper" id="mysticalStepper">
+        <button class="mystical-step-btn" id="mysticalPrev">−</button>
+        <span class="mystical-step-label" id="mysticalDayLabel">Day 9</span>
+        <button class="mystical-step-btn" id="mysticalNext">+</button>
+      </div>
+      <button class="mystical-today-btn" id="mysticalToday">✦ Return to today</button>
+      <div class="mystical-hint"><span class="ms">touch_app</span> Drag the orb or tap the ring to explore</div>
     </div>
 
     <!-- Today's insights -->
@@ -96,6 +105,17 @@
         </div>
       </div>
     </div>
+
+    <!-- Today's Activity -->
+    <a href="phase-coach.html" class="card" style="padding:14px 16px;display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;background:linear-gradient(135deg,rgba(168,192,160,.14),rgba(255,255,255,.9));border:1.5px solid rgba(168,192,160,.3)">
+      <span style="width:40px;height:40px;border-radius:13px;background:rgba(168,192,160,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="ms" style="color:var(--ok);font-size:21px">directions_run</span></span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ok)">Today's Activity · Follicular</div>
+        <div style="font-size:13.5px;font-weight:800;color:var(--ink);margin-top:2px">High intensity <span class="qi" data-evidence="estrogen-insulin-follicular" style="font-size:9px">i</span></div>
+        <div class="sub" style="font-size:11px;margin-top:1px">HIIT, strength, running — your power phase</div>
+      </div>
+      <span class="ms" style="color:var(--faded);font-size:18px;flex-shrink:0">chevron_right</span>
+    </a>
 
     <!-- Nutrition glance -->
     <a href="diet.html" class="card" style="padding:16px 18px;display:block;text-decoration:none;color:inherit">
