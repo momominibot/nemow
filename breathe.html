@@ -6,6 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="anim.css">
+<link rel="stylesheet" href="darkmode.css">
 <link rel="stylesheet" href="evidence.css">
 <script src="anim.js" defer></script>
 <style>
@@ -61,6 +62,22 @@
 .breath-stat .bs-l{ font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--taupe); font-weight:700; margin-top:2px; }
 
 .wellness-note{ font-size:11px; color:var(--taupe); line-height:1.5; padding:10px 12px; background:rgba(245,198,184,.12); border-radius:12px; border:1px solid rgba(212,154,138,.25); }
+
+/* mini breathing circle (per-exercise) */
+.mini-breathe{ display:flex; flex-direction:column; align-items:center; padding:16px 0 4px; gap:10px; }
+.mini-circle-wrap{ position:relative; width:130px; height:130px; display:flex; align-items:center; justify-content:center; }
+.mini-circle-bg{ position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle, rgba(196,181,224,.2), rgba(245,198,184,.12)); border:1.5px solid rgba(196,181,224,.25); }
+.mini-orb{ width:78px; height:78px; border-radius:50%; background:linear-gradient(135deg, var(--lavender), var(--blush)); box-shadow:0 4px 20px rgba(122,92,150,.2); transition: transform 4s ease-in-out, opacity .3s; opacity:.85; }
+.mini-orb.inhale{ transform:scale(1.45); }
+.mini-orb.exhale{ transform:scale(0.65); }
+.mini-orb.hold{ transform:scale(1.45); }
+.mini-label{ position:absolute; font:800 12px var(--sans); color:var(--ink); letter-spacing:.05em; text-transform:uppercase; z-index:2; transition:.3s; text-align:center; }
+.mini-start-btn{ display:inline-flex; align-items:center; gap:5px; padding:7px 16px; border-radius:99px; border:1.5px solid var(--mauve); background:rgba(139,108,130,.08); color:var(--ink); font:700 11.5px var(--sans); cursor:pointer; transition:.15s; }
+.mini-start-btn:active{ transform:scale(.96); }
+.cramps-section-head{ display:flex; align-items:center; gap:10px; margin:20px 0 12px; }
+.cramps-section-head .cs-icon{ width:40px; height:40px; border-radius:12px; background:rgba(212,154,138,.18); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.cramps-section-head .cs-text h3{ font:800 17px var(--sans); color:var(--ink); margin:0; }
+.cramps-section-head .cs-text p{ font-size:11.5px; color:var(--taupe); margin:2px 0 0; line-height:1.4; }
 </style>
 <link rel="stylesheet" href="luna-chat.css">
 </head><body>
@@ -125,6 +142,7 @@
       <div class="btab" data-ex="478">🌙 4-7-8</div>
       <div class="btab" data-ex="box">📦 Box</div>
       <div class="btab" data-ex="bodyscan">😴 Body Scan</div>
+      <div class="btab" data-ex="cramps">🩸 Cramps Relief</div>
     </div>
 
     <!-- Coherent Breathing -->
@@ -209,6 +227,136 @@
       <div class="insight" style="margin-top:4px">
         <span class="i-ic">💡</span>
         <p><b>Guided:</b> Lie down comfortably. Bring attention to the top of your head, slowly scanning down — forehead, eyes, jaw, neck, shoulders, arms, chest, belly, hips, legs, feet. At each area, notice tension without judgment, then breathe into it and let it soften. Let your body feel heavy and supported by the bed.</p>
+      </div>
+    </div>
+
+    <!-- Cramps Relief Breathing -->
+    <div id="ex-cramps" style="display:none">
+      <div class="cramps-section-head">
+        <div class="cs-icon">🩸</div>
+        <div class="cs-text">
+          <h3>Cramps Relief Breathing</h3>
+          <p>Evidence-based breathing techniques to ease menstrual pain, improve uterine blood flow, and calm your nervous system.</p>
+        </div>
+      </div>
+
+      <!-- a. Diaphragmatic Breathing for Cramps -->
+      <div class="ex-card" style="margin-bottom:14px">
+        <div class="ex-head">
+          <div class="ex-ic" style="background:rgba(168,192,160,.2)">🫁</div>
+          <div class="ex-info">
+            <div class="ex-name">Diaphragmatic Breathing</div>
+            <div class="ex-phase">Menses · Pain Relief</div>
+          </div>
+        </div>
+        <div class="ex-desc">Deep belly breathing directly targets cramp physiology. It increases intra-abdominal pressure, improves uterine blood flow, reduces prostaglandin secretion, and decreases uterine smooth muscle contraction intensity. Studies show a significant decrease in menstrual symptoms vs control (p=0.0008) <span class="qi" data-evidence="breath-cramps-diaphragmatic">i</span>.</div>
+        <div class="ex-pattern">
+          <div class="ex-step"><span class="es-n">4s</span> Inhale</div>
+          <div class="ex-step"><span class="es-n">6s</span> Exhale</div>
+          <div class="ex-step"><span class="es-n">5m</span> Per session</div>
+        </div>
+        <div class="insight" style="margin-top:4px">
+          <span class="i-ic">💡</span>
+          <p><b>How:</b> Lie on your back, knees bent, one hand on your chest and the other on your abdomen. Inhale slowly through your nose, letting your abdomen rise (hand on belly moves out, chest stays still). Exhale gently through pursed lips, contracting your abdomen. Keep breaths slow and deep.</p>
+        </div>
+        <div class="mini-breathe" data-pattern="diaphragmatic">
+          <div class="mini-circle-wrap">
+            <div class="mini-circle-bg"></div>
+            <div class="mini-orb"></div>
+            <div class="mini-label">Ready</div>
+          </div>
+          <button class="mini-start-btn"><span class="ms" style="font-size:14px">play_arrow</span> Start Guided</button>
+        </div>
+      </div>
+
+      <!-- b. 4-7-8 Breathing -->
+      <div class="ex-card" style="margin-bottom:14px">
+        <div class="ex-head">
+          <div class="ex-ic" style="background:rgba(196,181,224,.25)">🌙</div>
+          <div class="ex-info">
+            <div class="ex-name">4-7-8 Breathing</div>
+            <div class="ex-phase">Menses · Pain & Anxiety</div>
+          </div>
+        </div>
+        <div class="ex-desc">The extended exhale and hold activate your parasympathetic nervous system, inhibiting pain signal conduction and reducing both pain perception and anxiety. Especially helpful when cramps make it hard to rest or sleep <span class="qi" data-evidence="breath-478-relaxation">i</span>.</div>
+        <div class="ex-pattern">
+          <div class="ex-step"><span class="es-n">4s</span> Inhale</div>
+          <div class="ex-step"><span class="es-n">7s</span> Hold</div>
+          <div class="ex-step"><span class="es-n">8s</span> Exhale</div>
+          <div class="ex-step"><span class="es-n">10</span> Cycles</div>
+        </div>
+        <div class="insight" style="margin-top:4px">
+          <span class="i-ic">💡</span>
+          <p><b>How:</b> Place the tip of your tongue behind your upper front teeth. Inhale quietly through your nose for 4 counts. Hold your breath for 7 counts. Exhale completely through your mouth, making a soft whoosh sound, for 8 counts. That's one cycle. Repeat for 10 cycles. If 7-second hold feels too long, reduce to 4-5-6 while keeping the ratio.</p>
+        </div>
+        <div class="mini-breathe" data-pattern="478-cramps">
+          <div class="mini-circle-wrap">
+            <div class="mini-circle-bg"></div>
+            <div class="mini-orb"></div>
+            <div class="mini-label">Ready</div>
+          </div>
+          <button class="mini-start-btn"><span class="ms" style="font-size:14px">play_arrow</span> Start Guided</button>
+        </div>
+      </div>
+
+      <!-- c. Box Breathing -->
+      <div class="ex-card" style="margin-bottom:14px">
+        <div class="ex-head">
+          <div class="ex-ic" style="background:rgba(168,184,216,.25)">📦</div>
+          <div class="ex-info">
+            <div class="ex-name">Box Breathing (4-4-4-4)</div>
+            <div class="ex-phase">PMS · Stress & Irritability</div>
+          </div>
+        </div>
+        <div class="ex-desc">Equal four-part breathing creates a steady, meditative rhythm that calms the nervous system and sharpens focus. Best for stress, irritability, and anxiety during PMS, when emotional tension can amplify pain perception <span class="qi" data-evidence="stress-cortisol-cycle">i</span>.</div>
+        <div class="ex-pattern">
+          <div class="ex-step"><span class="es-n">4s</span> Inhale</div>
+          <div class="ex-step"><span class="es-n">4s</span> Hold</div>
+          <div class="ex-step"><span class="es-n">4s</span> Exhale</div>
+          <div class="ex-step"><span class="es-n">4s</span> Hold</div>
+          <div class="ex-step"><span class="es-n">4-6</span> Cycles</div>
+        </div>
+        <div class="insight" style="margin-top:4px">
+          <span class="i-ic">💡</span>
+          <p><b>How:</b> Visualize tracing the four sides of a square. Inhale as you trace the top (4 counts). Hold tracing the right side (4). Exhale down the left side (4). Hold along the bottom (4). Each full square is one cycle. Aim for 4-6 squares, or more if you find it calming.</p>
+        </div>
+        <div class="mini-breathe" data-pattern="box-cramps">
+          <div class="mini-circle-wrap">
+            <div class="mini-circle-bg"></div>
+            <div class="mini-orb"></div>
+            <div class="mini-label">Ready</div>
+          </div>
+          <button class="mini-start-btn"><span class="ms" style="font-size:14px">play_arrow</span> Start Guided</button>
+        </div>
+      </div>
+
+      <!-- d. Benson Relaxation Technique -->
+      <div class="ex-card" style="margin-bottom:14px">
+        <div class="ex-head">
+          <div class="ex-ic" style="background:rgba(245,198,184,.3)">🧘</div>
+          <div class="ex-info">
+            <div class="ex-name">Benson Relaxation Technique</div>
+            <div class="ex-phase">Daily · Long-term Relief</div>
+          </div>
+        </div>
+        <div class="ex-desc">Developed by Dr. Herbert Benson, this technique induces the "relaxation response" through regulated breathing and a focus word. It effectively reduces menstrual pain intensity and anxiety in adolescent girls. Mechanisms include decreased sympathetic activity, stimulated endogenous endorphin release, and reduced stress hormones <span class="qi" data-evidence="benson-menstrual-pain">i</span>.</div>
+        <div class="ex-pattern">
+          <div class="ex-step"><span class="es-n">10-20m</span> Per session</div>
+          <div class="ex-step"><span class="es-n">1-2x</span> Daily</div>
+          <div class="ex-step"><span class="es-n">🌿</span> Focus word</div>
+        </div>
+        <div class="insight" style="margin-top:4px">
+          <span class="i-ic">💡</span>
+          <p><b>How:</b> Sit quietly in a comfortable position. Close your eyes. Relax your muscles, starting from your feet and progressing upward. Breathe naturally through your nose. As you breathe out, silently repeat a focus word or phrase (e.g., "calm," "one," "peace," or a meaningful word). When other thoughts come, gently return to your word. Practice for 10-20 minutes. Best done daily, not just during pain.</p>
+        </div>
+        <div class="mini-breathe" data-pattern="benson">
+          <div class="mini-circle-wrap">
+            <div class="mini-circle-bg"></div>
+            <div class="mini-orb"></div>
+            <div class="mini-label">Ready</div>
+          </div>
+          <button class="mini-start-btn"><span class="ms" style="font-size:14px">play_arrow</span> Start Guided</button>
+        </div>
       </div>
     </div>
 
@@ -304,8 +452,18 @@ document.querySelectorAll('.btab').forEach(function(tab){
     document.querySelectorAll('.btab').forEach(function(t){t.classList.remove('on');});
     tab.classList.add('on');
     currentEx = tab.dataset.ex;
-    document.querySelectorAll('.ex-card').forEach(function(c){c.style.display='none';});
-    document.getElementById('ex-'+currentEx).style.display='block';
+    var crampsSection = document.getElementById('ex-cramps');
+    if(currentEx === 'cramps'){
+      // Hide standalone exercise cards only (not those inside cramps section)
+      document.querySelectorAll('.ex-card').forEach(function(c){
+        if(!c.closest('#ex-cramps')) c.style.display='none';
+      });
+      crampsSection.style.display = 'block';
+    } else {
+      crampsSection.style.display = 'none';
+      document.querySelectorAll('.ex-card').forEach(function(c){c.style.display='none';});
+      document.getElementById('ex-'+currentEx).style.display='block';
+    }
     resetSession();
   });
 });
@@ -428,6 +586,67 @@ function resetSession(){
   startBtn.innerHTML = '<span class="ms" style="font-size:18px">play_arrow</span> Start Session';
 }
 
+/* ── Mini breathing circles (cramps relief exercises) ── */
+var miniPatterns = {
+  diaphragmatic: [
+    {label:'Breathe In', duration:4000, cls:'inhale'},
+    {label:'Breathe Out', duration:6000, cls:'exhale'}
+  ],
+  '478-cramps': [
+    {label:'Breathe In', duration:4000, cls:'inhale'},
+    {label:'Hold', duration:7000, cls:'hold'},
+    {label:'Breathe Out', duration:8000, cls:'exhale'}
+  ],
+  'box-cramps': [
+    {label:'Breathe In', duration:4000, cls:'inhale'},
+    {label:'Hold', duration:4000, cls:'hold'},
+    {label:'Breathe Out', duration:4000, cls:'exhale'},
+    {label:'Hold', duration:4000, cls:'hold'}
+  ],
+  benson: [
+    {label:'Breathe In', duration:4000, cls:'inhale'},
+    {label:'Breathe Out', duration:6000, cls:'exhale'}
+  ]
+};
+
+document.querySelectorAll('.mini-breathe').forEach(function(el){
+  var patternName = el.dataset.pattern;
+  var orb = el.querySelector('.mini-orb');
+  var label = el.querySelector('.mini-label');
+  var btn = el.querySelector('.mini-start-btn');
+  var running = false;
+  var phaseTimer = null;
+
+  btn.addEventListener('click', function(){
+    if(running){
+      running = false;
+      clearTimeout(phaseTimer);
+      orb.className = 'mini-orb';
+      label.textContent = 'Ready';
+      btn.innerHTML = '<span class="ms" style="font-size:14px">play_arrow</span> Start Guided';
+    } else {
+      running = true;
+      btn.innerHTML = '<span class="ms" style="font-size:14px">stop</span> Stop';
+      runCycle();
+    }
+  });
+
+  function runCycle(){
+    var pattern = miniPatterns[patternName];
+    var idx = 0;
+    function nextPhase(){
+      if(!running) return;
+      var phase = pattern[idx % pattern.length];
+      label.textContent = phase.label;
+      orb.className = 'mini-orb ' + phase.cls;
+      idx++;
+      phaseTimer = setTimeout(nextPhase, phase.duration);
+    }
+    nextPhase();
+  }
+});
+
 updateTimerDisplay();
 </script>
+<script src="darkmode.js" defer></script>
 </body></html>

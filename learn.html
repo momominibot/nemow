@@ -7,6 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="anim.css">
+<link rel="stylesheet" href="knowledge-hero.css">
+<link rel="stylesheet" href="darkmode.css">
 <link rel="stylesheet" href="ovuluna-persona.css">
 <script src="anim.js" defer></script>
 <style>
@@ -60,12 +62,45 @@
   </div>
   <div class="scroll">
 
-    <!-- ===== Women's Wellness Wiki Hero ===== -->
-    <div class="card tint-lavender" style="padding:20px 18px;text-align:center">
-      <span style="font-size:40px">📚</span>
-      <div class="wiki-badge" style="margin-top:8px"><span class="ms" style="font-size:12px;color:var(--ok)">verified</span> Women's Wellness Wiki</div>
-      <div style="font-family:var(--serif);font-weight:600;font-size:18px;color:var(--cocoa);margin-top:8px">Evidence-based guides for every stage</div>
-      <div class="sub" style="font-size:12px;margin-top:4px">Doctor-reviewed articles on ovarian health, cycle science, and longevity.</div>
+    <!-- ===== Celestial Knowledge Hub Hero (Luna-guided) ===== -->
+    <div class="kh-hero">
+      <div class="kh-stars"></div>
+      <div class="kh-nebula n1"></div>
+      <div class="kh-nebula n2"></div>
+      <div class="kh-nebula n3"></div>
+      <svg class="kh-lines" viewBox="0 0 400 280" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="khLineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f0c878" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#c8a8f0" stop-opacity="0.25"/>
+          </linearGradient>
+        </defs>
+        <line class="kh-line" x1="200" y1="146" x2="72" y2="95"/>
+        <line class="kh-line" x1="200" y1="146" x2="328" y2="95"/>
+        <line class="kh-line" x1="200" y1="146" x2="48" y2="174"/>
+        <line class="kh-line" x1="200" y1="146" x2="352" y2="174"/>
+        <line class="kh-line" x1="200" y1="146" x2="200" y2="224"/>
+      </svg>
+      <div class="kh-moonphases"><span class="kh-mp"></span><span class="kh-mp"></span><span class="kh-mp"></span><span class="kh-mp"></span></div>
+      <div class="kh-title">Knowledge Hub</div>
+      <div class="kh-luna-wrap">
+        <div class="kh-luna-glow"></div>
+        <img class="kh-luna" src="assets/mascot/luna-mascot.png" alt="Luna, your cycle guide" />
+      </div>
+      <div class="kh-orbit spin">
+        <span class="kh-spark s1"></span><span class="kh-spark s2"></span>
+      </div>
+      <div class="kh-orbit spin-rev" style="width:86px;height:86px;margin-left:-43px;margin-top:-43px;">
+        <span class="kh-spark s3"></span><span class="kh-spark s4"></span>
+      </div>
+      <div class="kh-orbs">
+        <a class="kh-orb o1" href="learn-cycle-phases.html"><span class="kh-orb-dot">🌙</span><span class="kh-orb-label">Cycle Phases</span></a>
+        <a class="kh-orb o2" href="ovarian-age.html"><span class="kh-orb-dot">🌸</span><span class="kh-orb-label">Ovarian Health</span></a>
+        <a class="kh-orb o3" href="foods.html"><span class="kh-orb-dot">🥗</span><span class="kh-orb-label">Nutrition</span></a>
+        <a class="kh-orb o4" href="tcm-hub.html"><span class="kh-orb-dot">🍵</span><span class="kh-orb-label">TCM &amp; Herbs</span></a>
+        <a class="kh-orb o5" href="learn-perimenopause.html"><span class="kh-orb-dot">🌇</span><span class="kh-orb-label">Perimenopause</span></a>
+      </div>
+      <div class="kh-sub">Understand your body, cycle by cycle</div>
     </div>
 
     <!-- Quick links -->
@@ -427,4 +462,6 @@
 <script src="evidence-db.js" defer></script>
 <script src="evidence.js" defer></script>
 <script src="luna-chat.js" defer></script>
+<script src="darkmode.js" defer></script>
+<script src="knowledge-hero.js" defer></script>
 </body></html>

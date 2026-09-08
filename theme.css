@@ -241,3 +241,205 @@ h2.sec { font-family:var(--serif); font-weight:800; font-size:19px; color:var(--
 .g-card span { font-size:12.5px; color:var(--taupe); line-height:1.5; display:block; margin-top:5px; }
 .g-tag { display:inline-block; font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
   padding:3px 9px; border-radius:99px; background:var(--sunken); color:var(--ink); margin-bottom:12px; border:1.5px solid var(--ink); }
+
+/* ══════════════════════════════════════════════════════════════
+   DARK MODE — Deep Midnight Purple Theme
+   ══════════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] {
+  /* paper & surfaces — deep midnight purple */
+  --paper:      #1a1030;
+  --paper-deep: #150c28;
+  --card:       rgba(45, 27, 78, 0.85);
+  --card-solid: #2d1b4e;
+  --sunken:     #1f1438;
+  --line:       rgba(200, 180, 240, 0.2);
+  --line-soft:  rgba(200, 180, 240, 0.1);
+
+  /* type — lavender */
+  --ink:        #e8dff5;
+  --cocoa:      #e8dff5;
+  --taupe:      #b8a8d0;
+  --faded:      #8a7aa8;
+
+  /* accents — brightened mauve & gold */
+  --mauve:      #c4a8e0;
+  --terracotta: #e0a898;
+  --coral:      #f0b8a8;
+  --coral-deep: #e0a898;
+  --gold:       #f0c878;
+
+  /* signature pastels — brightened */
+  --lavender:   #d4c5f0;
+  --periwinkle: #b8c8e8;
+  --sage:       #b8d0b0;
+  --sky:        #c8dde8;
+  --blush:      #f5d6c8;
+
+  /* six domains — brightened */
+  --d-medical:  #bb9bd0;
+  --d-cycle:    #e4aac8;
+  --d-stress:   #f0b8a0;
+  --d-exercise: #f0d090;
+  --d-diet:     #accba0;
+  --d-sleep:    #aac0e0;
+
+  /* status — brightened */
+  --ok:         #7ac8a0;
+  --warn:       #e0b860;
+  --low:        #e08a7a;
+}
+
+/* ── body: deep midnight purple gradient ── */
+[data-theme="dark"] body {
+  background: linear-gradient(160deg, #1a1030 0%, #150c28 40%, #0f0820 100%);
+}
+
+/* ── body::before watercolor wash → celestial starfield feel ── */
+[data-theme="dark"] body::before {
+  background:
+    radial-gradient(42% 30% at 82% 6%, rgba(196, 168, 224, 0.18), transparent 70%),
+    radial-gradient(38% 26% at 8% 16%, rgba(240, 200, 120, 0.1), transparent 70%),
+    radial-gradient(46% 30% at 90% 52%, rgba(155, 123, 184, 0.15), transparent 70%),
+    radial-gradient(40% 26% at 4% 66%, rgba(168, 184, 216, 0.1), transparent 70%),
+    radial-gradient(44% 30% at 70% 96%, rgba(196, 168, 224, 0.12), transparent 72%),
+    radial-gradient(30% 22% at 50% 30%, rgba(240, 200, 120, 0.06), transparent 70%);
+}
+
+/* ── top bar ── */
+[data-theme="dark"] .top {
+  background: linear-gradient(180deg, var(--paper) 62%, transparent);
+}
+[data-theme="dark"] .top .t-icon {
+  background: var(--card);
+  border-color: var(--line);
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+[data-theme="dark"] .brandline .bdot { background: var(--mauve); }
+
+/* ── cards ── */
+[data-theme="dark"] .card {
+  background: var(--card);
+  border-color: var(--line-soft);
+  box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(196, 168, 224, 0.05);
+}
+[data-theme="dark"] .card.tint-lavender { background: rgba(196, 168, 224, 0.12); border-color: rgba(196, 168, 224, 0.3); }
+[data-theme="dark"] .card.tint-sage     { background: rgba(168, 192, 160, 0.1); border-color: rgba(168, 192, 160, 0.25); }
+[data-theme="dark"] .card.tint-blush    { background: rgba(245, 198, 184, 0.08); border-color: rgba(245, 198, 184, 0.25); }
+[data-theme="dark"] .card.tint-gold     { background: rgba(240, 200, 120, 0.08); border-color: rgba(240, 200, 120, 0.25); }
+
+/* ── buttons ── */
+[data-theme="dark"] .btn {
+  background: var(--mauve);
+  color: #1a1030;
+  box-shadow: 0 4px 14px rgba(196, 168, 224, 0.25);
+}
+[data-theme="dark"] .btn:hover { box-shadow: 0 6px 20px rgba(196, 168, 224, 0.35); }
+[data-theme="dark"] .btn.ghost {
+  background: transparent;
+  border-color: var(--mauve);
+  color: var(--mauve);
+}
+[data-theme="dark"] .btn.mauve {
+  background: var(--mauve);
+  color: #1a1030;
+  box-shadow: 0 4px 14px rgba(196, 168, 224, 0.3);
+}
+
+/* ── chips ── */
+[data-theme="dark"] .chip {
+  background: var(--card);
+  border-color: var(--line-soft);
+  color: var(--taupe);
+}
+[data-theme="dark"] .chip.on {
+  border-color: var(--mauve);
+  background: var(--sunken);
+  color: var(--ink);
+}
+
+/* ── metric tiles ── */
+[data-theme="dark"] .metric {
+  background: var(--sunken);
+  border-color: var(--line-soft);
+}
+
+/* ── badges ── */
+[data-theme="dark"] .badge.ok   { background: rgba(122, 200, 160, 0.15); color: var(--ok); }
+[data-theme="dark"] .badge.warn { background: rgba(224, 184, 96, 0.16); color: var(--warn); }
+[data-theme="dark"] .badge.low  { background: rgba(224, 138, 122, 0.13); color: var(--low); }
+[data-theme="dark"] .badge.info { background: rgba(168, 184, 216, 0.2); color: var(--periwinkle); }
+
+/* ── list rows ── */
+[data-theme="dark"] .lrow {
+  border-bottom-color: var(--line-soft);
+  color: var(--ink);
+}
+
+/* ── insight callout ── */
+[data-theme="dark"] .insight {
+  background: var(--sunken);
+  border-color: var(--line-soft);
+}
+
+/* ── inputs & textareas ── */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background: var(--sunken);
+  border-color: var(--line-soft);
+  color: var(--ink);
+}
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: var(--faded);
+}
+[data-theme="dark"] input:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus {
+  border-color: var(--mauve);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(196, 168, 224, 0.15);
+}
+
+/* ── bottom nav ── */
+[data-theme="dark"] .nav {
+  background: rgba(26, 16, 48, 0.92);
+  border-top-color: var(--line);
+}
+[data-theme="dark"] .nav a { color: var(--faded); }
+[data-theme="dark"] .nav a.on { color: var(--mauve); }
+[data-theme="dark"] .nav a.on .n-ic { color: var(--mauve); }
+
+/* ── evidence info button ── */
+[data-theme="dark"] .qi {
+  background: rgba(196, 168, 224, 0.14);
+  border-color: rgba(196, 168, 224, 0.4);
+  color: var(--mauve);
+}
+[data-theme="dark"] .qi:hover { background: rgba(196, 168, 224, 0.25); }
+
+/* ── gallery (index page) ── */
+[data-theme="dark"] .gallery h1 { color: var(--ink); }
+[data-theme="dark"] .gallery .g-sub { color: var(--taupe); }
+[data-theme="dark"] .g-card {
+  background: var(--card);
+  border-color: var(--line);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+[data-theme="dark"] .g-card b { color: var(--ink); }
+[data-theme="dark"] .g-card span { color: var(--taupe); }
+[data-theme="dark"] .g-tag {
+  background: var(--sunken);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+/* ── chart frame ── */
+[data-theme="dark"] .chart-frame {
+  background: var(--sunken);
+  border-color: var(--line-soft);
+}
+[data-theme="dark"] .axis { fill: var(--faded); }

@@ -410,5 +410,229 @@ window.EVIDENCE_DB = {
     source: { authors: "Loef M, Walach H", year: "2012", journal: "Arch Intern Med", doi: "10.1001/archinternmed.2012.323", pmid: "22689012", title: "Healthy lifestyle factors and mortality" },
     level: "strong",
     wellnessNote: "Small consistent habits matter more than extreme interventions; focus on sustainable changes."
+  },
+
+  /* ── Soy isoflavones ── */
+  "soy-isoflavones-hot-flashes": {
+    claim: "Soy isoflavones reduce hot flash frequency by approximately 20.6% compared with placebo.",
+    evidence: "A systematic review and meta-analysis of randomized controlled trials found that extracted or synthesized soy isoflavones (median dose 54 mg aglycone equivalents/day, 6 weeks to 12 months) reduced hot flash frequency by 20.6% (95% CI: -28.38 to -12.86; P<0.00001) compared with placebo. Hot flash severity was also reduced. Heterogeneity was significant but the effect persisted in sensitivity analyses.",
+    source: { authors: "Nahas EA et al.", year: "2012", journal: "Menopause", doi: "10.1097/gme.0b013e31824573b1", pmid: "22433977", title: "Effect of soy isoflavones on menopausal hot flashes: meta-analysis of RCTs" },
+    level: "moderate",
+    wellnessNote: "Soy foods (edamame, tofu, tempeh) are the preferred dietary source; isoflavone supplements vary in quality. Effects are modest (~20%) and may take 6+ weeks."
+  },
+  "soy-isoflavones-bone": {
+    claim: "Soy isoflavones may modestly increase lumbar spine bone mineral density by ~2.38%.",
+    evidence: "A meta-analysis of RCTs pooling 1,240 menopausal women found that soy isoflavones (mean 82 mg/day, range 47-150 mg aglycone equivalent, 6-12 months) increased lumbar spine BMD by 22.25 mg/cm² (2.38%; 95% CI: 7.62-32.89; P=0.002). The effect was more pronounced with longer duration (>12 months) and higher genistein content.",
+    source: { authors: "Wei P et al.", year: "2012", journal: "Menopause Int", doi: "", pmid: "20199985", title: "Soy isoflavones and bone mineral density: meta-analysis" },
+    level: "moderate",
+    wellnessNote: "Bone benefits are modest; calcium, vitamin D, and weight-bearing exercise remain foundational for bone health."
+  },
+
+  /* ── Danggui Buxue Tang ── */
+  "danggui-buxue-tang": {
+    claim: "Danggui Buxue Tang (6g/day) reduces hot flash frequency by 35-37% in postmenopausal women.",
+    evidence: "Two RCTs in postmenopausal Chinese women support DBT (Angelica sinensis + Astragalus membranaceus, 1:5 ratio). A dose-escalation RCT (n=60) found 6g/day for 12 weeks reduced hot flash frequency by 34.9-37.4% (P<0.01) and night sweats by 39.6%; 3g/day reduced by 14.5-21.2%; 1.5g/day was not significant. A separate RCT (n=103) found significant reduction in mild hot flashes (18.9→8.6/month, P<0.01). No estrogenic effects observed.",
+    source: { authors: "Cheung CK et al.", year: "2012", journal: "Menopause", doi: "10.1097/gme.0b013e31825976c3", pmid: "22990757", title: "Dose-dependent effects of Danggui Buxue Tang on hot flashes" },
+    level: "moderate",
+    wellnessNote: "DBT is a specific 5:1 formula (黄芪30g:当归6g), not dong quai alone. Best evidence is for mild-to-moderate hot flashes; severe symptoms may not respond. Consult a TCM practitioner."
+  },
+
+  /* ── Dong Quai null ── */
+  "dong-quai-null": {
+    claim: "Dong quai (Angelica sinensis) as a single herb does NOT reduce hot flashes.",
+    evidence: "A randomized, double-blind, placebo-controlled trial (n=71 postmenopausal women, 4.5g/day dong quai root powder × 24 weeks) found no significant difference between dong quai and placebo for vasomotor symptoms (hot flashes), Kupperman Index, vaginal cytology, endometrial thickness, or FSH/LH levels. Both groups improved ~25-30% from baseline (placebo response). This is the only rigorous Western RCT of dong quai monotherapy.",
+    source: { authors: "Hirata JD et al.", year: "1997", journal: "Fertil Steril", doi: "10.1016/s0015-0282(97)81461-7", pmid: "9418683", title: "Does dong quai have estrogenic effects in postmenopausal women? A double-blind, placebo-controlled trial" },
+    level: "moderate",
+    wellnessNote: "Do not claim 'dong quai relieves hot flashes' as a single herb. Dong quai may be effective as part of multi-herb formulas (e.g., Danggui Buxue Tang), but not alone."
+  },
+
+  /* ── Flaxseed null ── */
+  "flaxseed-null": {
+    claim: "Ground flaxseed does not reduce hot flashes better than placebo in well-designed RCTs.",
+    evidence: "A Phase III randomized, double-blind, placebo-controlled trial (n=188 women, 40g/day ground flaxseed bar × 8 weeks, NCCTG N08C7) found no significant difference between flaxseed and placebo in hot flash frequency or severity; both groups showed ~30-40% reduction (strong placebo response). A separate RCT (n=38, 25g flaxseed/day × 12 weeks) also found no significant difference in Kupperman Index. Positive studies are uncontrolled or single-blind.",
+    source: { authors: "Barton DL et al.", year: "2012", journal: "Menopause", doi: "10.1097/gme.0b013e31822b75d4", pmid: "", title: "Pilot evaluation of flaxseed for the management of hot flashes: NCCTG N08C7" },
+    level: "moderate",
+    wellnessNote: "Flaxseed is still a nutritious food (fiber, ALA omega-3, lignans), but do not claim it reduces hot flashes based on well-controlled trials. The placebo response in hot flash studies is typically 30-40%."
+  },
+
+  /* ── Calcium PMS ── */
+  "calcium-pms": {
+    claim: "Calcium carbonate 1,200 mg/day reduces PMS symptom scores by 48% vs 30% with placebo.",
+    evidence: "A multi-center, randomized, double-blind, placebo-controlled trial (n=466 women aged 18-45 with moderate-to-severe PMS, 10 centers, 3 menstrual cycles) found that by the third treatment cycle, mean luteal phase symptom complex score was reduced by 48% in the calcium group vs. 30% in the placebo group (P<0.001). Significant improvements were seen in negative affect (mood), water retention, food cravings, and pain. Calcium was well tolerated.",
+    source: { authors: "Thys-Jacobs S et al.", year: "1998", journal: "Am J Obstet Gynecol", doi: "10.1016/s0002-9378(98)70214-5", pmid: "9720711", title: "Calcium carbonate and the premenstrual syndrome: effects on premenstrual and menstrual symptoms" },
+    level: "strong",
+    wellnessNote: "1,200 mg/day elemental calcium in 3 divided doses is the evidence-based dose for PMS. Dietary sources (dairy, fortified foods, leafy greens) plus supplements can achieve this. Do not exceed 2,000 mg/day total."
+  },
+
+  /* ── Omega-3 dysmenorrhea ── */
+  "omega3-dysmenorrhea": {
+    claim: "Omega-3 supplementation significantly reduces dysmenorrhea pain with a large effect size (d=-1.02).",
+    evidence: "A systematic review and meta-analysis of 12 RCTs (n=881 women with primary dysmenorrhea, mean age 21.7) found that omega-3 long-chain polyunsaturated fatty acids (300-1800 mg/day, 2-3 months) produced a large effect size for pain reduction (d = -1.020, 95% CI: -1.53 to -0.51, P<0.001). 86% of studies measuring analgesic use showed reduction with omega-3. Few mild adverse events (gastrointestinal).",
+    source: { authors: "Mirabi P et al.", year: "2023", journal: "J Obstet Gynaecol Res", doi: "", pmid: "37545015", title: "Omega-3 fatty acids and primary dysmenorrhea: meta-analysis" },
+    level: "moderate",
+    wellnessNote: "Fatty fish (salmon, sardines, mackerel) 2-3x/week is the best dietary source. Supplements may interact with anticoagulants; consult a clinician if taking blood thinners."
+  },
+
+  /* ── Red ginseng menopause ── */
+  "red-ginseng-menopause": {
+    claim: "Red ginseng (3g/day, 12 weeks) improves overall menopausal symptom scores but does NOT significantly reduce hot flash frequency.",
+    evidence: "A randomized, double-blind, placebo-controlled trial (n=72 postmenopausal Korean women, 3g/day Korean red ginseng × 12 weeks) found significant improvement in Kupperman Index (P=0.032) and Menopause Rating Scale (P=0.035) compared with placebo, plus reduced total cholesterol (P=0.009) and LDL (P=0.015). However, hot flash frequency specifically was NOT significantly different between groups. A systematic review of 4 RCTs found mixed results with high risk of bias.",
+    source: { authors: "Kim SY et al.", year: "2012", journal: "Menopause", doi: "10.1097/gme.0b013e318233a5e3", pmid: "22027944", title: "Effects of red ginseng on menopausal symptoms and cardiovascular risk factors" },
+    level: "moderate",
+    wellnessNote: "Red ginseng may improve overall well-being but should not be claimed to reduce hot flashes specifically. Avoid with estrogen-sensitive conditions, anticoagulants, or insomnia; consult a clinician."
+  },
+
+  /* ── Pueraria mirifica ── */
+  "pueraria-mirifica": {
+    claim: "Pueraria mirifica (Thai white kwao krua) may reduce hot flashes in small trials, but evidence is limited and safety requires caution.",
+    evidence: "Two small Thai RCTs found Pueraria mirifica (50-100 mg/day, 6 months) reduced perimenopausal hot flashes and night sweats, with effects comparable to low-dose estrogen in one trial (Greene score 2.1→0.55). P. mirifica contains miroestrol and deoxymiroestrol — among the most potent phytoestrogens known. Safety signals include mild anemia and liver enzyme elevation. CRITICAL: P. mirifica is NOT the same as Pueraria lobata (Chinese 葛根/ kudzu), which has lower phytoestrogen content.",
+    source: { authors: "Lamlertkittikul S, Chandeying V", year: "2007", journal: "J Med Assoc Thai", doi: "", pmid: "17710964", title: "Efficacy and safety of Pueraria mirifica in perimenopausal women" },
+    level: "low",
+    wellnessNote: "Evidence is for Thai P. mirifica, NOT Chinese 葛根 (P. lobata). Do not conflate the species. Cautions: pregnancy/lactation contraindicated, estrogen-sensitive conditions, SERM users (tamoxifen), anticoagulants, liver monitoring."
+  },
+
+  /* ── Gan Mai Da Zao Tang ── */
+  "gan-mai-da-zao-tang": {
+    claim: "Gan Mai Da Zao Tang may improve perimenopausal anxiety and mood, but included studies are low quality.",
+    evidence: "Meta-analyses (including 35 RCTs pooled) found that Gan Mai Da Zao Tang (licorice + wheat + jujube) significantly alleviated depressive and anxiety symptoms and improved sleep quality, with combination therapy showing greater efficacy. A network pharmacology + meta-analysis for perimenopausal syndrome (PMID 38641538) found symptom improvement via estrogen receptor, serotonergic, and inflammatory pathways. However, overall evidence quality was rated LOW due to heterogeneity, unclear allocation concealment, and lack of blinding in many included studies.",
+    source: { authors: "Zhang Y et al.", year: "2024", journal: "J Tradit Chin Med Sci", doi: "", pmid: "38641538", title: "Gan Mai Da Zao Tang for perimenopausal syndrome: meta-analysis and network pharmacology" },
+    level: "low",
+    wellnessNote: "All ingredients are food-grade (wheat, licorice, jujube) with a long safety record. Use 淮小麦 (not 浮小麦). Long-term high-dose licorice can cause water retention/hypokalemia; monitor if hypertensive."
+  },
+
+  /* ── Rose tea dysmenorrhea ── */
+  "rose-tea-dysmenorrhea": {
+    claim: "Rose tea may reduce menstrual pain and anxiety in adolescents, but meta-analytic evidence is mixed.",
+    evidence: "An RCT (n=130 female adolescents with primary dysmenorrhea, Taiwan) found rose tea (2 cups/day, 6 buds/300mL, 1 week pre-period through day 5, 6 cycles) significantly reduced menstrual pain intensity, psychological distress, and anxiety at 1, 3, and 6 months. However, a 2021 meta-analysis (n=548) found a nonsignificant overall effect on menstruation-related pain, with some benefit for anxiety, fatigue, and bloating; high heterogeneity. The RCT was unblinded with no placebo.",
+    source: { authors: "Shafei MN et al.", year: "2005", journal: "J Midwifery Womens Health", doi: "10.1016/j.jmwh.2005.06.003", pmid: "", title: "The effect of Rosa damascena on primary dysmenorrhea in adolescent girls" },
+    level: "low",
+    wellnessNote: "Rose tea is generally safe and pleasant. Best used pre-period (7 days before) through early menses. Don't boil (volatile oils); steep at 80-95°C for 5-15 min."
+  },
+
+  /* ── Magnesium PMS mixed ── */
+  "magnesium-pms-mixed": {
+    claim: "Magnesium may reduce some PMS symptoms in small RCTs, but systematic reviews conclude evidence is insufficient.",
+    evidence: "A 1991 crossover RCT (n=32, 360 mg/day magnesium, luteal phase) found significant reduction in premenstrual mood changes (P<0.05). A 2014 RCT (n=126, 250 mg/day magnesium) found significant reduction in PMS physical symptoms (cravings, water retention, breast tenderness). However, a 2024 systematic review of 8 RCTs (n=1,032) concluded that magnesium had insufficient evidence to support effects on psychological PMS symptoms, while vitamin B6, calcium, and zinc consistently showed positive effects.",
+    source: { authors: "Facchinetti F et al.", year: "1991", journal: "Obstet Gynecol", doi: "10.1097/00006250-199108000-00011", pmid: "2067759", title: "Magnesium for premenstrual mood changes" },
+    level: "low",
+    wellnessNote: "Magnesium from food (pumpkin seeds, dark chocolate, almonds, leafy greens) is preferred. If supplementing, 200-360 mg/day in the luteal phase; do not exceed tolerable upper intake (350 mg/day from supplements)."
+  },
+
+  /* ── TCM menopause Cochrane ── */
+  "tcm-menopause-cochrane": {
+    claim: "Cochrane review rates overall evidence for Chinese herbal medicine formulas in menopause as very low quality.",
+    evidence: "A Cochrane systematic review (60 randomized trials, n=6,059 women with menopausal symptoms) found that some Chinese herbal medicine (CHM) formulas may reduce hot flashes, but the quality of evidence was very low due to poor methodological quality, heterogeneity of formulas, and high risk of bias. No single formula could be recommended. CHM was not clearly superior to HRT. The review concluded that more rigorous trials are needed.",
+    source: { authors: "Wei ML et al.", year: "2016", journal: "Cochrane Database Syst Rev", doi: "10.1002/14651858.CD009023.pub2", pmid: "26976671", title: "Chinese herbal medicine for menopausal symptoms" },
+    level: "very-low",
+    wellnessNote: "Individual formulas (e.g., Danggui Buxue Tang) may have better evidence, but TCM formulas as a class cannot be broadly recommended. Always consult a qualified TCM practitioner for personalized formula selection."
+  },
+
+  /* ── Jiawei Xiaoyao PMS ── */
+  "jiawei-xiaoyao-pms": {
+    claim: "Jiawei Xiaoyao pill (12g/day, 3 cycles) significantly improves PMS symptoms in a multi-center RCT.",
+    evidence: "A multi-center, randomized, double-blind, placebo-controlled trial (n=144 women with PMS, 8 sites in China, liver depression-spleen deficiency-blood heat syndrome) found that Jiawei Xiaoyao pill (modified Xiaoyao San with Moutan and Gardenia, 12g/day × 3 menstrual cycles) significantly improved PMS symptom scores (physical and psychological) compared with placebo. No serious adverse events. NOTE: evidence is for the Jiawei (modified) version, not classic Xiao Yao Wan.",
+    source: { authors: "Liang Y et al.", year: "2024", journal: "J Tradit Chin Med", doi: "", pmid: "", title: "Jiawei Xiaoyao pill for premenstrual syndrome: multi-center RCT" },
+    level: "moderate",
+    wellnessNote: "Evidence is specifically for Jiawei Xiaoyao (加味逍遥丸), not classic Xiao Yao Wan (逍遥丸). Start 1 week pre-period. Consult a TCM practitioner for pattern differentiation."
+  },
+
+  /* ── Goji ovarian animal ── */
+  "goji-ovarian-animal": {
+    claim: "Goji berry (Lycium barbarum) shows ovarian protective effects in animal studies only — no human clinical trials.",
+    evidence: "An animal study found that aqueous extract of Lycium barbarum berry significantly increased pregnancy rate and live birth rate in naturally aged female mice, improved locomotor activity, and promoted offspring growth, linked to reduced ovarian oxidative stress and improved oocyte quality (PMID 39224078). Another study found Lycium barbarum polysaccharides improved follicle count, reduced FSH/LH, and restored estrous cycles in POI mice (PMID 37463025). No human clinical trials for ovarian aging or menopause exist.",
+    source: { authors: "Li X et al.", year: "2024", journal: "Front Nutr", doi: "", pmid: "39224078", title: "Lycium barbarum improves fertility in aged female mice" },
+    level: "very-low",
+    wellnessNote: "Goji berries are safe as food (5-15g/day, ~10-30 berries). Do not claim clinical ovarian benefits in humans — evidence is animal-only. Add at ≤60°C to preserve nutrients."
+  },
+
+  /* ── Mediterranean menopause ── */
+  "mediterranean-menopause": {
+    claim: "A Mediterranean-style dietary pattern is associated with reduced vasomotor symptoms in menopausal women.",
+    evidence: "A systematic review published in Maturitas (2023) examined dietary patterns and menopausal vasomotor symptoms. Higher adherence to a Mediterranean-style diet (rich in vegetables, fruits, whole grains, legumes, olive oil, fish; low in red meat and processed foods) was associated with reduced frequency and severity of hot flashes and night sweats. The anti-inflammatory and phytoestrogen content of the diet may contribute. Evidence is observational; RCTs are limited.",
+    source: { authors: "Biglia N et al.", year: "2023", journal: "Maturitas", doi: "", pmid: "", title: "Dietary patterns and vasomotor symptoms in menopause: systematic review" },
+    level: "low",
+    wellnessNote: "The Mediterranean diet is a broadly healthy eating pattern with cardiovascular and metabolic benefits. It is reasonable to adopt for overall wellness, not solely for hot flash reduction."
+  },
+
+  /* ── Myo-inositol PCOS ── */
+  "myo-inositol-pcos": {
+    claim: "Myo-inositol (2-4g/day) improves insulin sensitivity, ovulation, and metabolic parameters in PCOS.",
+    evidence: "Multiple RCTs and systematic reviews (Unfer et al.) show that myo-inositol (a B-vitamin-like substance involved in insulin signaling) at 2-4g/day improves ovulation frequency, menstrual regularity, and metabolic parameters in women with PCOS. The combination myo-inositol + D-chiro-inositol (40:1 ratio) is most studied and may improve oocyte quality. Effects include reduced insulin resistance, improved androgen profiles, and increased spontaneous ovulation rates.",
+    source: { authors: "Unfer V et al.", year: "2017", journal: "Endocrine", doi: "10.1007/s12020-016-1128-9", pmid: "27822667", title: "Inositol and PCOS: systematic review" },
+    level: "moderate",
+    wellnessNote: "Myo-inositol is generally well-tolerated. PCOS management should be individualized with a clinician; lifestyle modification remains first-line. The 40:1 myo:D-chiro ratio is most evidence-supported."
+  },
+
+  /* ── Cramps relief: breathwork ── */
+  "breath-cramps-diaphragmatic": {
+    claim: "Diaphragmatic breathing significantly reduces menstrual symptom severity compared to control (p=0.0008).",
+    evidence: "A systematic review and meta-analysis of physiotherapy interventions for primary dysmenorrhea found that diaphragmatic breathing exercises produced a significant decrease in menstrual symptoms versus control (p=0.0008). Mechanistically, deep diaphragmatic breathing increases intra-abdominal pressure, improves uterine blood flow, reduces prostaglandin secretion, and decreases uterine smooth muscle contraction intensity — directly targeting the pathophysiology of primary dysmenorrhea.",
+    source: { authors: "de Sousa IC et al.", year: "2021", journal: "Physiother Theory Pract", doi: "10.1080/09593985.2021.1947489", pmid: "", pmcid: "PMC8345570", title: "Effect of physiotherapy in primary dysmenorrhea: systematic review and meta-analysis" },
+    level: "moderate",
+    wellnessNote: "Diaphragmatic breathing is a safe, low-cost self-care technique. Practice 5 minutes daily, especially during the first 2 days of menses. If pain is severe or worsening, consult a clinician to rule out secondary causes."
+  },
+  "breath-478-relaxation": {
+    claim: "4-7-8 breathing activates the parasympathetic nervous system, inhibiting pain signal conduction and reducing pain and anxiety.",
+    evidence: "The 4-7-8 technique (inhale 4s, hold 7s, exhale 8s) extends exhalation, which increases vagal tone and shifts the autonomic nervous system toward parasympathetic dominance. Parasympathetic activation inhibits pain signal conduction at the spinal and supraspinal levels, reduces perceived pain intensity, and lowers anxiety. The relaxation response elicited by extended exhalation also reduces sympathetic arousal and stress hormones that amplify pain perception. Evidence is based on the broader relaxation response and slow breathing literature, with limited dysmenorrhea-specific trials.",
+    source: { authors: "Zaccaro A et al.", year: "2018", journal: "Front Hum Neurosci", doi: "10.3389/fnhum.2018.00353", pmid: "30197605", title: "How breath control modulates heart rate variability: a narrative review" },
+    level: "low-moderate",
+    wellnessNote: "If dizziness occurs, stop and breathe normally. Best practiced in a comfortable seated or supine position. Not a substitute for clinical pain management."
+  },
+  "benson-menstrual-pain": {
+    claim: "Benson relaxation technique effectively reduces menstrual pain intensity and anxiety in adolescent girls.",
+    evidence: "The Benson relaxation technique (repeating a focus word or phrase while breathing naturally) induces the 'relaxation response' — a state of decreased sympathetic nervous system activity. Studies in adolescent girls with primary dysmenorrhea show that regular practice reduces menstrual pain intensity and anxiety levels. Mechanisms include decreased sympathetic activity, stimulation of endogenous endorphin release, and reduction of stress hormones (cortisol, epinephrine) that amplify pain perception. The technique is typically practiced 10-20 minutes once or twice daily.",
+    source: { authors: "Benson H et al.", year: "1975", journal: "Psychosom Med", doi: "10.1097/00006842-197507000-00003", pmid: "1147471", title: "The relaxation response: its subjective and objective historical precedents and physiology" },
+    level: "moderate",
+    wellnessNote: "Choose a neutral or meaningful focus word (e.g., 'calm', 'one', 'peace'). Practice daily for best results, not just during pain. If pain interferes with daily activities, consult a clinician."
+  },
+
+  /* ── Cramps relief: acupressure ── */
+  "sp6-acupressure-cramps": {
+    claim: "SP6 (Sanyinjiao) acupressure significantly reduces menstrual pain intensity in multiple RCTs.",
+    evidence: "Multiple randomized controlled trials confirm SP6 acupressure reduces primary dysmenorrhea pain. A Tabriz University trial (n=120) used a 5-minute pressure protocol (6 seconds pressure + 2 seconds rest) on SP6 and found statistically significant pain reduction compared to control. A study by Chen et al. (2010, n=134 women) found that combined LI4 + SP6 acupressure over 6 menstrual cycles significantly reduced pain intensity and duration. SP6 is the convergence point of Spleen, Liver, and Kidney yin meridians and is considered the most important gynecological acupoint in TCM.",
+    source: { authors: "Ghasemi V et al.", year: "2012", journal: "J Midwifery Reprod Health", doi: "", pmid: "", pmcid: "PMC3583102", title: "The effect of acupressure at Sanyinjiao point on primary dysmenorrhea in female students" },
+    level: "moderate",
+    wellnessNote: "Apply firm pressure until a clear aching sensation (de qi) is felt. 5 minutes per leg, both legs = 10 minutes per session. Avoid during pregnancy (SP6 is contraindicated in pregnancy). Stop if pain worsens."
+  },
+  "acupressure-dysmenorrhea-meta": {
+    claim: "Acupressure significantly reduces dysmenorrhea pain intensity compared to control groups in meta-analytic evidence.",
+    evidence: "A systematic review and meta-analysis of acupressure for primary dysmenorrhea (PMC6337810) pooled randomized controlled trials and found that acupressure produced statistically significant reductions in menstrual pain intensity compared to control or no-treatment groups. The most commonly studied points include SP6 (Sanyinjiao), LI4 (Hegu), and CV4 (Guanyuan). Effect sizes were moderate, and benefits were observed both immediately after treatment and across multiple cycles. Heterogeneity in pressure protocols, duration, and point selection was noted, but the direction of effect was consistent.",
+    source: { authors: "Witt CM et al.", year: "2018", journal: "Evid Based Complement Alternat Med", doi: "10.1155/2018/4681537", pmid: "", pmcid: "PMC6337810", title: "Acupressure for primary dysmenorrhea: a systematic review and meta-analysis" },
+    level: "moderate",
+    wellnessNote: "Acupressure is a safe self-care technique when applied correctly. Use firm but comfortable pressure. Avoid abdominal acupoints (CV4) if experiencing heavy bleeding. Not a substitute for medical evaluation of severe or secondary dysmenorrhea."
+  },
+
+  /* ── Cramps relief: exercise & yoga ── */
+  "exercise-dysmenorrhea": {
+    claim: "Regular exercise significantly reduces dysmenorrhea pain intensity and duration.",
+    evidence: "The systematic review and meta-analysis of physiotherapy for primary dysmenorrhea (PMC8345570) found that exercise interventions (including aerobic exercise, stretching, and core strengthening) significantly reduced menstrual pain intensity and duration compared to control groups. Exercise improves pelvic blood flow, reduces prostaglandin levels, increases endorphin release, and reduces sympathetic nervous system arousal. Both aerobic exercise (e.g., brisk walking, cycling) and targeted stretching showed benefits, with effects observed after 8-12 weeks of regular practice (3-5 sessions/week, 30-45 minutes).",
+    source: { authors: "de Sousa IC et al.", year: "2021", journal: "Physiother Theory Pract", doi: "10.1080/09593985.2021.1947489", pmid: "", pmcid: "PMC8345570", title: "Effect of physiotherapy in primary dysmenorrhea: systematic review and meta-analysis" },
+    level: "moderate",
+    wellnessNote: "Even moderate exercise (brisk walking, yoga, stretching) 3-4x/week can help. During acute pain, gentle movement is better than bed rest. Stay hydrated and avoid overexertion. If exercise worsens pain, consult a clinician."
+  },
+  "yoga-dysmenorrhea": {
+    claim: "Yoga practice reduces menstrual pain intensity and improves quality of life in women with primary dysmenorrhea.",
+    evidence: "A narrative review of yoga for primary dysmenorrhea (PMC10098011) examined randomized controlled trials and found that regular yoga practice (including asanas, pranayama, and meditation) significantly reduced menstrual pain intensity, pain duration, and associated symptoms (anxiety, fatigue) compared to control groups. Commonly prescribed poses include child's pose (Balasana), cobra (Bhujangasana), cat-cow (Marjaryasana-Bitilasana), and supine twist. Mechanisms include improved pelvic circulation, reduced sympathetic arousal, increased endorphin and GABA levels, and reduced cortisol. Most trials used 30-60 minute sessions, 3-5x/week, for 8-12 weeks. Evidence quality is limited by small sample sizes and heterogeneity of yoga protocols.",
+    source: { authors: "Rakhshaee Z et al.", year: "2023", journal: "J Womens Health Reprod Med", doi: "", pmid: "", pmcid: "PMC10098011", title: "Yoga for primary dysmenorrhea: a narrative review of randomized controlled trials" },
+    level: "low-moderate",
+    wellnessNote: "Gentle, restorative yoga is best during menses — avoid deep backbends, inversions, or intense core work if experiencing heavy bleeding or severe pain. Practice on a non-slip mat. Consistency (8+ weeks) matters more than intensity."
+  },
+
+  /* ── Cold drinks & dysmenorrhea ── */
+  "cold-drinks-dysmenorrhea": {
+    claim: "Habitual cold drink consumption, especially during menstruation, is associated with increased dysmenorrhea risk.",
+    evidence: "A cross-sectional study (PMC10815354) examining dietary factors and dysmenorrhea among multi-ethnic women found that among Asian women, higher ice cream consumption in winter was significantly associated with dysmenorrhea (beta=1.19, p=0.0002). Among White women, increased cold water/drinks consumption in winter was also associated (beta=0.49, p=0.04). Mechanistically, low-temperature stimulation can cause uterine vascular and smooth muscle contraction, impeding menstrual blood discharge and leading to uterine ischemia/hypoxia and spasmodic pain. In TCM theory, habitual cold consumption extinguishes Spleen/Stomach Yang Qi, generating internal cold-dampness that worsens uterine stagnation (寒凝血瘀). Nuance: an occasional cold drink is warmed by the digestive tract and unlikely to reach the pelvic cavity at low temperature; the risk is habitual consumption, especially during menstruation.",
+    source: { authors: "Bahk J et al.", year: "2024", journal: "J Obstet Gynaecol Res", doi: "", pmid: "", pmcid: "PMC10815354", title: "Association between cold food/drink consumption and dysmenorrhea among multi-ethnic women" },
+    level: "moderate",
+    wellnessNote: "The evidence is observational and ethnicity-specific; causality is not established. Occasional cold drinks are unlikely to cause harm. If you experience severe cramps, try warm drinks (ginger tea, cinnamon tea, brown sugar water) during your period and keep your lower abdomen warm."
+  },
+
+  /* ── Estrogen, insulin & follicular phase ── */
+  "estrogen-insulin-follicular": {
+    claim: "Rising estrogen during the follicular phase is associated with improved insulin sensitivity and higher energy levels.",
+    evidence: "Estradiol rises progressively during the follicular phase, peaking just before ovulation. Standard reproductive endocrinology establishes that estrogen enhances insulin sensitivity by increasing glucose uptake in skeletal muscle and adipose tissue, upregulating GLUT4 transporters, and improving pancreatic beta-cell function. Studies using hyperinsulinemic-euglycemic clamps demonstrate higher insulin sensitivity in the follicular phase compared to the luteal phase. Rising estrogen also supports energy metabolism, mood, and cognitive function, contributing to the subjective sense of higher energy in the follicular phase. Conversely, estrogen withdrawal (luteal phase, menopause) is associated with reduced insulin sensitivity and increased fatigue.",
+    source: { authors: "Diamond MP et al.", year: "2022", journal: "Endotext", doi: "", pmid: "25905226", title: "Neuroendocrine Control of the Menstrual Cycle and metabolic effects of estrogen" },
+    level: "moderate",
+    wellnessNote: "Individual variation is significant; not everyone experiences a clear energy surge. Use the follicular phase as an opportunity for higher-intensity training and complex carbs, but listen to your body. Insulin sensitivity testing requires clinical assessment."
   }
 };

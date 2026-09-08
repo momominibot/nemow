@@ -1,0 +1,337 @@
+/* ══════════════════════════════════════════════════════════════
+   OVULUNA · Knowledge Hub Celestial Hero
+   Mystical lunar intro — deep purple, stars, glowing gold, Luna guide
+   Pure CSS @keyframes · 20s seamless loop · transform/opacity only
+   ══════════════════════════════════════════════════════════════ */
+
+.kh-hero {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 130% 90% at 50% -10%, #3a2266 0%, #241442 45%, #150b2b 100%);
+  box-shadow: 0 14px 36px -14px rgba(45, 27, 78, 0.6), inset 0 0 60px rgba(120, 80, 200, 0.12);
+  isolation: isolate;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
+/* ── stars layer ── */
+.kh-stars { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.kh-star {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0;
+  animation: kh-twinkle var(--dur, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: opacity, transform;
+}
+.kh-star.gold { background: #f0c878; box-shadow: 0 0 6px rgba(240, 200, 120, 0.8); }
+.kh-star.blue { background: #c8b8f0; box-shadow: 0 0 5px rgba(200, 184, 240, 0.7); }
+
+@keyframes kh-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.6); }
+  50% { opacity: var(--peak, 0.9); transform: scale(1); }
+}
+
+/* ── nebula clouds ── */
+.kh-nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform, opacity;
+}
+.kh-nebula.n1 {
+  width: 220px; height: 220px; top: -60px; left: -50px;
+  background: radial-gradient(circle, rgba(180, 140, 230, 0.35), transparent 70%);
+  animation: kh-drift1 20s ease-in-out infinite;
+}
+.kh-nebula.n2 {
+  width: 200px; height: 200px; bottom: -70px; right: -40px;
+  background: radial-gradient(circle, rgba(240, 180, 140, 0.22), transparent 70%);
+  animation: kh-drift2 20s ease-in-out infinite;
+}
+.kh-nebula.n3 {
+  width: 160px; height: 160px; top: 40%; left: 55%;
+  background: radial-gradient(circle, rgba(140, 110, 210, 0.25), transparent 70%);
+  animation: kh-drift3 20s ease-in-out infinite;
+}
+@keyframes kh-drift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+  50% { transform: translate(30px, 20px) scale(1.15); opacity: 1; }
+}
+@keyframes kh-drift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  50% { transform: translate(-25px, -15px) scale(1.1); opacity: 0.9; }
+}
+@keyframes kh-drift3 {
+  0%, 100% { transform: translate(0, 0) scale(0.9); opacity: 0.5; }
+  50% { transform: translate(-20px, 15px) scale(1.1); opacity: 0.85; }
+}
+
+/* ── title & subtitle ── */
+.kh-title {
+  position: absolute;
+  top: 16px; left: 0; right: 0;
+  text-align: center;
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: 0.01em;
+  color: #f3ecff;
+  text-shadow: 0 0 18px rgba(200, 170, 255, 0.55), 0 2px 8px rgba(0,0,0,0.4);
+  z-index: 5;
+  opacity: 0;
+  animation: kh-title-in 20s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+.kh-sub {
+  position: absolute;
+  bottom: 12px; left: 0; right: 0;
+  text-align: center;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: rgba(232, 223, 245, 0.78);
+  z-index: 5;
+  opacity: 0;
+  animation: kh-sub-in 20s ease-in-out infinite;
+  will-change: opacity;
+}
+@keyframes kh-title-in {
+  0% { opacity: 0; transform: translateY(-6px); }
+  8% { opacity: 1; transform: translateY(0); }
+  88% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+@keyframes kh-sub-in {
+  0%, 10% { opacity: 0; }
+  18% { opacity: 0.85; }
+  85% { opacity: 0.85; }
+  100% { opacity: 0; }
+}
+
+/* ── Luna mascot ── */
+.kh-luna-wrap {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 72px; height: 72px;
+  margin-left: -36px; margin-top: -30px;
+  z-index: 4;
+  opacity: 0;
+  animation: kh-luna-master 20s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+.kh-luna-glow {
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240, 200, 120, 0.55) 0%, rgba(200, 160, 240, 0.25) 40%, transparent 70%);
+  filter: blur(6px);
+  animation: kh-glow-pulse 4s ease-in-out infinite;
+  z-index: 0;
+}
+.kh-luna {
+  position: relative;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  z-index: 1;
+  filter: drop-shadow(0 4px 14px rgba(240, 200, 120, 0.45));
+  animation: kh-bob 3.2s ease-in-out infinite;
+}
+@keyframes kh-luna-master {
+  /* Phase 1: 0-20% fade in from top */
+  0% { opacity: 0; transform: translateY(-28px) scale(0.85); }
+  15% { opacity: 1; transform: translateY(0) scale(1); }
+  /* Phase 2-3: hold center, gentle */
+  20% { opacity: 1; transform: translateY(0) scale(1); }
+  75% { opacity: 1; transform: translateY(0) scale(1.02); }
+  /* Phase 4: gentle fade for loop */
+  90% { opacity: 0.85; transform: translateY(-2px) scale(1); }
+  100% { opacity: 0; transform: translateY(-20px) scale(0.9); }
+}
+@keyframes kh-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes kh-glow-pulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.12); }
+}
+
+/* ── orbiting sparkles around Luna ── */
+.kh-orbit {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 110px; height: 110px;
+  margin-left: -55px; margin-top: -55px;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  animation: kh-orbit-master 20s ease-in-out infinite;
+}
+.kh-orbit.spin { animation: kh-orbit-master 20s ease-in-out infinite, kh-spin 9s linear infinite; }
+.kh-orbit.spin-rev { animation: kh-orbit-master 20s ease-in-out infinite, kh-spin-rev 12s linear infinite; }
+.kh-spark {
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #f0c878;
+  box-shadow: 0 0 8px rgba(240, 200, 120, 0.9), 0 0 16px rgba(240, 200, 120, 0.5);
+}
+.kh-spark.s1 { top: 0; left: 50%; margin-left: -3px; }
+.kh-spark.s2 { bottom: 0; left: 50%; margin-left: -3px; background: #d8c0f0; box-shadow: 0 0 8px rgba(200,170,240,.9); }
+.kh-spark.s3 { top: 50%; left: 0; margin-top: -3px; background: #fff; box-shadow: 0 0 8px rgba(255,255,255,.8); }
+.kh-spark.s4 { top: 50%; right: 0; margin-top: -3px; }
+@keyframes kh-orbit-master {
+  0%, 15% { opacity: 0; }
+  25% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes kh-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes kh-spin-rev {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* ── connecting lines (SVG) ── */
+.kh-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: visible;
+}
+.kh-line {
+  fill: none;
+  stroke: url(#khLineGrad);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  opacity: 0;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: kh-line-draw 20s ease-in-out infinite;
+  animation-delay: var(--line-delay, 0s);
+  filter: drop-shadow(0 0 4px rgba(200, 170, 255, 0.5));
+}
+@keyframes kh-line-draw {
+  0%, 30% { opacity: 0; stroke-dashoffset: 120; }
+  38% { opacity: 0.7; stroke-dashoffset: 0; }
+  78% { opacity: 0.7; stroke-dashoffset: 0; }
+  92%, 100% { opacity: 0; stroke-dashoffset: 60; }
+}
+
+/* ── knowledge orbs ── */
+.kh-orbs { position: absolute; inset: 0; z-index: 5; }
+.kh-orb {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.4);
+  animation: kh-orb-pop 20s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+  animation-delay: var(--orb-delay, 0s);
+  will-change: opacity, transform;
+}
+.kh-orb-dot {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.25), rgba(80, 50, 130, 0.7) 60%, rgba(40, 20, 70, 0.9));
+  border: 1.5px solid rgba(240, 200, 120, 0.55);
+  box-shadow:
+    0 0 14px rgba(240, 200, 120, 0.4),
+    0 0 28px rgba(160, 120, 220, 0.25),
+    inset 0 0 10px rgba(240, 200, 120, 0.15);
+  animation: kh-orb-pulse 3s ease-in-out infinite;
+  transition: transform 0.2s;
+}
+.kh-orb:active .kh-orb-dot { transform: scale(0.9); }
+.kh-orb-label {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 8.5px;
+  letter-spacing: 0.04em;
+  color: #e8dff5;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  white-space: nowrap;
+  text-align: center;
+}
+@keyframes kh-orb-pop {
+  /* stay hidden until delay window */
+  0%, 5% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+  12% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+  16% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  78% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  88% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.95); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+}
+@keyframes kh-orb-pulse {
+  0%, 100% { box-shadow: 0 0 14px rgba(240,200,120,.4), 0 0 28px rgba(160,120,220,.25), inset 0 0 10px rgba(240,200,120,.15); }
+  50% { box-shadow: 0 0 20px rgba(240,200,120,.6), 0 0 40px rgba(160,120,220,.4), inset 0 0 14px rgba(240,200,120,.25); }
+}
+
+/* orb positions (percent of hero) */
+.kh-orb.o1 { left: 18%; top: 34%; }
+.kh-orb.o2 { left: 82%; top: 34%; }
+.kh-orb.o3 { left: 12%; top: 62%; }
+.kh-orb.o4 { left: 88%; top: 62%; }
+.kh-orb.o5 { left: 50%; top: 80%; }
+
+/* ── moon phase decoration (small, top-right) ── */
+.kh-moonphases {
+  position: absolute;
+  top: 14px; right: 14px;
+  display: flex;
+  gap: 4px;
+  z-index: 5;
+  opacity: 0;
+  animation: kh-mp-in 20s ease-in-out infinite;
+}
+.kh-mp {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(240, 200, 120, 0.6);
+  box-shadow: 0 0 6px rgba(240, 200, 120, 0.5);
+}
+.kh-mp:nth-child(2) { background: rgba(240,200,120,.4); }
+.kh-mp:nth-child(3) { background: rgba(240,200,120,.25); }
+.kh-mp:nth-child(4) { background: rgba(240,200,120,.15); }
+@keyframes kh-mp-in {
+  0%, 12% { opacity: 0; transform: translateX(8px); }
+  20% { opacity: 0.8; transform: translateX(0); }
+  85% { opacity: 0.8; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(4px); }
+}
+
+/* ── reduced motion: static serene version ── */
+@media (prefers-reduced-motion: reduce) {
+  .kh-hero *, .kh-hero *::before, .kh-hero *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .kh-star { opacity: 0.7; }
+  .kh-nebula { opacity: 0.7; }
+  .kh-title, .kh-sub { opacity: 1; }
+  .kh-luna-wrap { opacity: 1; transform: none; }
+  .kh-luna-glow { opacity: 0.8; }
+  .kh-orbit { opacity: 0.7; }
+  .kh-orb { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .kh-line { opacity: 0.5; stroke-dashoffset: 0; }
+  .kh-moonphases { opacity: 0.7; }
+}

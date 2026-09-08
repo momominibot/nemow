@@ -73,7 +73,12 @@ export default async function handler(req, res) {
     // Add user cycle context if available (from request body)
     for (const msg of messages) {
       if (msg.role === 'user' || msg.role === 'assistant') {
-        fullMessages.push({ role: msg.role, content: String(msg.content).slice(0, 2000) });
+        // Support vision content (array of text + image_url parts) and plain text
+        if (Array.isArray(msg.content)) {
+          fullMessages.push({ role: msg.role, content: msg.content });
+        } else {
+          fullMessages.push({ role: msg.role, content: String(msg.content).slice(0, 2000) });
+        }
       }
     }
 

@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="anim.css">
+<link rel="stylesheet" href="darkmode.css">
 <script src="anim.js" defer></script>
 <style>
 .day { flex:1; text-align:center; padding:12px 4px; border-radius:16px; cursor:pointer; }
@@ -98,6 +99,17 @@ textarea:focus { outline:none; border-color:var(--sage); }
         <div class="chip"><span class="c-ic ms" style="color:var(--coral-deep)">water_drop</span>Light</div>
         <div class="chip on"><span class="c-ic ms" style="color:var(--d-cycle)">water_drop</span>Medium</div>
         <div class="chip"><span class="c-ic ms" style="color:var(--mauve)">water_drop</span>Heavy</div>
+      </div>
+    </div>
+
+    <!-- Cold drinks tip -->
+    <div class="card" style="padding:14px;background:linear-gradient(135deg,rgba(245,198,184,.15),rgba(255,255,255,.9));border:1.5px solid rgba(212,154,138,.3)">
+      <div class="row" style="gap:10px;align-items:flex-start">
+        <span style="width:38px;height:38px;border-radius:12px;background:rgba(212,154,138,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:19px">🍵</span>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:800;color:var(--ink)">Cold Drinks Tip</div>
+          <div style="font-size:11.5px;color:var(--taupe);line-height:1.45;margin-top:3px">During your period, opt for <b>warm drinks</b> (ginger tea, cinnamon tea, warm water) instead of ice-cold beverages. Habitual cold consumption may worsen cramping <span class="qi" data-evidence="cold-drinks-dysmenorrhea">i</span>.</div>
+        </div>
       </div>
     </div>
 
@@ -363,4 +375,5 @@ document.addEventListener('DOMContentLoaded', function(){
 <script src="evidence-db.js" defer></script>
 <script src="evidence.js" defer></script>
 <script src="luna-chat.js" defer></script>
+<script src="darkmode.js" defer></script>
 </body></html>
