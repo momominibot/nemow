@@ -106,10 +106,10 @@
   transition: height .6s cubic-bezier(.34,1.56,.64,1);
   min-height: 4px;
 }
-.hormone-bar-fill.estrogen { background: linear-gradient(180deg, #c4b5e0, #9b7fc4); }
-.hormone-bar-fill.progesterone { background: linear-gradient(180deg, #f5c6b8, #e8a898); }
-.hormone-bar-fill.lh { background: linear-gradient(180deg, #b8d4b0, #8ab87e); }
-.hormone-bar-fill.fsh { background: linear-gradient(180deg, #a8c8e0, #7ba8c8); }
+.hormone-bar-fill.estrogen { background: linear-gradient(180deg, #d4c5e8, #9b7fc4); }
+.hormone-bar-fill.progesterone { background: linear-gradient(180deg, #f8d8cc, #e8a898); }
+.hormone-bar-fill.lh { background: linear-gradient(180deg, #e8c8d8, #c49ab8); }
+.hormone-bar-fill.fsh { background: linear-gradient(180deg, #d8d0e8, #b0a0d0); }
 
 .hormone-bar-value {
   font-size: 9px;

@@ -47,8 +47,8 @@
   const hormoneMeta = {
     estrogen: { short: 'E2', full: 'Estrogen', color: '#9b7fc4' },
     progesterone: { short: 'P4', full: 'Progesterone', color: '#e8a898' },
-    lh: { short: 'LH', full: 'Luteinizing', color: '#8ab87e' },
-    fsh: { short: 'FSH', full: 'Follicle-stim', color: '#7ba8c8' }
+    lh: { short: 'LH', full: 'Luteinizing', color: '#c49ab8' },
+    fsh: { short: 'FSH', full: 'Follicle-stim', color: '#b0a0d0' }
   };
 
   let currentPhase = 'follicular';
