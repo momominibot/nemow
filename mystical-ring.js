@@ -104,13 +104,13 @@
     // Realistic watercolor moon image clipped to circle
     svg += '<image href="assets/moon-follicular.png" x="0" y="0" width="' + size + '" height="' + size + '" clip-path="url(#moonClip' + size + ')" preserveAspectRatio="xMidYMid slice"/>';
 
-    // Shadow side for phase transition
+    // Shadow side for phase transition (darker for visibility)
     var shadowWidth = r * 2 * (1 - illumination);
     if (shadowWidth > 0.5) {
       if (isWaxing) {
-        svg += '<path d="M ' + cx + ' ' + (cy - r) + ' A ' + r + ' ' + r + ' 0 0 0 ' + cx + ' ' + (cy + r) + ' A ' + (r - shadowWidth / 2) + ' ' + r + ' 0 0 1 ' + cx + ' ' + (cy - r) + ' Z" fill="rgba(25,15,55,0.72)"/>';
+        svg += '<path d="M ' + cx + ' ' + (cy - r) + ' A ' + r + ' ' + r + ' 0 0 0 ' + cx + ' ' + (cy + r) + ' A ' + (r - shadowWidth / 2) + ' ' + r + ' 0 0 1 ' + cx + ' ' + (cy - r) + ' Z" fill="rgba(18,10,45,0.82)"/>';
       } else {
-        svg += '<path d="M ' + cx + ' ' + (cy - r) + ' A ' + r + ' ' + r + ' 0 0 1 ' + cx + ' ' + (cy + r) + ' A ' + (r - shadowWidth / 2) + ' ' + r + ' 0 0 0 ' + cx + ' ' + (cy - r) + ' Z" fill="rgba(25,15,55,0.72)"/>';
+        svg += '<path d="M ' + cx + ' ' + (cy - r) + ' A ' + r + ' ' + r + ' 0 0 1 ' + cx + ' ' + (cy + r) + ' A ' + (r - shadowWidth / 2) + ' ' + r + ' 0 0 0 ' + cx + ' ' + (cy - r) + ' Z" fill="rgba(18,10,45,0.82)"/>';
       }
     }
 
@@ -210,14 +210,36 @@
 
     container.innerHTML = svg;
 
-    // Update center
+    // Update center with smooth moon transition
     var centerEl = document.getElementById('mysticalCenter');
     if (centerEl) {
-      centerEl.innerHTML =
-        '<div class="mystical-moon">' + generateMoonSVG(currentDay, 56) + '</div>' +
-        '<div class="mystical-day">Day ' + currentDay + ' of ' + config.length + '</div>' +
-        '<div class="mystical-phase">' + phaseInfo.name + '</div>' +
-        '<div class="mystical-desc">' + moonInfo.desc + '</div>';
+      var moonEl = centerEl.querySelector('.mystical-moon');
+      if (moonEl) {
+        // Fade out
+        moonEl.style.opacity = '0';
+        moonEl.style.transform = 'scale(0.85) rotate(-5deg)';
+        setTimeout(function() {
+          centerEl.innerHTML =
+            '<div class="mystical-moon" style="opacity:0;transform:scale(0.85) rotate(5deg)">' + generateMoonSVG(currentDay, 56) + '</div>' +
+            '<div class="mystical-day">Day ' + currentDay + ' of ' + config.length + '</div>' +
+            '<div class="mystical-phase">' + phaseInfo.name + '</div>' +
+            '<div class="mystical-desc">' + moonInfo.desc + '</div>';
+          // Fade in
+          requestAnimationFrame(function() {
+            var newMoon = centerEl.querySelector('.mystical-moon');
+            if (newMoon) {
+              newMoon.style.opacity = '1';
+              newMoon.style.transform = 'scale(1) rotate(0deg)';
+            }
+          });
+        }, 180);
+      } else {
+        centerEl.innerHTML =
+          '<div class="mystical-moon">' + generateMoonSVG(currentDay, 56) + '</div>' +
+          '<div class="mystical-day">Day ' + currentDay + ' of ' + config.length + '</div>' +
+          '<div class="mystical-phase">' + phaseInfo.name + '</div>' +
+          '<div class="mystical-desc">' + moonInfo.desc + '</div>';
+      }
     }
 
     attachListeners();
