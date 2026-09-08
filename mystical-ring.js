@@ -1,149 +1,311 @@
-/* ══════════════════════════════════════════════════════════════
-   OVULUNA · Mystical Interactive Cycle Ring (simplified)
-   HTML structure is in the page; this JS only renders the SVG
-   and handles drag/tap/stepper interaction.
-   ══════════════════════════════════════════════════════════════ */
+// mystical-ring.js — Interactive glowing cycle ring with 28-day moon phase transitions
+// Drag the orb, tap the ring, or use the moon to explore days. No +/- buttons.
 
 (function () {
   'use strict';
 
   var container = document.getElementById('cyclering');
-  var centerEl = document.getElementById('mysticalCenter');
-  var dayLabel = document.getElementById('mysticalDayLabel');
-  if (!container || !centerEl) return;
+  if (!container) return;
+
+  var SIZE = 300;
+  var CX = SIZE / 2;
+  var CY = SIZE / 2;
+  var R_OUTER = 130;
+  var R_INNER = 100;
+  var R_MID = (R_OUTER + R_INNER) / 2;
 
   var config = {
-    today: parseInt(container.dataset.day || '9', 10),
     length: parseInt(container.dataset.len || '28', 10),
+    today: parseInt(container.dataset.day || '1', 10),
     period: (container.dataset.period || '0,5').split(',').map(Number),
     fertile: (container.dataset.fertile || '11,16').split(',').map(Number),
-    ovulation: parseInt(container.dataset.ovulation || '14', 10),
+    ovulation: parseInt(container.dataset.ovulation || '14', 10)
   };
 
   var currentDay = config.today;
   var isDragging = false;
+  var animFrame = null;
 
-  var SIZE = 300, CX = SIZE / 2, CY = SIZE / 2, R = 110, STROKE = 16;
+  // 28 moon phase descriptions
+  var MOON_PHASES = [
+    { name: 'New Moon', emoji: '🌑', desc: 'Fresh start — set intentions' },
+    { name: 'Waxing Crescent', emoji: '🌒', desc: 'Tiny spark of new energy' },
+    { name: 'Waxing Crescent', emoji: '🌒', desc: 'Energy building gently' },
+    { name: 'Waxing Crescent', emoji: '🌒', desc: 'Momentum gathering' },
+    { name: 'First Quarter', emoji: '🌓', desc: 'Half lit — decision point' },
+    { name: 'Waxing Gibbous', emoji: '🌔', desc: 'Almost full — refine' },
+    { name: 'Waxing Gibbous', emoji: '🌔', desc: 'Building toward peak' },
+    { name: 'Waxing Gibbous', emoji: '🌔', desc: 'Nearly radiant' },
+    { name: 'Waxing Gibbous', emoji: '🌔', desc: 'Anticipation building' },
+    { name: 'Waxing Gibbous', emoji: '🌔', desc: 'Almost at fullness' },
+    { name: 'Waxing Gibbous', emoji: '🌔', desc: 'Peak approaching' },
+    { name: 'Waxing Gibbous', emoji: '🌔', desc: 'Radiance imminent' },
+    { name: 'Waxing Gibbous', emoji: '🌔', desc: 'One more night' },
+    { name: 'Full Moon', emoji: '🌕', desc: 'Peak vitality — radiate' },
+    { name: 'Waning Gibbous', emoji: '🌖', desc: 'Gratitude — share your light' },
+    { name: 'Waning Gibbous', emoji: '🌖', desc: 'Beginning to turn inward' },
+    { name: 'Waning Gibbous', emoji: '🌖', desc: 'Processing the cycle' },
+    { name: 'Waning Gibbous', emoji: '🌖', desc: 'Releasing what no longer serves' },
+    { name: 'Last Quarter', emoji: '🌗', desc: 'Half dark — let go' },
+    { name: 'Waning Crescent', emoji: '🌘', desc: 'Rest and restore' },
+    { name: 'Waning Crescent', emoji: '🌘', desc: 'Going inward' },
+    { name: 'Waning Crescent', emoji: '🌘', desc: 'Deep rest needed' },
+    { name: 'Waning Crescent', emoji: '🌘', desc: 'Almost new again' },
+    { name: 'Waning Crescent', emoji: '🌘', desc: 'Dreaming of next cycle' },
+    { name: 'Waning Crescent', emoji: '🌘', desc: 'Preparing for renewal' },
+    { name: 'Waning Crescent', emoji: '🌘', desc: 'The quiet before dawn' },
+    { name: 'New Moon', emoji: '🌑', desc: 'Cycle complete — begin again' }
+  ];
 
-  function getPhase(day) {
-    var p = config.period, f = config.fertile, ov = config.ovulation;
-    if (day >= p[0] && day <= p[1]) return { key: 'menstrual', name: 'Menstrual', moon: '🌑', desc: 'Release and renewal. Rest, nourish, go inward.' };
-    if (day >= f[0] && day <= f[1]) {
-      if (Math.abs(day - ov) <= 1) return { key: 'ovulation', name: 'Ovulation', moon: '🌕', desc: 'Peak vitality and radiance. Your energy is at its highest.' };
-      return { key: 'follicular', name: 'Follicular', moon: '🌒', desc: 'Rising energy. New beginnings, clarity, and growing strength.' };
-    }
-    if (day > p[1] && day < f[0]) return { key: 'follicular', name: 'Follicular', moon: '🌒', desc: 'Rising energy. New beginnings, clarity, and growing strength.' };
-    return { key: 'luteal', name: 'Luteal', moon: '🌖', desc: 'Inner wisdom. Nesting, reflection, and gentle slowing down.' };
-  }
-
-  var COLORS = {
-    track: 'rgba(160,130,200,0.15)', menstrual: '#d8607a', follicular: '#8a9ad8',
-    ovulation: '#f0c060', luteal: '#9b7bb8', orb: '#f0c878', star: '#f0e0c0',
+  var PHASE_INFO = {
+    menstrual: { name: 'Menstrual', color: '#e8a898', desc: 'Rest, release, reflect' },
+    follicular: { name: 'Follicular', color: '#c4b5e0', desc: 'New energy, plan, create' },
+    ovulation: { name: 'Ovulation', color: '#f0c878', desc: 'Peak vitality, connect, express' },
+    luteal: { name: 'Luteal', color: '#7a5c96', desc: 'Nest, edit, prepare, rest' }
   };
 
-  function polar(angle, radius) { return [CX + radius * Math.cos(angle), CY + radius * Math.sin(angle)]; }
-  function dayToAngle(day) { return -Math.PI / 2 + (day / config.length) * 2 * Math.PI; }
-  function angleToDay(angle) {
-    var n = ((angle + Math.PI / 2) / (2 * Math.PI) % 1 + 1) % 1;
-    return Math.max(1, Math.min(config.length, Math.round(n * config.length)));
+  function getPhase(day) {
+    if (day <= config.period[1]) return 'menstrual';
+    if (day < config.fertile[0]) return 'follicular';
+    if (day >= config.fertile[0] && day <= config.fertile[1]) return 'ovulation';
+    return 'luteal';
   }
 
-  function arcPath(startDay, endDay, color, opacity) {
-    var a0 = dayToAngle(startDay), a1 = dayToAngle(endDay);
-    var large = (endDay - startDay) / config.length > 0.5 ? 1 : 0;
-    var p0 = polar(a0, R), p1 = polar(a1, R);
-    return '<path d="M' + p0[0].toFixed(1) + ',' + p0[1].toFixed(1) +
-      ' A' + R + ',' + R + ' 0 ' + large + ' 1 ' + p1[0].toFixed(1) + ',' + p1[1].toFixed(1) +
-      '" fill="none" stroke="' + color + '" stroke-width="' + STROKE +
-      '" stroke-linecap="round" opacity="' + (opacity || 1) + '"/>';
+  function dayToAngle(day) {
+    return ((day - 1) / config.length) * Math.PI * 2 - Math.PI / 2;
+  }
+
+  function angleToDay(angle) {
+    var normalized = (angle + Math.PI / 2 + Math.PI * 2) % (Math.PI * 2);
+    return Math.round((normalized / (Math.PI * 2)) * config.length) + 1;
+  }
+
+  // Generate SVG moon phase for a given day (0-1 illumination)
+  function generateMoonSVG(day, size) {
+    var illumination = (1 - Math.cos(2 * Math.PI * (day - 1) / config.length)) / 2;
+    var isWaxing = day <= config.length / 2;
+    var r = size / 2 - 2;
+    var cx = size / 2;
+    var cy = size / 2;
+
+    // Moon base (full circle - light side)
+    var svg = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">';
+    // Glow filter
+    svg += '<defs><radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">';
+    svg += '<stop offset="0%" stop-color="#fff8e7" stop-opacity="1"/>';
+    svg += '<stop offset="70%" stop-color="#f0e4c8" stop-opacity="0.9"/>';
+    svg += '<stop offset="100%" stop-color="#e8d5a8" stop-opacity="0.8"/>';
+    svg += '</radialGradient></defs>';
+
+    // Full moon circle (light side)
+    svg += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="url(#moonGlow)" stroke="rgba(240,200,120,0.5)" stroke-width="1"/>';
+
+    // Shadow side - draw an ellipse to create phase
+    var shadowWidth = r * 2 * (1 - illumination);
+    if (isWaxing) {
+      // Shadow on left
+      svg += '<path d="M ' + cx + ' ' + (cy - r) + ' A ' + r + ' ' + r + ' 0 0 0 ' + cx + ' ' + (cy + r) + ' A ' + (r - shadowWidth / 2) + ' ' + r + ' 0 0 1 ' + cx + ' ' + (cy - r) + ' Z" fill="rgba(45,27,78,0.85)"/>';
+    } else {
+      // Shadow on right
+      svg += '<path d="M ' + cx + ' ' + (cy - r) + ' A ' + r + ' ' + r + ' 0 0 1 ' + cx + ' ' + (cy + r) + ' A ' + (r - shadowWidth / 2) + ' ' + r + ' 0 0 0 ' + cx + ' ' + (cy - r) + ' Z" fill="rgba(45,27,78,0.85)"/>';
+    }
+
+    // Subtle craters
+    svg += '<circle cx="' + (cx - r * 0.3) + '" cy="' + (cy - r * 0.2) + '" r="' + (r * 0.12) + '" fill="rgba(200,180,140,0.3)"/>';
+    svg += '<circle cx="' + (cx + r * 0.25) + '" cy="' + (cy + r * 0.3) + '" r="' + (r * 0.08) + '" fill="rgba(200,180,140,0.25)"/>';
+
+    svg += '</svg>';
+    return svg;
+  }
+
+  // Generate twinkling stars
+  function generateStars(count) {
+    var stars = '';
+    for (var i = 0; i < count; i++) {
+      var angle = (i / count) * Math.PI * 2 + Math.random() * 0.3;
+      var radius = R_OUTER + 12 + Math.random() * 18;
+      var x = CX + Math.cos(angle) * radius;
+      var y = CY + Math.sin(angle) * radius;
+      var size = 1 + Math.random() * 2;
+      var duration = 2 + Math.random() * 3;
+      var delay = Math.random() * 3;
+      stars += '<circle class="mystical-star" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + size.toFixed(1) + '" fill="rgba(240,200,120,0.8)" style="--twinkle-duration:' + duration.toFixed(1) + 's;--twinkle-delay:' + delay.toFixed(1) + 's"/>';
+    }
+    return stars;
   }
 
   function render() {
+    var angle = dayToAngle(currentDay);
+    var orbX = CX + Math.cos(angle) * R_MID;
+    var orbY = CY + Math.sin(angle) * R_MID;
     var phase = getPhase(currentDay);
-    var orbPos = polar(dayToAngle(currentDay), R);
-    var svg = '<svg width="' + SIZE + '" height="' + SIZE + '" viewBox="0 0 ' + SIZE + ' ' + SIZE + '" id="mysticalRingSvg" style="display:block;width:100%">';
-    svg += '<circle cx="' + CX + '" cy="' + CY + '" r="' + (R + 22) + '" fill="none" stroke="rgba(160,130,200,0.1)" stroke-width="1" stroke-dasharray="2,6"/>';
-    // stars
-    for (var i = 0; i < 16; i++) {
-      var sa = (i / 16) * 2 * Math.PI + i * 0.7;
-      var sr = R + 28 + (i % 3) * 6;
-      var sp = polar(sa, sr);
-      svg += '<circle cx="' + sp[0].toFixed(1) + '" cy="' + sp[1].toFixed(1) + '" r="' + (1 + (i % 3) * 0.8).toFixed(1) + '" fill="' + COLORS.star + '" opacity="0.6"/>';
+    var phaseInfo = PHASE_INFO[phase];
+    var moonInfo = MOON_PHASES[Math.min(currentDay - 1, MOON_PHASES.length - 1)];
+
+    // Build phase segments
+    var segments = '';
+    var phaseRanges = [
+      { start: 1, end: config.period[1], cls: 'mystical-seg-menstrual' },
+      { start: config.period[1] + 1, end: config.fertile[0] - 1, cls: 'mystical-seg-follicular' },
+      { start: config.fertile[0], end: config.fertile[1], cls: 'mystical-seg-ovulation' },
+      { start: config.fertile[1] + 1, end: config.length, cls: 'mystical-seg-luteal' }
+    ];
+
+    phaseRanges.forEach(function (p) {
+      if (p.start > p.end) return;
+      var a1 = dayToAngle(p.start);
+      var a2 = dayToAngle(p.end);
+      var largeArc = (a2 - a1) > Math.PI ? 1 : 0;
+      var x1 = CX + Math.cos(a1) * R_OUTER;
+      var y1 = CY + Math.sin(a1) * R_OUTER;
+      var x2 = CX + Math.cos(a2) * R_OUTER;
+      var y2 = CY + Math.sin(a2) * R_OUTER;
+      var xi1 = CX + Math.cos(a2) * R_INNER;
+      var yi1 = CY + Math.sin(a2) * R_INNER;
+      var xi2 = CX + Math.cos(a1) * R_INNER;
+      var yi2 = CY + Math.sin(a1) * R_INNER;
+      segments += '<path class="' + p.cls + '" d="M ' + x1.toFixed(1) + ' ' + y1.toFixed(1) + ' A ' + R_OUTER + ' ' + R_OUTER + ' 0 ' + largeArc + ' 1 ' + x2.toFixed(1) + ' ' + y2.toFixed(1) + ' L ' + xi1.toFixed(1) + ' ' + yi1.toFixed(1) + ' A ' + R_INNER + ' ' + R_INNER + ' 0 ' + largeArc + ' 0 ' + xi2.toFixed(1) + ' ' + yi2.toFixed(1) + ' Z"/>';
+    });
+
+    // Day markers (28 small dots)
+    var dayMarkers = '';
+    for (var d = 1; d <= config.length; d++) {
+      var da = dayToAngle(d);
+      var dx = CX + Math.cos(da) * R_MID;
+      var dy = CY + Math.sin(da) * R_MID;
+      var isToday = d === config.today;
+      var isCurrent = d === currentDay;
+      var dotSize = isCurrent ? 0 : (isToday ? 3 : 1.5);
+      if (!isCurrent) {
+        dayMarkers += '<circle cx="' + dx.toFixed(1) + '" cy="' + dy.toFixed(1) + '" r="' + dotSize + '" fill="' + (isToday ? '#f0c878' : 'rgba(255,255,255,0.3)') + '"/>';
+      }
     }
-    svg += '<circle cx="' + CX + '" cy="' + CY + '" r="' + R + '" fill="none" stroke="' + COLORS.track + '" stroke-width="' + STROKE + '"/>';
-    svg += arcPath(config.period[0], config.period[1], COLORS.menstrual, 0.85);
-    if (config.period[1] + 1 < config.fertile[0]) svg += arcPath(config.period[1] + 1, config.fertile[0] - 1, COLORS.follicular, 0.7);
-    svg += arcPath(config.fertile[0], config.fertile[1], COLORS.ovulation, 0.8);
-    if (config.fertile[1] + 1 < config.length) svg += arcPath(config.fertile[1] + 1, config.length, COLORS.luteal, 0.75);
-    // moon markers
-    var markers = [{ d: 1, icon: '🌑' }, { d: Math.round(config.length * 0.25), icon: '🌒' }, { d: config.ovulation, icon: '🌕' }, { d: Math.round(config.length * 0.75), icon: '🌖' }];
-    for (var m = 0; m < markers.length; m++) {
-      var mp = polar(dayToAngle(markers[m].d), R - 32);
-      svg += '<text x="' + mp[0].toFixed(1) + '" y="' + mp[1].toFixed(1) + '" text-anchor="middle" dominant-baseline="middle" font-size="14" opacity="0.7">' + markers[m].icon + '</text>';
-    }
-    // tick marks
-    for (var d = 1; d <= config.length; d += 2) {
-      var ta = dayToAngle(d - 0.5);
-      var ti = polar(ta, R - STROKE / 2 - 3), to = polar(ta, R - STROKE / 2 - 7);
-      svg += '<line x1="' + ti[0].toFixed(1) + '" y1="' + ti[1].toFixed(1) + '" x2="' + to[0].toFixed(1) + '" y2="' + to[1].toFixed(1) + '" stroke="rgba(122,92,150,0.3)" stroke-width="1"/>';
-    }
-    // orb glow + orb
-    svg += '<circle cx="' + orbPos[0].toFixed(1) + '" cy="' + orbPos[1].toFixed(1) + '" r="18" fill="rgba(240,200,120,0.35)"/>';
-    svg += '<circle class="mystical-orb" cx="' + orbPos[0].toFixed(1) + '" cy="' + orbPos[1].toFixed(1) + '" r="11" fill="' + COLORS.orb + '" stroke="#fff" stroke-width="3" style="cursor:grab;filter:drop-shadow(0 0 6px rgba(240,200,120,0.8))"/>';
+
+    // Moon phase markers at key days
+    var moonMarkers = '';
+    var keyDays = [1, 7, 14, 21];
+    keyDays.forEach(function (d) {
+      var ma = dayToAngle(d);
+      var mx = CX + Math.cos(ma) * (R_OUTER + 24);
+      var my = CY + Math.sin(ma) * (R_OUTER + 24);
+      var moonEmoji = MOON_PHASES[Math.min(d - 1, MOON_PHASES.length - 1)].emoji;
+      moonMarkers += '<text x="' + mx.toFixed(1) + '" y="' + my.toFixed(1) + '" text-anchor="middle" dominant-baseline="middle" font-size="14" style="pointer-events:none">' + moonEmoji + '</text>';
+    });
+
+    var svg = '<svg width="' + SIZE + '" height="' + SIZE + '" viewBox="0 0 ' + SIZE + ' ' + SIZE + '" id="mysticalRingSvg">';
+    svg += generateStars(20);
+    svg += '<circle class="mystical-track" cx="' + CX + '" cy="' + CY + '" r="' + R_MID + '" fill="none" stroke="rgba(240,200,120,0.15)" stroke-width="1"/>';
+    svg += segments;
+    svg += dayMarkers;
+    svg += moonMarkers;
+    // Orb pulse ring
+    svg += '<circle class="mystical-orb-pulse" cx="' + orbX.toFixed(1) + '" cy="' + orbY.toFixed(1) + '" r="14" fill="none" stroke="rgba(240,200,120,0.6)" stroke-width="2"/>';
+    // Orb
+    svg += '<circle class="mystical-orb" cx="' + orbX.toFixed(1) + '" cy="' + orbY.toFixed(1) + '" r="10" fill="#f0c878" stroke="#fff" stroke-width="2.5"/>';
+    svg += '<circle cx="' + (orbX - 3).toFixed(1) + '" cy="' + (orbY - 3).toFixed(1) + '" r="3" fill="rgba(255,255,255,0.6)"/>';
     svg += '</svg>';
+
     container.innerHTML = svg;
-    centerEl.innerHTML =
-      '<div class="mystical-moon">' + phase.moon + '</div>' +
-      '<div class="mystical-day">Day ' + currentDay + '</div>' +
-      '<div class="mystical-day-label">of ' + config.length + '</div>' +
-      '<div class="mystical-phase phase-' + phase.key + '">' + phase.name + '</div>' +
-      '<div class="mystical-desc">' + phase.desc + '</div>';
-    if (dayLabel) dayLabel.textContent = 'Day ' + currentDay;
+
+    // Update center
+    var centerEl = document.getElementById('mysticalCenter');
+    if (centerEl) {
+      centerEl.innerHTML =
+        '<div class="mystical-moon">' + generateMoonSVG(currentDay, 56) + '</div>' +
+        '<div class="mystical-day">Day ' + currentDay + ' of ' + config.length + '</div>' +
+        '<div class="mystical-phase">' + phaseInfo.name + '</div>' +
+        '<div class="mystical-desc">' + moonInfo.desc + '</div>';
+    }
+
+    attachListeners();
   }
 
-  // Interaction
-  function getAngle(e) {
-    var svg = document.getElementById('mysticalRingSvg');
-    if (!svg) return 0;
-    var rect = svg.getBoundingClientRect();
-    var cx = e.touches ? e.touches[0].clientX : e.clientX;
-    var cy = e.touches ? e.touches[0].clientY : e.clientY;
-    return Math.atan2(cy - rect.top - rect.height / 2, cx - rect.left - rect.width / 2);
-  }
-
-  function onDown(e) { isDragging = true; e.preventDefault(); onMove(e); }
-  function onMove(e) {
-    if (!isDragging) return;
-    e.preventDefault();
-    var day = angleToDay(getAngle(e));
-    if (day !== currentDay) { currentDay = day; render(); }
-  }
-  function onUp() { isDragging = false; }
-
-  function attach() {
+  function attachListeners() {
     var svg = document.getElementById('mysticalRingSvg');
     if (!svg) return;
+
+    function getAngleFromEvent(e) {
+      var rect = svg.getBoundingClientRect();
+      var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      var x = clientX - rect.left - rect.width / 2;
+      var y = clientY - rect.top - rect.height / 2;
+      return Math.atan2(y, x);
+    }
+
+    function onDown(e) {
+      isDragging = true;
+      e.preventDefault();
+      onMove(e);
+    }
+
+    function onMove(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      var angle = getAngleFromEvent(e);
+      var day = angleToDay(angle);
+      if (day < 1) day = 1;
+      if (day > config.length) day = config.length;
+      if (day !== currentDay) {
+        currentDay = day;
+        if (animFrame) cancelAnimationFrame(animFrame);
+        animFrame = requestAnimationFrame(render);
+      }
+    }
+
+    function onUp() { isDragging = false; }
+
     var orb = svg.querySelector('.mystical-orb');
-    if (orb) { orb.addEventListener('mousedown', onDown); orb.addEventListener('touchstart', onDown, { passive: false }); }
+    if (orb) {
+      orb.addEventListener('mousedown', onDown);
+      orb.addEventListener('touchstart', onDown, { passive: false });
+    }
+
+    // Tap anywhere on ring to jump
     svg.addEventListener('click', function (e) {
       if (isDragging) return;
-      currentDay = angleToDay(getAngle(e));
+      var angle = getAngleFromEvent(e);
+      var day = angleToDay(angle);
+      if (day < 1) day = 1;
+      if (day > config.length) day = config.length;
+      currentDay = day;
       render();
     });
+
     document.addEventListener('mousemove', onMove);
     document.addEventListener('touchmove', onMove, { passive: false });
     document.addEventListener('mouseup', onUp);
     document.addEventListener('touchend', onUp);
   }
 
-  var prevBtn = document.getElementById('mysticalPrev');
-  var nextBtn = document.getElementById('mysticalNext');
-  var todayBtn = document.getElementById('mysticalToday');
-  if (prevBtn) prevBtn.addEventListener('click', function () { currentDay = currentDay > 1 ? currentDay - 1 : config.length; render(); });
-  if (nextBtn) nextBtn.addEventListener('click', function () { currentDay = currentDay < config.length ? currentDay + 1 : 1; render(); });
-  if (todayBtn) todayBtn.addEventListener('click', function () { currentDay = config.today; render(); });
-
   // Boot
-  render();
-  attach();
+  function init() {
+    // Add today button if not exists
+    if (!document.getElementById('mysticalToday')) {
+      var wrap = document.getElementById('mysticalRingWrap') || container.closest('.mystical-ring-wrap') || container.parentElement;
+      if (wrap) {
+        var todayBtn = document.createElement('button');
+        todayBtn.className = 'mystical-today-btn';
+        todayBtn.id = 'mysticalToday';
+        todayBtn.textContent = '✦ Return to today';
+        todayBtn.addEventListener('click', function () {
+          currentDay = config.today;
+          render();
+        });
+        wrap.parentElement.insertBefore(todayBtn, wrap.nextSibling);
+
+        var hint = document.createElement('div');
+        hint.className = 'mystical-hint';
+        hint.innerHTML = '<span class="ms">touch_app</span> Drag the glowing orb or tap the ring';
+        wrap.parentElement.insertBefore(hint, todayBtn.nextSibling);
+      }
+    }
+    render();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();

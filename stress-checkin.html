@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ovuluna \u00b7 Stress Check-in</title>
+  <title>Ovuluna · Stress Check-in</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
@@ -55,8 +55,8 @@
       </a>
 
       <div class="card" style="margin:16px; padding:16px">
-        <h3 style="margin-bottom:8px; font-size:14px">\ud83d\udcda About PSS-10</h3>
-        <p style="font-size:12px; color:var(--taupe); line-height:1.5">The Perceived Stress Scale is a validated 10-item questionnaire. Scores 0\u201313 = low, 14\u201326 = moderate, 27\u201340 = high perceived stress. It is a screening tool, not a diagnosis.</p>
+        <h3 style="margin-bottom:8px; font-size:14px">📚 About PSS-10</h3>
+        <p style="font-size:12px; color:var(--taupe); line-height:1.5">The Perceived Stress Scale is a validated 10-item questionnaire. Scores 0–13 = low, 14–26 = moderate, 27–40 = high perceived stress. It is a screening tool, not a diagnosis.</p>
       </div>
     </main>
 
@@ -120,7 +120,7 @@
       const r = document.getElementById('result');
       r.style.display = 'block';
       let level = total <= 13 ? 'low' : total <= 26 ? 'moderate' : 'high';
-      let msg = `<strong>PSS-10 score: ${total}/40 \u2014 ${level} perceived stress.</strong>`;
+      let msg = `<strong>PSS-10 score: ${total}/40 — ${level} perceived stress.</strong>`;
       if(level === 'high') msg += ' Consider daily breathwork, reducing commitments, or speaking with a mental-health professional.';
       else if(level === 'moderate') msg += ' Small daily stress-management practices can help bring this down.';
       else msg += ' Your stress load looks manageable. Keep your protective routines.';

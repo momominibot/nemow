@@ -77,13 +77,49 @@
         <div id="cyclering" data-day="9" data-len="28" data-period="0,5" data-fertile="11,16" data-ovulation="14" style="position:relative;z-index:2"></div>
         <div class="mystical-center" id="mysticalCenter"></div>
       </div>
-      <div class="mystical-stepper" id="mysticalStepper">
-        <button class="mystical-step-btn" id="mysticalPrev">−</button>
-        <span class="mystical-step-label" id="mysticalDayLabel">Day 9</span>
-        <button class="mystical-step-btn" id="mysticalNext">+</button>
-      </div>
       <button class="mystical-today-btn" id="mysticalToday">✦ Return to today</button>
       <div class="mystical-hint"><span class="ms">touch_app</span> Drag the orb or tap the ring to explore</div>
+    </div>
+
+
+    <!-- Daily Logging -->
+    <div class="card" style="padding:16px 14px 12px">
+      <div class="row" style="justify-content:space-between;margin-bottom:10px">
+        <b style="font-family:var(--serif);font-size:16px;color:var(--cocoa)">Today's Log</b>
+        <span class="sub" style="font-size:10.5px;font-weight:700" id="logProgress">0/6 done</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" id="dailyLogGrid">
+        <div class="log-item" data-log="mood" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(196,181,224,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
+          <span class="log-check" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s"><span class="ms" style="font-size:14px;opacity:0">check</span></span>
+          <span class="ms" style="font-size:18px;color:var(--mauve)">mood</span>
+          <span style="font-size:12px;font-weight:700;color:var(--cocoa)">Mood</span>
+        </div>
+        <div class="log-item" data-log="sleep" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(127,174,201,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
+          <span class="log-check" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s"><span class="ms" style="font-size:14px;opacity:0">check</span></span>
+          <span class="ms" style="font-size:18px;color:var(--d-sleep)">bedtime</span>
+          <span style="font-size:12px;font-weight:700;color:var(--cocoa)">Sleep</span>
+        </div>
+        <div class="log-item" data-log="symptoms" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(236,150,120,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
+          <span class="log-check" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s"><span class="ms" style="font-size:14px;opacity:0">check</span></span>
+          <span class="ms" style="font-size:18px;color:var(--d-stress)">monitor_heart</span>
+          <span style="font-size:12px;font-weight:700;color:var(--cocoa)">Symptoms</span>
+        </div>
+        <div class="log-item" data-log="water" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(127,174,201,.08);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
+          <span class="log-check" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s"><span class="ms" style="font-size:14px;opacity:0">check</span></span>
+          <span class="ms" style="font-size:18px;color:#5fa8d3">water_drop</span>
+          <span style="font-size:12px;font-weight:700;color:var(--cocoa)">Water</span>
+        </div>
+        <div class="log-item" data-log="activity" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(168,192,160,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
+          <span class="log-check" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s"><span class="ms" style="font-size:14px;opacity:0">check</span></span>
+          <span class="ms" style="font-size:18px;color:var(--ok)">directions_run</span>
+          <span style="font-size:12px;font-weight:700;color:var(--cocoa)">Activity</span>
+        </div>
+        <div class="log-item" data-log="food" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(240,200,120,.1);border:1.5px solid var(--line-soft);cursor:pointer;transition:all .2s">
+          <span class="log-check" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s"><span class="ms" style="font-size:14px;opacity:0">check</span></span>
+          <span class="ms" style="font-size:18px;color:var(--gold)">restaurant</span>
+          <span style="font-size:12px;font-weight:700;color:var(--cocoa)">Food</span>
+        </div>
+      </div>
     </div>
 
     <!-- Today's insights -->
@@ -313,6 +349,59 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 </script>
 <script src="mystical-ring.js" defer></script>
+
+<script>
+// Daily logging toggle with localStorage persistence
+(function() {
+  var today = new Date().toISOString().split('T')[0];
+  var items = document.querySelectorAll('.log-item');
+  var progress = document.getElementById('logProgress');
+  
+  function getLogged() {
+    try { return JSON.parse(localStorage.getItem('ovuluna_daily_log_' + today) || '{}'); }
+    catch(e) { return {}; }
+  }
+  function saveLogged(logged) {
+    localStorage.setItem('ovuluna_daily_log_' + today, JSON.stringify(logged));
+  }
+  function updateProgress() {
+    var logged = getLogged();
+    var done = Object.values(logged).filter(Boolean).length;
+    if (progress) progress.textContent = done + '/' + items.length + ' done';
+  }
+  function applyState(item, isLogged) {
+    var check = item.querySelector('.log-check');
+    var checkIcon = check.querySelector('.ms');
+    if (isLogged) {
+      check.style.background = 'var(--ok)';
+      check.style.borderColor = 'var(--ok)';
+      checkIcon.style.opacity = '1';
+      checkIcon.style.color = '#fff';
+      item.style.borderColor = 'rgba(127,174,127,.4)';
+      item.style.background = 'rgba(127,174,127,.08)';
+    } else {
+      check.style.background = 'transparent';
+      check.style.borderColor = 'var(--line-soft)';
+      checkIcon.style.opacity = '0';
+      item.style.borderColor = 'var(--line-soft)';
+    }
+  }
+  items.forEach(function(item) {
+    var key = item.dataset.log;
+    var logged = getLogged();
+    applyState(item, !!logged[key]);
+    item.addEventListener('click', function() {
+      var logged = getLogged();
+      logged[key] = !logged[key];
+      saveLogged(logged);
+      applyState(item, logged[key]);
+      updateProgress();
+    });
+  });
+  updateProgress();
+})();
+</script>
+
 <script src="appnav.js" defer></script>
 <script src="evidence-db.js" defer></script>
 <script src="evidence.js" defer></script>

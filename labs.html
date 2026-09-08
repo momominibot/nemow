@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ovuluna \u00b7 Lab Log</title>
+  <title>Ovuluna · Lab Log</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
@@ -55,10 +55,10 @@
         <div class="field">
           <label>AMH (ng/mL)</label>
           <input type="number" id="amh" step="0.01" placeholder="e.g. 2.4">
-          <div class="hint">Anti-M\u00fcllerian hormone. Most stable marker of remaining follicle pool.</div>
+          <div class="hint">Anti-Müllerian hormone. Most stable marker of remaining follicle pool.</div>
         </div>
         <div class="field">
-          <label>FSH day 2\u20134 (IU/L)</label>
+          <label>FSH day 2–4 (IU/L)</label>
           <input type="number" id="fsh" step="0.1" placeholder="e.g. 7.2">
           <div class="hint">Follicle-stimulating hormone, early cycle.</div>
         </div>
@@ -89,8 +89,8 @@
       </div>
 
       <div class="card" style="margin:16px; padding:16px">
-        <h3 style="margin-bottom:8px">\ud83d\udcda What these markers mean</h3>
-        <p style="font-size:13px; color:var(--taupe); line-height:1.5">AMH and AFC reflect ovarian reserve <span class="qi" data-evidence="amh-overview">i</span> <span class="qi" data-evidence="afc-reserve">i</span>. FSH/E2 reflect how hard the brain is working to stimulate the ovaries <span class="qi" data-evidence="fsh-menopause">i</span>. None predict natural fertility or egg quality on their own \u2014 they estimate response to fertility treatment and help contextualize where you are relative to typical age patterns.</p>
+        <h3 style="margin-bottom:8px">📚 What these markers mean</h3>
+        <p style="font-size:13px; color:var(--taupe); line-height:1.5">AMH and AFC reflect ovarian reserve <span class="qi" data-evidence="amh-overview">i</span> <span class="qi" data-evidence="afc-reserve">i</span>. FSH/E2 reflect how hard the brain is working to stimulate the ovaries <span class="qi" data-evidence="fsh-menopause">i</span>. None predict natural fertility or egg quality on their own — they estimate response to fertility treatment and help contextualize where you are relative to typical age patterns.</p>
       </div>
     </main>
 
@@ -117,9 +117,9 @@
 
       if(!isNaN(amh)) {
         let status, cls, text;
-        if(amh < 1.0) { status='Low'; cls='status-low'; text='Below typical for most ages'; flags.push('AMH low \u2014 consider REI discussion'); }
+        if(amh < 1.0) { status='Low'; cls='status-low'; text='Below typical for most ages'; flags.push('AMH low — consider REI discussion'); }
         else if(amh < 2.0 && age < 35) { status='Low-normal'; cls='status-warn'; text='Lower than typical for your age group'; flags.push('AMH lower than age-expected'); }
-        else if(amh > 4.5) { status='Elevated'; cls='status-warn'; text='May suggest PCO-like picture'; flags.push('High AMH \u2014 discuss with clinician'); }
+        else if(amh > 4.5) { status='Elevated'; cls='status-warn'; text='May suggest PCO-like picture'; flags.push('High AMH — discuss with clinician'); }
         else { status='Typical'; cls='status-ok'; text='Within common range'; }
         rows.push({name:'AMH', val:amh+' ng/mL', status, cls, text});
       }
@@ -127,14 +127,14 @@
       if(!isNaN(fsh)) {
         let status, cls, text;
         if(fsh > 12) { status='Elevated'; cls='status-low'; text='Suggestive of diminished reserve'; flags.push('FSH elevated'); }
-        else if(fsh > 10) { status='High-normal'; cls='status-warn'; text='Upper range \u2014 monitor'; }
+        else if(fsh > 10) { status='High-normal'; cls='status-warn'; text='Upper range — monitor'; }
         else { status='Typical'; cls='status-ok'; text='Within common range'; }
         rows.push({name:'FSH', val:fsh+' IU/L', status, cls, text});
       }
 
       if(!isNaN(e2)) {
         let status='Typical', cls='status-ok', text='Early-cycle estradiol';
-        if(e2 > 80) { status='Elevated'; cls='status-warn'; text='May suppress FSH \u2014 interpret together'; }
+        if(e2 > 80) { status='Elevated'; cls='status-warn'; text='May suppress FSH — interpret together'; }
         rows.push({name:'Estradiol', val:e2+' pg/mL', status, cls, text});
       }
 
@@ -148,9 +148,9 @@
 
       if(!isNaN(vitd)) {
         let status, cls, text;
-        if(vitd < 20) { status='Deficient'; cls='status-low'; text='<20 ng/mL \u2014 supplement recommended'; flags.push('Vitamin D deficient'); }
-        else if(vitd < 30) { status='Insufficient'; cls='status-warn'; text='20\u201329 ng/mL'; }
-        else { status='Sufficient'; cls='status-ok'; text:'\u226530 ng/mL'; }
+        if(vitd < 20) { status='Deficient'; cls='status-low'; text='<20 ng/mL — supplement recommended'; flags.push('Vitamin D deficient'); }
+        else if(vitd < 30) { status='Insufficient'; cls='status-warn'; text='20–29 ng/mL'; }
+        else { status='Sufficient'; cls='status-ok'; text:'≥30 ng/mL'; }
         rows.push({name:'Vitamin D', val:vitd+' ng/mL', status, cls, text});
       }
 
