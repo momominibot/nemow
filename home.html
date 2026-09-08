@@ -393,8 +393,9 @@ document.addEventListener('DOMContentLoaded', function(){
     sleep: {
       title: 'How did you sleep?',
       fields: [
-        { type: 'number', label: 'Hours slept', placeholder: 'e.g., 7.5', min: 0, max: 16, step: 0.5 },
-        { type: 'emoji', label: 'Sleep quality', options: ['😫','😕','😐','🙂','😴'] },
+        { type: 'time', label: 'Bedtime', placeholder: 'e.g., 11:00 PM' },
+        { type: 'time', label: 'Wake time', placeholder: 'e.g., 7:00 AM' },
+        { type: 'stars', label: 'Sleep quality' },
         { type: 'radio', label: 'Woke up during the night?', options: ['No','Once','2-3 times','More than 3'] }
       ]
     },
@@ -409,22 +410,23 @@ document.addEventListener('DOMContentLoaded', function(){
     water: {
       title: 'Hydration check',
       fields: [
-        { type: 'number', label: 'Glasses of water today (250ml each)', placeholder: 'e.g., 6', min: 0, max: 20 },
-        { type: 'radio', label: 'Other drinks', options: ['Only water','Some tea/coffee','Sugary drinks','Alcohol'] },
-        { type: 'emoji', label: 'Thirst level', options: ['💧','💧💧','💧💧💧','🥵'] }
+        { type: 'watermeter', label: 'Today's water intake' },
+        { type: 'number', label: 'Glasses of water (250ml each)', placeholder: 'e.g., 6', min: 0, max: 20 },
+        { type: 'radio', label: 'Other drinks today', options: ['Only water','Some tea/coffee','Sugary drinks','Alcohol'] }
       ]
     },
     activity: {
       title: 'Today\'s activity',
       fields: [
-        { type: 'radio', label: 'Activity type', options: ['Rest day','Walking','Yoga/stretching','Cardio','Strength training','HIIT','Sports'] },
+        { type: 'metactivity', label: 'Activity type' },
         { type: 'number', label: 'Duration (minutes)', placeholder: 'e.g., 30', min: 0, max: 300 },
-        { type: 'emoji', label: 'Energy level during activity', options: ['😫','😕','😐','💪','🔥'] }
+        { type: 'slider', label: 'Perceived exertion (1-10)', min: 1, max: 10 }
       ]
     },
     food: {
       title: 'Today\'s nutrition',
       fields: [
+        { type: 'caloriemeter', label: 'Calorie intake today' },
         { type: 'checkbox', label: 'Did you eat these cycle-supportive foods?', options: ['Leafy greens','Omega-3 (fish/nuts)','Whole grains','Fruits','Protein at each meal','Fermented foods','Water-rich foods'] },
         { type: 'radio', label: 'Sugar intake today', options: ['Minimal','Moderate','High','Very high'] },
         { type: 'text', label: 'Anything notable? (optional)', placeholder: 'e.g., had salmon for dinner, craved chocolate...' }
@@ -478,6 +480,100 @@ document.addEventListener('DOMContentLoaded', function(){
         html += '<input type="range" class="slider-input" data-field="' + i + '" min="' + f.min + '" max="' + f.max + '" value="' + val + '" style="flex:1;accent-color:var(--mauve)"/>';
         html += '<span class="slider-val" style="font-size:18px;font-weight:800;color:var(--mauve);min-width:30px;text-align:center">' + val + '</span>';
         html += '</div>';
+      } else if (f.type === 'time') {
+        var timeVal = logData[type] && logData[type].fields ? logData[type].fields[i] : '';
+        html += '<div style="display:flex;gap:8px;align-items:center">';
+        html += '<input type="time" class="time-input" data-field="' + i + '" value="' + timeVal + '" style="flex:1;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line-soft);font-size:15px;font-family:var(--sans);font-weight:700;background:var(--card);color:var(--ink);box-sizing:border-box"/>';
+        html += '</div>';
+      } else if (f.type === 'stars') {
+        var starVal = logData[type] && logData[type].fields ? parseInt(logData[type].fields[i]) || 0 : 0;
+        html += '<div class="stars-row" data-field="' + i + '" style="display:flex;gap:6px;font-size:30px;cursor:pointer">';
+        for (var s = 1; s <= 5; s++) {
+          var filled = s <= starVal;
+          html += '<span class="star-opt" data-star="' + s + '" style="color:' + (filled ? '#f0c878' : 'rgba(107,82,142,.2)') + ';transition:.15s;user-select:none">' + (filled ? '★' : '☆') + '</span>';
+        }
+        html += '<span style="font-size:12px;font-weight:700;color:var(--taupe);margin-left:8px;align-self:center" class="star-label">' + (starVal ? starVal + '/5' : 'Tap to rate') + '</span>';
+        html += '</div>';
+      } else if (f.type === 'metactivity') {
+        var metActivities = [
+          { name: 'Rest day', met: 1.0, desc: 'Complete rest' },
+          { name: 'Slow walking', met: 2.5, desc: 'Casual stroll' },
+          { name: 'Brisk walking', met: 3.5, desc: '3.5-4 mph' },
+          { name: 'Yoga / stretching', met: 2.5, desc: 'Gentle flow' },
+          { name: 'Light cardio', met: 4.5, desc: 'Easy cycling, swimming' },
+          { name: 'Moderate cardio', met: 6.0, desc: 'Jogging, cycling 12-14 mph' },
+          { name: 'Vigorous cardio', met: 8.0, desc: 'Running, fast cycling' },
+          { name: 'Strength training', met: 5.0, desc: 'Moderate effort' },
+          { name: 'HIIT', met: 9.5, desc: 'High intensity intervals' },
+          { name: 'Sports (tennis, basketball)', met: 7.0, desc: 'Recreational' }
+        ];
+        var savedMet = logData[type] && logData[type].fields ? logData[type].fields[i] : '';
+        var userWeight = parseFloat(localStorage.getItem('ovuluna_user_weight')) || 60;
+        html += '<div style="display:flex;flex-direction:column;gap:6px">';
+        metActivities.forEach(function(act) {
+          var isSel = savedMet === act.name;
+          html += '<div class="met-opt" data-val="' + act.name + '" data-met="' + act.met + '" style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:12px;border:1.5px solid ' + (isSel ? 'var(--mauve)' : 'var(--line-soft)') + ';background:' + (isSel ? 'rgba(196,181,224,.15)' : 'transparent') + ';cursor:pointer;transition:.15s">';
+          html += '<div><div style="font-size:13px;font-weight:700;color:var(--cocoa)">' + act.name + '</div><div style="font-size:10px;color:var(--taupe)">' + act.desc + '</div></div>';
+          html += '<div style="text-align:right"><div style="font-size:14px;font-weight:800;color:var(--mauve)">' + act.met + ' <span style="font-size:9px;font-weight:600">MET</span></div></div>';
+          html += '</div>';
+        });
+        html += '<div id="metCalorieEstimate" style="font-size:11px;font-weight:700;color:var(--taupe);text-align:center;padding:6px;background:rgba(127,180,212,.08);border-radius:10px;margin-top:4px">Select activity + enter duration to estimate calories</div>';
+        html += '</div>';
+      } else if (f.type === 'watermeter') {
+        var savedWater = logData[type] && logData[type].fields ? parseInt(logData[type].fields[i]) || 0 : 0;
+        var wUserWeight = parseFloat(localStorage.getItem('ovuluna_user_weight')) || 60;
+        var waterGoal = Math.round(wUserWeight * 35 / 250); // 35ml/kg, 250ml per glass
+        var waterPct = Math.min(100, (savedWater / waterGoal) * 100);
+        html += '<div style="text-align:center">';
+        html += '<div style="font-size:11px;font-weight:700;color:var(--taupe);margin-bottom:6px">Daily goal: ' + waterGoal + ' glasses (' + (waterGoal * 250) + 'ml) · based on ' + wUserWeight + 'kg</div>';
+        html += '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:8px">';
+        html += '<button class="water-minus" style="width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line-soft);background:var(--card);font-size:18px;font-weight:800;color:var(--mauve);cursor:pointer;line-height:1">−</button>';
+        html += '<div style="font-size:32px;font-weight:800;color:var(--mauve);font-family:var(--serif)"><span class="water-count">' + savedWater + '</span><span style="font-size:14px;color:var(--taupe)">/' + waterGoal + '</span></div>';
+        html += '<button class="water-plus" style="width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line-soft);background:var(--card);font-size:18px;font-weight:800;color:var(--mauve);cursor:pointer;line-height:1">+</button>';
+        html += '</div>';
+        html += '<div style="height:10px;background:rgba(127,180,212,.15);border-radius:99px;overflow:hidden;margin-bottom:4px">';
+        html += '<div class="water-progress" style="height:100%;width:' + waterPct + '%;background:linear-gradient(90deg,#7fb4d4,#5fa8d3);border-radius:99px;transition:width .3s"></div>';
+        html += '</div>';
+        html += '<div class="water-status" style="font-size:10px;font-weight:700;color:' + (waterPct >= 100 ? 'var(--ok)' : '#e8a898') + '">' + (waterPct >= 100 ? '✓ Goal reached! Great hydration' : '⚠ ' + (waterGoal - savedWater) + ' more glasses to reach your goal') + '</div>';
+        html += '</div>';
+      } else if (f.type === 'weight') {
+        var savedWeight = localStorage.getItem('ovuluna_user_weight') || '';
+        html += '<div style="display:flex;gap:8px;align-items:center">';
+        html += '<input type="number" class="weight-input" data-field="' + i + '" placeholder="e.g., 60" value="' + savedWeight + '" min="30" max="200" step="0.5" style="flex:1;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line-soft);font-size:15px;font-family:var(--sans);font-weight:700;background:var(--card);color:var(--ink);box-sizing:border-box"/>';
+        html += '<span style="font-size:13px;font-weight:700;color:var(--taupe)">kg</span>';
+        html += '</div>';
+        html += '<div style="font-size:10px;color:var(--taupe);margin-top:4px">Used to calculate your daily water goal (35ml/kg) and calorie burn estimate</div>';
+      } else if (f.type === 'caloriemeter') {
+        var savedCals = logData[type] && logData[type].fields ? parseInt(logData[type].fields[i]) || 0 : 0;
+        var cUserWeight = parseFloat(localStorage.getItem('ovuluna_user_weight')) || 60;
+        var cActivityLevel = localStorage.getItem('ovuluna_activity_level') || 'moderate';
+        var cGoal = localStorage.getItem('ovuluna_calorie_goal');
+        if (!cGoal) {
+          // Mifflin-St Jeor BMR × activity multiplier (default female, 165cm, 30yo)
+          var bmr = 10 * cUserWeight + 6.25 * 165 - 5 * 30 - 161;
+          var mult = { sedentary: 1.2, light: 1.375, moderate: 1.55, active: 1.725, very_active: 1.9 };
+          cGoal = Math.round(bmr * (mult[cActivityLevel] || 1.55));
+          localStorage.setItem('ovuluna_calorie_goal', cGoal);
+        }
+        cGoal = parseInt(cGoal);
+        var calPct = Math.min(100, (savedCals / cGoal) * 100);
+        html += '<div style="text-align:center">';
+        html += '<div style="font-size:11px;font-weight:700;color:var(--taupe);margin-bottom:6px">Daily goal: ' + cGoal.toLocaleString() + ' kcal · based on ' + cUserWeight + 'kg, ' + cActivityLevel + ' activity</div>';
+        html += '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:8px">';
+        html += '<button class="cal-minus" style="width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line-soft);background:var(--card);font-size:18px;font-weight:800;color:var(--coral);cursor:pointer;line-height:1">−</button>';
+        html += '<div style="font-size:28px;font-weight:800;color:var(--coral);font-family:var(--serif)"><span class="cal-count">' + savedCals.toLocaleString() + '</span><span style="font-size:13px;color:var(--taupe)">/' + cGoal.toLocaleString() + ' kcal</span></div>';
+        html += '<button class="cal-plus" style="width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line-soft);background:var(--card);font-size:18px;font-weight:800;color:var(--coral);cursor:pointer;line-height:1">+</button>';
+        html += '</div>';
+        html += '<div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px">';
+        [100, 250, 500].forEach(function(v) {
+          html += '<button class="cal-quick" data-val="' + v + '" style="padding:5px 12px;border-radius:99px;border:1.5px solid var(--line-soft);background:var(--card);font-size:11px;font-weight:700;color:var(--cocoa);cursor:pointer">+' + v + '</button>';
+        });
+        html += '</div>';
+        html += '<div style="height:10px;background:rgba(232,168,152,.15);border-radius:99px;overflow:hidden;margin-bottom:4px">';
+        html += '<div class="cal-progress" style="height:100%;width:' + calPct + '%;background:linear-gradient(90deg,#e8a898,#d4776a);border-radius:99px;transition:width .3s"></div>';
+        html += '</div>';
+        html += '<div class="cal-status" style="font-size:10px;font-weight:700;color:' + (calPct >= 90 && calPct <= 110 ? 'var(--ok)' : (calPct > 110 ? '#d4776a' : '#e8a898')) + '">' + (calPct >= 90 && calPct <= 110 ? '✓ On target! Great nutrition balance' : (calPct > 110 ? '⚠ ' + Math.round(calPct - 100) + '% over goal' : '⚠ ' + Math.round(cGoal - savedCals).toLocaleString() + ' kcal to reach your goal')) + '</div>';
+        html += '</div>';
       }
       html += '</div>';
     });
@@ -522,6 +618,113 @@ document.addEventListener('DOMContentLoaded', function(){
       });
     });
 
+    // Star rating
+    body.querySelectorAll('.stars-row').forEach(function(row) {
+      row.querySelectorAll('.star-opt').forEach(function(star) {
+        star.addEventListener('click', function() {
+          var val = parseInt(star.dataset.star);
+          row.querySelectorAll('.star-opt').forEach(function(s, idx) {
+            var filled = idx < val;
+            s.style.color = filled ? '#f0c878' : 'rgba(107,82,142,.2)';
+            s.textContent = filled ? '★' : '☆';
+          });
+          row.querySelector('.star-label').textContent = val + '/5';
+          row.dataset.value = val;
+        });
+      });
+    });
+
+    // MET activity selection
+    body.querySelectorAll('.met-opt').forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        body.querySelectorAll('.met-opt').forEach(function(o) {
+          o.style.borderColor = 'var(--line-soft)';
+          o.style.background = 'transparent';
+          o.dataset.selected = '';
+        });
+        opt.style.borderColor = 'var(--mauve)';
+        opt.style.background = 'rgba(196,181,224,.15)';
+        opt.dataset.selected = 'true';
+        // Calculate calorie estimate
+        var met = parseFloat(opt.dataset.met);
+        var durInput = body.querySelector('.number-input, input[type="number"]');
+        var duration = durInput ? parseFloat(durInput.value) || 0 : 0;
+        var weight = parseFloat(localStorage.getItem('ovuluna_user_weight')) || 60;
+        var calories = Math.round(met * weight * (duration / 60));
+        var est = body.querySelector('#metCalorieEstimate');
+        if (est) est.textContent = duration > 0 ? '~' + calories + ' kcal burned (' + met + ' MET × ' + weight + 'kg × ' + duration + 'min)' : 'Enter duration to estimate calories';
+      });
+    });
+
+    // Water meter
+    var waterCount = body.querySelector('.water-count');
+    if (waterCount) {
+      var wGoalEl = waterCount.parentElement.querySelector('span');
+      var wGoal = parseInt(wGoalEl ? wGoalEl.textContent.replace('/','') : 8);
+      function updateWater() {
+        var val = parseInt(waterCount.textContent);
+        var pct = Math.min(100, (val / wGoal) * 100);
+        body.querySelector('.water-progress').style.width = pct + '%';
+        var status = body.querySelector('.water-status');
+        if (status) {
+          status.textContent = pct >= 100 ? '✓ Goal reached! Great hydration' : '⚠ ' + (wGoal - val) + ' more glasses to reach your goal';
+          status.style.color = pct >= 100 ? 'var(--ok)' : '#e8a898';
+        }
+      }
+      body.querySelector('.water-minus').addEventListener('click', function() {
+        var v = Math.max(0, parseInt(waterCount.textContent) - 1);
+        waterCount.textContent = v;
+        updateWater();
+      });
+      body.querySelector('.water-plus').addEventListener('click', function() {
+        var v = parseInt(waterCount.textContent) + 1;
+        waterCount.textContent = v;
+        updateWater();
+      });
+    }
+
+    // Calorie meter
+    var calCount = body.querySelector('.cal-count');
+    if (calCount) {
+      var calGoalEl = calCount.parentElement.querySelector('span');
+      var calGoal = parseInt(calGoalEl ? calGoalEl.textContent.replace(/[^0-9]/g,'') : 2000);
+      function updateCal() {
+        var val = parseInt(calCount.textContent.replace(/[^0-9]/g,''));
+        var pct = Math.min(120, (val / calGoal) * 100);
+        body.querySelector('.cal-progress').style.width = Math.min(100, pct) + '%';
+        var status = body.querySelector('.cal-status');
+        if (status) {
+          if (pct >= 90 && pct <= 110) { status.textContent = '✓ On target! Great nutrition balance'; status.style.color = 'var(--ok)'; }
+          else if (pct > 110) { status.textContent = '⚠ ' + Math.round(pct - 100) + '% over goal'; status.style.color = '#d4776a'; }
+          else { status.textContent = '⚠ ' + (calGoal - val).toLocaleString() + ' kcal to reach your goal'; status.style.color = '#e8a898'; }
+        }
+      }
+      body.querySelector('.cal-minus').addEventListener('click', function() {
+        var v = Math.max(0, parseInt(calCount.textContent.replace(/[^0-9]/g,'')) - 100);
+        calCount.textContent = v.toLocaleString();
+        updateCal();
+      });
+      body.querySelector('.cal-plus').addEventListener('click', function() {
+        var v = parseInt(calCount.textContent.replace(/[^0-9]/g,'')) + 100;
+        calCount.textContent = v.toLocaleString();
+        updateCal();
+      });
+      body.querySelectorAll('.cal-quick').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var v = parseInt(calCount.textContent.replace(/[^0-9]/g,'')) + parseInt(btn.dataset.val);
+          calCount.textContent = v.toLocaleString();
+          updateCal();
+        });
+      });
+    }
+
+    // Weight input — save to localStorage
+    body.querySelectorAll('.weight-input').forEach(function(input) {
+      input.addEventListener('change', function() {
+        if (input.value) localStorage.setItem('ovuluna_user_weight', input.value);
+      });
+    });
+
     modal.style.display = 'flex';
     requestAnimationFrame(function() { sheet.style.transform = 'translateY(0)'; });
   }
@@ -542,9 +745,21 @@ document.addEventListener('DOMContentLoaded', function(){
         var checks = [];
         body.querySelectorAll('.check-opt[data-selected="true"]').forEach(function(c) { checks.push(c.dataset.val); });
         fields.push(checks);
-      } else if (f.type === 'number' || f.type === 'text' || f.type === 'slider') {
+      } else if (f.type === 'number' || f.type === 'text' || f.type === 'slider' || f.type === 'time' || f.type === 'weight') {
         var input = body.querySelector('[data-field="' + i + '"]');
         fields.push(input ? input.value : '');
+      } else if (f.type === 'stars') {
+        var row = body.querySelector('.stars-row[data-field="' + i + '"]');
+        fields.push(row ? (row.dataset.value || '0') : '0');
+      } else if (f.type === 'metactivity') {
+        var metSel = body.querySelector('.met-opt[data-selected="true"]');
+        fields.push(metSel ? metSel.dataset.val : '');
+      } else if (f.type === 'watermeter') {
+        var wc = body.querySelector('.water-count');
+        fields.push(wc ? wc.textContent : '0');
+      } else if (f.type === 'caloriemeter') {
+        var cc = body.querySelector('.cal-count');
+        fields.push(cc ? cc.textContent.replace(/[^0-9]/g,'') : '0');
       }
     });
     logData[currentLog] = { completed: true, fields: fields, ts: Date.now() };
@@ -555,16 +770,51 @@ document.addEventListener('DOMContentLoaded', function(){
 
   function updateTicks() {
     var done = 0;
+    var userWeight = parseFloat(localStorage.getItem('ovuluna_user_weight')) || 60;
+    var waterGoal = Math.round(userWeight * 35 / 250);
+    var calGoal = parseInt(localStorage.getItem('ovuluna_calorie_goal')) || 2000;
+
     document.querySelectorAll('.log-btn').forEach(function(btn) {
       var type = btn.dataset.log;
       var tick = btn.querySelector('.log-tick');
-      if (logData[type] && logData[type].completed) {
-        tick.style.display = 'flex';
+      var tickIcon = tick ? tick.querySelector('.ms') : null;
+      var entry = logData[type];
+
+      if (!entry || !entry.completed) {
+        if (tick) tick.style.display = 'none';
+        btn.style.borderColor = '';
+        btn.style.background = '';
+        return;
+      }
+
+      var goalMet = true;
+      if (type === 'water') {
+        var waterVal = parseInt(entry.fields[0]) || 0;
+        goalMet = waterVal >= waterGoal;
+      } else if (type === 'food') {
+        var calVal = parseInt(entry.fields[0]) || 0;
+        var calPct = (calVal / calGoal) * 100;
+        goalMet = calPct >= 90 && calPct <= 110;
+      }
+
+      if (goalMet) {
+        if (tick) {
+          tick.style.display = 'flex';
+          tick.style.background = 'var(--ok)';
+          if (tickIcon) { tickIcon.textContent = 'check'; tickIcon.style.color = '#fff'; }
+        }
         btn.style.borderColor = 'var(--ok)';
         btn.style.background = 'rgba(120,180,120,.12)';
         done++;
       } else {
-        tick.style.display = 'none';
+        // Orange exclamation for goal not met
+        if (tick) {
+          tick.style.display = 'flex';
+          tick.style.background = '#f0a860';
+          if (tickIcon) { tickIcon.textContent = 'priority_high'; tickIcon.style.color = '#fff'; }
+        }
+        btn.style.borderColor = '#f0a860';
+        btn.style.background = 'rgba(240,168,96,.1)';
       }
     });
     var prog = document.getElementById('logProgress');
