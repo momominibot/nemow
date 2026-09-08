@@ -2,11 +2,5 @@
   "framework": null,
   "outputDirectory": ".",
   "cleanUrls": false,
-  "trailingSlash": false,
-  "functions": {
-    "api/chat.js": {
-      "runtime": "nodejs20.x",
-      "maxDuration": 30
-    }
-  }
+  "trailingSlash": false
 }
