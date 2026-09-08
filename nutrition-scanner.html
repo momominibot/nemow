@@ -25,6 +25,7 @@
     .loading { text-align:center; padding:20px; color:var(--ovaria-text-secondary); }
     .suggestion { margin-top:12px; padding:12px; border-radius:12px; background:var(--ovaria-accent-bg); font-size:13px; }
   </style>
+<link rel="stylesheet" href="evidence.css">
 <link rel="stylesheet" href="luna-chat.css">
 </head>
 <body>
@@ -153,6 +154,8 @@
       return [...new Set(markers)].slice(0,5);
     }
   </script>
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
 <script src="luna-chat.js" defer></script>
 </body>
 </html>

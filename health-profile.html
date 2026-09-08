@@ -1,15 +1,548 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ovuluna</title>
+<title>Ovuluna · Health Profile</title>
 <link rel="icon" type="image/png" href="assets/onboarding/egg.png">
-<style>body{font-family:system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:var(--paper);color:var(--ink);padding:24px;text-align:center}
-h1{font-family:Georgia,serif;font-size:28px;color:var(--ink);margin-bottom:8px}p{color:var(--taupe);font-size:15px;max-width:32ch;line-height:1.5}
-a{display:inline-block;margin-top:18px;padding:12px 24px;border-radius:99px;background:var(--mauve);color:#fff;text-decoration:none;font-weight:700;font-size:14px}</style>
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<link rel="stylesheet" href="evidence.css">
+<script src="anim.js" defer></script>
+<style>
+/* progress */
+.prog-wrap{ padding:0 2px 4px; }
+.prog-steps{ display:flex; justify-content:space-between; margin-bottom:8px; }
+.prog-dot{ width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font:800 11px var(--sans); background:var(--sunken); color:var(--faded); border:1.5px solid var(--line-soft); transition:.2s; }
+.prog-dot.done{ background:var(--mauve); color:#fff; border-color:var(--mauve); }
+.prog-dot.on{ background:var(--ink); color:#fff; border-color:var(--ink); transform:scale(1.1); }
+.prog-bar{ height:5px; background:var(--sunken); border-radius:99px; overflow:hidden; }
+.prog-fill{ height:100%; background:linear-gradient(90deg,var(--lavender),var(--mauve)); border-radius:99px; transition:.35s ease; width:14%; }
+.prog-label{ font-size:11px; font-weight:700; color:var(--taupe); margin-top:6px; letter-spacing:.03em; }
+
+/* form */
+.fstep{ display:none; animation:fadeUp .3s ease; }
+.fstep.on{ display:block; }
+@keyframes fadeUp{ from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+.field{ margin-bottom:16px; }
+.field label{ display:block; font-size:12.5px; font-weight:800; color:var(--ink); margin-bottom:6px; }
+.field label .why{ display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; border-radius:50%; background:var(--sunken); color:var(--mauve); font-size:10px; font-weight:800; margin-left:5px; cursor:pointer; vertical-align:middle; position:relative; }
+.field label .why::after{ content:attr(data-tip); position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%); width:220px; background:var(--ink); color:#fff; font-size:10.5px; font-weight:600; line-height:1.45; padding:8px 10px; border-radius:10px; opacity:0; pointer-events:none; transition:.18s; z-index:50; text-align:left; }
+.field label .why:hover::after{ opacity:1; }
+.field input[type=text], .field input[type=number], .field input[type=date], .field select, .field textarea{
+  width:100%; padding:13px 14px; border:1.5px solid var(--line); border-radius:14px; background:var(--card-solid);
+  font:600 14px var(--sans); color:var(--ink); outline:none; transition:.15s;
+}
+.field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--mauve); box-shadow:0 0 0 3px rgba(122,92,150,.12); }
+.field textarea{ resize:vertical; min-height:70px; }
+.field .hint{ font-size:11px; color:var(--taupe); margin-top:4px; line-height:1.4; }
+.inline2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.inline3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+
+/* toggle chips */
+.tog-row{ display:flex; flex-wrap:wrap; gap:8px; }
+.tog{ padding:9px 14px; border-radius:99px; border:1.5px solid var(--line); background:var(--card-solid); font:700 12px var(--sans); color:var(--taupe); cursor:pointer; transition:.15s; user-select:none; }
+.tog.on{ border-color:var(--mauve); background:rgba(122,92,150,.1); color:var(--ink); }
+
+/* step header */
+.step-h{ font-family:var(--serif); font-size:24px; font-weight:700; color:var(--ink); margin-bottom:4px; }
+.step-sub{ font-size:13px; color:var(--taupe); line-height:1.5; margin-bottom:18px; }
+
+/* nav buttons */
+.fnav{ display:flex; gap:10px; margin-top:8px; }
+.fnav .btn{ flex:1; }
+.fnav .btn.ghost{ flex:0 0 auto; padding:16px 22px; }
+
+/* evidence inline in form */
+.why-ev{ font-size:11px; color:var(--taupe); background:rgba(196,181,224,.12); border:1px solid rgba(196,181,224,.3); border-radius:10px; padding:8px 10px; margin-top:6px; line-height:1.45; }
+.why-ev b{ color:var(--mauve); }
+
+/* summary */
+.sum-row{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--line-soft); font-size:13px; }
+.sum-row:last-child{ border-bottom:none; }
+.sum-row .sk{ color:var(--taupe); font-weight:600; }
+.sum-row .sv{ color:var(--ink); font-weight:800; text-align:right; max-width:60%; }
+</style>
 <link rel="stylesheet" href="luna-chat.css">
 </head><body>
-<h1>✨ Coming soon</h1>
-<p>We're working on this feature and will share it here when it's ready.</p>
-<a href="home.html">Back to Ovuluna</a>
-<script>setTimeout(function(){location.href="home.html"},3000)</script>
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="home.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">Health Profile</div>
+    <a class="t-icon ms" href="profile.html">person</a>
+  </div>
+
+  <div class="scroll">
+
+    <!-- Progress -->
+    <div class="prog-wrap">
+      <div class="prog-steps" id="progSteps">
+        <div class="prog-dot on" data-s="1">1</div>
+        <div class="prog-dot" data-s="2">2</div>
+        <div class="prog-dot" data-s="3">3</div>
+        <div class="prog-dot" data-s="4">4</div>
+        <div class="prog-dot" data-s="5">5</div>
+        <div class="prog-dot" data-s="6">6</div>
+        <div class="prog-dot" data-s="7">7</div>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+      <div class="prog-label" id="progLabel">Step 1 of 7 · Personal Info</div>
+    </div>
+
+    <!-- STEP 1: Personal Info -->
+    <div class="card fstep on" data-step="1">
+      <div class="step-h">Personal Info</div>
+      <div class="step-sub">Let's get to know you. This helps us personalize your cycle insights and health recommendations.</div>
+      <div class="field">
+        <label>First name</label>
+        <input type="text" placeholder="e.g. Amelia" id="f_name">
+      </div>
+      <div class="inline2">
+        <div class="field">
+          <label>Age <span class="why" data-tip="Age influences cycle regularity, fertility potential, and menopause timing. Ovarian reserve naturally declines with age.">?</span></label>
+          <input type="number" placeholder="28" id="f_age" min="13" max="100">
+        </div>
+        <div class="field">
+          <label>Date of birth</label>
+          <input type="date" id="f_dob">
+        </div>
+      </div>
+      <div class="inline2">
+        <div class="field">
+          <label>Height (cm)</label>
+          <input type="number" placeholder="165" id="f_height">
+        </div>
+        <div class="field">
+          <label>Weight (kg) <span class="why" data-tip="BMI affects menstrual regularity and fertility. Both low and high BMI can disrupt ovulation.">?</span></label>
+          <input type="number" placeholder="60" id="f_weight">
+        </div>
+      </div>
+      <div class="why-ev">💡 <b>Why weight matters:</b> Body mass index is associated with menstrual regularity and fertility outcomes <span class="qi" data-evidence="bmi-fertility">i</span>.</div>
+      <div class="field" style="margin-top:14px">
+        <label>Ethnicity (optional)</label>
+        <select id="f_ethnicity">
+          <option value="">Prefer not to say</option>
+          <option>East Asian</option><option>Southeast Asian</option><option>South Asian</option>
+          <option>Caucasian</option><option>Black / African</option><option>Hispanic / Latino</option>
+          <option>Middle Eastern</option><option>Multiracial</option><option>Other</option>
+        </select>
+      </div>
+      <div class="fnav">
+        <a class="btn ghost" href="home.html">Skip</a>
+        <button class="btn mauve" onclick="goStep(2)">Continue <span class="ms" style="font-size:18px">arrow_forward</span></button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Reproductive History -->
+    <div class="card fstep" data-step="2">
+      <div class="step-h">Reproductive History</div>
+      <div class="step-sub">Your reproductive history shapes your hormonal baseline and helps us tailor fertility and cycle guidance.</div>
+      <div class="inline3">
+        <div class="field">
+          <label>Pregnancies</label>
+          <input type="number" placeholder="0" id="f_preg" min="0">
+        </div>
+        <div class="field">
+          <label>Live births</label>
+          <input type="number" placeholder="0" id="f_births" min="0">
+        </div>
+        <div class="field">
+          <label>Miscarriages</label>
+          <input type="number" placeholder="0" id="f_misc" min="0">
+        </div>
+      </div>
+      <div class="field">
+        <label>Are you currently breastfeeding? <span class="why" data-tip="Breastfeeding suppresses ovulation and can delay the return of your menstrual cycle postpartum.">?</span></label>
+        <div class="tog-row">
+          <div class="tog" onclick="toggle(this)">Yes</div>
+          <div class="tog on" onclick="toggle(this)">No</div>
+          <div class="tog" onclick="toggle(this)">Recently stopped</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Age at first period (menarche)</label>
+        <input type="number" placeholder="12" id="f_menarche" min="8" max="20">
+        <div class="hint">The average age is 12–13 years. Earlier or later onset can relate to long-term hormonal patterns.</div>
+      </div>
+      <div class="why-ev">💡 <b>Family history note:</b> A family history of ovarian conditions or early menopause can inform your own risk profile <span class="qi" data-evidence="family-history-ovarian">i</span>.</div>
+      <div class="field" style="margin-top:14px">
+        <label>Does anyone in your family have PCOS, endometriosis, or early menopause?</label>
+        <div class="tog-row">
+          <div class="tog" onclick="toggle(this)">Mother</div>
+          <div class="tog" onclick="toggle(this)">Sister</div>
+          <div class="tog" onclick="toggle(this)">Aunt</div>
+          <div class="tog" onclick="toggle(this)">None that I know</div>
+        </div>
+      </div>
+      <div class="fnav">
+        <button class="btn ghost" onclick="goStep(1)"><span class="ms" style="font-size:18px">arrow_back</span> Back</button>
+        <button class="btn mauve" onclick="goStep(3)">Continue <span class="ms" style="font-size:18px">arrow_forward</span></button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Cycle History -->
+    <div class="card fstep" data-step="3">
+      <div class="step-h">Cycle History</div>
+      <div class="step-sub">Understanding your cycle patterns is the foundation of personalized phase-based guidance.</div>
+      <div class="inline2">
+        <div class="field">
+          <label>Average cycle length (days) <span class="why" data-tip="Cycle length helps identify regularity patterns. A normal cycle ranges from 21–35 days.">?</span></label>
+          <input type="number" placeholder="28" id="f_cyclelen" min="15" max="60">
+        </div>
+        <div class="field">
+          <label>Period length (days)</label>
+          <input type="number" placeholder="5" id="f_periodlen" min="1" max="14">
+        </div>
+      </div>
+      <div class="why-ev">💡 <b>What's normal:</b> A regular menstrual cycle typically ranges from 21 to 35 days, with variation of a few days being common <span class="qi" data-evidence="cycle-length-normal">i</span>.</div>
+      <div class="field" style="margin-top:14px">
+        <label>Cycle regularity</label>
+        <div class="tog-row">
+          <div class="tog on" onclick="toggle(this)">Very regular (±2 days)</div>
+          <div class="tog" onclick="toggle(this)">Somewhat regular (±5 days)</div>
+          <div class="tog" onclick="toggle(this)">Irregular</div>
+          <div class="tog" onclick="toggle(this)">Not sure</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Flow intensity</label>
+        <div class="tog-row">
+          <div class="tog" onclick="toggle(this)">Light</div>
+          <div class="tog on" onclick="toggle(this)">Medium</div>
+          <div class="tog" onclick="toggle(this)">Heavy</div>
+          <div class="tog" onclick="toggle(this)">Very heavy</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Last period start date</label>
+        <input type="date" id="f_lmp">
+      </div>
+      <div class="field">
+        <label>Do you experience mittelschmerz (ovulation pain)?</label>
+        <div class="tog-row">
+          <div class="tog" onclick="toggle(this)">Yes, often</div>
+          <div class="tog" onclick="toggle(this)">Sometimes</div>
+          <div class="tog on" onclick="toggle(this)">Never noticed</div>
+        </div>
+      </div>
+      <div class="fnav">
+        <button class="btn ghost" onclick="goStep(2)"><span class="ms" style="font-size:18px">arrow_back</span> Back</button>
+        <button class="btn mauve" onclick="goStep(4)">Continue <span class="ms" style="font-size:18px">arrow_forward</span></button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Symptoms & Conditions -->
+    <div class="card fstep" data-step="4">
+      <div class="step-h">Symptoms & Conditions</div>
+      <div class="step-sub">Select any conditions or symptoms you experience. This helps us flag patterns and suggest appropriate support.</div>
+      <div class="field">
+        <label>Diagnosed conditions <span class="why" data-tip="Certain conditions like PCOS or endometriosis significantly change cycle and hormone guidance.">?</span></label>
+        <div class="tog-row">
+          <div class="tog" onclick="toggle(this)">PCOS</div>
+          <div class="tog" onclick="toggle(this)">Endometriosis</div>
+          <div class="tog" onclick="toggle(this)">Thyroid disorder</div>
+          <div class="tog" onclick="toggle(this)">Fibroids</div>
+          <div class="tog" onclick="toggle(this)">PMS / PMDD</div>
+          <div class="tog" onclick="toggle(this)">Perimenopause</div>
+          <div class="tog" onclick="toggle(this)">None</div>
+        </div>
+        <div class="hint" style="margin-top:8px">PCOS is diagnosed based on Rotterdam criteria including irregular cycles, androgen excess, and polycystic ovaries <span class="qi" data-evidence="pcos-criteria">i</span>. Endometriosis affects 1 in 10 women and can cause severe period pain <span class="qi" data-evidence="endometriosis-overview">i</span>. Thyroid function is closely linked to menstrual regularity <span class="qi" data-evidence="thyroid-menstrual">i</span>.</div>
+      </div>
+      <div class="field">
+        <label>Common symptoms (select all that apply)</label>
+        <div class="tog-row">
+          <div class="tog" onclick="toggle(this)">Cramps</div>
+          <div class="tog" onclick="toggle(this)">Bloating</div>
+          <div class="tog" onclick="toggle(this)">Breast tenderness</div>
+          <div class="tog" onclick="toggle(this)">Headaches</div>
+          <div class="tog" onclick="toggle(this)">Mood swings</div>
+          <div class="tog" onclick="toggle(this)">Acne</div>
+          <div class="tog" onclick="toggle(this)">Fatigue</div>
+          <div class="tog" onclick="toggle(this)">Sleep issues</div>
+          <div class="tog" onclick="toggle(this)">Hot flashes</div>
+          <div class="tog" onclick="toggle(this)">None</div>
+        </div>
+        <div class="hint" style="margin-top:8px">Hot flashes are a hallmark of perimenopause and menopause, affecting up to 75% of women <span class="qi" data-evidence="hot-flashes">i</span>. Perimenopause can begin 4–8 years before menopause and brings a range of symptoms <span class="qi" data-evidence="perimenopause-symptoms">i</span>.</div>
+      </div>
+      <div class="field">
+        <label>Pain level during period (1–10)</label>
+        <input type="number" placeholder="3" id="f_pain" min="1" max="10">
+      </div>
+      <div class="field">
+        <label>Anything else we should know?</label>
+        <textarea placeholder="Other symptoms, surgeries, or health concerns..." id="f_other"></textarea>
+      </div>
+      <div class="fnav">
+        <button class="btn ghost" onclick="goStep(3)"><span class="ms" style="font-size:18px">arrow_back</span> Back</button>
+        <button class="btn mauve" onclick="goStep(5)">Continue <span class="ms" style="font-size:18px">arrow_forward</span></button>
+      </div>
+    </div>
+
+    <!-- STEP 5: Medications & Supplements -->
+    <div class="card fstep" data-step="5">
+      <div class="step-h">Medications & Supplements</div>
+      <div class="step-sub">Hormonal medications and supplements can affect your cycle and how we interpret your data.</div>
+      <div class="field">
+        <label>Current hormonal contraception <span class="why" data-tip="Hormonal contraception suppresses natural ovulation and hormone fluctuations, which changes how we analyze your cycle.">?</span></label>
+        <div class="tog-row">
+          <div class="tog" onclick="toggle(this)">Combined pill</div>
+          <div class="tog" onclick="toggle(this)">Mini-pill</div>
+          <div class="tog" onclick="toggle(this)">IUD (hormonal)</div>
+          <div class="tog" onclick="toggle(this)">IUD (copper)</div>
+          <div class="tog" onclick="toggle(this)">Implant</div>
+          <div class="tog" onclick="toggle(this)">Patch / ring</div>
+          <div class="tog on" onclick="toggle(this)">None</div>
+        </div>
+        <div class="hint" style="margin-top:8px">Hormonal contraception suppresses natural hormone fluctuations and ovulation; your "cycle" on contraception is a withdrawal bleed, not a natural cycle <span class="qi" data-evidence="hormonal-contraception">i</span>.</div>
+      </div>
+      <div class="field">
+        <label>Other prescription medications</label>
+        <textarea placeholder="List any medications, doses, and how long you've been taking them..." id="f_meds"></textarea>
+      </div>
+      <div class="field">
+        <label>Supplements you take regularly</label>
+        <div class="tog-row">
+          <div class="tog" onclick="toggle(this)">Vitamin D</div>
+          <div class="tog" onclick="toggle(this)">Iron</div>
+          <div class="tog" onclick="toggle(this)">Magnesium</div>
+          <div class="tog" onclick="toggle(this)">Omega-3</div>
+          <div class="tog" onclick="toggle(this)">Folate / B9</div>
+          <div class="tog" onclick="toggle(this)">B6</div>
+          <div class="tog" onclick="toggle(this)">Inositol</div>
+          <div class="tog" onclick="toggle(this)">None</div>
+        </div>
+        <div class="hint" style="margin-top:8px">Supplements can interact with medications and affect hormone levels. Vitamin D supports fertility <span class="qi" data-evidence="vitamin-d-fertility">i</span>, magnesium may help PMS symptoms <span class="qi" data-evidence="magnesium-pms">i</span>, and inositol is studied for PCOS <span class="qi" data-evidence="inositol-pcos">i</span>. Always consult your provider before starting supplements <span class="qi" data-evidence="supplements-caution">i</span>.</div>
+      </div>
+      <div class="fnav">
+        <button class="btn ghost" onclick="goStep(4)"><span class="ms" style="font-size:18px">arrow_back</span> Back</button>
+        <button class="btn mauve" onclick="goStep(6)">Continue <span class="ms" style="font-size:18px">arrow_forward</span></button>
+      </div>
+    </div>
+
+    <!-- STEP 6: Lifestyle -->
+    <div class="card fstep" data-step="6">
+      <div class="step-h">Lifestyle</div>
+      <div class="step-sub">Daily habits significantly influence hormonal balance, cycle regularity, and long-term wellness.</div>
+      <div class="inline2">
+        <div class="field">
+          <label>Avg sleep (hours/night) <span class="why" data-tip="Sleep duration and quality directly affect hormone regulation, including cortisol and reproductive hormones.">?</span></label>
+          <input type="number" placeholder="7" id="f_sleep" min="3" max="12">
+        </div>
+        <div class="field">
+          <label>Exercise (days/week)</label>
+          <input type="number" placeholder="3" id="f_exercise" min="0" max="7">
+        </div>
+      </div>
+      <div class="why-ev">💡 <b>Sleep & hormones:</b> Adults need 7–9 hours of sleep. Sleep deprivation disrupts cortisol and reproductive hormone balance <span class="qi" data-evidence="sleep-duration">i</span>. Hormonal fluctuations across the cycle also affect sleep quality <span class="qi" data-evidence="sleep-cycle-hormones">i</span>.</div>
+      <div class="field" style="margin-top:14px">
+        <label>Stress level (typical)</label>
+        <div class="tog-row">
+          <div class="tog" onclick="toggle(this)">Low</div>
+          <div class="tog on" onclick="toggle(this)">Moderate</div>
+          <div class="tog" onclick="toggle(this)">High</div>
+          <div class="tog" onclick="toggle(this)">Very high</div>
+        </div>
+        <div class="hint" style="margin-top:8px">Chronic stress elevates cortisol, which can disrupt ovulation and cycle regularity. HRV is a useful marker of stress resilience <span class="qi" data-evidence="stress-cortisol-cycle">i</span>.</div>
+      </div>
+      <div class="field">
+        <label>Smoking status <span class="why" data-tip="Smoking accelerates ovarian aging and can bring on menopause 1–2 years earlier.">?</span></label>
+        <div class="tog-row">
+          <div class="tog on" onclick="toggle(this)">Never</div>
+          <div class="tog" onclick="toggle(this)">Former</div>
+          <div class="tog" onclick="toggle(this)">Occasional</div>
+          <div class="tog" onclick="toggle(this)">Regular</div>
+        </div>
+        <div class="hint" style="margin-top:8px">Smoking is associated with earlier menopause onset and reduced ovarian reserve <span class="qi" data-evidence="smoking-menopause">i</span>.</div>
+      </div>
+      <div class="field">
+        <label>Alcohol (drinks/week)</label>
+        <input type="number" placeholder="2" id="f_alcohol" min="0" max="50">
+      </div>
+      <div class="field">
+        <label>Diet pattern</label>
+        <div class="tog-row">
+          <div class="tog" onclick="toggle(this)">Omnivore</div>
+          <div class="tog" onclick="toggle(this)">Vegetarian</div>
+          <div class="tog" onclick="toggle(this)">Vegan</div>
+          <div class="tog" onclick="toggle(this)">Pescatarian</div>
+          <div class="tog" onclick="toggle(this)">Keto / low-carb</div>
+          <div class="tog" onclick="toggle(this)">Gluten-free</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Exposure to endocrine disruptors? (plastics, pesticides, parabens)</label>
+        <div class="tog-row">
+          <div class="tog" onclick="toggle(this)">Minimal</div>
+          <div class="tog on" onclick="toggle(this)">Some</div>
+          <div class="tog" onclick="toggle(this)">Frequent</div>
+        </div>
+        <div class="hint" style="margin-top:8px">Endocrine-disrupting chemicals can interfere with hormone function and reproductive health <span class="qi" data-evidence="endocrine-disruptors">i</span>.</div>
+      </div>
+      <div class="fnav">
+        <button class="btn ghost" onclick="goStep(5)"><span class="ms" style="font-size:18px">arrow_back</span> Back</button>
+        <button class="btn mauve" onclick="goStep(7)">Continue <span class="ms" style="font-size:18px">arrow_forward</span></button>
+      </div>
+    </div>
+
+    <!-- STEP 7: Goals -->
+    <div class="card fstep" data-step="7">
+      <div class="step-h">Your Goals</div>
+      <div class="step-sub">What would you like to achieve with Ovuluna? We'll prioritize insights and recommendations around your goals.</div>
+      <div class="field">
+        <label>Primary goals (select all that apply)</label>
+        <div class="tog-row">
+          <div class="tog" onclick="toggle(this)">Understand my cycle</div>
+          <div class="tog" onclick="toggle(this)">Reduce PMS symptoms</div>
+          <div class="tog" onclick="toggle(this)">Fertility / trying to conceive</div>
+          <div class="tog" onclick="toggle(this)">Hormonal balance</div>
+          <div class="tog" onclick="toggle(this)">Better sleep</div>
+          <div class="tog" onclick="toggle(this)">Stress management</div>
+          <div class="tog" onclick="toggle(this)">Weight management</div>
+          <div class="tog" onclick="toggle(this)">Longevity & ovarian health</div>
+          <div class="tog" onclick="toggle(this)">Perimenopause support</div>
+          <div class="tog" onclick="toggle(this)">Manage PCOS / endo</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>How would you describe your current fertility intentions?</label>
+        <div class="tog-row">
+          <div class="tog on" onclick="toggle(this)">Not trying, not preventing</div>
+          <div class="tog" onclick="toggle(this)">Trying to conceive</div>
+          <div class="tog" onclick="toggle(this)">Avoiding pregnancy</div>
+          <div class="tog" onclick="toggle(this)">Future planning</div>
+        </div>
+        <div class="hint" style="margin-top:8px">Understanding your fertile window is key whether you're trying to conceive or avoiding pregnancy <span class="qi" data-evidence="fertile-window">i</span>. Stress can impact fertility outcomes <span class="qi" data-evidence="stress-fertility">i</span>.</div>
+      </div>
+      <div class="field">
+        <label>Preferred communication style</label>
+        <div class="tog-row">
+          <div class="tog on" onclick="toggle(this)">Gentle & supportive</div>
+          <div class="tog" onclick="toggle(this)">Data-driven & detailed</div>
+          <div class="tog" onclick="toggle(this)">Quick & concise</div>
+        </div>
+      </div>
+
+      <!-- Summary preview -->
+      <div class="card tint-lavender" style="margin-top:8px;padding:14px">
+        <h2 class="sec" style="margin-top:0;font-size:16px">Profile Summary</h2>
+        <div class="sum-row"><span class="sk">Name</span><span class="sv" id="sum_name">—</span></div>
+        <div class="sum-row"><span class="sk">Age</span><span class="sv" id="sum_age">—</span></div>
+        <div class="sum-row"><span class="sk">Cycle length</span><span class="sv" id="sum_cycle">—</span></div>
+        <div class="sum-row"><span class="sk">Conditions</span><span class="sv" id="sum_cond">—</span></div>
+        <div class="sum-row"><span class="sk">Goals</span><span class="sv" id="sum_goals">—</span></div>
+      </div>
+
+      <div class="fnav" style="margin-top:16px">
+        <button class="btn ghost" onclick="goStep(6)"><span class="ms" style="font-size:18px">arrow_back</span> Back</button>
+        <button class="btn mauve" onclick="saveProfile()">Save Profile <span class="ms" style="font-size:18px">check</span></button>
+      </div>
+    </div>
+
+    <!-- Success card (hidden) -->
+    <div class="card fstep" data-step="done" style="text-align:center">
+      <div style="font-size:48px;margin-bottom:10px">🌸</div>
+      <div class="step-h" style="text-align:center">Profile Saved!</div>
+      <div class="step-sub" style="text-align:center">Your personalized health profile is ready. Luna will use this to tailor cycle insights, nutrition plans, and wellness recommendations just for you.</div>
+      <a href="home.html" class="btn mauve" style="margin-top:8px">Go to Home <span class="ms" style="font-size:18px">home</span></a>
+      <a href="phase-coach.html" class="btn ghost" style="margin-top:10px">View Phase Coach <span class="ms" style="font-size:18px">arrow_forward</span></a>
+    </div>
+
+    <!-- Wellness disclaimer -->
+    <div class="wellness-note">
+      💛 <b>Wellness, not diagnosis.</b> Your health profile is used to personalize educational insights and general wellness guidance. It is not a medical diagnosis or treatment plan. Always consult a qualified healthcare provider for medical concerns, diagnosis, or treatment.
+    </div>
+
+  </div>
+
+  <nav class="nav">
+    <a href="home.html"><span class="n-ic">home</span>Home</a>
+    <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+    <a href="tcm-hub.html"><span class="n-ic">acupuncture</span>TCM</a>
+    <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+    <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+  </nav>
+</div>
+
+<script src="appnav.js" defer></script>
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
 <script src="luna-chat.js" defer></script>
+<script>
+var currentStep = 1;
+var totalSteps = 7;
+var stepNames = ['Personal Info','Reproductive History','Cycle History','Symptoms & Conditions','Medications & Supplements','Lifestyle','Goals'];
+
+function goStep(n){
+  if(n < 1 || n > totalSteps) return;
+  currentStep = n;
+  document.querySelectorAll('.fstep').forEach(function(s){ s.classList.remove('on'); });
+  document.querySelector('.fstep[data-step="'+n+'"]').classList.add('on');
+  // update dots
+  document.querySelectorAll('.prog-dot').forEach(function(d){
+    var ds = parseInt(d.dataset.s);
+    d.classList.remove('on','done');
+    if(ds < n) d.classList.add('done');
+    else if(ds === n) d.classList.add('on');
+  });
+  // update bar
+  document.getElementById('progFill').style.width = (n/totalSteps*100) + '%';
+  document.getElementById('progLabel').textContent = 'Step ' + n + ' of ' + totalSteps + ' · ' + stepNames[n-1];
+  // update summary on step 7
+  if(n === 7) updateSummary();
+  // scroll to top
+  document.querySelector('.scroll').scrollTop = 0;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggle(el){
+  // exclusive for "None" options
+  var parent = el.parentElement;
+  var txt = el.textContent.trim();
+  if(txt === 'None' || txt === 'None that I know'){
+    parent.querySelectorAll('.tog').forEach(function(t){ t.classList.remove('on'); });
+    el.classList.add('on');
+  } else {
+    // remove None if selecting something else
+    parent.querySelectorAll('.tog').forEach(function(t){
+      if(t.textContent.trim() === 'None' || t.textContent.trim() === 'None that I know') t.classList.remove('on');
+    });
+    el.classList.toggle('on');
+  }
+}
+
+function updateSummary(){
+  document.getElementById('sum_name').textContent = document.getElementById('f_name').value || '—';
+  document.getElementById('sum_age').textContent = (document.getElementById('f_age').value || '—') + ' yrs';
+  document.getElementById('sum_cycle').textContent = (document.getElementById('f_cyclelen').value || '—') + ' days';
+  var conds = [];
+  document.querySelectorAll('.fstep[data-step="4"] .tog.on').forEach(function(t){ conds.push(t.textContent.trim()); });
+  document.getElementById('sum_cond').textContent = conds.length ? conds.join(', ') : 'None selected';
+  var goals = [];
+  document.querySelectorAll('.fstep[data-step="7"] .tog.on').forEach(function(t){ goals.push(t.textContent.trim()); });
+  document.getElementById('sum_goals').textContent = goals.length ? goals.slice(0,3).join(', ') + (goals.length>3?' +'+(goals.length-3):'') : '—';
+}
+
+function saveProfile(){
+  // collect data
+  var profile = {
+    name: document.getElementById('f_name').value,
+    age: document.getElementById('f_age').value,
+    dob: document.getElementById('f_dob').value,
+    height: document.getElementById('f_height').value,
+    weight: document.getElementById('f_weight').value,
+    cycleLength: document.getElementById('f_cyclelen').value,
+    periodLength: document.getElementById('f_periodlen').value,
+    lastPeriod: document.getElementById('f_lmp').value,
+    timestamp: new Date().toISOString()
+  };
+  try { localStorage.setItem('ovuluna_profile', JSON.stringify(profile)); } catch(e){}
+  // show success
+  document.querySelectorAll('.fstep').forEach(function(s){ s.classList.remove('on'); });
+  document.querySelector('.fstep[data-step="done"]').classList.add('on');
+  document.getElementById('progFill').style.width = '100%';
+  document.getElementById('progLabel').textContent = 'Complete!';
+  document.querySelectorAll('.prog-dot').forEach(function(d){ d.classList.remove('on'); d.classList.add('done'); });
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
 </body></html>

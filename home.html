@@ -23,6 +23,7 @@
 .rlegend span{ font:700 11px var(--sans); color:var(--taupe); display:inline-flex; align-items:center; gap:6px; }
 .rlegend i{ width:9px; height:9px; border-radius:50%; }
 </style>
+<link rel="stylesheet" href="evidence.css">
 <link rel="stylesheet" href="luna-chat.css">
 </head><body>
 
@@ -93,12 +94,12 @@
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
         <div style="background:rgba(127,174,201,.14);border-radius:16px;padding:13px 14px">
           <div class="row" style="gap:6px"><span class="ms" style="font-size:16px;color:var(--d-sleep)">bedtime</span><span class="sub" style="font-size:10.5px;font-weight:800;letter-spacing:.05em">SLEEP</span></div>
-          <div style="font-family:var(--serif);font-size:22px;color:var(--cocoa);margin-top:3px">7h 24m</div>
+          <div style="font-family:var(--serif);font-size:22px;color:var(--cocoa);margin-top:3px">7h 24m <span class="qi" data-evidence="sleep-duration" style="font-size:9px">i</span></div>
           <div class="sub" style="font-size:10.5px">Score 88</div>
         </div>
         <div style="background:rgba(236,150,120,.14);border-radius:16px;padding:13px 14px">
           <div class="row" style="gap:6px"><span class="ms" style="font-size:16px;color:var(--d-stress)">monitor_heart</span><span class="sub" style="font-size:10.5px;font-weight:800;letter-spacing:.05em">HRV</span></div>
-          <div style="font-family:var(--serif);font-size:22px;color:var(--cocoa);margin-top:3px">62 ms</div>
+          <div style="font-family:var(--serif);font-size:22px;color:var(--cocoa);margin-top:3px">62 ms <span class="qi" data-evidence="stress-hrv" style="font-size:9px">i</span></div>
           <div class="sub" style="font-size:10.5px">Balanced</div>
         </div>
       </div>
@@ -142,7 +143,7 @@
         <span class="hstat"><span class="ms" style="color:#7FA9D0;font-size:15px">trending_up</span> E2 rising</span>
         <span class="hstat"><span class="ms" style="color:#D983A4;font-size:15px">remove</span> LH low</span>
       </div>
-      <p style="margin:12px 2px 0;font-size:12.5px;line-height:1.5;color:var(--cocoa)">A follicle is maturing and estrogen is climbing toward its pre-ovulation peak.</p>
+      <p style="margin:12px 2px 0;font-size:12.5px;line-height:1.5;color:var(--cocoa)">A follicle is maturing and estrogen is climbing toward its pre-ovulation peak <span class="qi" data-evidence="estradiol-follicular">i</span>.</p>
     </div>
 
     <!-- Longevity grid -->
@@ -301,6 +302,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 <script src="cyclering.js" defer></script>
 <script src="appnav.js" defer></script>
-<script src="ovuluna-mascot.js" defer></script>
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
 <script src="luna-chat.js" defer></script>
 </body></html>

@@ -1,15 +1,205 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ovuluna</title>
+<title>Ovuluna · Phase Coach</title>
 <link rel="icon" type="image/png" href="assets/onboarding/egg.png">
-<style>body{font-family:system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:var(--paper);color:var(--ink);padding:24px;text-align:center}
-h1{font-family:Georgia,serif;font-size:28px;color:var(--ink);margin-bottom:8px}p{color:var(--taupe);font-size:15px;max-width:32ch;line-height:1.5}
-a{display:inline-block;margin-top:18px;padding:12px 24px;border-radius:99px;background:var(--mauve);color:#fff;text-decoration:none;font-weight:700;font-size:14px}</style>
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<link rel="stylesheet" href="evidence.css">
+<script src="anim.js" defer></script>
+<style>
+.phase-hero{ background:linear-gradient(135deg,rgba(196,181,224,.25),rgba(245,198,184,.2)); border:1.5px solid rgba(196,181,224,.4); border-radius:var(--r); padding:20px; position:relative; overflow:hidden; }
+.phase-hero::after{ content:''; position:absolute; top:-30px; right:-20px; width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,.3); }
+.phase-badge{ display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:99px; background:rgba(255,255,255,.7); font:800 12px var(--sans); color:var(--mauve); letter-spacing:.04em; }
+.phase-day{ font-family:var(--serif); font-size:38px; font-weight:600; color:var(--cocoa); line-height:1; margin-top:10px; }
+.phase-name{ font-size:15px; font-weight:700; color:var(--ink); margin-top:4px; }
+.phase-desc{ font-size:12.5px; color:var(--taupe); line-height:1.5; margin-top:6px; }
+.hormone-bar{ display:flex; gap:6px; margin-top:14px; }
+.hormone-bar .hb{ flex:1; text-align:center; }
+.hormone-bar .hb .hb-label{ font-size:9px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--taupe); }
+.hormone-bar .hb .hb-track{ height:6px; background:rgba(107,82,142,.1); border-radius:99px; margin-top:4px; overflow:hidden; }
+.hormone-bar .hb .hb-fill{ height:100%; border-radius:99px; }
+.coach-card{ display:flex; gap:12px; padding:14px; background:var(--card-solid); border:1.5px solid var(--line-soft); border-radius:16px; }
+.coach-card .cc-ic{ width:36px; height:36px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.coach-card .cc-body{ flex:1; }
+.coach-card .cc-t{ font-size:13px; font-weight:800; color:var(--ink); margin-bottom:3px; }
+.coach-card .cc-d{ font-size:12px; color:var(--taupe); line-height:1.45; }
+.tip-row{ display:flex; gap:10px; align-items:flex-start; padding:11px 0; border-bottom:1px solid var(--line-soft); }
+.tip-row:last-child{ border-bottom:none; }
+.tip-row .tr-ic{ font-size:17px; flex-shrink:0; margin-top:1px; }
+.tip-row .tr-txt{ font-size:12.5px; color:var(--cocoa); line-height:1.45; }
+.tip-row .tr-txt b{ color:var(--ink); }
+.phase-tabs{ display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; }
+.phase-tab{ flex-shrink:0; padding:8px 14px; border-radius:99px; border:1.5px solid var(--line-soft); background:var(--card-solid); font:700 11.5px var(--sans); color:var(--taupe); cursor:pointer; transition:.15s; }
+.phase-tab.on{ border-color:var(--mauve); background:rgba(139,108,130,.1); color:var(--ink); }
+.ai-insight{ background:linear-gradient(135deg,rgba(196,181,224,.15),rgba(245,198,184,.12)); border:1.5px solid rgba(196,181,224,.35); border-radius:var(--r-sm); padding:14px 16px; display:flex; gap:10px; }
+.ai-insight .ai-ic{ font-size:20px; flex-shrink:0; }
+.ai-insight p{ font-size:12.5px; line-height:1.5; color:var(--cocoa); }
+.ai-insight b{ color:var(--mauve); }
+.wellness-note{ font-size:11px; color:var(--taupe); line-height:1.5; padding:10px 12px; background:rgba(245,198,184,.12); border-radius:12px; border:1px solid rgba(212,154,138,.25); }
+</style>
 <link rel="stylesheet" href="luna-chat.css">
 </head><body>
-<h1>✨ Coming soon</h1>
-<p>This feature is being developed. We'll let you know when it's ready.</p>
-<a href="home.html">Back to Ovuluna</a>
-<script>setTimeout(function(){location.href="home.html"},3000)</script>
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="home.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">Phase Coach</div>
+    <a class="t-icon ms" href="cycle-home.html">calendar_month</a>
+  </div>
+
+  <div class="scroll">
+
+    <!-- Phase hero -->
+    <div class="phase-hero">
+      <div class="phase-badge"><span class="ms" style="font-size:14px">auto_awesome</span> Today's Guidance</div>
+      <div class="phase-day">Day 9</div>
+      <div class="phase-name">Follicular Phase <span class="qi" data-evidence="cycle-phases">i</span></div>
+      <div class="phase-desc">Your estrogen is rising, energy is building. This is your power phase — lean into it.</div>
+      <div class="hormone-bar">
+        <div class="hb"><div class="hb-label">Estrogen</div><div class="hb-track"><div class="hb-fill" style="width:65%;background:var(--lavender)"></div></div></div>
+        <div class="hb"><div class="hb-label">Progesterone</div><div class="hb-track"><div class="hb-fill" style="width:15%;background:var(--blush)"></div></div></div>
+        <div class="hb"><div class="hb-label">FSH</div><div class="hb-track"><div class="hb-fill" style="width:40%;background:var(--periwinkle)"></div></div></div>
+      </div>
+    </div>
+
+    <!-- AI insight -->
+    <div class="ai-insight">
+      <span class="ai-ic">🌙</span>
+      <p><b>Luna says:</b> Your follicular phase is a great time for high-intensity workouts and big creative projects. Estrogen is climbing, which supports insulin sensitivity and energy <span class="qi" data-evidence="estradiol-follicular">i</span>. Try adding protein-rich meals to fuel follicle development <span class="qi" data-evidence="nutrition-follicular">i</span>.</p>
+    </div>
+
+    <!-- Phase tabs -->
+    <div class="phase-tabs" id="phaseTabs">
+      <div class="phase-tab on" data-phase="menstrual">🩸 Menstrual</div>
+      <div class="phase-tab" data-phase="follicular">🌱 Follicular</div>
+      <div class="phase-tab" data-phase="ovulation">✨ Ovulation</div>
+      <div class="phase-tab" data-phase="luteal">🌙 Luteal</div>
+    </div>
+
+    <!-- Energy & Mood -->
+    <div class="card">
+      <h2 class="sec" style="margin-top:0">Energy & Focus</h2>
+      <div class="tip-row">
+        <span class="tr-ic">⚡</span>
+        <div class="tr-txt"><b>High-intensity exercise</b> is well-tolerated now. Your estrogen supports strength and recovery <span class="qi" data-evidence="exercise-cycle">i</span>. Try HIIT, heavy lifting, or long runs.</div>
+      </div>
+      <div class="tip-row">
+        <span class="tr-ic">🧠</span>
+        <div class="tr-txt"><b>Peak cognitive window.</b> Rising estrogen enhances verbal fluency and spatial memory. Schedule important meetings and creative work this week.</div>
+      </div>
+      <div class="tip-row">
+        <span class="tr-ic">😊</span>
+        <div class="tr-txt"><b>Mood tends to lift</b> as estrogen rises. Social energy is higher — this is a good time for networking and social events.</div>
+      </div>
+    </div>
+
+    <!-- Nutrition -->
+    <div class="card">
+      <h2 class="sec" style="margin-top:0">Nutrition Today</h2>
+      <div class="tip-row">
+        <span class="tr-ic">🥩</span>
+        <div class="tr-txt"><b>Protein + healthy fats</b> support hormone synthesis. Aim for 20-30g protein per meal. Include eggs, fish, legumes, and avocados <span class="qi" data-evidence="nutrition-follicular">i</span>.</div>
+      </div>
+      <div class="tip-row">
+        <span class="tr-ic">🥬</span>
+        <div class="tr-txt"><b>Iron-rich foods</b> help replenish stores after menstruation. Pair with vitamin C (bell peppers, citrus) to boost absorption <span class="qi" data-evidence="iron-menstruation">i</span>.</div>
+      </div>
+      <div class="tip-row">
+        <span class="tr-ic">💧</span>
+        <div class="tr-txt"><b>Stay hydrated.</b> Estrogen supports fluid balance; aim for 2L water daily. Add electrolytes if exercising heavily.</div>
+      </div>
+      <a href="nutrition-plan.html" class="btn ghost" style="margin-top:10px">View Full Nutrition Plan <span class="ms" style="font-size:18px">arrow_forward</span></a>
+    </div>
+
+    <!-- Exercise -->
+    <div class="card">
+      <h2 class="sec" style="margin-top:0">Movement</h2>
+      <div class="grid2">
+        <div class="coach-card" style="flex-direction:column;gap:8px">
+          <div class="cc-ic" style="background:rgba(212,154,184,.15)">🏃</div>
+          <div class="cc-t">HIIT / Cardio</div>
+          <div class="cc-d">20-30 min. Your body responds well to intensity now <span class="qi" data-evidence="exercise-luteal">i</span>.</div>
+        </div>
+        <div class="coach-card" style="flex-direction:column;gap:8px">
+          <div class="cc-ic" style="background:rgba(168,192,160,.15)">🏋️</div>
+          <div class="cc-t">Strength</div>
+          <div class="cc-d">Upper body focus. Estrogen supports muscle protein synthesis.</div>
+        </div>
+      </div>
+      <a href="exercise.html" class="btn ghost" style="margin-top:12px">Browse Workouts <span class="ms" style="font-size:18px">arrow_forward</span></a>
+    </div>
+
+    <!-- Intimacy -->
+    <div class="card tint-blush">
+      <h2 class="sec" style="margin-top:0">Intimacy & Connection</h2>
+      <div class="tip-row">
+        <span class="tr-ic">💕</span>
+        <div class="tr-txt"><b>Libido may rise</b> as estrogen increases toward ovulation. This is a natural part of your cycle <span class="qi" data-evidence="cycle-phases">i</span>.</div>
+      </div>
+      <div class="tip-row">
+        <span class="tr-ic">👥</span>
+        <div class="tr-txt"><b>Communicate with your partner.</b> Sharing your cycle phase helps them understand your energy and needs <span class="qi" data-evidence="partner-support-outcomes">i</span>.</div>
+      </div>
+      <a href="partner-connect.html" class="btn ghost" style="margin-top:10px">Partner Connection <span class="ms" style="font-size:18px">arrow_forward</span></a>
+    </div>
+
+    <!-- Symptom watch -->
+    <div class="card">
+      <h2 class="sec" style="margin-top:0">Symptom Watch</h2>
+      <div class="sub" style="margin-bottom:10px">What's normal in this phase, and when to check in:</div>
+      <div class="tip-row">
+        <span class="tr-ic">✅</span>
+        <div class="tr-txt"><b>Normal:</b> Light spotting ending, increasing energy, clearer skin, higher libido.</div>
+      </div>
+      <div class="tip-row">
+        <span class="tr-ic">⚠️</span>
+        <div class="tr-txt"><b>Worth noting:</b> Persistent heavy bleeding beyond day 7, severe pelvic pain, or fever — these warrant clinical attention <span class="qi" data-evidence="cycle-length-normal">i</span>.</div>
+      </div>
+      <a href="cycle-log.html" class="btn ghost" style="margin-top:10px">Log Symptoms <span class="ms" style="font-size:18px">edit_note</span></a>
+    </div>
+
+    <!-- Breathwork -->
+    <div class="card tint-lavender">
+      <h2 class="sec" style="margin-top:0">Breathwork of the Day</h2>
+      <div class="coach-card" style="background:transparent;border:none;padding:0">
+        <div class="cc-ic" style="background:rgba(196,181,224,.3)">🫁</div>
+        <div class="cc-body">
+          <div class="cc-t">Coherent Breathing · 6 breaths/min</div>
+          <div class="cc-d">5 sec inhale, 5 sec exhale. Maximizes HRV and balances your nervous system <span class="qi" data-evidence="breathwork-hrv">i</span>.</div>
+        </div>
+      </div>
+      <a href="breathe.html" class="btn mauve" style="margin-top:12px">Start 5-min Session <span class="ms" style="font-size:18px">play_arrow</span></a>
+    </div>
+
+    <!-- Wellness disclaimer -->
+    <div class="wellness-note">
+      💛 <b>Wellness, not diagnosis.</b> Phase coaching is educational and based on general cycle physiology. Individual cycles vary. If you have concerns about your cycle, symptoms, or fertility, please consult a qualified healthcare provider.
+    </div>
+
+  </div>
+
+  <nav class="nav">
+    <a href="home.html"><span class="n-ic">home</span>Home</a>
+    <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+    <a href="tcm-hub.html"><span class="n-ic">acupuncture</span>TCM</a>
+    <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+    <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+  </nav>
+</div>
+
+<script src="appnav.js" defer></script>
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
 <script src="luna-chat.js" defer></script>
+<script>
+// Phase tab switching
+document.querySelectorAll('.phase-tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.phase-tab').forEach(function(t){t.classList.remove('on');});
+    tab.classList.add('on');
+  });
+});
+</script>
 </body></html>

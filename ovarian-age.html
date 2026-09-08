@@ -42,6 +42,7 @@
   .persona-bar .p-chip.on{ border-color:var(--mauve); background:rgba(139,108,130,.10); }
   .persona-bar .p-chip img{ width:18px; height:18px; }
 </style>
+<link rel="stylesheet" href="evidence.css">
 <link rel="stylesheet" href="luna-chat.css">
 </head><body>
 
@@ -85,7 +86,7 @@
           <input type="number" id="age" value="33" min="13" max="65">
         </div>
         <div class="field">
-          <label for="amh">AMH (optional)</label>
+          <label for="amh">AMH (ng/mL) <span class="qi" data-evidence="amh-overview">i</span></label>
           <input type="number" id="amh" value="" step="0.1" min="0" max="15" placeholder="ng/mL">
         </div>
         <div class="field">
@@ -140,7 +141,7 @@
         <span class="r-val" id="ovVal">33</span>
       </div>
       <div class="result-row">
-        <span class="r-label">Years to menopause</span>
+        <span class="r-label">Years to menopause <span class="qi" data-evidence="menopause-age">i</span></span>
         <span class="r-val" id="ttmVal">18</span>
       </div>
       <div class="result-row">
@@ -160,9 +161,9 @@
     <h2 class="sec">Daily levers</h2>
     <div class="tip-list">
       <div class="tip"><span class="ms">restaurant</span><div><b>Glycemic stability</b><span>Keep blood sugar steady with protein-first meals and fiber.</span></div></div>
-      <div class="tip"><span class="ms">bedtime</span><div><b>Deep sleep</b><span>7–9 hours supports follicular recovery and hormone rhythm.</span></div></div>
-      <div class="tip"><span class="ms">fitness_center</span><div><b>Phase-aligned movement</b><span>Moderate exercise most days; avoid overtraining.</span></div></div>
-      <div class="tip"><span class="ms">self_improvement</span><div><b>Stress breaks</b><span>Short breathing resets lower cortisol, which matters for estrogen.</span></div></div>
+      <div class="tip"><span class="ms">bedtime</span><div><b>Deep sleep</b><span>7–9 hours supports follicular recovery and hormone rhythm <span class="qi" data-evidence="sleep-duration">i</span>.</span></div></div>
+      <div class="tip"><span class="ms">fitness_center</span><div><b>Phase-aligned movement</b><span>Moderate exercise most days; avoid overtraining <span class="qi" data-evidence="exercise-cycle">i</span>.</span></div></div>
+      <div class="tip"><span class="ms">self_improvement</span><div><b>Stress breaks</b><span>Short breathing resets lower cortisol, which matters for estrogen <span class="qi" data-evidence="stress-cortisol-cycle">i</span>.</span></div></div>
     </div>
 
     <a href="bio-age.html" class="btn mauve" style="margin-top:18px;padding:14px">View full Bio-Age breakdown</a>
@@ -286,5 +287,7 @@
   update();
 })();
 </script>
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
 <script src="luna-chat.js" defer></script>
 </body></html>

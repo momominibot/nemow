@@ -1,15 +1,258 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ovuluna</title>
+<title>Ovuluna · Personal Info</title>
 <link rel="icon" type="image/png" href="assets/onboarding/egg.png">
-<style>body{font-family:system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:var(--paper);color:var(--ink);padding:24px;text-align:center}
-h1{font-family:Georgia,serif;font-size:28px;color:var(--ink);margin-bottom:8px}p{color:var(--taupe);font-size:15px;max-width:32ch;line-height:1.5}
-a{display:inline-block;margin-top:18px;padding:12px 24px;border-radius:99px;background:var(--mauve);color:#fff;text-decoration:none;font-weight:700;font-size:14px}</style>
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<link rel="stylesheet" href="evidence.css">
+<script src="anim.js" defer></script>
+<style>
+.info-hero{ background:linear-gradient(135deg,rgba(196,181,224,.25),rgba(168,192,160,.18)); border:1.5px solid rgba(196,181,224,.4); border-radius:var(--r); padding:20px; position:relative; overflow:hidden; }
+.info-hero::after{ content:''; position:absolute; top:-30px; right:-20px; width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,.3); }
+.info-badge{ display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:99px; background:rgba(255,255,255,.7); font:800 12px var(--sans); color:var(--mauve); letter-spacing:.04em; }
+.info-title{ font-family:var(--serif); font-size:26px; font-weight:600; color:var(--cocoa); line-height:1.1; margin-top:10px; }
+.info-desc{ font-size:12.5px; color:var(--taupe); line-height:1.5; margin-top:6px; }
+.profile-head{ display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+.profile-avatar{ width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg,var(--lavender),var(--blush)); display:flex; align-items:center; justify-content:center; font-size:30px; border:2.5px solid var(--ink); flex-shrink:0; }
+.profile-name{ font-family:var(--serif); font-size:20px; font-weight:700; color:var(--ink); }
+.profile-sub{ font-size:12px; color:var(--taupe); margin-top:2px; }
+.form-group{ margin-bottom:14px; }
+.form-group:last-child{ margin-bottom:0; }
+.form-label{ display:block; font-size:11px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--taupe); margin-bottom:5px; }
+.form-input{ width:100%; padding:13px 14px; border:1.5px solid var(--line-soft); border-radius:12px; background:var(--card-solid); font:600 14px var(--sans); color:var(--ink); outline:none; transition:.15s; }
+.form-input:focus{ border-color:var(--mauve); background:#fff; }
+.form-input::placeholder{ color:var(--faded); }
+.form-row{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.toggle-row{ display:flex; align-items:center; justify-content:space-between; padding:13px 0; border-bottom:1px solid var(--line-soft); }
+.toggle-row:last-child{ border-bottom:none; }
+.toggle-row .tr-label{ font-size:13.5px; font-weight:700; color:var(--ink); }
+.toggle-row .tr-sub{ font-size:11px; color:var(--taupe); margin-top:2px; }
+.toggle-switch{ position:relative; width:46px; height:26px; background:var(--sunken); border-radius:99px; cursor:pointer; transition:.2s; flex-shrink:0; border:1.5px solid var(--line-soft); }
+.toggle-switch.on{ background:var(--mauve); border-color:var(--mauve); }
+.toggle-switch::after{ content:''; position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.2); transition:.2s; }
+.toggle-switch.on::after{ left:22px; }
+.bmi-card{ display:flex; align-items:center; gap:14px; padding:14px; background:linear-gradient(135deg,rgba(168,192,160,.15),rgba(196,181,224,.1)); border:1.5px solid rgba(168,192,160,.35); border-radius:var(--r-sm); margin-top:12px; }
+.bmi-num{ font-family:var(--serif); font-size:32px; font-weight:800; color:var(--ink); }
+.bmi-label{ font-size:11px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--taupe); }
+.bmi-text{ font-size:12px; color:var(--cocoa); line-height:1.45; flex:1; }
+.bmi-text b{ color:var(--ink); }
+.section-head{ display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+.section-head .sh-ic{ width:32px; height:32px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:17px; background:var(--sunken); }
+.section-head .sh-t{ font-family:var(--serif); font-size:17px; font-weight:700; color:var(--ink); }
+.danger-btn{ display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; border:1.5px solid rgba(190,74,62,.3); border-radius:99px; background:rgba(190,74,62,.06); color:var(--low); font:800 14px var(--sans); cursor:pointer; text-decoration:none; transition:.15s; }
+.danger-btn:hover{ background:rgba(190,74,62,.12); }
+.wellness-note{ font-size:11px; color:var(--taupe); line-height:1.5; padding:10px 12px; background:rgba(245,198,184,.12); border-radius:12px; border:1px solid rgba(212,154,138,.25); }
+</style>
 <link rel="stylesheet" href="luna-chat.css">
 </head><body>
-<h1>✨ Coming soon</h1>
-<p>We're working on this feature and will share it here when it's ready.</p>
-<a href="home.html">Back to Ovuluna</a>
-<script>setTimeout(function(){location.href="home.html"},3000)</script>
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="profile.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">Personal Info</div>
+    <a class="t-icon ms" href="settings.html">settings</a>
+  </div>
+
+  <div class="scroll">
+
+    <!-- Hero -->
+    <div class="info-hero">
+      <div class="info-badge"><span class="ms" style="font-size:14px">manage_accounts</span> Your Profile</div>
+      <div class="info-title">Manage Your Details</div>
+      <div class="info-desc">Keep your profile accurate so Ovuluna can personalize your cycle insights, nutrition, and wellness recommendations.</div>
+    </div>
+
+    <!-- Profile header -->
+    <div class="card">
+      <div class="profile-head">
+        <div class="profile-avatar">👩</div>
+        <div>
+          <div class="profile-name">Maya Chen</div>
+          <div class="profile-sub">Premium member · Joined March 2025</div>
+        </div>
+      </div>
+      <a href="profile.html" class="btn ghost">Change Photo <span class="ms" style="font-size:18px">photo_camera</span></a>
+    </div>
+
+    <!-- Basic info -->
+    <div class="card">
+      <div class="section-head">
+        <div class="sh-ic">📋</div>
+        <div class="sh-t">Basic Information</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input class="form-input" type="text" value="Maya Chen" placeholder="Your full name"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Date of Birth</label>
+          <input class="form-input" type="date" value="1992-06-15"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Age</label>
+          <input class="form-input" type="text" value="34" readonly/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Height</label>
+          <input class="form-input" type="text" value="165 cm" placeholder="cm"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Weight</label>
+          <input class="form-input" type="text" value="58 kg" placeholder="kg"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" value="maya.chen@email.com" placeholder="Email address"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone</label>
+        <input class="form-input" type="tel" value="+65 9123 4567" placeholder="Phone number"/>
+      </div>
+
+      <!-- BMI context -->
+      <div class="bmi-card">
+        <div>
+          <div class="bmi-num">21.3</div>
+          <div class="bmi-label">BMI</div>
+        </div>
+        <div class="bmi-text">
+          <b>Healthy range.</b> Your BMI falls within the normal range (18.5–24.9), which is associated with optimal fertility and cycle regularity <span class="qi" data-evidence="bmi-fertility">i</span>. Both underweight and overweight can affect hormonal balance and ovulation.
+        </div>
+      </div>
+
+      <a href="health-profile.html" class="btn mauve" style="margin-top:14px">Save Changes <span class="ms" style="font-size:18px">save</span></a>
+    </div>
+
+    <!-- Preferences -->
+    <div class="card">
+      <div class="section-head">
+        <div class="sh-ic">⚙️</div>
+        <div class="sh-t">Preferences</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Units</label>
+        <div class="chiprow">
+          <div class="chip on"><span class="c-ic">📏</span>Metric</div>
+          <div class="chip"><span class="c-ic">📐</span>Imperial</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Cycle Start Day</label>
+        <div class="chiprow">
+          <div class="chip on"><span class="c-ic">🩸</span>Day 1 = First day of flow</div>
+          <div class="chip"><span class="c-ic">🌙</span>Day 1 = Day before</div>
+        </div>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <div class="tr-label">Daily Reminders</div>
+          <div class="tr-sub">Log symptoms, water, and mood</div>
+        </div>
+        <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <div class="tr-label">Period Alerts</div>
+          <div class="tr-sub">Notify 3 days before expected period</div>
+        </div>
+        <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <div class="tr-label">Fertility Window</div>
+          <div class="tr-sub">Notify when fertile window begins <span class="qi" data-evidence="fertile-window">i</span></div>
+        </div>
+        <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <div class="tr-label">Dark Theme</div>
+          <div class="tr-sub">Use dark interface at night</div>
+        </div>
+        <div class="toggle-switch" onclick="this.classList.toggle('on')"></div>
+      </div>
+    </div>
+
+    <!-- Data & privacy -->
+    <div class="card tint-lavender">
+      <div class="section-head">
+        <div class="sh-ic">🔒</div>
+        <div class="sh-t">Data &amp; Privacy</div>
+      </div>
+      <div class="sub" style="margin-bottom:12px">Your health data is encrypted and never sold. You're in full control.</div>
+      <a href="reports.html" class="lrow">
+        <div class="l-ic" style="background:rgba(168,192,160,.15)">📥</div>
+        <div class="l-t"><b>Export My Data</b><span>Download all your cycle and health data as JSON/CSV</span></div>
+        <span class="l-arr ms">chevron_right</span>
+      </a>
+      <a href="privacy.html" class="lrow">
+        <div class="l-ic" style="background:rgba(168,176,216,.15)">📄</div>
+        <div class="l-t"><b>Privacy Policy</b><span>How we collect, use, and protect your data</span></div>
+        <span class="l-arr ms">chevron_right</span>
+      </a>
+      <div class="lrow" style="cursor:pointer">
+        <div class="l-ic" style="background:rgba(212,154,138,.15)">🔕</div>
+        <div class="l-t"><b>Manage Permissions</b><span>Camera, notifications, health data access</span></div>
+        <span class="l-arr ms">chevron_right</span>
+      </div>
+      <div style="height:12px"></div>
+      <a href="settings.html" class="danger-btn"><span class="ms" style="font-size:18px">delete_forever</span> Delete My Data</a>
+      <div style="font-size:10.5px;color:var(--taupe);text-align:center;margin-top:8px;line-height:1.4">This permanently removes all your data and cannot be undone.</div>
+    </div>
+
+    <!-- Account -->
+    <div class="card">
+      <div class="section-head">
+        <div class="sh-ic">👤</div>
+        <div class="sh-t">Account</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Account Email</label>
+        <input class="form-input" type="email" value="maya.chen@email.com" readonly/>
+      </div>
+      <a href="settings.html" class="lrow">
+        <div class="l-ic" style="background:rgba(196,181,224,.2)">🔑</div>
+        <div class="l-t"><b>Change Password</b><span>Last changed 4 months ago</span></div>
+        <span class="l-arr ms">chevron_right</span>
+      </a>
+      <a href="premium.html" class="lrow">
+        <div class="l-ic" style="background:rgba(229,201,138,.2)">💎</div>
+        <div class="l-t"><b>Subscription</b><span>Premium · renews Oct 1, 2026</span></div>
+        <span class="l-arr ms">chevron_right</span>
+      </a>
+      <a href="settings.html" class="lrow">
+        <div class="l-ic" style="background:rgba(212,154,184,.15)">🔗</div>
+        <div class="l-t"><b>Connected Apps</b><span>Apple Health, 2 devices linked</span></div>
+        <span class="l-arr ms">chevron_right</span>
+      </a>
+      <div style="height:12px"></div>
+      <a href="login.html" class="btn ghost">Sign Out <span class="ms" style="font-size:18px">logout</span></a>
+    </div>
+
+    <!-- Wellness disclaimer -->
+    <div class="wellness-note">
+      💛 <b>Wellness, not diagnosis.</b> Personal information is used to personalize educational insights and recommendations. BMI is a general screening tool and does not account for body composition, muscle mass, or individual health. For medical advice, please consult a qualified healthcare provider.
+    </div>
+
+  </div>
+
+  <nav class="nav">
+    <a href="home.html"><span class="n-ic">home</span>Home</a>
+    <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+    <a href="tcm-hub.html"><span class="n-ic">acupuncture</span>TCM</a>
+    <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+    <a href="profile.html"><span class="n-ic on">person</span>Profile</a>
+  </nav>
+</div>
+
+<script src="appnav.js" defer></script>
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
 <script src="luna-chat.js" defer></script>
 </body></html>

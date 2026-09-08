@@ -1,15 +1,267 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ovuluna</title>
+<title>Ovuluna · Label Scan</title>
 <link rel="icon" type="image/png" href="assets/onboarding/egg.png">
-<style>body{font-family:system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:var(--paper);color:var(--ink);padding:24px;text-align:center}
-h1{font-family:Georgia,serif;font-size:28px;color:var(--ink);margin-bottom:8px}p{color:var(--taupe);font-size:15px;max-width:32ch;line-height:1.5}
-a{display:inline-block;margin-top:18px;padding:12px 24px;border-radius:99px;background:var(--mauve);color:#fff;text-decoration:none;font-weight:700;font-size:14px}</style>
+<link rel="apple-touch-icon" href="assets/onboarding/egg.png">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<link rel="stylesheet" href="evidence.css">
+<script src="anim.js" defer></script>
+<style>
+.scan-hero{ background:linear-gradient(135deg,rgba(168,192,160,.22),rgba(196,181,224,.18)); border:1.5px solid rgba(168,192,160,.4); border-radius:var(--r); padding:20px; position:relative; overflow:hidden; }
+.scan-hero::after{ content:''; position:absolute; top:-30px; right:-20px; width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,.3); }
+.scan-badge{ display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:99px; background:rgba(255,255,255,.7); font:800 12px var(--sans); color:var(--mauve); letter-spacing:.04em; }
+.scan-title{ font-family:var(--serif); font-size:26px; font-weight:600; color:var(--cocoa); line-height:1.1; margin-top:10px; }
+.scan-desc{ font-size:12.5px; color:var(--taupe); line-height:1.5; margin-top:6px; }
+.viewfinder{ position:relative; width:100%; aspect-ratio:4/3; border-radius:var(--r-sm); background:linear-gradient(135deg,#2a2438,#3d3350); overflow:hidden; border:2px solid var(--ink); }
+.viewfinder::before{ content:''; position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.02) 2px,rgba(255,255,255,.02) 4px); }
+.vf-frame{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:78%; height:68%; border:2.5px solid rgba(255,255,255,.6); border-radius:14px; }
+.vf-frame::before,.vf-frame::after,.vf-corner{ position:absolute; width:22px; height:22px; border-color:var(--sage); border-style:solid; }
+.vf-frame::before{ content:''; top:-2px; left:-2px; border-width:3px 0 0 3px; border-top-left-radius:10px; }
+.vf-frame::after{ content:''; bottom:-2px; right:-2px; border-width:0 3px 3px 0; border-bottom-right-radius:10px; }
+.vf-corner.tl{ top:-2px; right:-2px; border-width:3px 3px 0 0; border-top-right-radius:10px; }
+.vf-corner.bl{ bottom:-2px; left:-2px; border-width:0 0 3px 3px; border-bottom-left-radius:10px; }
+.vf-scanline{ position:absolute; left:10%; right:10%; height:2px; background:linear-gradient(90deg,transparent,var(--sage),transparent); animation:scanmove 2.4s ease-in-out infinite; box-shadow:0 0 12px var(--sage); }
+@keyframes scanmove{ 0%,100%{top:18%} 50%{top:80%} }
+.vf-label{ position:absolute; bottom:12px; left:50%; transform:translateX(-50%); font:700 11px var(--sans); color:rgba(255,255,255,.7); letter-spacing:.06em; text-transform:uppercase; }
+.vf-icon{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:42px; opacity:.15; }
+.score-ring{ position:relative; width:72px; height:72px; flex-shrink:0; }
+.score-ring svg{ transform:rotate(-90deg); }
+.score-ring .sr-val{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:22px; font-weight:800; color:var(--ink); }
+.ing-item{ display:flex; align-items:flex-start; gap:8px; padding:8px 0; border-bottom:1px solid var(--line-soft); font-size:12.5px; color:var(--cocoa); }
+.ing-item:last-child{ border-bottom:none; }
+.ing-item .ing-dot{ width:7px; height:7px; border-radius:50%; margin-top:6px; flex-shrink:0; }
+.ing-item.flag .ing-dot{ background:var(--low); }
+.ing-item.ok .ing-dot{ background:var(--ok); }
+.ing-item.warn .ing-dot{ background:var(--warn); }
+.ing-item b{ color:var(--ink); }
+.flag-tag{ display:inline-block; font-size:9.5px; font-weight:800; padding:2px 7px; border-radius:99px; background:rgba(190,74,62,.12); color:var(--low); margin-left:6px; letter-spacing:.03em; }
+.phase-rec{ background:linear-gradient(135deg,rgba(245,198,184,.18),rgba(196,181,224,.14)); border:1.5px solid rgba(245,198,184,.4); border-radius:var(--r-sm); padding:14px; display:flex; gap:10px; }
+.phase-rec .pr-ic{ font-size:22px; flex-shrink:0; }
+.phase-rec p{ font-size:12.5px; line-height:1.5; color:var(--cocoa); }
+.phase-rec b{ color:var(--mauve); }
+.watch-row{ display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--line-soft); }
+.watch-row:last-child{ border-bottom:none; }
+.watch-row .wr-ic{ width:32px; height:32px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; background:rgba(190,74,62,.1); }
+.watch-row .wr-txt{ flex:1; font-size:12.5px; color:var(--cocoa); }
+.watch-row .wr-txt b{ color:var(--ink); display:block; font-size:13px; }
+.history-row{ display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line-soft); }
+.history-row:last-child{ border-bottom:none; }
+.history-row .hr-thumb{ width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; background:var(--sunken); }
+.history-row .hr-body{ flex:1; }
+.history-row .hr-name{ font-size:13.5px; font-weight:800; color:var(--ink); }
+.history-row .hr-meta{ font-size:11px; color:var(--taupe); margin-top:2px; }
+.how-step{ display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--line-soft); }
+.how-step:last-child{ border-bottom:none; }
+.how-step .hs-num{ width:28px; height:28px; border-radius:50%; background:var(--mauve); color:#fff; display:flex; align-items:center; justify-content:center; font:800 13px var(--sans); flex-shrink:0; }
+.how-step .hs-body{ flex:1; }
+.how-step .hs-t{ font-size:13px; font-weight:800; color:var(--ink); }
+.how-step .hs-d{ font-size:12px; color:var(--taupe); line-height:1.45; margin-top:2px; }
+.wellness-note{ font-size:11px; color:var(--taupe); line-height:1.5; padding:10px 12px; background:rgba(245,198,184,.12); border-radius:12px; border:1px solid rgba(212,154,138,.25); }
+</style>
 <link rel="stylesheet" href="luna-chat.css">
 </head><body>
-<h1>✨ Coming soon</h1>
-<p>This feature is being developed. We'll share it here when it's ready.</p>
-<a href="home.html">Back to Ovuluna</a>
-<script>setTimeout(function(){location.href="home.html"},3000)</script>
+
+<div class="app">
+  <div class="top">
+    <a class="t-icon ms" href="home.html">arrow_back_ios_new</a>
+    <div class="t-title" style="text-align:center">Label Scan</div>
+    <a class="t-icon ms" href="foods.html">restaurant</a>
+  </div>
+
+  <div class="scroll">
+
+    <!-- Hero -->
+    <div class="scan-hero">
+      <div class="scan-badge"><span class="ms" style="font-size:14px">center_focus_strong</span> Nutrition Intelligence</div>
+      <div class="scan-title">Scan. Understand. Align.</div>
+      <div class="scan-desc">Point your camera at any food label. Ovuluna analyzes ingredients, flags endocrine disruptors, and tells you how it fits your cycle phase <span class="qi" data-evidence="endocrine-disruptors">i</span>.</div>
+    </div>
+
+    <!-- Camera viewfinder mock -->
+    <div class="card">
+      <h2 class="sec" style="margin-top:0">Camera</h2>
+      <div class="viewfinder">
+        <div class="vf-icon ms">photo_camera</div>
+        <div class="vf-frame">
+          <div class="vf-corner tl"></div>
+          <div class="vf-corner bl"></div>
+        </div>
+        <div class="vf-scanline"></div>
+        <div class="vf-label">Align label within frame</div>
+      </div>
+      <a href="nutrition-scanner.html" class="btn mauve" style="margin-top:14px"><span class="ms" style="font-size:20px">camera_alt</span> Start Scan</a>
+      <a href="food-scan.html" class="btn ghost" style="margin-top:8px">Upload from Gallery</a>
+    </div>
+
+    <!-- Sample analysis result -->
+    <div class="card tint-sage">
+      <div class="row" style="justify-content:space-between;align-items:flex-start">
+        <div style="flex:1">
+          <div class="badge ok" style="margin-bottom:8px">Analysis Complete</div>
+          <div style="font-family:var(--serif);font-size:20px;font-weight:700;color:var(--ink)">Organic Almond Butter</div>
+          <div style="font-size:12px;color:var(--taupe);margin-top:2px">340g jar · scanned 2 min ago</div>
+        </div>
+        <div class="score-ring">
+          <svg width="72" height="72" viewBox="0 0 72 72">
+            <circle cx="36" cy="36" r="30" fill="none" stroke="rgba(107,82,142,.1)" stroke-width="6"/>
+            <circle cx="36" cy="36" r="30" fill="none" stroke="var(--ok)" stroke-width="6" stroke-linecap="round" stroke-dasharray="169.6" stroke-dashoffset="25.4"/>
+          </svg>
+          <div class="sr-val">85</div>
+        </div>
+      </div>
+
+      <div style="height:1px;background:var(--line-soft);margin:14px 0"></div>
+
+      <div style="font:800 12px var(--sans);color:var(--taupe);letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px">Ingredients</div>
+      <div class="ing-item ok"><div class="ing-dot"></div><div><b>Organic almonds</b> — dry roasted</div></div>
+      <div class="ing-item ok"><div class="ing-dot"></div><div><b>Sea salt</b> — trace amount</div></div>
+      <div class="ing-item warn"><div class="ing-dot"></div><div><b>Palm oil</b> (sustainable) — refined<span class="flag-tag">High saturated fat</span></div></div>
+      <div class="ing-item flag"><div class="ing-dot"></div><div><b>Natural flavors</b> — proprietary blend<span class="flag-tag">May contain phthalates</span> <span class="qi" data-evidence="endocrine-disruptors">i</span></div></div>
+
+      <div style="height:1px;background:var(--line-soft);margin:14px 0"></div>
+
+      <div class="grid2">
+        <div class="metric"><div class="m-ic">🔥</div><div class="m-v">180</div><div class="m-l">Cal / 2 tbsp</div></div>
+        <div class="metric"><div class="m-ic">🥩</div><div class="m-v">6g</div><div class="m-l">Protein</div></div>
+        <div class="metric"><div class="m-ic">🫒</div><div class="m-v">16g</div><div class="m-l">Healthy Fat</div></div>
+        <div class="metric"><div class="m-ic">🌾</div><div class="m-v">3g</div><div class="m-l">Carbs</div></div>
+      </div>
+    </div>
+
+    <!-- Phase-specific recommendation -->
+    <div class="phase-rec">
+      <span class="pr-ic">🌙</span>
+      <p><b>Good for your luteal phase.</b> Almonds are rich in magnesium, which may help reduce PMS symptoms like cramping and mood swings <span class="qi" data-evidence="magnesium-pms">i</span>. The healthy fats support progesterone production <span class="qi" data-evidence="nutrition-luteal">i</span>. Enjoy 1–2 tbsp daily this week.</p>
+    </div>
+
+    <!-- Ingredients to watch for -->
+    <div class="card">
+      <h2 class="sec" style="margin-top:0">Ingredients to Watch For</h2>
+      <div class="sub" style="margin-bottom:8px">These additives and compounds may affect hormonal balance <span class="qi" data-evidence="endocrine-disruptors">i</span>.</div>
+      <div class="watch-row">
+        <div class="wr-ic">⚠️</div>
+        <div class="wr-txt"><b>Parabens</b> (methylparaben, propylparaben) — preservatives with estrogenic activity, often in processed foods and personal care.</div>
+      </div>
+      <div class="watch-row">
+        <div class="wr-ic">⚠️</div>
+        <div class="wr-txt"><b>Phthalates</b> — used in packaging and "natural flavors"; linked to reduced ovarian reserve <span class="qi" data-evidence="endocrine-disruptors">i</span>.</div>
+      </div>
+      <div class="watch-row">
+        <div class="wr-ic">⚠️</div>
+        <div class="wr-txt"><b>BPA &amp; BPS</b> — found in canned food linings; may disrupt estrogen signaling.</div>
+      </div>
+      <div class="watch-row">
+        <div class="wr-ic">⚠️</div>
+        <div class="wr-txt"><b>Artificial trans fats</b> (partially hydrogenated oils) — linked to increased inflammation and cycle irregularity <span class="qi" data-evidence="omega3-inflammation">i</span>.</div>
+      </div>
+      <div class="watch-row">
+        <div class="wr-ic">⚠️</div>
+        <div class="wr-txt"><b>High-fructose corn syrup</b> — excess fructose may contribute to insulin resistance and PCOS risk <span class="qi" data-evidence="pcos-lifestyle">i</span>.</div>
+      </div>
+      <div class="watch-row">
+        <div class="wr-ic">⚠️</div>
+        <div class="wr-txt"><b>Soy isolates</b> (not whole soy) — concentrated phytoestrogens; moderation advised for hormone-sensitive conditions.</div>
+      </div>
+    </div>
+
+    <!-- Recent scans -->
+    <div class="card">
+      <h2 class="sec" style="margin-top:0">Recent Scans</h2>
+      <div class="history-row">
+        <div class="hr-thumb">🥜</div>
+        <div class="hr-body">
+          <div class="hr-name">Organic Almond Butter <span class="badge ok" style="margin-left:6px">85</span></div>
+          <div class="hr-meta">Today · 2:14 PM · Luteal-friendly</div>
+        </div>
+        <span class="ms l-arr">chevron_right</span>
+      </div>
+      <div class="history-row">
+        <div class="hr-thumb">🥛</div>
+        <div class="hr-body">
+          <div class="hr-name">Greek Yogurt, Plain <span class="badge ok" style="margin-left:6px">92</span></div>
+          <div class="hr-meta">Yesterday · 8:02 AM · High protein &amp; calcium</div>
+        </div>
+        <span class="ms l-arr">chevron_right</span>
+      </div>
+      <div class="history-row">
+        <div class="hr-thumb">🍞</div>
+        <div class="hr-body">
+          <div class="hr-name">Sourdough Bread <span class="badge warn" style="margin-left:6px">68</span></div>
+          <div class="hr-meta">Yesterday · 1:30 PM · Low fiber, watch portion</div>
+        </div>
+        <span class="ms l-arr">chevron_right</span>
+      </div>
+      <div class="history-row">
+        <div class="hr-thumb">🍫</div>
+        <div class="hr-body">
+          <div class="hr-name">Dark Chocolate 70% <span class="badge ok" style="margin-left:6px">78</span></div>
+          <div class="hr-meta">Sep 5 · Magnesium-rich, luteal support <span class="qi" data-evidence="magnesium-pms">i</span></div>
+        </div>
+        <span class="ms l-arr">chevron_right</span>
+      </div>
+      <div class="history-row">
+        <div class="hr-thumb">🥤</div>
+        <div class="hr-body">
+          <div class="hr-name">Energy Drink <span class="badge low" style="margin-left:6px">32</span></div>
+          <div class="hr-meta">Sep 4 · Flagged: artificial additives, high caffeine</div>
+        </div>
+        <span class="ms l-arr">chevron_right</span>
+      </div>
+    </div>
+
+    <!-- How it works -->
+    <div class="card tint-lavender">
+      <h2 class="sec" style="margin-top:0">How It Works</h2>
+      <div class="how-step">
+        <div class="hs-num">1</div>
+        <div class="hs-body">
+          <div class="hs-t">Snap the label</div>
+          <div class="hs-d">Point your camera at the ingredients and nutrition panel. The viewfinder guides framing.</div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="hs-num">2</div>
+        <div class="hs-body">
+          <div class="hs-t">AI reads &amp; parses</div>
+          <div class="hs-d">OCR extracts every ingredient and nutrient. Our database cross-references 10,000+ additives.</div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="hs-num">3</div>
+        <div class="hs-body">
+          <div class="hs-t">Endocrine disruptor check</div>
+          <div class="hs-d">Known hormone-disrupting compounds are flagged with evidence from peer-reviewed research <span class="qi" data-evidence="endocrine-disruptors">i</span>.</div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="hs-num">4</div>
+        <div class="hs-body">
+          <div class="hs-t">Phase-aligned verdict</div>
+          <div class="hs-d">We score the product and tell you whether it supports your current cycle phase's nutritional needs <span class="qi" data-evidence="nutrition-follicular">i</span>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wellness disclaimer -->
+    <div class="wellness-note">
+      💛 <b>Wellness, not diagnosis.</b> Label scanning is educational and based on general nutritional science. Individual needs vary. If you have specific dietary restrictions, allergies, or health conditions, please consult a registered dietitian or qualified healthcare provider.
+    </div>
+
+  </div>
+
+  <nav class="nav">
+    <a href="home.html"><span class="n-ic">home</span>Home</a>
+    <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+    <a href="tcm-hub.html"><span class="n-ic">acupuncture</span>TCM</a>
+    <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+    <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+  </nav>
+</div>
+
+<script src="appnav.js" defer></script>
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
 <script src="luna-chat.js" defer></script>
 </body></html>

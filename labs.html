@@ -28,6 +28,7 @@
     .summary { margin:16px; padding:16px; border-radius:var(--r); background:rgba(201,138,46,.12); border:1.5px solid rgba(201,138,46,.35); font-size:13px; line-height:1.55; }
     .export-btn { margin:16px; padding:14px; border:2px solid var(--ink); border-radius:12px; background:var(--card); font-weight:800; cursor:pointer; }
   </style>
+<link rel="stylesheet" href="evidence.css">
 <link rel="stylesheet" href="luna-chat.css">
 </head>
 <body>
@@ -88,7 +89,7 @@
 
       <div class="card" style="margin:16px; padding:16px">
         <h3 style="margin-bottom:8px">\ud83d\udcda What these markers mean</h3>
-        <p style="font-size:13px; color:var(--taupe); line-height:1.5">AMH and AFC reflect ovarian reserve. FSH/E2 reflect how hard the brain is working to stimulate the ovaries. None predict natural fertility or egg quality on their own \u2014 they estimate response to fertility treatment and help contextualize where you are relative to typical age patterns.</p>
+        <p style="font-size:13px; color:var(--taupe); line-height:1.5">AMH and AFC reflect ovarian reserve <span class="qi" data-evidence="amh-overview">i</span> <span class="qi" data-evidence="afc-reserve">i</span>. FSH/E2 reflect how hard the brain is working to stimulate the ovaries <span class="qi" data-evidence="fsh-menopause">i</span>. None predict natural fertility or egg quality on their own \u2014 they estimate response to fertility treatment and help contextualize where you are relative to typical age patterns.</p>
       </div>
     </main>
 
@@ -200,6 +201,8 @@
       if(saved.vitd) document.getElementById('vitd').value = saved.vitd;
     } catch(e){}
   </script>
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
 <script src="luna-chat.js" defer></script>
 </body>
 </html>

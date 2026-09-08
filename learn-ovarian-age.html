@@ -20,6 +20,7 @@
 .ref a{color:var(--mauve);text-decoration:none;font-weight:600}
 </style>
 <script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
+<link rel="stylesheet" href="evidence.css">
 <link rel="stylesheet" href="luna-chat.css">
 </head><body>
 
@@ -42,7 +43,7 @@
     <!-- The concept -->
     <div class="card">
       <div class="artsec">Two Different Ages</div>
-      <p class="sub">Your chronological age is the number of candles on your birthday cake — a useful but incomplete measure. Your <b>ovarian age</b> is the biological age of your ovaries, determined by the quantity and quality of your remaining egg supply. For some women, these ages align. For many others, they diverge — sometimes by a decade or more.</p>
+      <p class="sub">Your chronological age is the number of candles on your birthday cake — a useful but incomplete measure. Your <b>ovarian age</b> is the biological age of your ovaries, determined by the quantity and quality of your remaining egg supply <span class="qi" data-evidence="ovarian-age-concept">i</span>. For some women, these ages align. For many others, they diverge — sometimes by a decade or more.</p>
       <div class="wikicallout">
         <b>🕰️ The Ovarian Age Index</b>
         <p>The Ovarian Age Index is a composite measure that compares your ovarian reserve markers (AMH, AFC) against population norms for your age. An ovarian age older than your chronological age signals accelerated ovarian aging — a biological red flag that may warrant proactive intervention.</p>
@@ -52,7 +53,7 @@
     <!-- AMH as Reserve Indicator -->
     <div class="card">
       <div class="artsec">AMH: The Finite Reserve Indicator</div>
-      <p class="sub">AMH (Anti-Müllerian Hormone) is produced by the granulosa cells of small growing follicles. It correlates directly with the number of remaining eggs. Unlike FSH or estradiol, AMH can be measured on any cycle day and remains stable within a cycle, making it the preferred biomarker for ovarian reserve assessment.</p>
+      <p class="sub">AMH (Anti-Müllerian Hormone) is produced by the granulosa cells of small growing follicles. It correlates directly with the number of remaining eggs <span class="qi" data-evidence="amh-overview">i</span>. Unlike FSH or estradiol, AMH can be measured on any cycle day and remains stable within a cycle, making it the preferred biomarker for ovarian reserve assessment.</p>
       <table class="datatable">
         <tr><th>AMH Value</th><th>Reserve Status</th><th>Estimated Ovarian Age vs Chronological Age</th></tr>
         <tr><td>> 4.0 ng/mL</td><td>High / robust</td><td>Ovarian age younger</td></tr>
@@ -66,7 +67,7 @@
     <!-- AFC -->
     <div class="card">
       <div class="artsec">AFC — Antral Follicle Count</div>
-      <p class="sub">Antral Follicle Count (AFC) is measured via transvaginal ultrasound and counts the number of small (2–10 mm) antral follicles visible at the start of your cycle. It is the <b>second pillar</b> of ovarian reserve assessment alongside AMH.</p>
+      <p class="sub">Antral Follicle Count (AFC) is measured via transvaginal ultrasound and counts the number of small (2–10 mm) antral follicles visible at the start of your cycle <span class="qi" data-evidence="afc-reserve">i</span>. It is the <b>second pillar</b> of ovarian reserve assessment alongside AMH.</p>
       <ul style="font-size:12.5px;color:var(--ink);line-height:1.55;padding-left:16px;margin-top:6px">
         <li><b>AFC > 20:</b> High reserve; consistent with younger ovarian age</li>
         <li><b>AFC 10–20:</b> Normal for most reproductive-age women</li>
@@ -130,6 +131,7 @@
   <a href="profile.html"><span class="n-ic">person</span>Profile</a>
 </nav>
 <script src="appnav.js" defer></script>
-<script src="ovuluna-mascot.js" defer></script>
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
 <script src="luna-chat.js" defer></script>
 </body></html>
