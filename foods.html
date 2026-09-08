@@ -83,6 +83,18 @@
 .correction-box .cb-title{ font-size:12px; font-weight:800; color:var(--low); margin-bottom:6px; display:flex; align-items:center; gap:6px; }
 .correction-box .cb-item{ font-size:11px; color:var(--cocoa); line-height:1.5; padding:3px 0; }
 .correction-box .cb-item b{ color:var(--ink); }
+
+/* Collapsible sections */
+.collapsible-header{ cursor:pointer; user-select:none; display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:var(--card); border:1px solid var(--line-soft); border-radius:12px; margin-bottom:0; transition:all .2s; }
+.collapsible-header:hover{ border-color:var(--mauve); box-shadow:0 2px 12px -6px rgba(107,82,142,.2); }
+.collapsible-header .chevron{ font-size:18px; color:var(--mauve); transition:transform .3s; flex-shrink:0; }
+.collapsible-header.open .chevron{ transform:rotate(180deg); }
+.collapsible-header .sec-title{ font-size:15px; font-weight:800; color:var(--ink); display:flex; align-items:center; gap:8px; }
+.collapsible-header .count{ font-size:10px; font-weight:700; color:var(--taupe); background:var(--sunken); padding:2px 8px; border-radius:10px; }
+.collapsible-content{ max-height:5000px; overflow:hidden; transition:max-height .4s ease, opacity .3s, margin .3s; opacity:1; margin-bottom:16px; }
+.collapsible-content.collapsed{ max-height:0; opacity:0; margin-bottom:0; }
+.collapsible-content-inner{ padding-top:12px; }
+
 </style>
 <link rel="stylesheet" href="luna-chat.css">
 </head><body>
@@ -136,7 +148,8 @@
     <!-- ═══════════ CYCLE PHASE FOODS ═══════════ -->
     <div class="phase-section" data-section="cycle">
       <div style="display:flex;align-items:center;justify-content:space-between;padding:0 2px">
-        <h2 class="sec" style="margin:0">Cycle-Supportive Foods</h2>
+        <div class="collapsible-header open" id="cycle-foods-header"><span class="sec-title">Cycle-Supportive Foods</span><span style="display:flex;align-items:center;gap:8px"><span class="count" id="cycle-foods-count"></span><span class="chevron">▼</span></span></div>
+<div class="collapsible-content" id="cycle-foods-content"><div class="collapsible-content-inner">
         <span style="font-size:11px;font-weight:800;color:var(--taupe)" id="foodCount">18 foods</span>
       </div>
 
@@ -146,7 +159,7 @@
         <div class="food-card" data-cats="iron antiox" data-phase="menstrual follicular">
           <div class="fc-ic">🥬</div>
           <div class="fc-body">
-            <div class="fc-name">Spinach <span class="qi" data-evidence="iron-menstruation">i</span></div>
+            <div class="fc-name">Spinach </div>
             <div class="fc-nutrients"><b>Iron</b> · Folate · Vitamin C · Magnesium · Calcium</div>
             <div class="food-tags"><span class="food-tag iron">Iron-rich</span><span class="food-tag antiox">Antioxidant</span></div>
             <div class="fc-benefit"><b>Best: Menstrual &amp; Follicular.</b> Replenishes iron lost during menstruation <span class="qi" data-evidence="iron-menstruation">i</span>. Pair with vitamin C (citrus, bell peppers) to boost absorption.</div>
@@ -157,7 +170,7 @@
         <div class="food-card" data-cats="omega protein" data-phase="menstrual follicular ovulation luteal perimenopause pcos endometriosis">
           <div class="fc-ic">🐟</div>
           <div class="fc-body">
-            <div class="fc-name">Wild Salmon <span class="qi" data-evidence="omega3-dysmenorrhea">i</span></div>
+            <div class="fc-name">Wild Salmon </div>
             <div class="fc-nutrients"><b>Omega-3 (EPA/DHA)</b> · Vitamin D · Selenium · High-quality protein</div>
             <div class="food-tags"><span class="food-tag omega">Omega-3</span><span class="food-tag protein">Protein</span></div>
             <div class="fc-benefit"><b>Best: All phases.</b> Omega-3s reduce inflammation and may significantly ease menstrual cramps (large effect size d=-1.02 in meta-analysis) <span class="qi" data-evidence="omega3-dysmenorrhea">i</span>. Vitamin D supports fertility and bone health <span class="qi" data-evidence="vitamin-d-fertility">i</span>.</div>
@@ -179,7 +192,7 @@
         <div class="food-card" data-cats="mag omega" data-phase="luteal ovulation">
           <div class="fc-ic">🎃</div>
           <div class="fc-body">
-            <div class="fc-name">Pumpkin Seeds <span class="qi" data-evidence="magnesium-pms-mixed">i</span></div>
+            <div class="fc-name">Pumpkin Seeds </div>
             <div class="fc-nutrients"><b>Magnesium</b> · Zinc · Omega-3 · Iron · Tryptophan</div>
             <div class="food-tags"><span class="food-tag mag">Magnesium</span><span class="food-tag omega">Omega-3</span></div>
             <div class="fc-benefit"><b>Best: Luteal.</b> Magnesium helps relax muscles; small RCTs suggest PMS symptom reduction but systematic reviews say evidence is insufficient <span class="qi" data-evidence="magnesium-pms-mixed">i</span>. Zinc supports immune function and hormone balance.</div>
@@ -190,7 +203,7 @@
         <div class="food-card" data-cats="protein calcium" data-phase="luteal perimenopause">
           <div class="fc-ic">🥛</div>
           <div class="fc-body">
-            <div class="fc-name">Greek Yogurt <span class="qi" data-evidence="calcium-pms">i</span></div>
+            <div class="fc-name">Greek Yogurt </div>
             <div class="fc-nutrients"><b>Protein</b> · Calcium · Probiotics · Vitamin B12 · Iodine</div>
             <div class="food-tags"><span class="food-tag protein">Protein</span><span class="food-tag calcium">Calcium</span></div>
             <div class="fc-benefit"><b>Best: All phases.</b> High protein stabilizes blood sugar; probiotics support gut health and hormone metabolism. Calcium 1,200mg/day reduced PMS symptoms by 48% in a large multi-center RCT (n=466) <span class="qi" data-evidence="calcium-pms">i</span>. Choose unsweetened, add fruit.</div>
@@ -201,7 +214,7 @@
         <div class="food-card" data-cats="antiox" data-phase="ovulation follicular perimenopause pcos endometriosis">
           <div class="fc-ic">🫐</div>
           <div class="fc-body">
-            <div class="fc-name">Blueberries <span class="qi" data-evidence="omega3-inflammation">i</span></div>
+            <div class="fc-name">Blueberries </div>
             <div class="fc-nutrients"><b>Anthocyanins</b> · Vitamin C · Vitamin K · Manganese · Fiber</div>
             <div class="food-tags"><span class="food-tag antiox">Antioxidant</span></div>
             <div class="fc-benefit"><b>Best: All phases.</b> Powerful antioxidants reduce oxidative stress and inflammation. May support cognitive function and skin health. Frozen blueberries are just as nutritious.</div>
@@ -212,7 +225,7 @@
         <div class="food-card" data-cats="antiox" data-phase="follicular ovulation">
           <div class="fc-ic">🥑</div>
           <div class="fc-body">
-            <div class="fc-name">Avocado <span class="qi" data-evidence="nutrition-follicular">i</span></div>
+            <div class="fc-name">Avocado </div>
             <div class="fc-nutrients"><b>Healthy fats</b> · Vitamin E · Potassium · Folate · Fiber</div>
             <div class="food-tags"><span class="food-tag antiox">Antioxidant</span></div>
             <div class="fc-benefit"><b>Best: Follicular &amp; Ovulation.</b> Monounsaturated fats support hormone synthesis (estrogen, progesterone) <span class="qi" data-evidence="nutrition-follicular">i</span>. Vitamin E supports skin and reproductive health. Keeps you full and satisfied.</div>
@@ -223,7 +236,7 @@
         <div class="food-card" data-cats="mag protein antiox" data-phase="luteal perimenopause">
           <div class="fc-ic">🌰</div>
           <div class="fc-body">
-            <div class="fc-name">Almonds <span class="qi" data-evidence="magnesium-pms-mixed">i</span></div>
+            <div class="fc-name">Almonds </div>
             <div class="fc-nutrients"><b>Magnesium</b> · Vitamin E · Protein · Calcium · Healthy fats</div>
             <div class="food-tags"><span class="food-tag mag">Magnesium</span><span class="food-tag protein">Protein</span><span class="food-tag antiox">Antioxidant</span></div>
             <div class="fc-benefit"><b>Best: Luteal.</b> Magnesium supports muscle relaxation; small RCTs suggest PMS benefit but evidence is mixed <span class="qi" data-evidence="magnesium-pms-mixed">i</span>. Vitamin E supports skin and hormonal health. A small handful (23) is a perfect snack.</div>
@@ -245,7 +258,7 @@
         <div class="food-card" data-cats="mag antiox iron" data-phase="luteal menstrual">
           <div class="fc-ic">🍫</div>
           <div class="fc-body">
-            <div class="fc-name">Dark Chocolate (70%+) <span class="qi" data-evidence="magnesium-pms-mixed">i</span></div>
+            <div class="fc-name">Dark Chocolate (70%+) </div>
             <div class="fc-nutrients"><b>Magnesium</b> · Iron · Flavanols · Copper · Antioxidants</div>
             <div class="food-tags"><span class="food-tag mag">Magnesium</span><span class="food-tag antiox">Antioxidant</span><span class="food-tag iron">Iron-rich</span></div>
             <div class="fc-benefit"><b>Best: Luteal.</b> Magnesium may help with chocolate cravings and PMS mood, though evidence is mixed <span class="qi" data-evidence="magnesium-pms-mixed">i</span>. Flavanols support blood flow and heart health. Stick to 1-2 squares (20-30g) to avoid excess sugar.</div>
@@ -256,7 +269,7 @@
         <div class="food-card" data-cats="omega phyto" data-phase="follicular perimenopause">
           <div class="fc-ic">🌾</div>
           <div class="fc-body">
-            <div class="fc-name">Ground Flaxseeds <span class="qi" data-evidence="flaxseed-null">i</span></div>
+            <div class="fc-name">Ground Flaxseeds </div>
             <div class="fc-nutrients"><b>ALA (Omega-3)</b> · Lignans (phytoestrogens) · Fiber · Magnesium</div>
             <div class="food-tags"><span class="food-tag omega">Omega-3</span><span class="food-tag phyto">Phytoestrogen</span></div>
             <div class="fc-benefit"><b>Best: All phases (fiber source).</b> Nutritious for fiber and ALA omega-3. ⚠️ <b>Honest evidence:</b> A Phase III RCT (n=188) found flaxseed was <b>no better than placebo</b> for hot flashes <span class="qi" data-evidence="flaxseed-null">i</span>. Do not claim flaxseed reduces hot flashes. Ground flax is more digestible than whole.</div>
@@ -267,7 +280,7 @@
         <div class="food-card" data-cats="antiox iron" data-phase="follicular ovulation endometriosis pcos">
           <div class="fc-ic">🥦</div>
           <div class="fc-body">
-            <div class="fc-name">Broccoli <span class="qi" data-evidence="folate-reproduction">i</span></div>
+            <div class="fc-name">Broccoli </div>
             <div class="fc-nutrients"><b>Folate</b> · Vitamin C · Vitamin K · Calcium · Sulforaphane · Fiber</div>
             <div class="food-tags"><span class="food-tag antiox">Antioxidant</span><span class="food-tag iron">Iron-rich</span></div>
             <div class="fc-benefit"><b>Best: Follicular.</b> Folate supports cell division and reproductive health <span class="qi" data-evidence="folate-reproduction">i</span>. Sulforaphane supports detoxification and may help metabolize excess estrogen. Steam lightly to preserve nutrients.</div>
@@ -278,7 +291,7 @@
         <div class="food-card" data-cats="protein phyto iron b6" data-phase="luteal follicular pcos">
           <div class="fc-ic">🫛</div>
           <div class="fc-body">
-            <div class="fc-name">Chickpeas <span class="qi" data-evidence="b6-pms">i</span></div>
+            <div class="fc-name">Chickpeas </div>
             <div class="fc-nutrients"><b>Plant protein</b> · Iron · Folate · Phytoestrogens · Fiber · Vitamin B6 · Manganese</div>
             <div class="food-tags"><span class="food-tag protein">Protein</span><span class="food-tag phyto">Phytoestrogen</span><span class="food-tag b6">B6</span></div>
             <div class="fc-benefit"><b>Best: Luteal &amp; Follicular.</b> Vitamin B6 supports serotonin production and may reduce PMS mood symptoms <span class="qi" data-evidence="b6-pms">i</span>. Plant-based protein and iron with phytoestrogens. Hummus is an easy way to include them.</div>
@@ -300,7 +313,7 @@
         <div class="food-card" data-cats="antiox b6" data-phase="luteal pcos">
           <div class="fc-ic">🍠</div>
           <div class="fc-body">
-            <div class="fc-name">Sweet Potato <span class="qi" data-evidence="b6-pms">i</span></div>
+            <div class="fc-name">Sweet Potato </div>
             <div class="fc-nutrients"><b>Beta-carotene</b> · Vitamin B6 · Fiber · Potassium · Vitamin C</div>
             <div class="food-tags"><span class="food-tag antiox">Antioxidant</span><span class="food-tag b6">B6</span></div>
             <div class="fc-benefit"><b>Best: Luteal.</b> Vitamin B6 supports serotonin production and may reduce PMS mood symptoms <span class="qi" data-evidence="b6-pms">i</span>. Complex carbs stabilize blood sugar and reduce cravings. Beta-carotene supports skin and immune health.</div>
@@ -311,7 +324,7 @@
         <div class="food-card" data-cats="antiox" data-phase="menstrual luteal endometriosis pcos perimenopause">
           <div class="fc-ic">🧡</div>
           <div class="fc-body">
-            <div class="fc-name">Turmeric <span class="qi" data-evidence="omega3-inflammation">i</span></div>
+            <div class="fc-name">Turmeric </div>
             <div class="fc-nutrients"><b>Curcumin</b> · Antioxidants · Iron · Manganese · Vitamin B6</div>
             <div class="food-tags"><span class="food-tag antiox">Antioxidant</span></div>
             <div class="fc-benefit"><b>Best: All phases.</b> Curcumin is a powerful anti-inflammatory that may reduce menstrual pain and PMS. Pair with black pepper (piperine) to boost absorption by up to 2000%. Golden milk is a soothing option.</div>
@@ -322,7 +335,7 @@
         <div class="food-card" data-cats="mag protein" data-phase="luteal menstrual pcos">
           <div class="fc-ic">🥣</div>
           <div class="fc-body">
-            <div class="fc-name">Rolled Oats <span class="qi" data-evidence="magnesium-pms-mixed">i</span></div>
+            <div class="fc-name">Rolled Oats </div>
             <div class="fc-nutrients"><b>Magnesium</b> · B vitamins · Fiber · Iron · Zinc · Complex carbs</div>
             <div class="food-tags"><span class="food-tag mag">Magnesium</span><span class="food-tag protein">Protein</span></div>
             <div class="fc-benefit"><b>Best: Luteal &amp; Menstrual.</b> Complex carbs stabilize blood sugar and reduce PMS cravings <span class="qi" data-evidence="nutrition-luteal">i</span>. Magnesium supports relaxation; evidence for PMS is mixed <span class="qi" data-evidence="magnesium-pms-mixed">i</span>. B vitamins support energy and mood. Top with berries and nuts.</div>
@@ -333,7 +346,7 @@
         <div class="food-card" data-cats="iron antiox calcium" data-phase="menstrual follicular endometriosis">
           <div class="fc-ic">🥗</div>
           <div class="fc-body">
-            <div class="fc-name">Kale <span class="qi" data-evidence="iron-menstruation">i</span></div>
+            <div class="fc-name">Kale </div>
             <div class="fc-nutrients"><b>Iron</b> · Vitamin K · Vitamin C · Calcium · Antioxidants · Folate</div>
             <div class="food-tags"><span class="food-tag iron">Iron-rich</span><span class="food-tag antiox">Antioxidant</span><span class="food-tag calcium">Calcium</span></div>
             <div class="fc-benefit"><b>Best: Menstrual &amp; Follicular.</b> Dark leafy green with iron to replenish losses <span class="qi" data-evidence="iron-menstruation">i</span>. Vitamin C in kale enhances iron absorption. Massage with olive oil to soften and improve digestibility. Great in salads, smoothies, or soups.</div>
@@ -345,7 +358,9 @@
 
     <!-- ═══════════ PERIMENOPAUSE / MENOPAUSE ═══════════ -->
     <div class="phase-section" data-section="perimenopause">
-      <h2 class="sec">🔥 Perimenopause &amp; Menopause Foods</h2>
+      </div></div>
+<div class="collapsible-header" id="perimenopause-foods-header"><span class="sec-title">🔥 Perimenopause & Menopause</span><span style="display:flex;align-items:center;gap:8px"><span class="count" id="perimenopause-foods-count"></span><span class="chevron">▼</span></span></div>
+<div class="collapsible-content collapsed" id="perimenopause-foods-content"><div class="collapsible-content-inner">
       <div class="sub" style="margin-bottom:10px">Evidence-based nutritional support for vasomotor symptoms, bone health, and body composition</div>
 
       <div style="display:flex;flex-direction:column;gap:10px">
@@ -365,7 +380,7 @@
         <div class="food-card" data-cats="omega" data-phase="perimenopause">
           <div class="fc-ic">🐟</div>
           <div class="fc-body">
-            <div class="fc-name">Omega-3 Rich Foods <span class="qi" data-evidence="omega3-dysmenorrhea">i</span></div>
+            <div class="fc-name">Omega-3 Rich Foods </div>
             <div class="fc-nutrients"><b>EPA/DHA</b> · Vitamin D · Anti-inflammatory</div>
             <div class="food-tags"><span class="food-tag omega">Omega-3</span></div>
             <div class="fc-benefit"><b>Best: Perimenopause.</b> EPA/DHA reduce pro-inflammatory cytokines linked to vasomotor symptoms. Fatty fish (salmon, sardines, mackerel) 2-3x/week. Meta-analysis shows large effect for menstrual pain reduction (d=-1.02) <span class="qi" data-evidence="omega3-dysmenorrhea">i</span>.</div>
@@ -376,7 +391,7 @@
         <div class="food-card" data-cats="mag" data-phase="perimenopause">
           <div class="fc-ic">🥬</div>
           <div class="fc-body">
-            <div class="fc-name">Magnesium-Rich Foods <span class="qi" data-evidence="magnesium-pms-mixed">i</span></div>
+            <div class="fc-name">Magnesium-Rich Foods </div>
             <div class="fc-nutrients"><b>Magnesium (310-320mg/day)</b> · Muscle relaxation · Sleep support</div>
             <div class="food-tags"><span class="food-tag mag">Magnesium</span></div>
             <div class="fc-benefit"><b>Best: Perimenopause.</b> Magnesium supports thermoregulation, muscle relaxation, and sleep quality. Sources: pumpkin seeds, almonds, dark chocolate, leafy greens, black beans. Evidence for PMS is mixed <span class="qi" data-evidence="magnesium-pms-mixed">i</span>; food sources are safe and nutritious.</div>
@@ -398,7 +413,7 @@
         <div class="food-card" data-cats="antiox omega" data-phase="perimenopause pcos endometriosis">
           <div class="fc-ic">🫒</div>
           <div class="fc-body">
-            <div class="fc-name">Mediterranean Diet Pattern <span class="qi" data-evidence="mediterranean-menopause">i</span></div>
+            <div class="fc-name">Mediterranean Diet Pattern </div>
             <div class="fc-nutrients"><b>Anti-inflammatory pattern</b> · Olive oil · Vegetables · Fish · Legumes · Whole grains</div>
             <div class="food-tags"><span class="food-tag antiox">Antioxidant</span><span class="food-tag omega">Omega-3</span></div>
             <div class="fc-benefit"><b>Best: Perimenopause &amp; all conditions.</b> Systematic review (Maturitas 2023): higher Mediterranean diet adherence associated with reduced vasomotor symptom frequency and severity <span class="qi" data-evidence="mediterranean-menopause">i</span>. Rich in phytoestrogens, anti-inflammatory compounds, and fiber. Also benefits cardiovascular and metabolic health.</div>
@@ -409,7 +424,7 @@
         <div class="food-card" data-cats="protein" data-phase="perimenopause">
           <div class="fc-ic">🍳</div>
           <div class="fc-body">
-            <div class="fc-name">Protein 1.1-1.5g/kg/day <span class="qi" data-evidence="nutrition-follicular">i</span></div>
+            <div class="fc-name">Protein 1.1-1.5g/kg/day </div>
             <div class="fc-nutrients"><b>High-quality protein</b> · Muscle maintenance · Satiety</div>
             <div class="food-tags"><span class="food-tag protein">Protein</span></div>
             <div class="fc-benefit"><b>Best: Perimenopause.</b> Higher protein intake (1.1-1.5g/kg body weight) helps maintain lean muscle mass as estrogen declines, supports satiety and weight management. Sources: eggs, fish, poultry, legumes, Greek yogurt, tofu. Spread protein across meals for best utilization.</div>
@@ -421,7 +436,9 @@
 
     <!-- ═══════════ PCOS ═══════════ -->
     <div class="phase-section" data-section="pcos">
-      <h2 class="sec">📊 PCOS Foods</h2>
+      </div></div>
+<div class="collapsible-header" id="pcos-foods-header"><span class="sec-title">📊 PCOS Foods</span><span style="display:flex;align-items:center;gap:8px"><span class="count" id="pcos-foods-count"></span><span class="chevron">▼</span></span></div>
+<div class="collapsible-content collapsed" id="pcos-foods-content"><div class="collapsible-content-inner">
       <div class="sub" style="margin-bottom:10px">Insulin-sensitizing, anti-inflammatory nutrition for polycystic ovary syndrome <span class="qi" data-evidence="pcos-lifestyle">i</span></div>
 
       <div style="display:flex;flex-direction:column;gap:10px">
@@ -430,7 +447,7 @@
         <div class="food-card" data-cats="protein" data-phase="pcos">
           <div class="fc-ic">🧪</div>
           <div class="fc-body">
-            <div class="fc-name">Myo-Inositol 4,000mg/day <span class="qi" data-evidence="myo-inositol-pcos">i</span></div>
+            <div class="fc-name">Myo-Inositol 4,000mg/day </div>
             <div class="fc-nutrients"><b>Myo-inositol (2-4g/day)</b> · Insulin signaling · Ovulation support</div>
             <div class="food-tags"><span class="food-tag protein">Supplement</span></div>
             <div class="fc-benefit"><b>Best: PCOS.</b> Multiple RCTs and systematic reviews (Unfer et al.): myo-inositol 2-4g/day improves insulin sensitivity, ovulation frequency, and metabolic parameters in PCOS <span class="qi" data-evidence="myo-inositol-pcos">i</span>. The 40:1 myo-inositol:D-chiro-inositol ratio is most studied. Generally well-tolerated. Lifestyle modification remains first-line <span class="qi" data-evidence="pcos-lifestyle">i</span>.</div>
@@ -441,7 +458,7 @@
         <div class="food-card" data-cats="omega antiox" data-phase="pcos endometriosis perimenopause">
           <div class="fc-ic">🧡</div>
           <div class="fc-body">
-            <div class="fc-name">Anti-Inflammatory Foods <span class="qi" data-evidence="omega3-inflammation">i</span></div>
+            <div class="fc-name">Anti-Inflammatory Foods </div>
             <div class="fc-nutrients"><b>Omega-3 · Polyphenols · Curcumin · Sulforaphane</b></div>
             <div class="food-tags"><span class="food-tag omega">Omega-3</span><span class="food-tag antiox">Antioxidant</span></div>
             <div class="fc-benefit"><b>Best: PCOS &amp; Endometriosis.</b> Chronic low-grade inflammation is central to PCOS. Omega-3 (EPA/DHA), polyphenol-rich foods (berries, dark chocolate, green tea), curcumin (turmeric + black pepper), and sulforaphane (cruciferous veggies) reduce inflammatory markers. Fatty fish 2-3x/week <span class="qi" data-evidence="omega3-inflammation">i</span>.</div>
@@ -452,7 +469,7 @@
         <div class="food-card" data-cats="protein" data-phase="pcos">
           <div class="fc-ic">🍚</div>
           <div class="fc-body">
-            <div class="fc-name">Low GI Carbs &amp; Fiber <span class="qi" data-evidence="pcos-lifestyle">i</span></div>
+            <div class="fc-name">Low GI Carbs &amp; Fiber </div>
             <div class="fc-nutrients"><b>Low glycemic index</b> · High fiber · Stable blood sugar</div>
             <div class="food-tags"><span class="food-tag protein">Carbs</span></div>
             <div class="fc-benefit"><b>Best: PCOS.</b> Low-GI carbohydrates (oats, quinoa, sweet potato, legumes, non-starchy vegetables) improve insulin sensitivity and reduce androgen levels. Aim for 25-30g fiber/day. International PCOS guidelines recommend lifestyle modification as first-line <span class="qi" data-evidence="pcos-lifestyle">i</span>. Even 5-10% weight loss improves ovulation.</div>
@@ -464,7 +481,9 @@
 
     <!-- ═══════════ ENDOMETRIOSIS ═══════════ -->
     <div class="phase-section" data-section="endometriosis">
-      <h2 class="sec">🌀 Endometriosis Foods</h2>
+      </div></div>
+<div class="collapsible-header" id="endo-foods-header"><span class="sec-title">🌀 Endometriosis Foods</span><span style="display:flex;align-items:center;gap:8px"><span class="count" id="endo-foods-count"></span><span class="chevron">▼</span></span></div>
+<div class="collapsible-content collapsed" id="endo-foods-content"><div class="collapsible-content-inner">
       <div class="sub" style="margin-bottom:10px">Estrogen-lowering, anti-inflammatory dietary approaches <span class="qi" data-evidence="endometriosis-overview">i</span></div>
 
       <div style="display:flex;flex-direction:column;gap:10px">
@@ -473,7 +492,7 @@
         <div class="food-card" data-cats="antiox" data-phase="endometriosis">
           <div class="fc-ic">🥦</div>
           <div class="fc-body">
-            <div class="fc-name">High-Fiber Foods <span class="qi" data-evidence="endometriosis-overview">i</span></div>
+            <div class="fc-name">High-Fiber Foods </div>
             <div class="fc-nutrients"><b>Dietary fiber (25-30g/day)</b> · Estrogen excretion</div>
             <div class="food-tags"><span class="food-tag antiox">Antioxidant</span></div>
             <div class="fc-benefit"><b>Best: Endometriosis.</b> High dietary fiber supports gut microbiome and increases estrogen excretion, potentially reducing circulating estrogen by 10-25%. Endometriosis is estrogen-dependent. Sources: vegetables, fruits, whole grains, legumes, flaxseeds, chia seeds. Cruciferous veggies (broccoli, Brussels sprouts) provide sulforaphane for detoxification.</div>
@@ -484,7 +503,7 @@
         <div class="food-card" data-cats="omega" data-phase="endometriosis">
           <div class="fc-ic">🐟</div>
           <div class="fc-body">
-            <div class="fc-name">Omega-3 (EPA/DHA) <span class="qi" data-evidence="omega3-dysmenorrhea">i</span></div>
+            <div class="fc-name">Omega-3 (EPA/DHA) </div>
             <div class="fc-nutrients"><b>EPA/DHA</b> · Anti-proliferative · Anti-angiogenic</div>
             <div class="food-tags"><span class="food-tag omega">Omega-3</span></div>
             <div class="fc-benefit"><b>Best: Endometriosis.</b> EPA and DHA have anti-proliferative and anti-angiogenic properties relevant to endometriosis lesion growth. Meta-analysis shows large effect for menstrual pain reduction (d=-1.02) <span class="qi" data-evidence="omega3-dysmenorrhea">i</span>. Fatty fish (salmon, sardines, mackerel) 2-3x/week. Reduce omega-6 (processed oils, fried foods) which promotes inflammation.</div>
@@ -495,7 +514,7 @@
         <div class="food-card" data-cats="antiox omega" data-phase="endometriosis pcos perimenopause">
           <div class="fc-ic">🫒</div>
           <div class="fc-body">
-            <div class="fc-name">Anti-Inflammatory Diet <span class="qi" data-evidence="mediterranean-menopause">i</span></div>
+            <div class="fc-name">Anti-Inflammatory Diet </div>
             <div class="fc-nutrients"><b>Mediterranean pattern</b> · Reduce red meat · Limit alcohol</div>
             <div class="food-tags"><span class="food-tag antiox">Antioxidant</span><span class="food-tag omega">Omega-3</span></div>
             <div class="fc-benefit"><b>Best: Endometriosis.</b> An anti-inflammatory dietary pattern (Mediterranean-style) is associated with reduced endometriosis risk and improved pain outcomes. Emphasize vegetables, fruits, whole grains, legumes, olive oil, and fatty fish. Limit red meat, processed foods, and alcohol. Cochrane notes very low-quality evidence for CHM in endometriosis <span class="qi" data-evidence="endometriosis-overview">i</span>.</div>
@@ -518,7 +537,9 @@
 
     <!-- ═══════════ CHINESE HERBS & TEAS ═══════════ -->
     <div class="phase-section" data-section="herbs">
-      <h2 class="sec">🍵 Chinese Herbs &amp; Teas</h2>
+      </div></div>
+<div class="collapsible-header" id="herbs-teas-header"><span class="sec-title">🍵 Chinese Herbs & Teas</span><span style="display:flex;align-items:center;gap:8px"><span class="count" id="herbs-teas-count"></span><span class="chevron">▼</span></span></div>
+<div class="collapsible-content collapsed" id="herbs-teas-content"><div class="collapsible-content-inner">
       <div class="sub" style="margin-bottom:10px">Traditional usage with honest evidence status. Dosages and frequencies from Chinese health platforms; clinical claims verified against PubMed/PMC.</div>
 
       <div style="display:flex;flex-direction:column;gap:10px">
@@ -526,7 +547,7 @@
         <!-- 1. Dong Quai -->
         <div class="herb-card" data-phase="herbs menstrual follicular perimenopause">
           <div class="hc-head">
-            <div class="hc-ic">🌿</div>
+            <div class="hc-ic" style="width:56px;height:56px;background:transparent;padding:0;overflow:visible"><img src="assets/danggui.png?v=2" alt="Dang Gui" style="width:56px;height:56px;object-fit:contain;border-radius:12px;display:block"/></div>
             <div>
               <div class="hc-title">当归 Dong Quai <span class="qi" data-evidence="dong-quai-null">i</span> <span class="qi" data-evidence="danggui-buxue-tang">i</span></div>
               <div class="hc-latin">Angelica sinensis</div>
@@ -826,7 +847,9 @@
       </div>
 
       <!-- ═══════════ COMPOUND FORMULAS ═══════════ -->
-      <h2 class="sec" style="margin-top:18px">📜 Compound Formulas &amp; Protocols</h2>
+      </div></div>
+<div class="collapsible-header" id="formulas-header"><span class="sec-title">📜 Compound Formulas</span><span style="display:flex;align-items:center;gap:8px"><span class="count" id="formulas-count"></span><span class="chevron">▼</span></span></div>
+<div class="collapsible-content collapsed" id="formulas-content"><div class="collapsible-content-inner">
       <div class="sub" style="margin-bottom:10px">Evidence-supported TCM formulas and cycle-aligned tea protocols</div>
 
       <div style="display:flex;flex-direction:column;gap:10px">
@@ -916,7 +939,9 @@
 
     <!-- Foods to limit -->
     <div class="card tint-blush">
-      <h2 class="sec" style="margin-top:0">Foods to Limit</h2>
+      </div></div>
+<div class="collapsible-header" id="foods-limit-header"><span class="sec-title">🚫 Foods to Limit</span><span style="display:flex;align-items:center;gap:8px"><span class="count" id="foods-limit-count"></span><span class="chevron">▼</span></span></div>
+<div class="collapsible-content collapsed" id="foods-limit-content"><div class="collapsible-content-inner">
       <div class="sub" style="margin-bottom:8px">These may worsen cycle symptoms</div>
       <div class="limit-card">
         <div class="lc-ic">🍟</div>
@@ -950,7 +975,9 @@
 
     <!-- More resources -->
     <div class="card">
-      <h2 class="sec" style="margin-top:0">Go Deeper</h2>
+      </div></div>
+<div class="collapsible-header" id="go-deeper-header"><span class="sec-title">📚 Go Deeper</span><span style="display:flex;align-items:center;gap:8px"><span class="count" id="go-deeper-count"></span><span class="chevron">▼</span></span></div>
+<div class="collapsible-content collapsed" id="go-deeper-content"><div class="collapsible-content-inner">
       <div class="sub" style="margin-bottom:10px">Personalized nutrition &amp; smart scanning</div>
       <a href="nutrition-plan.html" class="lrow" style="padding:14px 4px">
         <div class="l-ic" style="background:rgba(168,192,160,.15)">📋</div>
@@ -1043,4 +1070,34 @@ function filterFoods(){
 }
 </script>
 <script src="darkmode.js" defer></script>
+
+</div></div>
+
+<script>
+
+// Count items in each collapsible section
+document.addEventListener('DOMContentLoaded', function() {
+  var sections = ['cycle-foods','perimenopause-foods','pcos-foods','endo-foods','herbs-teas','formulas','foods-limit','go-deeper'];
+  sections.forEach(function(id) {
+    var content = document.getElementById(id + '-content');
+    var countEl = document.getElementById(id + '-count');
+    if (content && countEl) {
+      var cards = content.querySelectorAll('.food-card, .herb-card, .formula-card, .cb-item, li');
+      if (cards.length > 0) countEl.textContent = cards.length + ' items';
+    }
+  });
+});
+
+// Collapsible sections
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.collapsible-header').forEach(function(header) {
+    header.addEventListener('click', function() {
+      var content = header.nextElementSibling;
+      header.classList.toggle('open');
+      content.classList.toggle('collapsed');
+    });
+  });
+});
+</script>
+
 </body></html>
