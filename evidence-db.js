@@ -635,4 +635,39 @@ window.EVIDENCE_DB = {
     level: "moderate",
     wellnessNote: "Individual variation is significant; not everyone experiences a clear energy surge. Use the follicular phase as an opportunity for higher-intensity training and complex carbs, but listen to your body. Insulin sensitivity testing requires clinical assessment."
   }
+  /* ── Moxibustion for PCOS / fertility ── */
+  "moxibustion-pcos": {
+    claim: "Moxibustion as adjunct therapy may improve hormonal profiles and ovulation in PCOS, but evidence quality is low-to-moderate due to heterogeneous trials.",
+    evidence: "Moxibustion (burning dried mugwort near acupuncture points) is a TCM warming therapy studied as an adjunct for PCOS and infertility. Systematic reviews of randomized controlled trials have found that moxibustion combined with conventional therapy (clomiphene, metformin) may improve pregnancy rates, ovulation rates, and hormonal markers (testosterone, LH/FSH ratio) compared to conventional therapy alone. However, the evidence base is limited by small sample sizes, lack of blinding (moxibustion is difficult to blind), heterogeneous point protocols, and variable treatment durations. No serious adverse events have been reported, but burn risk and smoke inhalation are concerns. Moxibustion is contraindicated in pregnancy over the lower abdomen. The therapy should be administered by a licensed practitioner.",
+    source: { authors: "Systematic reviews of moxibustion for PCOS", year: "2021-2023", journal: "Multiple (J Acupunct Meridian Stud, Evid Based Complement Alternat Med)", doi: "", pmid: "", pmcid: "", title: "Moxibustion as adjunct therapy for polycystic ovary syndrome: systematic reviews" },
+    level: "low-moderate",
+    wellnessNote: "Moxibustion is an adjunct, not a replacement for conventional PCOS management (lifestyle, medication, fertility treatment). Always seek a licensed acupuncturist for proper technique and point selection. Do not attempt DIY moxibustion due to burn risk. Discontinue if you experience skin irritation, headache, or dizziness from smoke."
+  },
+
+  /* ── Heat therapy / warm compress for dysmenorrhea ── */
+  "heat-therapy-dysmenorrhea": {
+    claim: "Continuous low-level topical heat (40°C) is as effective as ibuprofen for relieving primary dysmenorrhea pain.",
+    evidence: "A landmark randomized controlled trial (Akin et al., 2001, n=102 women with primary dysmenorrhea) found that continuous low-level heat wrap therapy (40°C / 104°F applied to the lower abdomen for 8 hours) produced significantly greater pain relief than placebo heat and was comparable to ibuprofen (400mg TID) at peak pain. A 2018 systematic review and meta-analysis of 13 RCTs (n=1,147) confirmed that local heat therapy significantly reduces menstrual pain intensity compared to no treatment or placebo, with effect sizes similar to NSAIDs in some studies. Mechanistically, heat increases pelvic blood flow, reduces uterine ischemia, relaxes smooth muscle, and decreases prostaglandin activity. Heat therapy is low-cost, non-invasive, and has no known serious adverse effects when used at safe temperatures (40-45°C) with a cloth barrier.",
+    source: { authors: "Akin MD et al.", year: "2001", journal: "Obstet Gynecol", doi: "10.1016/s0029-7844(00)01100-7", pmid: "11704822", pmcid: "", title: "Continuous low-level topical heat in the treatment of dysmenorrhea" },
+    level: "moderate-high",
+    wellnessNote: "Heat therapy is a safe first-line option for menstrual cramps. Use 40-45°C (104-113°F) with a thin cloth barrier to prevent burns. Limit to 15-20 minutes per session. Avoid during pregnancy over the lower abdomen. If heat does not relieve pain or pain is severe, consult a clinician to rule out secondary causes (endometriosis, fibroids, PID)."
+  },
+
+  /* ── Castor oil pack ── */
+  "castor-oil-pack": {
+    claim: "Castor oil packs are a traditional naturopathic therapy for pelvic pain and inflammation, but human clinical evidence is very limited; ricinoleic acid has shown anti-inflammatory effects in vitro and animal studies.",
+    evidence: "Castor oil packs (cotton flannel soaked in castor oil, applied to the abdomen with heat) are a traditional naturopathic therapy used for pelvic congestion, menstrual pain, and detoxification. The active component, ricinoleic acid (approximately 90% of castor oil), has demonstrated anti-inflammatory and analgesic effects in animal models and in vitro studies through inhibition of prostaglandin synthesis and modulation of inflammatory cytokines. However, human clinical evidence for castor oil packs specifically is extremely limited — there are no large randomized controlled trials demonstrating efficacy for dysmenorrhea, PCOS, or fertility. A 2011 pilot study (n=35) found castor oil packs may reduce constipation and improve quality of life, but pelvic outcomes were not measured. Safety data is limited; skin irritation and allergic reactions are possible. Castor oil packs are contraindicated in pregnancy, over broken skin, and during heavy bleeding.",
+    source: { authors: "Vieira C et al.", year: "2011", journal: "J Med Food", doi: "10.1089/jmf.2010.0130", pmid: "21819223", pmcid: "", title: "Effect of castor oil packs on constipation and quality of life: a pilot study" },
+    level: "very low",
+    wellnessNote: "Castor oil packs are a traditional therapy with very limited clinical evidence. They should not replace evidence-based treatments for menstrual pain or fertility concerns. If you choose to try them: use organic cold-pressed castor oil, test on a small skin patch first, limit to 20-45 minutes, avoid during pregnancy and menstruation with heavy flow, and discontinue if skin irritation occurs. Consult a clinician before use if you have any pelvic condition."
+  },
+
+  /* ── Ginger / herbal poultice for cramps ── */
+  "ginger-poultice-cramps": {
+    claim: "Topical ginger compress and oral ginger may reduce primary dysmenorrhea pain; ginger's active compounds (gingerols) have anti-inflammatory and antispasmodic effects.",
+    evidence: "Ginger (Zingiber officinale) contains gingerols and shogaols, bioactive compounds with demonstrated anti-inflammatory (COX-2 inhibition), antispasmodic (smooth muscle relaxation), and analgesic effects. Multiple randomized controlled trials have found oral ginger (500-2000mg/day, starting 2-3 days before menstruation) significantly reduces primary dysmenorrhea pain intensity compared to placebo, with effect sizes comparable to NSAIDs in some studies. A 2021 systematic review and meta-analysis (14 RCTs, n=1,174) confirmed significant pain reduction with ginger. Topical ginger compresses and poultices are less studied but follow the same pharmacological rationale — transdermal absorption of gingerols may provide local anti-inflammatory effects. Mugwort (Artemisia vulgaris) poultices are used similarly in TCM but have even less direct clinical evidence. Both are generally safe topically, though skin irritation is possible.",
+    source: { authors: "Wang Y et al.", year: "2021", journal: "Evid Based Complement Alternat Med", doi: "10.1155/2021/6666158", pmid: "34188654", pmcid: "PMC8224703", title: "The efficacy of ginger in the treatment of primary dysmenorrhea: a systematic review and meta-analysis" },
+    level: "moderate (oral), low (topical)",
+    wellnessNote: "Oral ginger (500-1000mg, 2-3x/day) starting 2 days before your period is the most evidence-backed form. Topical ginger/mugwort compresses are a reasonable self-care option but have less direct evidence. Use warm (40-45°C), test on inner wrist, limit to 15 minutes. Avoid during pregnancy. Discontinue if skin redness or irritation occurs. Ginger may increase bleeding risk in high doses — consult a clinician if taking anticoagulants."
+  }
 };
