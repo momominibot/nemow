@@ -210,29 +210,41 @@
 
     container.innerHTML = svg;
 
-    // Update center with smooth moon transition
+    // Update center with smooth cross-fade moon transition + glow pulse
     var centerEl = document.getElementById('mysticalCenter');
     if (centerEl) {
       var moonEl = centerEl.querySelector('.mystical-moon');
       if (moonEl) {
-        // Fade out
+        // Add glow pulse overlay
+        var glow = document.createElement('div');
+        glow.style.cssText = 'position:absolute;top:50%;left:50%;width:80px;height:80px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(240,200,120,0.5) 0%,transparent 70%);opacity:0;pointer-events:none;z-index:5;transition:opacity 0.3s ease;';
+        centerEl.style.position = 'relative';
+        centerEl.appendChild(glow);
+
+        // Phase 1: Old moon gently fades + shrinks, glow pulses in
+        moonEl.style.transition = 'opacity 0.35s cubic-bezier(0.4,0,0.2,1), transform 0.35s cubic-bezier(0.4,0,0.2,1)';
         moonEl.style.opacity = '0';
-        moonEl.style.transform = 'scale(0.85) rotate(-5deg)';
+        moonEl.style.transform = 'scale(0.92) rotate(-3deg)';
+        glow.style.opacity = '1';
+
+        // Phase 2: Swap content at midpoint, new moon fades in from slight scale
         setTimeout(function() {
           centerEl.innerHTML =
-            '<div class="mystical-moon" style="opacity:0;transform:scale(0.85) rotate(5deg)">' + generateMoonSVG(currentDay, 56) + '</div>' +
+            '<div class="mystical-moon" style="opacity:0;transform:scale(0.92) rotate(3deg);transition:opacity 0.4s cubic-bezier(0,0,0.2,1),transform 0.4s cubic-bezier(0,0,0.2,1)">' + generateMoonSVG(currentDay, 56) + '</div>' +
             '<div class="mystical-day">Day ' + currentDay + ' of ' + config.length + '</div>' +
             '<div class="mystical-phase">' + phaseInfo.name + '</div>' +
             '<div class="mystical-desc">' + moonInfo.desc + '</div>';
-          // Fade in
+          // Fade in new moon
           requestAnimationFrame(function() {
-            var newMoon = centerEl.querySelector('.mystical-moon');
-            if (newMoon) {
-              newMoon.style.opacity = '1';
-              newMoon.style.transform = 'scale(1) rotate(0deg)';
-            }
+            requestAnimationFrame(function() {
+              var newMoon = centerEl.querySelector('.mystical-moon');
+              if (newMoon) {
+                newMoon.style.opacity = '1';
+                newMoon.style.transform = 'scale(1) rotate(0deg)';
+              }
+            });
           });
-        }, 180);
+        }, 300);
       } else {
         centerEl.innerHTML =
           '<div class="mystical-moon">' + generateMoonSVG(currentDay, 56) + '</div>' +
