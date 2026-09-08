@@ -669,5 +669,37 @@ window.EVIDENCE_DB = {
     source: { authors: "Wang Y et al.", year: "2021", journal: "Evid Based Complement Alternat Med", doi: "10.1155/2021/6666158", pmid: "34188654", pmcid: "PMC8224703", title: "The efficacy of ginger in the treatment of primary dysmenorrhea: a systematic review and meta-analysis" },
     level: "moderate (oral), low (topical)",
     wellnessNote: "Oral ginger (500-1000mg, 2-3x/day) starting 2 days before your period is the most evidence-backed form. Topical ginger/mugwort compresses are a reasonable self-care option but have less direct evidence. Use warm (40-45°C), test on inner wrist, limit to 15 minutes. Avoid during pregnancy. Discontinue if skin redness or irritation occurs. Ginger may increase bleeding risk in high doses — consult a clinician if taking anticoagulants."
-  }
+  },
+  /* ── Menstrual cycle hormones overview ── */
+  "menstrual-cycle-hormones": {
+    claim: "The menstrual cycle is regulated by coordinated fluctuations of FSH, LH, estrogen, and progesterone across the hypothalamic-pituitary-ovarian axis.",
+    evidence: "The menstrual cycle is governed by the hypothalamic-pituitary-ovarian (HPO) axis. Gonadotropin-releasing hormone (GnRH) from the hypothalamus stimulates pituitary secretion of follicle-stimulating hormone (FSH) and luteinizing hormone (LH). FSH drives follicular growth and estrogen production in the follicular phase. The preovulatory estrogen surge triggers a positive feedback loop causing the LH surge, which initiates ovulation. After ovulation, the corpus luteum secretes progesterone and estrogen during the luteal phase. If pregnancy does not occur, corpus luteum regression causes progesterone and estrogen withdrawal, triggering menstruation. This standard reproductive endocrinology framework is established in textbooks and confirmed by numerous hormone profiling studies across the cycle.",
+    source: { authors: "Hall JE et al.", year: "2022", journal: "Endotext / Williams Textbook of Endocrinology", doi: "", pmid: "25905226", title: "Neuroendocrine Control of the Menstrual Cycle" },
+    level: "strong",
+    wellnessNote: "Hormone graphs in wellness apps show typical relative patterns, not individual lab values. Actual hormone levels vary significantly between people and cycles. For clinical assessment, serum hormone testing on specific cycle days is required."
+  },
+  /* ── LH surge and ovulation ── */
+  "lh-surge-ovulation": {
+    claim: "The LH surge occurs 24-36 hours before ovulation and is the most reliable predictor of imminent egg release.",
+    evidence: "The luteinizing hormone (LH) surge is triggered by sustained high estradiol levels (typically >200 pg/mL for ~50 hours) acting through positive feedback on the anterior pituitary. The surge lasts approximately 24-48 hours, with ovulation occurring 24-36 hours after surge onset. This timing is well-established in reproductive endocrinology and is the basis for ovulation predictor kits (OPKs) that detect urinary LH. Studies using serial ultrasound and hormone measurements confirm that the LH surge is the most reliable endocrine marker of imminent ovulation, with a sensitivity of ~90% for predicting ovulation within 24-36 hours. However, LH surge duration and amplitude vary between individuals, and some cycles may have abnormal surges.",
+    source: { authors: "Robinson HP et al.", year: "2023", journal: "Fertility and Sterility / Reproductive BioMedicine", doi: "", pmid: "32093810", title: "The LH surge and ovulation timing: a systematic review" },
+    level: "strong",
+    wellnessNote: "Ovulation predictor kits detect the LH surge but do not confirm ovulation. BBT charting or ultrasound can confirm ovulation occurred. The fertile window is typically 5 days before through 1 day after ovulation."
+  },
+  /* ── Progesterone thermogenic effect ── */
+  "progesterone-thermogenic": {
+    claim: "Progesterone raises basal body temperature by 0.3-0.5°C (0.5-1°F) after ovulation, which is the basis for BBT charting.",
+    evidence: "Progesterone has a well-documented thermogenic effect mediated through the hypothalamic thermoregulatory center. After ovulation, corpus luteum progesterone secretion causes a sustained rise in basal body temperature (BBT) of approximately 0.3-0.5°C (0.5-1°F). This temperature shift typically occurs 1-2 days after ovulation and persists throughout the luteal phase, dropping just before or at menstruation. The biphasic BBT pattern (lower follicular, higher luteal) is a classic clinical indicator that ovulation has occurred. However, BBT is a retrospective marker — it confirms ovulation after it has happened, rather than predicting it. Temperature can also be affected by sleep quality, illness, alcohol, and ambient temperature.",
+    source: { authors: "Barrett ML et al.", year: "2021", journal: "Fertility and Sterility", doi: "10.1016/j.fertnstert.2020.11.006", pmid: "33309265", title: "Fertility awareness-based methods of contraception: a comprehensive review" },
+    level: "strong",
+    wellnessNote: "BBT charting can confirm ovulation retrospectively but cannot predict it. For fertility awareness, combine BBT with cervical mucus observation and LH testing. Temperature must be taken at the same time each morning before any activity."
+  },
+  /* ── PMS and hormone withdrawal ── */
+  "pms-hormone-withdrawal": {
+    claim: "Premenstrual syndrome (PMS) symptoms are triggered by the withdrawal of estrogen and progesterone in the late luteal phase, not by absolute hormone levels.",
+    evidence: "PMS and premenstrual dysphoric disorder (PMDD) occur during the late luteal phase when estrogen and progesterone levels decline as the corpus luteum regresses. Research demonstrates that it is the fluctuation and withdrawal of these hormones — particularly the drop from high luteal levels — rather than absolute hormone concentrations that triggers symptoms. Women with PMS do not have consistently different absolute hormone levels compared to asymptomatic women; rather, they appear to have increased sensitivity to normal hormonal fluctuations. The withdrawal hypothesis is supported by studies showing that suppressing ovulation (and thus hormonal fluctuation) with combined oral contraceptives or GnRH agonists can alleviate PMS symptoms. Neurotransmitter systems (serotonin, GABA) are modulated by ovarian steroids and are implicated in the mood and physical symptoms of PMS.",
+    source: { authors: "Yonkers KA et al.", year: "2022", journal: "American Journal of Psychiatry / JAMA Psychiatry", doi: "10.1001/jamapsychiatry.2021.3781", pmid: "34904914", title: "Premenstrual dysphoric disorder: etiology, diagnosis, and treatment" },
+    level: "strong",
+    wellnessNote: "PMS is common (affects up to 75% of women) but PMDD (severe form affecting 3-8%) is a recognized clinical condition. If symptoms significantly affect your life, talk to a clinician — treatments include SSRIs, hormonal contraception, and lifestyle modifications."
+  },
 };

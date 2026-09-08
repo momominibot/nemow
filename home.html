@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="anim.css">
 <link rel="stylesheet" href="darkmode.css">
 <link rel="stylesheet" href="mystical-ring.css">
+<link rel="stylesheet" href="hormone-graph.css">
 <script src="anim.js" defer></script>
 <style>
 .hstat{ display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:99px;background:var(--card-solid);border:1.5px solid var(--line-soft);font:700 12px var(--sans);color:var(--cocoa); }
@@ -121,6 +122,9 @@
         </div>
       </div>
     </div>
+
+    <!-- Hormone Cycle Graph -->
+    <div class="hormone-card" id="hormoneGraphCard"></div>
 
     <!-- Today's insights -->
     <div class="card" style="padding:18px">
@@ -348,6 +352,7 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 })();
 </script>
+<script src="hormone-graph.js" defer></script>
 <script src="mystical-ring.js" defer></script>
 
 <script src="appnav.js" defer></script>

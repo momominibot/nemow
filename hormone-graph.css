@@ -1,0 +1,107 @@
+/* Hormone Cycle Graph — Ovuluna mystical pastel */
+.hormone-card {
+  background: var(--card);
+  border: 1px solid var(--line-soft);
+  border-radius: 20px;
+  padding: 16px 14px 12px;
+  margin: 10px 0;
+  box-shadow: 0 4px 20px -10px rgba(107,82,142,.15);
+  backdrop-filter: blur(8px);
+}
+.hormone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.hormone-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--cocoa);
+  font-weight: 700;
+}
+.hormone-day-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--mauve);
+  background: rgba(196,181,224,.15);
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+.hormone-legend {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.hormone-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--taupe);
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.hormone-legend-item.dimmed { opacity: 0.3; }
+.hormone-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.hormone-svg-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.hormone-svg-wrap svg {
+  width: 100%;
+  display: block;
+}
+.hormone-tooltip {
+  position: absolute;
+  background: rgba(45,27,78,.95);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+  transform: translate(-50%, -110%);
+  display: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+}
+.hormone-tooltip .tt-day {
+  font-size: 9px;
+  opacity: .7;
+  display: block;
+  margin-bottom: 2px;
+}
+.hormone-phase-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  padding: 0 2px;
+}
+.hormone-phase-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-align: center;
+  flex: 1;
+}
+.hormone-insight {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(196,181,224,.08);
+  border: 1px solid rgba(196,181,224,.2);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--cocoa);
+}
+.hormone-insight b {
+  color: var(--mauve);
+}
