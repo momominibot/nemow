@@ -58,7 +58,7 @@ html[data-persona] .metric {
 
 /* ── Co-branding footer ── */
 .ovuluna-footer {
-  font-family: 'Nunito', system-ui, sans-serif;
+  font-family: 'Manrope', system-ui, sans-serif;
   font-size: 12px;
   color: #8a78a0;
   opacity: 0.6;
@@ -95,9 +95,9 @@ html[data-persona] .metric {
   --ovuluna-radius-pill:          999px;
   --ovuluna-shadow-card:          0 4px 14px rgba(29,27,24,.08);
   --ovuluna-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
-  --ovuluna-font-heading:         'Nunito', system-ui, sans-serif;
-  --ovuluna-font-body:            'Nunito', system-ui, sans-serif;
-  --ovuluna-font-data:            'Nunito', system-ui, sans-serif;
+  --ovuluna-font-heading:         'Manrope', system-ui, sans-serif;
+  --ovuluna-font-body:            'Manrope', system-ui, sans-serif;
+  --ovuluna-font-data:            'Manrope', system-ui, sans-serif;
   --ovuluna-font-size-h1:         32px;
   --ovuluna-font-size-h2:         24px;
   --ovuluna-font-size-h3:         20px;
@@ -155,9 +155,9 @@ html[data-persona] .metric {
   --ovuluna-radius-pill:          999px;
   --ovuluna-shadow-card:          0 4px 14px rgba(29,27,24,.08);
   --ovuluna-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
-  --ovuluna-font-heading:         'Nunito', system-ui, sans-serif;
-  --ovuluna-font-body:            'Nunito', system-ui, sans-serif;
-  --ovuluna-font-data:            'Nunito', system-ui, sans-serif;
+  --ovuluna-font-heading:         'Manrope', system-ui, sans-serif;
+  --ovuluna-font-body:            'Manrope', system-ui, sans-serif;
+  --ovuluna-font-data:            'Manrope', system-ui, sans-serif;
   --ovuluna-font-size-h1:         32px;
   --ovuluna-font-size-h2:         24px;
   --ovuluna-font-size-h3:         20px;
@@ -220,10 +220,10 @@ html[data-persona] .metric {
   --ovuluna-radius-pill:          999px;
   --ovuluna-shadow-card:          0 4px 14px rgba(29,27,24,.08);
   --ovuluna-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
-  --ovuluna-font-heading:         'Nunito', system-ui, sans-serif;
-  --ovuluna-font-body:            'Nunito', system-ui, sans-serif;
-  --ovuluna-font-data:            'Nunito', system-ui, sans-serif;
-  --ovuluna-font-timer:           'Nunito', system-ui, sans-serif;
+  --ovuluna-font-heading:         'Manrope', system-ui, sans-serif;
+  --ovuluna-font-body:            'Manrope', system-ui, sans-serif;
+  --ovuluna-font-data:            'Manrope', system-ui, sans-serif;
+  --ovuluna-font-timer:           'Manrope', system-ui, sans-serif;
   --ovuluna-font-size-h1:         32px;
   --ovuluna-font-size-h2:         24px;
   --ovuluna-font-size-h3:         20px;
@@ -285,9 +285,9 @@ html[data-persona] .metric {
   --ovuluna-radius-pill:          999px;
   --ovuluna-shadow-card:          0 4px 14px rgba(29,27,24,.08);
   --ovuluna-shadow-elevated:      0 8px 24px rgba(29,27,24,.12);
-  --ovuluna-font-heading:         'Nunito', system-ui, sans-serif;
-  --ovuluna-font-body:            'Nunito', system-ui, sans-serif;
-  --ovuluna-font-data:            'Nunito', system-ui, sans-serif;
+  --ovuluna-font-heading:         'Manrope', system-ui, sans-serif;
+  --ovuluna-font-body:            'Manrope', system-ui, sans-serif;
+  --ovuluna-font-data:            'Manrope', system-ui, sans-serif;
   --ovuluna-font-size-h1:         32px;
   --ovuluna-font-size-h2:         24px;
   --ovuluna-font-size-h3:         20px;
@@ -355,7 +355,7 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
   transition: .2s;
 }
 .acupoint-card h3 {
-  font-family: 'Nunito', system-ui, sans-serif;
+  font-family: 'Manrope', system-ui, sans-serif;
   font-size: 20px;
   font-weight: 800;
   color: #3d2f52;
@@ -385,7 +385,7 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
   flex-shrink: 0; padding: 8px 15px; border-radius: 99px;
   background: #FFFFFF;
   border: 2px solid rgba(107,82,142,0.15);
-  font: 700 12px 'Nunito', system-ui, sans-serif;
+  font: 700 12px 'Manrope', system-ui, sans-serif;
   color: #3d2f52;
   cursor: pointer; transition: .15s; white-space: nowrap;
 }
@@ -433,7 +433,7 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
 }
 .tech-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(29,27,24,.12); }
 .tech-card h3 {
-  font-family: 'Nunito', system-ui, sans-serif;
+  font-family: 'Manrope', system-ui, sans-serif;
   font-size: 20px;
   font-weight: 800;
   color: #3d2f52;
@@ -501,7 +501,7 @@ html[data-persona] .card.tint-gold     { background: #FDFAF3; }
 .food-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(29,27,24,.12); }
 .food-card .food-header { display: flex; align-items: center; gap: 10px; }
 .food-card .food-icon { font-size: 36px; flex-shrink: 0; }
-.food-card .food-title { font-family: 'Nunito', system-ui, sans-serif; font-size: 17px; font-weight: 800; color: #3d2f52; margin: 0; letter-spacing: -.01em; }
+.food-card .food-title { font-family: 'Manrope', system-ui, sans-serif; font-size: 17px; font-weight: 800; color: #3d2f52; margin: 0; letter-spacing: -.01em; }
 .food-card .food-cn { font-size: 13px; color: #8B6C82; font-weight: 700; margin-left: 6px; letter-spacing: .02em; }
 .food-dual { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
 .food-tcm, .food-western {
