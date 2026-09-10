@@ -93,15 +93,25 @@ body::before {
   width: 100%; max-width: 430px;
   min-height: 100dvh;
   display: flex; flex-direction: column;
+  padding-top: 68px;
   padding-bottom: 92px;
 }
 
-/* ── top bar ── */
+/* ── top bar (fixed, stays visible) ── */
 .top {
-  position: sticky; top: 0; z-index: 30;
+  position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 430px;
+  z-index: 50;
   display: flex; align-items: center; gap: 12px;
-  padding: 18px 20px 12px;
-  background: linear-gradient(180deg, var(--paper) 62%, transparent);
+  padding: 14px 20px 10px;
+  background: rgba(247, 242, 250, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(196, 181, 224, 0.2);
+}
+[data-theme="dark"] .top {
+  background: rgba(30, 25, 45, 0.92);
+  border-bottom-color: rgba(196, 181, 224, 0.15);
 }
 .top .t-title { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--ink); letter-spacing:-.01em; flex:1; }
 .top .t-icon {
