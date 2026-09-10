@@ -443,3 +443,52 @@ h2.sec { font-family:var(--serif); font-weight:800; font-size:19px; color:var(--
   border-color: var(--line-soft);
 }
 [data-theme="dark"] .axis { fill: var(--faded); }
+
+/* ═══════════════════════════════════════════════════════
+   BOTTOM NAVIGATION (fixed, stays visible)
+   ═══════════════════════════════════════════════════════ */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+  background: rgba(247, 242, 250, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(196, 181, 224, 0.3);
+}
+[data-theme="dark"] .bottom-nav {
+  background: rgba(30, 25, 45, 0.92);
+  border-top-color: rgba(196, 181, 224, 0.2);
+}
+.bottom-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 10px;
+  text-decoration: none;
+  color: var(--taupe, #8a7a9a);
+  font-size: 10px;
+  font-weight: 600;
+  font-family: var(--sans, 'Manrope', sans-serif);
+  transition: color 0.2s, transform 0.1s;
+  border-radius: 10px;
+}
+.bottom-nav a:active {
+  transform: scale(0.95);
+}
+.bottom-nav a.active {
+  color: var(--mauve, #7a5c96);
+}
+.bottom-nav a.active .material-symbols-outlined {
+  font-variation-settings: 'FILL' 1;
+}
+.bottom-nav .material-symbols-outlined {
+  font-size: 22px;
+}
