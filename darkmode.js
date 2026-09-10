@@ -1,42 +1,68 @@
 /* ══════════════════════════════════════════════════════════════
-   OVULUNA · Dark Mode Controller
-   Self-injects a sun/moon toggle into .top on every page.
-   Persists preference in localStorage under 'ovuluna_theme'.
+   OVULUNA · Dark Mode + Font Size Controller
+   Self-injects a sun/moon theme toggle and Aa font size toggle
+   into .top on every page.
+   Persists preferences in localStorage.
    ══════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'ovuluna_theme';
+  /* ── Theme ── */
+  var THEME_KEY = 'ovuluna_theme';
   var currentTheme = 'light';
 
-  /* ── Read saved preference (default light) ── */
   try {
-    var saved = localStorage.getItem(STORAGE_KEY);
-    if (saved === 'dark' || saved === 'light') {
-      currentTheme = saved;
+    var savedTheme = localStorage.getItem(THEME_KEY);
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      currentTheme = savedTheme;
     }
-  } catch (e) { /* localStorage unavailable */ }
+  } catch (e) {}
 
-  /* ── Apply theme immediately (before paint to avoid flash) ── */
   function applyTheme(theme) {
     currentTheme = theme;
     document.documentElement.setAttribute('data-theme', theme);
-    try { localStorage.setItem(STORAGE_KEY, theme); } catch (e) {}
+    try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
   }
 
   applyTheme(currentTheme);
 
-  /* ── Build starfield overlay ── */
+  /* ── Font Size ── */
+  var FONT_KEY = 'ovuluna_fontsize';
+  var FONT_LEVELS = ['small', 'medium', 'large'];
+  var FONT_SCALES = { small: 0.9, medium: 1.0, large: 1.15 };
+  var FONT_LABELS = { small: 'A−', medium: 'A', large: 'A+' };
+  var currentFontSize = 'medium';
+
+  try {
+    var savedFont = localStorage.getItem(FONT_KEY);
+    if (FONT_LEVELS.indexOf(savedFont) !== -1) {
+      currentFontSize = savedFont;
+    }
+  } catch (e) {}
+
+  function applyFontSize(level) {
+    currentFontSize = level;
+    var scale = FONT_SCALES[level] || 1.0;
+    document.documentElement.style.fontSize = (16 * scale) + 'px';
+    document.documentElement.setAttribute('data-fontsize', level);
+    try { localStorage.setItem(FONT_KEY, level); } catch (e) {}
+
+    // Update toggle button label
+    var btn = document.querySelector('.font-toggle .ft-label');
+    if (btn) btn.textContent = FONT_LABELS[level];
+  }
+
+  applyFontSize(currentFontSize);
+
+  /* ── Build starfield overlay (dark mode) ── */
   function buildStars() {
     if (document.querySelector('.dark-stars')) return;
     var stars = document.createElement('div');
     stars.className = 'dark-stars';
     stars.setAttribute('aria-hidden', 'true');
-    // Generate 60 stars with deterministic pseudo-random positions
     var count = 60;
     for (var i = 0; i < count; i++) {
       var s = document.createElement('i');
-      // Pseudo-random but stable positions using a simple LCG
       var seed = (i * 9301 + 49297) % 233280;
       var x = (seed / 233280) * 100;
       var seed2 = (i * 4096 + 150889) % 714025;
@@ -52,12 +78,10 @@
     document.body.appendChild(stars);
   }
 
-  /* ── Build toggle button ── */
-  function buildToggle() {
+  /* ── Build theme toggle button ── */
+  function buildThemeToggle() {
     var top = document.querySelector('.top');
-    if (!top) return; // gracefully skip pages without .top
-
-    // Avoid double-injection
+    if (!top) return;
     if (top.querySelector('.theme-toggle')) return;
 
     var btn = document.createElement('button');
@@ -68,11 +92,11 @@
 
     var sun = document.createElement('span');
     sun.className = 'tt-sun';
-    sun.textContent = '\u2600\uFE0F'; // ☀️
+    sun.textContent = '\u2600\uFE0F';
 
     var moon = document.createElement('span');
     moon.className = 'tt-moon';
-    moon.textContent = '\uD83C\uDF19'; // 🌙
+    moon.textContent = '\uD83C\uDF19';
 
     btn.appendChild(sun);
     btn.appendChild(moon);
@@ -82,14 +106,86 @@
       applyTheme(next);
     });
 
-    // Insert as last child in .top (after existing icons)
     top.appendChild(btn);
+  }
+
+  /* ── Build font size toggle button ── */
+  function buildFontToggle() {
+    var top = document.querySelector('.top');
+    if (!top) return;
+    if (top.querySelector('.font-toggle')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'font-toggle';
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Adjust font size');
+    btn.setAttribute('title', 'Adjust font size (small / medium / large)');
+
+    var label = document.createElement('span');
+    label.className = 'ft-label';
+    label.textContent = FONT_LABELS[currentFontSize];
+    label.style.fontFamily = 'var(--serif, Newsreader, serif)';
+    label.style.fontWeight = '700';
+    label.style.fontSize = '14px';
+
+    btn.appendChild(label);
+
+    btn.addEventListener('click', function () {
+      var idx = FONT_LEVELS.indexOf(currentFontSize);
+      var next = FONT_LEVELS[(idx + 1) % FONT_LEVELS.length];
+      applyFontSize(next);
+    });
+
+    top.appendChild(btn);
+  }
+
+  /* ── Inject toggle CSS ── */
+  function injectToggleCSS() {
+    if (document.getElementById('ovuluna-toggle-css')) return;
+    var style = document.createElement('style');
+    style.id = 'ovuluna-toggle-css';
+    style.textContent = [
+      '.theme-toggle, .font-toggle {',
+      '  width: 38px; height: 38px; border-radius: 12px;',
+      '  display: flex; align-items: center; justify-content: center;',
+      '  background: var(--card, #fff); border: 2px solid var(--ink, #3d2f52);',
+      '  cursor: pointer; padding: 0; flex-shrink: 0;',
+      '  transition: transform 0.1s, background 0.2s;',
+      '}',
+      '.theme-toggle:active, .font-toggle:active { transform: scale(0.95); }',
+      '.theme-toggle .tt-sun, .theme-toggle .tt-moon {',
+      '  font-size: 18px; line-height: 1;',
+      '}',
+      '[data-theme="light"] .theme-toggle .tt-moon { display: none; }',
+      '[data-theme="dark"] .theme-toggle .tt-sun { display: none; }',
+      '.font-toggle .ft-label {',
+      '  color: var(--ink, #3d2f52);',
+      '  letter-spacing: -0.02em;',
+      '}',
+      '.dark-stars {',
+      '  position: fixed; inset: 0; pointer-events: none; z-index: 0;',
+      '  overflow: hidden; opacity: 0; transition: opacity 0.5s;',
+      '}',
+      '[data-theme="dark"] .dark-stars { opacity: 1; }',
+      '.dark-stars i {',
+      '  position: absolute; width: 2px; height: 2px; border-radius: 50%;',
+      '  background: #fff; opacity: 0.6;',
+      '  animation: twinkle 3s ease-in-out infinite;',
+      '}',
+      '@keyframes twinkle {',
+      '  0%, 100% { opacity: 0.2; }',
+      '  50% { opacity: 0.9; }',
+      '}'
+    ].join('\n');
+    document.head.appendChild(style);
   }
 
   /* ── Boot ── */
   function init() {
+    injectToggleCSS();
     buildStars();
-    buildToggle();
+    buildThemeToggle();
+    buildFontToggle();
   }
 
   if (document.readyState === 'loading') {
