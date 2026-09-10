@@ -28,9 +28,11 @@
 
   /* ── Font Size ── */
   var FONT_KEY = 'ovuluna_fontsize';
-  var FONT_LEVELS = ['small', 'medium', 'large'];
-  var FONT_SCALES = { small: 0.9, medium: 1.0, large: 1.15 };
-  var FONT_LABELS = { small: 'A−', medium: 'A', large: 'A+' };
+  // Only scale UP from default — no smaller-than-default option
+  var FONT_LEVELS = ['medium', 'large', 'xlarge'];
+  var FONT_SCALES = { medium: 1.0, large: 1.15, xlarge: 1.3 };
+  var FONT_LABELS = { medium: 'A', large: 'A+', xlarge: 'A++' };
+  var FONT_TITLES = { medium: 'Normal size', large: 'Large size', xlarge: 'Extra large size' };
   var currentFontSize = 'medium';
 
   try {
@@ -43,19 +45,21 @@
   function applyFontSize(level) {
     currentFontSize = level;
     var scale = FONT_SCALES[level] || 1.0;
-    // Use zoom on .app container — scales all px-based text, images, layout
-    var app = document.querySelector('.app');
-    if (app) {
-      app.style.zoom = scale;
+    // Scale only .scroll content area — top header and bottom nav stay fixed
+    var scroll = document.querySelector('.scroll');
+    if (scroll) {
+      scroll.style.zoom = scale;
     }
     // Also set root font-size as fallback for any rem-based elements
     document.documentElement.style.fontSize = (16 * scale) + 'px';
     document.documentElement.setAttribute('data-fontsize', level);
     try { localStorage.setItem(FONT_KEY, level); } catch (e) {}
 
-    // Update toggle button label
+    // Update toggle button label and title
     var btn = document.querySelector('.font-toggle .ft-label');
     if (btn) btn.textContent = FONT_LABELS[level];
+    var toggleBtn = document.querySelector('.font-toggle');
+    if (toggleBtn) toggleBtn.setAttribute('title', FONT_TITLES[level] || 'Adjust font size');
   }
 
   applyFontSize(currentFontSize);
@@ -157,8 +161,10 @@
       '  background: var(--card, #fff); border: 2px solid var(--ink, #3d2f52);',
       '  cursor: pointer; padding: 0; flex-shrink: 0;',
       '  transition: transform 0.1s, background 0.2s;',
+      '  pointer-events: auto; z-index: 100; position: relative;',
       '}',
-      '.theme-toggle:active, .font-toggle:active { transform: scale(0.95); }',
+      '.theme-toggle:hover, .font-toggle:hover { opacity: 0.85; }',
+      '.theme-toggle:active, .font-toggle:active { transform: scale(0.92); }',
       '.theme-toggle .tt-sun, .theme-toggle .tt-moon {',
       '  font-size: 18px; line-height: 1;',
       '}',
