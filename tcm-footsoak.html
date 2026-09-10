@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en" data-persona="bloom">
+<head>
+<meta charset="utf-8"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Ovuluna · Herbal Foot Soak</title>
+<link rel="icon" type="image/png" href="assets/onboarding/egg.png">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="darkmode.css">
+<link rel="stylesheet" href="evidence.css">
+<style>
+.footsoak-hero { background:linear-gradient(135deg,rgba(196,181,224,.25),rgba(245,198,184,.2)); border:1.5px solid rgba(196,181,224,.4); border-radius:var(--r); padding:20px; position:relative; overflow:hidden; margin-bottom:16px; }
+.footsoak-hero::after { content:''; position:absolute; top:-30px; right:-20px; width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,.25); }
+.fs-title { font-family:var(--serif); font-size:26px; font-weight:600; color:var(--cocoa); line-height:1.1; margin-top:10px; }
+.fs-desc { font-size:12.5px; color:var(--taupe); line-height:1.5; margin-top:6px; }
+.freq-card { background:var(--card); border:1.5px solid var(--line-soft); border-radius:var(--r); padding:16px; margin-bottom:12px; }
+.freq-card h4 { font:800 14px var(--sans); color:var(--ink); margin:0 0 10px; display:flex; align-items:center; gap:6px; }
+.freq-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--line-soft); font-size:12.5px; }
+.freq-row:last-child { border-bottom:none; }
+.freq-label { color:var(--taupe); font-weight:600; }
+.freq-value { font:800 13px var(--serif); color:var(--mauve); }
+.step-card { background:var(--card); border:1.5px solid var(--line-soft); border-radius:var(--r); padding:14px; margin-bottom:10px; display:flex; gap:12px; }
+.step-num { width:32px; height:32px; border-radius:10px; background:rgba(196,181,224,.2); display:flex; align-items:center; justify-content:center; font:800 14px var(--serif); color:var(--mauve); flex-shrink:0; }
+.step-body { flex:1; }
+.step-title { font:800 13px var(--sans); color:var(--ink); }
+.step-detail { font-size:11.5px; color:var(--taupe); line-height:1.45; margin-top:3px; }
+.herb-card { background:var(--card); border:1.5px solid var(--line-soft); border-radius:var(--r); padding:14px; margin-bottom:10px; }
+.herb-head { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.herb-icon { width:40px; height:40px; border-radius:12px; background:rgba(212,154,138,.18); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.herb-name { font:800 14px var(--sans); color:var(--ink); }
+.herb-latin { font-size:10.5px; color:var(--taupe); font-style:italic; }
+.herb-detail { font-size:11.5px; color:var(--cocoa); line-height:1.45; }
+.herb-dose { display:inline-block; font-size:10px; font-weight:800; padding:2px 8px; border-radius:99px; background:rgba(168,192,160,.15); color:#5a7a52; margin-top:6px; }
+.safety-card { background:rgba(201,138,46,.08); border:1.5px solid rgba(201,138,46,.35); border-radius:var(--r); padding:14px; margin-bottom:12px; }
+.safety-card h4 { font:800 13px var(--sans); color:var(--warn); margin:0 0 8px; display:flex; align-items:center; gap:6px; }
+.safety-item { font-size:11.5px; color:var(--cocoa); line-height:1.45; padding:4px 0; display:flex; gap:8px; }
+.safety-item .ms { font-size:14px; color:var(--warn); flex-shrink:0; }
+.reminder-card { background:linear-gradient(135deg,rgba(196,181,224,.2),rgba(245,198,184,.16)); border:1.5px solid rgba(196,181,224,.45); border-radius:var(--r); padding:16px; margin-bottom:12px; }
+.reminder-card h4 { font:800 14px var(--sans); color:var(--ink); margin:0 0 8px; display:flex; align-items:center; gap:6px; }
+.reminder-options { display:flex; flex-direction:column; gap:8px; margin-top:10px; }
+.reminder-opt { display:flex; align-items:center; gap:10px; padding:10px 12px; background:var(--card); border:1.5px solid var(--line-soft); border-radius:12px; cursor:pointer; font-size:12px; font-weight:600; color:var(--ink); }
+.reminder-opt.active { border-color:var(--mauve); background:rgba(139,108,130,.08); }
+.reminder-opt .dot { width:16px; height:16px; border-radius:50%; border:2px solid var(--line); flex-shrink:0; }
+.reminder-opt.active .dot { background:var(--mauve); border-color:var(--mauve); }
+.evidence-note { font-size:10.5px; color:var(--taupe); line-height:1.4; padding:10px 12px; background:rgba(168,192,160,.08); border-radius:10px; margin-top:8px; }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="top">
+    <div class="brandline"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">OVULUNA</b></div>
+    <a class="t-icon ms" href="notifications.html">notifications</a>
+    <a class="t-icon ms" href="cycle-trends.html">calendar_today</a>
+  </div>
+
+  <div class="scroll">
+
+    <!-- Hero -->
+    <div class="footsoak-hero">
+      <div class="foods-badge"><span class="ms" style="font-size:14px">water_drop</span> TCM WARMING RITUAL</div>
+      <div class="fs-title">Herbal Foot Soak</div>
+      <p class="fs-desc">Warm herbal foot baths support circulation, reduce menstrual discomfort, improve sleep, and balance your body's warming energy. A 20-minute ritual, 2-3 times per week.</p>
+    </div>
+
+    <!-- Recommended Frequency -->
+    <h2 class="sec">How Often Should You Soak?</h2>
+    
+    <div class="freq-card">
+      <h4><span class="ms" style="font-size:16px;color:var(--mauve)">event_repeat</span> By Goal</h4>
+      <div class="freq-row">
+        <span class="freq-label">General wellness & relaxation</span>
+        <span class="freq-value">2–3× / week</span>
+      </div>
+      <div class="freq-row">
+        <span class="freq-label">Menstrual cramp relief</span>
+        <span class="freq-value">3–5× / week</span>
+      </div>
+      <div class="freq-row">
+        <span class="freq-label">Premenstrual (week before period)</span>
+        <span class="freq-value">Daily for 5–7 days</span>
+      </div>
+      <div class="freq-row">
+        <span class="freq-label">Sleep improvement</span>
+        <span class="freq-value">3–4× / week, 1hr before bed</span>
+      </div>
+      <div class="freq-row">
+        <span class="freq-label">Cold feet / poor circulation</span>
+        <span class="freq-value">3–4× / week</span>
+      </div>
+    </div>
+
+    <div class="freq-card">
+      <h4><span class="ms" style="font-size:16px;color:var(--coral)">wb_sunny</span> By Season</h4>
+      <div class="freq-row">
+        <span class="freq-label">Winter (cold, dry)</span>
+        <span class="freq-value">3–4× / week</span>
+      </div>
+      <div class="freq-row">
+        <span class="freq-label">Spring / Autumn</span>
+        <span class="freq-value">2–3× / week</span>
+      </div>
+      <div class="freq-row">
+        <span class="freq-label">Summer (hot, humid)</span>
+        <span class="freq-value">1–2× / week</span>
+      </div>
+      <div class="evidence-note">
+        <b>Why seasonal variation?</b> TCM principle: in winter, the body's energy moves inward and cold accumulates in the lower body — more frequent warming soaks help disperse cold. In summer, excessive sweating from frequent soaks can deplete qi and fluids. <span class="evidence-dot" data-id="fs-seasonal">(i)</span>
+      </div>
+    </div>
+
+    <!-- How to Do It -->
+    <h2 class="sec">Step-by-Step Guide</h2>
+    
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Prepare the herbal decoction</div>
+        <div class="step-detail">Place 20–30g dried herbs in 1L water. Simmer for 15–20 minutes, then strain. For convenience, use pre-packaged herbal foot soak packets.</div>
+      </div>
+    </div>
+    
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Fill basin with warm water</div>
+        <div class="step-detail">Add the herbal decoction to a foot basin. Add warm water to reach <b>40–45°C (104–113°F)</b>. Water should cover the ankles, ideally up to the lower calf (Sanyinjiao point, SP6).</div>
+      </div>
+    </div>
+    
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Soak for 20–30 minutes</div>
+        <div class="step-detail">Keep feet submerged. Add hot water as needed to maintain temperature. You should feel gentle warmth spreading upward, perhaps a light sweat on the upper lip or forehead. <span class="evidence-dot" data-id="fs-duration">(i)</span></div>
+      </div>
+    </div>
+    
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Dry and rest</div>
+        <div class="step-detail">Pat feet dry thoroughly, especially between toes. Put on warm socks. Rest for 15–30 minutes — avoid going outside or exposing feet to cold for at least 1 hour. Best done 1 hour before bed for sleep benefits.</div>
+      </div>
+    </div>
+
+    <!-- Herb Formulas -->
+    <h2 class="sec">Herb Formulas by Need</h2>
+    
+    <div class="herb-card">
+      <div class="herb-head">
+        <div class="herb-icon">🌿</div>
+        <div>
+          <div class="herb-name">Mugwort (Ai Ye) — Classic Warming</div>
+          <div class="herb-latin">Artemisia argyi</div>
+        </div>
+      </div>
+      <div class="herb-detail">The most widely used foot soak herb in TCM. Warms the channels, dispels cold, regulates menstruation, and stops pain. Ideal for cold-type menstrual cramps, cold feet, and irregular cycles.</div>
+      <span class="herb-dose">15–30g per soak · 2–3×/week</span>
+      <div class="evidence-note">Systematic review & meta-analysis (Frontiers in Pharmacology, 2024): Chinese herbal footbaths including mugwort significantly reduced dysmenorrhea pain intensity vs. control groups. <span class="evidence-dot" data-id="fs-mugwort">(i)</span></div>
+    </div>
+    
+    <div class="herb-card">
+      <div class="herb-head">
+        <div class="herb-icon">🫚</div>
+        <div>
+          <div class="herb-name">Ginger (Gan Jiang / Sheng Jiang) — Circulation</div>
+          <div class="herb-latin">Zingiber officinale</div>
+        </div>
+      </div>
+      <div class="herb-detail">Stimulates peripheral circulation, warms the middle burner, and dispels cold. Excellent for cold feet, bloating, and digestive discomfort. Often combined with mugwort for enhanced warming effect.</div>
+      <span class="herb-dose">5–10 slices fresh ginger or 10–15g dried · 2–4×/week</span>
+    </div>
+    
+    <div class="herb-card">
+      <div class="herb-head">
+        <div class="herb-icon">🌸</div>
+        <div>
+          <div class="herb-name">Dang Gui (Chinese Angelica) — Blood Nourishing</div>
+          <div class="herb-latin">Angelica sinensis</div>
+        </div>
+      </div>
+      <div class="herb-detail">Known as the "female ginseng" in TCM. Nourishes blood, harmonizes the cycle, and soothes menstrual pain. Ideal for post-period recovery, pale complexion, and scanty menstruation.</div>
+      <span class="herb-dose">10–15g per soak · 2×/week (post-period)</span>
+    </div>
+    
+    <div class="herb-card">
+      <div class="herb-head">
+        <div class="herb-icon">🌶️</div>
+        <div>
+          <div class="herb-name">Sichuan Pepper (Hua Jiao) — Deep Warming</div>
+          <div class="herb-latin">Zanthoxylum bungeanum</div>
+        </div>
+      </div>
+      <div class="herb-detail">Strong warming action that penetrates deep into the channels. Relieves cold-type pain, reduces dampness, and improves circulation in the lower body. Use in smaller quantities due to its potency.</div>
+      <span class="herb-dose">5–10g per soak · 1–2×/week</span>
+    </div>
+
+    <!-- Safety -->
+    <div class="safety-card">
+      <h4><span class="ms">warning</span> Safety & Contraindications</h4>
+      <div class="safety-item"><span class="ms">pregnant_woman</span><span><b>Pregnancy:</b> Avoid herbal foot soaks during pregnancy, especially with mugwort, dang gui, or safflower — these can stimulate uterine contractions. Plain warm water (38°C) is safe with doctor approval.</span></div>
+      <div class="safety-item"><span class="ms">local_hospital</span><span><b>Diabetes / neuropathy:</b> Reduced temperature sensation increases burn risk. Use water ≤40°C, test with elbow, and limit to 15 minutes. Consult your doctor first.</span></div>
+      <div class="safety-item"><span class="ms">favorite</span><span><b>Heart conditions / high blood pressure:</b> Hot foot soaks can cause vasodilation and blood pressure changes. Consult your cardiologist before starting. Avoid if BP is unstable.</span></div>
+      <div class="safety-item"><span class="ms">coronavirus</span><span><b>Open wounds / skin infections:</b> Delay soaking until skin is fully healed. Herbal decoctions can irritate broken skin.</span></div>
+      <div class="safety-item"><span class="ms">thermostat</span><span><b>Overheating:</b> If you feel dizzy, nauseous, or excessively sweaty, stop immediately, cool down, and drink water. Do not soak to the point of heavy sweating.</span></div>
+      <div class="safety-item"><span class="ms">schedule</span><span><b>Timing:</b> Avoid soaking within 1 hour after meals (blood is needed for digestion) or when extremely hungry. Best: 1 hour before bed.</span></div>
+    </div>
+
+    <!-- Reminder Setup -->
+    <div class="reminder-card">
+      <h4><span class="ms">notifications_active</span> Set a Foot Soak Reminder</h4>
+      <p style="font-size:12px;color:var(--taupe);line-height:1.5;margin:0">Consistency is key — benefits build over 2–3 menstrual cycles. Choose a schedule that fits your life:</p>
+      <div class="reminder-options" id="reminderOptions">
+        <div class="reminder-opt" data-freq="2"><span class="dot"></span>Gentle: 2× per week (Tue + Fri, 9pm)</div>
+        <div class="reminder-opt active" data-freq="3"><span class="dot"></span>Standard: 3× per week (Mon + Wed + Fri, 9pm)</div>
+        <div class="reminder-opt" data-freq="5"><span class="dot"></span>Cycle support: Daily for 5 days before period</div>
+        <div class="reminder-opt" data-freq="custom"><span class="dot"></span>Custom: I'll set my own schedule</div>
+      </div>
+      <button class="btn mauve" style="width:100%;margin-top:12px;padding:12px" id="saveReminderBtn">
+        <span class="ms" style="font-size:16px;vertical-align:middle;margin-right:4px">save</span>
+        Save Reminder Preference
+      </button>
+      <p style="font-size:10.5px;color:var(--taupe);margin:8px 0 0;text-align:center">Reminders are saved locally. Push notifications coming soon.</p>
+    </div>
+
+    <!-- Evidence Summary -->
+    <div class="freq-card">
+      <h4><span class="ms" style="font-size:16px;color:#5a7a52">menu_book</span> Evidence Summary</h4>
+      <div style="font-size:11.5px;color:var(--cocoa);line-height:1.55">
+        <p style="margin:0 0 8px"><b>Mechanism:</b> Warm water causes vasodilation in the feet (which contain ~250,000 sweat glands), increasing peripheral blood flow by 2–3×. Herbal compounds (volatile oils, flavonoids) may be absorbed transdermally at low levels.</p>
+        <p style="margin:0 0 8px"><b>Menstrual pain:</b> Meta-analysis of 15 RCTs (n=1,236) found herbal footbaths reduced VAS pain scores by 2.1 points vs. control (p<0.001), with effect sustained at 3-month follow-up. <span class="evidence-dot" data-id="fs-meta">(i)</span></p>
+        <p style="margin:0"><b>Sleep:</b> Foot soaking at 40°C for 20 minutes before bed significantly improved sleep onset latency (by 8 min) and sleep quality (PSQI) in adults with mild insomnia, via body temperature downregulation after warming. <span class="evidence-dot" data-id="fs-sleep">(i)</span></p>
+      </div>
+    </div>
+
+    <div style="height:20px"></div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="home.html"><span class="material-symbols-outlined">home</span>Home</a>
+    <a href="learn.html"><span class="material-symbols-outlined">menu_book</span>Learn</a>
+    <a href="tcm-hub.html" class="active"><span class="material-symbols-outlined">acupuncture</span>TCM</a>
+    <a href="foods.html"><span class="material-symbols-outlined">restaurant</span>Foods</a>
+    <a href="profile.html"><span class="material-symbols-outlined">person</span>Profile</a>
+  </nav>
+</div>
+
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
+<script src="darkmode.js" defer></script>
+<script>
+// Reminder option selection
+document.querySelectorAll('.reminder-opt').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.reminder-opt').forEach(o => o.classList.remove('active'));
+    opt.classList.add('active');
+  });
+});
+
+document.getElementById('saveReminderBtn').addEventListener('click', () => {
+  const active = document.querySelector('.reminder-opt.active');
+  const freq = active ? active.dataset.freq : '3';
+  try {
+    localStorage.setItem('ovuluna_footsoak_reminder', JSON.stringify({
+      frequency: freq,
+      setAt: new Date().toISOString()
+    }));
+    const btn = document.getElementById('saveReminderBtn');
+    btn.innerHTML = '<span class="ms" style="font-size:16px;vertical-align:middle;margin-right:4px">check_circle</span>Saved!';
+    btn.style.background = '#5a7a52';
+    setTimeout(() => {
+      btn.innerHTML = '<span class="ms" style="font-size:16px;vertical-align:middle;margin-right:4px">save</span>Save Reminder Preference';
+      btn.style.background = '';
+    }, 2000);
+  } catch(e) {}
+});
+</script>
+</body>
+</html>
