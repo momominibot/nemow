@@ -43,6 +43,12 @@
   function applyFontSize(level) {
     currentFontSize = level;
     var scale = FONT_SCALES[level] || 1.0;
+    // Use zoom on .app container — scales all px-based text, images, layout
+    var app = document.querySelector('.app');
+    if (app) {
+      app.style.zoom = scale;
+    }
+    // Also set root font-size as fallback for any rem-based elements
     document.documentElement.style.fontSize = (16 * scale) + 'px';
     document.documentElement.setAttribute('data-fontsize', level);
     try { localStorage.setItem(FONT_KEY, level); } catch (e) {}
@@ -186,6 +192,8 @@
     buildStars();
     buildThemeToggle();
     buildFontToggle();
+    // Re-apply font size zoom now that .app exists in DOM
+    applyFontSize(currentFontSize);
   }
 
   if (document.readyState === 'loading') {
