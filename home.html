@@ -78,6 +78,19 @@
       <a href="learn-cycle-phases.html" style="display:inline-block;margin-top:10px;font-size:11.5px;font-weight:700;color:var(--mauve);text-decoration:none">Learn about your cycle →</a>
     </div>
 
+    <!-- Postpartum Recovery Card (Nurture persona only) -->
+    <div id="postpartumCard" class="card" style="display:none;padding:18px;background:linear-gradient(135deg,rgba(110,180,150,.18),rgba(245,198,184,.15));border:1.5px solid rgba(110,180,150,.4)">
+      <div class="row" style="justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="sub" style="font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--sage)">Postpartum Recovery</div>
+          <div style="font-family:var(--serif);font-size:22px;font-weight:600;color:var(--cocoa);line-height:1.2;margin-top:4px">Healing & nurturing</div>
+        </div>
+        <span class="ms" style="font-size:30px;color:var(--sage)">favorite</span>
+      </div>
+      <div style="margin-top:10px;font-size:12.5px;color:var(--taupe);line-height:1.5">Your body is doing incredible work. Prioritize rest, nourishment, and gentle movement. Your cycle may not return for months — especially while breastfeeding. This is normal.</div>
+      <a href="learn.html" style="display:inline-block;margin-top:10px;font-size:11.5px;font-weight:700;color:var(--sage);text-decoration:none">Postpartum recovery guide →</a>
+    </div>
+
     <!-- gesture from a loved one -->
     <a href="partner-connect.html" id="gestureBanner" style="display:none;text-decoration:none;color:inherit">
       <div class="card" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(135deg,rgba(217,131,164,.22),rgba(255,255,255,.75));border:1.5px solid rgba(217,131,164,.4)">
@@ -287,6 +300,30 @@
       </div>
     </div>
 
+    <!-- Postpartum Nurture section (Nurture persona only) -->
+    <div id="nurtureLearnSection" style="display:none;margin-top:16px">
+      <h2 class="sec" style="font-family:var(--serif);font-size:17px;color:var(--cocoa);margin-bottom:10px">Your Postpartum Journey 💚</h2>
+      <div class="grid2" style="gap:10px">
+        <a class="card tint-sage" href="learn.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--sage);font-size:22px">healing</span><b style="display:block;font-size:13.5px;margin-top:6px">Recovery guide</b><span class="sub" style="font-size:11px">Weeks 1-6, 6-12, beyond</span></a>
+        <a class="card tint-gold" href="foods.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--terracotta);font-size:22px">restaurant</span><b style="display:block;font-size:13.5px;margin-top:6px">Breastfeeding nutrition</b><span class="sub" style="font-size:11px">Calories, hydration, galactagogues</span></a>
+        <a class="card tint-lavender" href="learn.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--mauve);font-size:22px">schedule</span><b style="display:block;font-size:13.5px;margin-top:6px">When will my period return?</b><span class="sub" style="font-size:11px">Varies \u2014 especially with breastfeeding</span></a>
+        <a class="card" href="breathwork.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms twinkle" style="color:var(--mauve);font-size:22px">self_improvement</span><b style="display:block;font-size:13.5px;margin-top:6px">Mental health & calm</b><span class="sub" style="font-size:11px">PPD screening, stress tools, support</span></a>
+      </div>
+      <!-- Postpartum mental health reminder -->
+      <div class="card" style="padding:16px;margin-top:12px;background:linear-gradient(135deg,rgba(110,180,150,.18),rgba(196,181,224,.15));border:1.5px solid rgba(110,180,150,.4)">
+        <div class="row" style="align-items:center;gap:10px;margin-bottom:8px">
+          <span class="ms" style="color:var(--sage);font-size:22px">favorite</span>
+          <b style="font-size:14px;font-family:var(--serif);color:var(--cocoa)">You are not alone 💚</b>
+        </div>
+        <p style="font-size:12px;color:var(--taupe);line-height:1.5;margin:0">1 in 7 women experience postpartum depression. If you\u2019re feeling overwhelmed, sad, or disconnected, please reach out. In Singapore: call <b style="color:var(--sage)">SOS 1-767</b> (24/7) or text <b style="color:var(--sage)">741741</b>. Talk to your doctor or midwife at your 6-week checkup. <span class="qi" data-evidence="ppd-prevalence">i</span></p>
+      </div>
+      <!-- Warning signs -->
+      <div class="card" style="padding:14px 16px;margin-top:10px;background:rgba(232,168,152,.1);border:1.5px solid rgba(232,168,152,.3)">
+        <b style="font-size:12.5px;color:var(--coral);font-family:var(--serif)">⚠️ When to call your doctor:</b>
+        <p style="font-size:11.5px;color:var(--taupe);line-height:1.5;margin:6px 0 0">Heavy bleeding (soaking a pad in 1 hour), fever >38°C, severe headache, chest pain, difficulty breathing, suicidal thoughts, or incision redness/swelling.</p>
+      </div>
+    </div>
+
     <div id="hstage" style="display:flex;flex-direction:column;gap:16px;margin-top:12px"></div>
 
   </div>
@@ -408,11 +445,14 @@ document.addEventListener('DOMContentLoaded', function(){
   // Apply persona-specific content
   function applyPersonaContent(persona) {
     var isTeen = persona === 'bloom';
-    // Ovarian age card: hide for teens, show teen cycle education card
+    var isPostpartum = persona === 'nurture';
+    // Ovarian age card: hide for teens and postpartum, show for adults
     var ovCard = document.getElementById('ovarianAgeCard');
     var teenCard = document.getElementById('teenCycleCard');
-    if (ovCard) ovCard.style.display = isTeen ? 'none' : 'block';
+    var ppCard = document.getElementById('postpartumCard');
+    if (ovCard) ovCard.style.display = (isTeen || isPostpartum) ? 'none' : 'block';
     if (teenCard) teenCard.style.display = isTeen ? 'block' : 'none';
+    if (ppCard) ppCard.style.display = isPostpartum ? 'block' : 'none';
     // Teen hormone note
     var teenNote = document.getElementById('teenHormoneNote');
     if (teenNote) teenNote.style.display = isTeen ? 'block' : 'none';
@@ -422,6 +462,12 @@ document.addEventListener('DOMContentLoaded', function(){
     // TTC grow section
     var growLearn = document.getElementById('growLearnSection');
     if (growLearn) growLearn.style.display = persona === 'grow' ? 'block' : 'none';
+    // Postpartum nurture section
+    var nurtureLearn = document.getElementById('nurtureLearnSection');
+    if (nurtureLearn) nurtureLearn.style.display = isPostpartum ? 'block' : 'none';
+    // Hide cycle ring for postpartum (period may not return for months)
+    var cycleRing = document.getElementById('mysticalRingWrap');
+    if (cycleRing) cycleRing.style.display = isPostpartum ? 'none' : 'block';
     // Hide calorie meter for teens (disordered eating risk)
     var calMeter = document.querySelector('[data-log="food"] .calorie-meter, #calorieMeter');
     if (calMeter) calMeter.style.display = isTeen ? 'none' : 'block';
@@ -636,6 +682,65 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   };
 
+  // Postpartum-specific logging questions (Nurture persona)
+  var questionsNurture = {
+    mood: {
+      title: 'How are you feeling?',
+      fields: [
+        { type: 'emoji', label: 'Overall mood', options: ['😢','😕','😐','🙂','😄'] },
+        { type: 'radio', label: 'Feeling overwhelmed or anxious?', options: ['Not at all','Sometimes','Often','Almost always'] },
+        { type: 'radio', label: 'Lost interest in things you used to enjoy?', options: ['No','Sometimes','Often','Yes, a lot'] },
+        { type: 'radio', label: 'Sleep quality (when you do sleep)?', options: ['Good','Fair','Poor','Very poor'] },
+        { type: 'text', label: 'Anything you want to note? (optional)', placeholder: 'e.g., feeling tearful, grateful, exhausted...' }
+      ]
+    },
+    sleep: {
+      title: 'Sleep & rest',
+      fields: [
+        { type: 'number', label: 'Hours of sleep last night', placeholder: 'e.g., 5', min: 0, max: 12 },
+        { type: 'number', label: 'Night wakings (baby)', placeholder: 'e.g., 3', min: 0, max: 10 },
+        { type: 'radio', label: 'Did you rest during the day?', options: ['Yes, napped','Yes, rested quietly','No, too busy','No, not possible'] },
+        { type: 'radio', label: 'Sleep quality when sleeping?', options: ['Good','Fair','Poor','Very poor'] }
+      ]
+    },
+    symptoms: {
+      title: 'Postpartum recovery',
+      fields: [
+        { type: 'radio', label: 'Bleeding (lochia) today?', options: ['None','Light spotting','Moderate','Heavy','Very heavy/clots'] },
+        { type: 'slider', label: 'Perineal / incision pain (0-10)', min: 0, max: 10 },
+        { type: 'radio', label: 'Breast / nipple pain?', options: ['None','Mild','Moderate','Severe / cracked'] },
+        { type: 'checkbox', label: 'Other symptoms', options: ['Headache','Fatigue','Backache','Pelvic pressure','Constipation','Hemorrhoids','Hot flashes','None'] },
+        { type: 'text', label: 'Notes (optional)', placeholder: 'e.g., bleeding lighter today, incision healing well...' }
+      ]
+    },
+    water: {
+      title: 'Hydration (breastfeeding)',
+      fields: [
+        { type: 'watermeter', label: 'Today\u2019s water intake' },
+        { type: 'number', label: 'Glasses of water (250ml each)', placeholder: 'e.g., 8', min: 0, max: 25 },
+        { type: 'radio', label: 'Other drinks today', options: ['Only water','Some tea','Coffee','Sugary drinks'] },
+        { type: 'radio', label: 'Did you drink a glass after each feed?', options: ['Yes, mostly','Sometimes','Rarely','Not breastfeeding'] }
+      ]
+    },
+    activity: {
+      title: 'Gentle movement',
+      fields: [
+        { type: 'radio', label: 'Activity type', options: ['Resting today','Gentle walk','Pelvic floor exercises','Stretching','Light housework','Other'] },
+        { type: 'number', label: 'Duration (minutes)', placeholder: 'e.g., 15', min: 0, max: 120 },
+        { type: 'radio', label: 'How did your body feel?', options: ['Great, energized','Okay, mild fatigue','Tired, should rest more','Pain or discomfort'] }
+      ]
+    },
+    food: {
+      title: 'Nourishment & healing',
+      fields: [
+        { type: 'checkbox', label: 'Did you eat these healing foods?', options: ['Protein (meat/beans/eggs)','Iron-rich (leafy greens/red meat)','Calcium (dairy/fortified)','Omega-3 (fish/nuts)','Vitamin C (fruits/peppers)','Whole grains','Warm soups/stews','Water-rich foods'] },
+        { type: 'radio', label: 'Did you take postnatal vitamins?', options: ['Yes, daily','Most days','Sometimes','No'] },
+        { type: 'radio', label: 'Appetite today?', options: ['Good, ate well','Fair, ate enough','Poor, forced to eat','Very poor / nausea'] },
+        { type: 'text', label: 'Notes (optional)', placeholder: 'e.g., had oatmeal with berries, craving protein...' }
+      ]
+    }
+  };
+
   // Persona-aware questions helper
   function getQuestions(type) {
     var persona = localStorage.getItem('ovuluna_persona') || 'bloom';
@@ -644,6 +749,9 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     if (persona === 'grow' && questionsGrow[type]) {
       return questionsGrow[type];
+    }
+    if (persona === 'nurture' && questionsNurture[type]) {
+      return questionsNurture[type];
     }
     return questions[type];
   }
