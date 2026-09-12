@@ -268,6 +268,25 @@
       </div>
     </div>
 
+    <!-- TTC-specific Grow section (Grow persona only) -->
+    <div id="growLearnSection" style="display:none;margin-top:16px">
+      <h2 class="sec" style="font-family:var(--serif);font-size:17px;color:var(--cocoa);margin-bottom:10px">Your Fertility Journey 🌱</h2>
+      <div class="grid2" style="gap:10px">
+        <a class="card tint-lavender" href="learn-fertile-window.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--mauve);font-size:22px">favorite</span><b style="display:block;font-size:13.5px;margin-top:6px">Fertile window guide</b><span class="sub" style="font-size:11px">When to conceive \u2014 days 10-17</span></a>
+        <a class="card tint-gold" href="foods.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--terracotta);font-size:22px">restaurant</span><b style="display:block;font-size:13.5px;margin-top:6px">Pre-conception nutrition</b><span class="sub" style="font-size:11px">Folic acid, iron, omega-3, antioxidants</span></a>
+        <a class="card tint-sage" href="breathwork.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--sage);font-size:22px">spa</span><b style="display:block;font-size:13.5px;margin-top:6px">Stress & fertility</b><span class="sub" style="font-size:11px">How stress affects conception \u2014 calm tools</span></a>
+        <a class="card" href="learn.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms twinkle" style="color:var(--mauve);font-size:22px">medical_services</span><b style="display:block;font-size:13.5px;margin-top:6px">When to see a specialist</b><span class="sub" style="font-size:11px">Under 35: 12 months \u00b7 Over 35: 6 months</span></a>
+      </div>
+      <!-- Fertile window reminder -->
+      <div class="card" style="padding:16px;margin-top:12px;background:linear-gradient(135deg,rgba(232,168,152,.18),rgba(196,181,224,.15));border:1.5px solid rgba(232,168,152,.4)">
+        <div class="row" style="align-items:center;gap:10px;margin-bottom:8px">
+          <span class="ms" style="color:var(--coral);font-size:22px">favorite</span>
+          <b style="font-size:14px;font-family:var(--serif);color:var(--cocoa)">Fertile Window Tracker</b>
+        </div>
+        <p style="font-size:12px;color:var(--taupe);line-height:1.5;margin:0">For a 28-day cycle, your fertile window is typically <b style="color:var(--coral)">days 10-17</b>, with ovulation around day 14. Log cervical mucus and intercourse daily to maximize your chances. <span class="qi" data-evidence="fertile-window">i</span></p>
+      </div>
+    </div>
+
     <div id="hstage" style="display:flex;flex-direction:column;gap:16px;margin-top:12px"></div>
 
   </div>
@@ -400,6 +419,9 @@ document.addEventListener('DOMContentLoaded', function(){
     // Teen learn & grow section
     var teenLearn = document.getElementById('teenLearnSection');
     if (teenLearn) teenLearn.style.display = isTeen ? 'block' : 'none';
+    // TTC grow section
+    var growLearn = document.getElementById('growLearnSection');
+    if (growLearn) growLearn.style.display = persona === 'grow' ? 'block' : 'none';
     // Hide calorie meter for teens (disordered eating risk)
     var calMeter = document.querySelector('[data-log="food"] .calorie-meter, #calorieMeter');
     if (calMeter) calMeter.style.display = isTeen ? 'none' : 'block';
@@ -556,11 +578,72 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   };
 
+  // TTC-specific logging questions (Grow persona)
+  var questionsGrow = {
+    mood: {
+      title: 'How\u2019s your mood & stress?',
+      fields: [
+        { type: 'emoji', label: 'Overall mood', options: ['😢','😕','😐','🙂','😄'] },
+        { type: 'radio', label: 'Stress level today?', options: ['Low','Mild','Moderate','High'] },
+        { type: 'radio', label: 'Mood swings today?', options: ['None','Mild','Moderate','Strong'] },
+        { type: 'text', label: 'Anything affecting your mood? (optional)', placeholder: 'e.g., TTC stress, work, good news...' }
+      ]
+    },
+    sleep: {
+      title: 'How did you sleep?',
+      fields: [
+        { type: 'time', label: 'Bedtime', placeholder: 'e.g., 11:00 PM' },
+        { type: 'time', label: 'Wake time', placeholder: 'e.g., 7:00 AM' },
+        { type: 'stars', label: 'Sleep quality' },
+        { type: 'radio', label: 'Woke up during the night?', options: ['No','Once','2-3 times','More than 3'] }
+      ]
+    },
+    symptoms: {
+      title: 'Fertility signs today',
+      fields: [
+        { type: 'slider', label: 'Cramp pain (0-10)', min: 0, max: 10 },
+        { type: 'radio', label: 'Cervical mucus today?', options: ['None/Dry','Sticky','Creamy','Egg white (fertile)','Watery'] },
+        { type: 'radio', label: 'Intercourse today?', options: ['Yes','No','Not TTC today'] },
+        { type: 'checkbox', label: 'Other symptoms', options: ['Bloating','Headache','Fatigue','Breast tenderness','Backache','Acne','None'] },
+        { type: 'text', label: 'Notes (optional)', placeholder: 'e.g., fertile mucus noticed, positive OPK...' }
+      ]
+    },
+    water: {
+      title: 'Hydration check',
+      fields: [
+        { type: 'watermeter', label: 'Today\u2019s water intake' },
+        { type: 'number', label: 'Glasses of water (250ml each)', placeholder: 'e.g., 6', min: 0, max: 20 },
+        { type: 'radio', label: 'Other drinks today', options: ['Only water','Some tea/coffee','Sugary drinks','Alcohol'] }
+      ]
+    },
+    activity: {
+      title: 'Today\u2019s activity',
+      fields: [
+        { type: 'metactivity', label: 'Activity type' },
+        { type: 'number', label: 'Duration (minutes)', placeholder: 'e.g., 30', min: 0, max: 300 },
+        { type: 'slider', label: 'Perceived exertion (1-10)', min: 1, max: 10 }
+      ]
+    },
+    food: {
+      title: 'Today\u2019s fertility nutrition',
+      fields: [
+        { type: 'caloriemeter', label: 'Calorie intake today' },
+        { type: 'checkbox', label: 'Did you take your pre-conception supplements?', options: ['Folic acid (400mcg)','Iron','Omega-3/DHA','Vitamin D','Prenatal vitamin','None today'] },
+        { type: 'checkbox', label: 'Fertility-supportive foods?', options: ['Leafy greens','Omega-3 (fish/nuts)','Whole grains','Fruits','Protein at each meal','Fermented foods','Antioxidant-rich (berries)'] },
+        { type: 'radio', label: 'Caffeine intake today', options: ['None (<50mg)','Low (50-150mg)','Moderate (150-300mg)','High (>300mg)'] },
+        { type: 'text', label: 'Anything notable? (optional)', placeholder: 'e.g., had salmon, took prenatal vitamin...' }
+      ]
+    }
+  };
+
   // Persona-aware questions helper
   function getQuestions(type) {
     var persona = localStorage.getItem('ovuluna_persona') || 'bloom';
     if (persona === 'bloom' && questionsTeen[type]) {
       return questionsTeen[type];
+    }
+    if (persona === 'grow' && questionsGrow[type]) {
+      return questionsGrow[type];
     }
     return questions[type];
   }
