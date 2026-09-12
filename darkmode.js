@@ -97,6 +97,7 @@
     var btn = document.createElement('button');
     btn.className = 'theme-toggle';
     btn.type = 'button';
+    btn.style.marginLeft = 'auto';
     btn.setAttribute('aria-label', 'Toggle dark mode');
     btn.setAttribute('title', 'Toggle dark mode');
 
