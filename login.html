@@ -1,196 +1,369 @@
-<!doctype html><html lang="en"><head>
+<!doctype html>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ovuluna · Enter</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Ovuluna · Begin Your Journey</title>
 <link rel="icon" type="image/png" href="assets/onboarding/egg.png">
 <link rel="apple-touch-icon" href="assets/onboarding/egg.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
-<link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="darkmode.css">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;500;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
 <style>
-*{ box-sizing:border-box; }
-.lwrap{ position:fixed; inset:0; overflow:hidden;
-  background:linear-gradient(180deg,#F3E7F0 0%,#F6E9E4 42%,#FAF3EC 100%); }
-/* generated mystical sky */
-.lsky{ position:absolute; inset:0; background:center/cover no-repeat; opacity:0; transition:opacity 1.4s ease; }
-.lsky.on{ opacity:1; }
-/* once the painted sky loads, fade the CSS fallbacks so nothing doubles up */
-.skyon .aura{ opacity:.22; }
-.skyon .geo{ opacity:0; }
-/* animated fallback aurora (shows until image loads, and blends under it) */
-.aura{ position:absolute; border-radius:50%; filter:blur(60px); opacity:.6; mix-blend-mode:screen; }
-.a1{ width:420px;height:420px; top:-120px; left:-90px; background:radial-gradient(circle,#E7B8D8,transparent 68%); animation:drift1 20s ease-in-out infinite; }
-.a2{ width:360px;height:360px; top:8%; right:-120px; background:radial-gradient(circle,#E9CE86,transparent 66%); animation:drift2 26s ease-in-out infinite; }
-.a3{ width:480px;height:480px; bottom:-160px; left:-40px; background:radial-gradient(circle,#C9B6EC,transparent 70%); animation:drift1 30s ease-in-out infinite reverse; }
-@keyframes drift1{ 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,30px)} }
-@keyframes drift2{ 0%,100%{transform:translate(0,0)} 50%{transform:translate(-36px,26px)} }
-/* sacred geometry */
-.geo{ position:absolute; top:-6%; left:50%; width:130vw; max-width:640px; transform:translateX(-50%);
-  opacity:.16; animation:spin 90s linear infinite; }
-@keyframes spin{ to{ transform:translateX(-50%) rotate(360deg);} }
-/* stars */
-.stars i{ position:absolute; border-radius:50%; background:radial-gradient(circle,#fff,rgba(255,244,214,.6));
-  box-shadow:0 0 7px 1px rgba(255,240,210,.85); animation:tw var(--d,3s) ease-in-out var(--t,0s) infinite; }
-@keyframes tw{ 0%,100%{opacity:0;transform:scale(.4)} 50%{opacity:1;transform:scale(1)} }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html, body { height:100%; overflow:hidden; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: #0d0a1a;
+    color: #f0e8f8;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
 
-.lstage{ position:relative; z-index:3; height:100%; display:flex; flex-direction:column; align-items:center;
-  justify-content:center; padding:0 26px calc(30px + env(safe-area-inset-bottom)); text-align:center; }
+  /* Cosmic background */
+  .cosmos {
+    position:fixed; inset:0; z-index:0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 20%, rgba(139,92,246,0.25), transparent),
+      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(244,114,182,0.15), transparent),
+      radial-gradient(ellipse 50% 40% at 80% 70%, rgba(251,191,36,0.1), transparent),
+      linear-gradient(180deg, #0d0a1a 0%, #1a1030 50%, #0d0a1a 100%);
+  }
+  .stars { position:fixed; inset:0; z-index:1; pointer-events:none; }
+  .stars i {
+    position:absolute; width:2px; height:2px; border-radius:50%;
+    background:#fff; opacity:0;
+    animation: twinkle var(--d,3s) ease-in-out var(--t,0s) infinite;
+  }
+  @keyframes twinkle { 0%,100%{opacity:0.1;} 50%{opacity:0.9;} }
 
-/* celestial orb + logo */
-.orb{ position:relative; width:118px; height:118px; margin-bottom:22px; }
-.orb .halo{ position:absolute; inset:-26px; border-radius:50%;
-  background:radial-gradient(circle, rgba(233,180,92,.42), rgba(217,131,164,.16) 55%, transparent 72%);
-  animation:pulse 4.2s ease-in-out infinite; }
-.orb .glass{ position:absolute; inset:0; border-radius:50%;
-  background:radial-gradient(circle at 38% 32%, rgba(255,255,255,.9), rgba(247,225,240,.6) 45%, rgba(218,206,246,.5));
-  box-shadow:0 18px 44px -14px rgba(110,70,84,.45), inset 0 0 30px rgba(255,255,255,.55);
-  backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; animation:bob 5.5s ease-in-out infinite; }
-.orb svg{ animation:spin 46s linear infinite; }
-@keyframes pulse{ 0%,100%{opacity:.5;transform:scale(.96)} 50%{opacity:.95;transform:scale(1.06)} }
-@keyframes bob{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  /* Moon glow */
+  .moon-glow {
+    position:fixed; top:8%; left:50%; transform:translateX(-50%);
+    width:200px; height:200px; border-radius:50%; z-index:1;
+    background: radial-gradient(circle at 40% 35%, rgba(255,250,230,0.9), rgba(251,191,36,0.4) 40%, rgba(139,92,246,0.15) 70%, transparent);
+    filter: blur(2px);
+    animation: moonPulse 6s ease-in-out infinite;
+  }
+  @keyframes moonPulse { 0%,100%{opacity:0.7; transform:translateX(-50%) scale(1);} 50%{opacity:1; transform:translateX(-50%) scale(1.05);} }
 
-/* glowing wordmark hero */
-.lhero{ position:relative; font-family:var(--serif); font-weight:500; font-size:44px; letter-spacing:.24em; color:var(--mauve);
-  padding-left:.24em; margin:6px 0 18px; text-shadow:0 2px 18px rgba(233,180,92,.35); }
-.lhalo{ position:absolute; left:50%; top:52%; width:220px; height:120px; transform:translate(-50%,-50%);
-  border-radius:50%; background:radial-gradient(circle, rgba(233,180,92,.4), rgba(217,131,164,.14) 55%, transparent 72%);
-  z-index:-1; animation:pulse 4.2s ease-in-out infinite; }
-.lbrand{ font:800 12px var(--sans); letter-spacing:.42em; color:var(--mauve); margin-bottom:8px; }
-.ltitle{ font-family:var(--serif); font-weight:500; font-size:34px; line-height:1.14; color:var(--cocoa); margin:0; }
-.ltitle em{ font-style:italic; color:var(--terracotta); }
-.lsub{ font:500 13.5px var(--sans); color:var(--taupe); margin:10px 0 26px; max-width:26ch; }
+  /* Main container */
+  .login-container {
+    position:relative; z-index:10;
+    width:100%; max-width:400px;
+    padding:40px 28px 32px;
+    text-align:center;
+    display:flex; flex-direction:column; align-items:center;
+    max-height:100dvh; overflow-y:auto;
+  }
 
-/* glass form card */
-.lcard{ width:100%; max-width:360px; padding:22px 20px 20px; border-radius:26px;
-  background:rgba(255,255,255,.42); border:1.5px solid rgba(255,255,255,.6);
-  box-shadow:0 24px 60px -24px rgba(110,70,84,.4), inset 0 1px 0 rgba(255,255,255,.7);
-  backdrop-filter:blur(18px) saturate(1.2); -webkit-backdrop-filter:blur(18px) saturate(1.2); }
-.field{ display:flex; align-items:center; gap:11px; background:rgba(255,255,255,.66);
-  border:1.5px solid rgba(255,255,255,.7); border-radius:15px; padding:14px 15px; margin-bottom:12px; transition:.18s; }
-.field:focus-within{ border-color:var(--lavender); box-shadow:0 0 0 4px rgba(218,206,246,.4); background:rgba(255,255,255,.85); }
-.field .ms{ color:var(--faded); font-size:20px; }
-.field input{ flex:1; min-width:0; border:none; outline:none; background:transparent; font:500 15px var(--sans); color:var(--ink); }
-.field input::placeholder{ color:var(--faded); }
-.field .eye{ cursor:pointer; }
-.forgot{ display:block; text-align:right; font:700 12px var(--sans); color:var(--terracotta); text-decoration:none; margin:-2px 2px 14px; }
-.lbtn{ width:100%; border:none; cursor:pointer; padding:15px; border-radius:99px;
-  font:800 15px var(--sans); color:#F8EFE6; letter-spacing:.02em;
-  background:linear-gradient(120deg,var(--mauve),#8A5A63 60%,var(--terracotta));
-  box-shadow:0 14px 30px -12px rgba(110,70,84,.6); transition:.15s; display:flex; align-items:center; justify-content:center; gap:8px; }
-.lbtn:hover{ transform:translateY(-1px); box-shadow:0 18px 36px -12px rgba(110,70,84,.7); }
-.ldiv{ display:flex; align-items:center; gap:12px; color:var(--taupe); font-size:11.5px; margin:16px 0 14px; }
-.ldiv::before,.ldiv::after{ content:""; flex:1; height:1px; background:rgba(150,105,87,.22); }
-.oauth{ display:flex; align-items:center; justify-content:center; gap:8px; padding:13px; border-radius:99px;
-  background:rgba(255,255,255,.7); border:1.5px solid rgba(255,255,255,.7); font:700 13.5px var(--sans);
-  color:var(--cocoa); text-decoration:none; transition:.15s; }
-.oauth:hover{ background:#fff; }
-.lswitch{ font:500 13px var(--sans); color:var(--taupe); margin-top:20px; }
-.lswitch a{ font-weight:800; color:var(--mauve); text-decoration:none; }
-.lpartner{ margin-top:14px; padding-top:14px; border-top:1px solid rgba(150,105,87,.16); text-align:center; }
-.lpartner > a{ font:700 12.5px var(--sans); color:var(--d-cycle); text-decoration:none; }
-.singpass{ font:500 11px var(--sans); color:var(--faded); margin-top:9px; }
-.authtab{ display:none; }
-.authtab.on{ display:block; animation:rise .5s cubic-bezier(.22,1,.36,1); }
-@keyframes rise{ from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+  /* Logo */
+  .logo-orb {
+    width:90px; height:90px; margin-bottom:20px;
+    position:relative;
+    animation: floaty 5s ease-in-out infinite;
+  }
+  @keyframes floaty { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+  .logo-orb::before {
+    content:''; position:absolute; inset:-15px; border-radius:50%;
+    background: radial-gradient(circle, rgba(251,191,36,0.3), rgba(139,92,246,0.1) 60%, transparent);
+    animation: orbGlow 4s ease-in-out infinite;
+  }
+  @keyframes orbGlow { 0%,100%{opacity:0.5; transform:scale(0.95);} 50%{opacity:1; transform:scale(1.1);} }
+  .logo-orb img { width:100%; height:100%; object-fit:contain; position:relative; z-index:1; }
+
+  .brand {
+    font-family:'Newsreader', serif;
+    font-weight:500; font-size:32px;
+    letter-spacing:0.22em;
+    background: linear-gradient(135deg, #fbbf24, #f472b6 50%, #a78bfa);
+    -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:6px;
+  }
+  .tagline {
+    font-family:'Newsreader', serif;
+    font-weight:300; font-style:italic;
+    font-size:17px; color:rgba(240,232,248,0.85);
+    margin-bottom:36px; line-height:1.4;
+  }
+
+  /* Social login buttons */
+  .social-buttons { width:100%; display:flex; flex-direction:column; gap:12px; margin-bottom:24px; }
+  .social-btn {
+    display:flex; align-items:center; justify-content:center; gap:12px;
+    width:100%; padding:15px 20px;
+    border-radius:14px; border:none;
+    font-family:'Manrope', sans-serif; font-weight:600; font-size:15px;
+    cursor:pointer; transition:all 0.2s;
+    text-decoration:none;
+  }
+  .social-btn:active { transform:scale(0.97); }
+  .social-btn svg { width:20px; height:20px; flex-shrink:0; }
+
+  .btn-apple {
+    background:#fff; color:#000;
+  }
+  .btn-apple:hover { background:#f5f5f5; }
+
+  .btn-google {
+    background:#fff; color:#1a1a1a;
+    border:1px solid rgba(0,0,0,0.1);
+  }
+  .btn-google:hover { background:#f8f9fa; }
+
+  .btn-email {
+    background:transparent; color:#f0e8f8;
+    border:1.5px solid rgba(240,232,248,0.4);
+  }
+  .btn-email:hover { border-color:rgba(240,232,248,0.7); color:#fff; }
+
+  /* Divider */
+  .divider {
+    display:flex; align-items:center; gap:12px;
+    width:100%; margin:8px 0 20px;
+  }
+  .divider::before, .divider::after {
+    content:''; flex:1; height:1px;
+    background:linear-gradient(90deg, transparent, rgba(240,232,248,0.35), transparent);
+  }
+  .divider span { font-size:11px; font-weight:700; color:rgba(240,232,248,0.75); letter-spacing:0.1em; text-transform:uppercase; }
+
+  /* Terms checkbox */
+  .terms-agree {
+    width:100%; display:flex; align-items:flex-start; gap:10px;
+    padding:14px 16px;
+    background:rgba(255,255,255,0.04);
+    border:1.5px solid rgba(240,232,248,0.12);
+    border-radius:12px;
+    margin-bottom:20px;
+    cursor:pointer;
+    transition:all 0.2s;
+    text-align:left;
+  }
+  .terms-agree:hover { border-color:rgba(167,139,250,0.4); background:rgba(255,255,255,0.06); }
+  .terms-agree.checked { border-color:rgba(251,191,36,0.5); background:rgba(251,191,36,0.06); }
+  .terms-checkbox {
+    width:20px; height:20px; min-width:20px;
+    border:2px solid rgba(240,232,248,0.3);
+    border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    margin-top:1px;
+    transition:all 0.2s;
+  }
+  .terms-agree.checked .terms-checkbox {
+    background:linear-gradient(135deg, #fbbf24, #f472b6);
+    border-color:transparent;
+  }
+  .terms-checkbox svg { width:12px; height:12px; opacity:0; transition:opacity 0.2s; }
+  .terms-agree.checked .terms-checkbox svg { opacity:1; }
+  .terms-text {
+    font-size:12.5px; line-height:1.55;
+    color:rgba(240,232,248,0.9);
+    font-weight:500;
+  }
+  .terms-text a {
+    color:#a78bfa; text-decoration:underline;
+    font-weight:600;
+  }
+  .terms-text a:hover { color:#c4b5fd; }
+
+  /* Continue button */
+  .continue-btn {
+    width:100%; padding:16px;
+    border:none; border-radius:14px;
+    font-family:'Manrope', sans-serif; font-weight:700; font-size:16px;
+    cursor:pointer; transition:all 0.25s;
+    background:linear-gradient(135deg, #8b5cf6, #d946ef 50%, #f472b6);
+    color:#fff;
+    box-shadow:0 4px 20px rgba(139,92,246,0.4);
+    opacity:0.5; pointer-events:none;
+  }
+  .continue-btn.enabled {
+    opacity:1; pointer-events:auto;
+  }
+  .continue-btn.enabled:hover {
+    transform:translateY(-1px);
+    box-shadow:0 6px 28px rgba(139,92,246,0.55);
+  }
+  .continue-btn.enabled:active { transform:scale(0.98); }
+
+  /* Footer */
+  .footer-note {
+    margin-top:24px;
+    font-size:11px; color:rgba(240,232,248,0.7);
+    line-height:1.6; text-align:center;
+    font-weight:500;
+  }
+  .footer-note a { color:rgba(196,181,253,0.9); text-decoration:underline; font-weight:600; }
+  .footer-note a:hover { color:#c4b5fd; }
+
+  /* Error shake */
+  @keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);} 75%{transform:translateX(5px);} }
+  .shake { animation:shake 0.3s ease; }
+
+  /* PDPA badge */
+  .pdpa-badge {
+    display:inline-flex; align-items:center; gap:5px;
+    padding:5px 12px; border-radius:99px;
+    background:rgba(16,185,129,0.1);
+    border:1px solid rgba(16,185,129,0.25);
+    font-size:10px; font-weight:700; color:#34d399;
+    letter-spacing:0.04em; margin-bottom:16px;
+  }
+  .pdpa-badge svg { width:12px; height:12px; }
 </style>
-<link rel="stylesheet" href="evidence.css">
-<link rel="stylesheet" href="luna-chat.css">
-</head><body>
-<div class="lwrap">
-  <div class="aura a1"></div><div class="aura a2"></div><div class="aura a3"></div>
-  <div class="lsky" id="lsky"></div>
-  <svg class="geo" viewBox="0 0 200 200" fill="none" stroke="var(--mauve)" stroke-width="0.4">
-    <circle cx="100" cy="100" r="30"/><circle cx="100" cy="70" r="30"/><circle cx="100" cy="130" r="30"/>
-    <circle cx="74" cy="85" r="30"/><circle cx="126" cy="85" r="30"/><circle cx="74" cy="115" r="30"/><circle cx="126" cy="115" r="30"/>
-    <circle cx="100" cy="100" r="60"/><circle cx="100" cy="100" r="61.5"/>
-  </svg>
-  <div class="stars" id="stars"></div>
+</head>
+<body>
 
-  <div class="lstage">
-    <div class="lhero"><span class="lhalo"></span>OVULUNA</div>
-    <h1 class="ltitle" id="ttl">Welcome <em>back.</em></h1>
-    <div class="lsub" id="sub">Step back into your rhythm — your cycle has been waiting.</div>
+<div class="cosmos"></div>
+<div class="stars" id="stars"></div>
+<div class="moon-glow"></div>
 
-    <div class="lcard">
-      <!-- SIGN IN -->
-      <div class="authtab on" id="tab-in">
-        <div class="field"><span class="ms">mail</span><input type="email" placeholder="Email address" autocomplete="email"/></div>
-        <div class="field"><span class="ms">lock</span><input type="password" id="p1" placeholder="Password" autocomplete="current-password"/><span class="ms eye" data-t="p1">visibility_off</span></div>
-        <a class="forgot" href="#">Forgot password?</a>
-        <button class="lbtn" onclick="location.href='home.html'"><span class="ms" style="font-size:19px">auto_awesome</span> Enter Ovuluna</button>
-      </div>
-      <!-- CREATE -->
-      <div class="authtab" id="tab-up">
-        <div class="field"><span class="ms">person</span><input type="text" placeholder="First name" autocomplete="given-name"/></div>
-        <div class="field"><span class="ms">mail</span><input type="email" placeholder="Email address" autocomplete="email"/></div>
-        <div class="field"><span class="ms">lock</span><input type="password" id="p2" placeholder="Create a password" autocomplete="new-password"/><span class="ms eye" data-t="p2">visibility_off</span></div>
-        <button class="lbtn" onclick="location.href='onboarding.html?start'"><span class="ms" style="font-size:19px">spa</span> Begin my journey</button>
-      </div>
+<div class="login-container">
+  <div class="logo-orb">
+    <img src="assets/onboarding/egg.png" alt="Ovuluna" onerror="this.style.display='none'">
+  </div>
+  <div class="brand">OVULUNA</div>
+  <div class="tagline">Nurture your cycle.<br>Honor your wisdom.</div>
 
-      <div class="ldiv">or continue with</div>
-      <div class="grid2" style="gap:10px">
-        <a class="oauth osocial" href="#"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.6 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h5.9a5 5 0 0 1-2.2 3.3v2.8h3.6c2.1-2 3.3-4.9 3.3-8.2z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.6H2.1v2.9A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.8 14a6.6 6.6 0 0 1 0-4.2V6.9H2.1a11 11 0 0 0 0 10z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 0 0 2.1 6.9L5.8 9.8c.9-2.7 3.3-4.4 6.2-4.4z"/></svg> Google</a>
-        <a class="oauth" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94-.19 1.84-.86 3.16-.83 1.79.14 3.02.86 3.81 2.17-3.28 1.97-2.5 6.02.75 7.24-.7 1.53-1.61 3.05-2.8 3.59zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg> Apple</a>
-      </div>
+  <div class="pdpa-badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    PDPA COMPLIANT · DATA STAYS ON YOUR DEVICE
+  </div>
 
-      <div class="lswitch" id="switchline">New to Ovuluna? <a href="#" id="switch">Create your account</a></div>
-      <div class="lpartner" id="lpartner">
-        <a href="partner-code.html">💛 Have a partner code?</a>
-        <div style="margin-top:9px"><a href="provider-dashboard.html" style="font:600 11.5px var(--sans);color:var(--taupe);text-decoration:none">Clinician? <b style="color:var(--mauve)">Sign in to the provider portal →</b></a></div>
-      </div>
+  <div class="social-buttons">
+    <button class="social-btn btn-apple" id="appleBtn" onclick="socialLogin('apple')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+      Continue with Apple
+    </button>
+    <button class="social-btn btn-google" id="googleBtn" onclick="socialLogin('google')">
+      <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continue with Google
+    </button>
+  </div>
+
+  <div class="divider"><span>or</span></div>
+
+  <button class="social-btn btn-email" onclick="socialLogin('email')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    Continue with Email
+  </button>
+
+  <div style="height:20px"></div>
+
+  <div class="terms-agree" id="termsAgree" onclick="toggleTerms()">
+    <div class="terms-checkbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
     </div>
+    <div class="terms-text">
+      I agree to Ovuluna's <a href="terms.html" onclick="event.stopPropagation()">Terms &amp; Privacy Policy</a>. I understand this is a wellness app, not a medical device, and my data is stored securely on my device in compliance with the Singapore PDPA.
+    </div>
+  </div>
+
+  <button class="continue-btn" id="continueBtn" onclick="continueToApp()">
+    Begin My Journey
+  </button>
+
+  <div class="footer-note">
+    By using Ovuluna, you acknowledge that this app provides general wellness information only and is not a substitute for professional medical advice, diagnosis, or treatment.<br><br>
+    <a href="terms.html">Terms & Privacy</a> · <a href="#" onclick="alert('Contact: privacy@ovuluna.app');return false;">Privacy Contact</a>
   </div>
 </div>
 
 <script>
-(function(){
-  // sky image (generated) with graceful fallback to the animated aura
-  var sky=document.getElementById('lsky');
-  var img=new Image();
-  img.onload=function(){ sky.style.backgroundImage="url('assets/login/mystic-sky.jpg')"; sky.classList.add('on'); document.querySelector('.lwrap').classList.add('skyon'); };
-  img.src='assets/login/mystic-sky.jpg';
+  // Generate stars
+  (function() {
+    var container = document.getElementById('stars');
+    for (var i = 0; i < 80; i++) {
+      var s = document.createElement('i');
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.setProperty('--d', (2 + Math.random() * 4).toFixed(1) + 's');
+      s.style.setProperty('--t', (Math.random() * 3).toFixed(1) + 's');
+      s.style.width = s.style.height = (1 + Math.random() * 2) + 'px';
+      container.appendChild(s);
+    }
+  })();
 
-  // twinkling stars
-  var s=document.getElementById('stars'), h='';
-  for(var i=0;i<26;i++){
-    var x=(i*37+13)%100, y=(i*53+7)%62, sz=(2+(i%3)), d=(2.4+(i%5)*0.6).toFixed(1), t=((i%7)*0.4).toFixed(1);
-    h+='<i style="left:'+x+'%;top:'+y+'%;width:'+sz+'px;height:'+sz+'px;--d:'+d+'s;--t:'+t+'s"></i>';
+  var termsAccepted = false;
+
+  function toggleTerms() {
+    termsAccepted = !termsAccepted;
+    var el = document.getElementById('termsAgree');
+    var btn = document.getElementById('continueBtn');
+    if (termsAccepted) {
+      el.classList.add('checked');
+      btn.classList.add('enabled');
+    } else {
+      el.classList.remove('checked');
+      btn.classList.remove('enabled');
+    }
   }
-  s.innerHTML=h;
 
-  // social buttons: new-account context → onboarding, otherwise straight into the app
-  document.querySelectorAll('.osocial').forEach(function(a){ a.addEventListener('click',function(ev){
-    ev.preventDefault();
-    location.href = document.getElementById('tab-up').classList.contains('on') ? 'onboarding.html?start' : 'home.html';
-  }); });
+  function socialLogin(provider) {
+    if (!termsAccepted) {
+      var el = document.getElementById('termsAgree');
+      el.classList.add('shake');
+      setTimeout(function() { el.classList.remove('shake'); }, 300);
+      el.style.borderColor = 'rgba(244,114,182,0.6)';
+      setTimeout(function() { el.style.borderColor = ''; }, 1000);
+      return;
+    }
+    // Store login state (demo mode - actual OAuth requires backend)
+    try {
+      localStorage.setItem('ovuluna_auth', JSON.stringify({
+        provider: provider,
+        loggedIn: true,
+        timestamp: new Date().toISOString()
+      }));
+    } catch(e) {}
+    proceedToOnboarding();
+  }
 
-  // password reveal
-  document.querySelectorAll('.eye').forEach(function(e){ e.addEventListener('click',function(){
-    var inp=document.getElementById(e.dataset.t);
-    var show=inp.type==='password'; inp.type=show?'text':'password'; e.textContent=show?'visibility':'visibility_off';
-  }); });
+  function continueToApp() {
+    if (!termsAccepted) return;
+    try {
+      localStorage.setItem('ovuluna_auth', JSON.stringify({
+        provider: 'guest',
+        loggedIn: true,
+        timestamp: new Date().toISOString()
+      }));
+    } catch(e) {}
+    proceedToOnboarding();
+  }
 
-  // sign-in ⇄ create toggle (delegated so it survives innerHTML swaps)
-  var up=false, line=document.getElementById('switchline');
-  line.addEventListener('click',function(ev){
-    if(!ev.target.closest('#switch')) return;
-    ev.preventDefault(); up=!up;
-    document.getElementById('tab-in').classList.toggle('on',!up);
-    document.getElementById('tab-up').classList.toggle('on',up);
-    document.getElementById('ttl').innerHTML = up ? 'Begin your <em>journey.</em>' : 'Welcome <em>back.</em>';
-    document.getElementById('sub').textContent = up ? 'Create your account and let Ovuluna learn your rhythm.' : 'Step back into your rhythm — your cycle has been waiting.';
-    line.innerHTML = up
-      ? 'Already with us? <a href="#" id="switch">Sign in</a>'
-      : 'New to Ovuluna? <a href="#" id="switch">Create your account</a>';
-  });
-})();
+  function proceedToOnboarding() {
+    // Check if onboarding already completed
+    try {
+      var onboard = localStorage.getItem('ovuluna_onboarding');
+      if (onboard) {
+        var data = JSON.parse(onboard);
+        if (data.completed) {
+          window.location.href = 'home.html';
+          return;
+        }
+      }
+    } catch(e) {}
+    window.location.href = 'onboarding.html';
+  }
+
+  // If already logged in and onboarded, go straight to home
+  (function() {
+    try {
+      var auth = localStorage.getItem('ovuluna_auth');
+      var onboard = localStorage.getItem('ovuluna_onboarding');
+      if (auth && onboard) {
+        var a = JSON.parse(auth);
+        var o = JSON.parse(onboard);
+        if (a.loggedIn && o.completed) {
+          window.location.href = 'home.html';
+        }
+      }
+    } catch(e) {}
+  })();
 </script>
-<script src="evidence-db.js" defer></script>
-<script src="evidence.js" defer></script>
-<script src="luna-chat.js" defer></script>
-<script src="darkmode.js?v=6" defer></script>
-</body></html>
+
+</body>
+</html>
