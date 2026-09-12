@@ -193,12 +193,23 @@
     document.head.appendChild(style);
   }
 
+  /* ── Pages that should NOT show toggles (auth/flow/legal pages) ── */
+  var NO_TOGGLE_PAGES = ['login.html', 'onboarding.html', 'terms.html', 'index.html'];
+  function shouldHideToggles() {
+    try {
+      var path = window.location.pathname.split('/').pop() || 'index.html';
+      return NO_TOGGLE_PAGES.indexOf(path) !== -1;
+    } catch (e) { return false; }
+  }
+
   /* ── Boot ── */
   function init() {
     injectToggleCSS();
     buildStars();
-    buildThemeToggle();
-    buildFontToggle();
+    if (!shouldHideToggles()) {
+      buildThemeToggle();
+      buildFontToggle();
+    }
     // Re-apply font size zoom now that .app exists in DOM
     applyFontSize(currentFontSize);
   }
