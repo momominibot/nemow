@@ -47,6 +47,7 @@
       options: [
         { value: 'regular', label: 'Regular cycles', emoji: '🔄', desc: 'Predictable 21-35 day cycles' },
         { value: 'variable', label: 'Variable / irregular', emoji: '📊', desc: 'Cycle length varies by 7+ days' },
+        { value: 'newbie', label: 'Just started my period', emoji: '🌱', desc: 'Cycles still regulating (first 2-3 years)' },
         { value: 'skipped', label: 'Skipped periods', emoji: '⏭️', desc: 'Occasionally miss periods' },
         { value: 'contraceptive', label: 'On hormonal contraception', emoji: '💊', desc: 'Pill, IUD, implant, or ring' },
         { value: 'post12', label: 'Post-menopause', emoji: '🌙', desc: 'No period for 12+ months' }
@@ -144,6 +145,9 @@
       options: [
         { value: 'wellness', label: 'Overall wellness', emoji: '🌸' },
         { value: 'cycle', label: 'Cycle tracking', emoji: '🔄' },
+        { value: 'education', label: 'Cycle education & body literacy', emoji: '📚' },
+        { value: 'mental', label: 'Mental health & stress', emoji: '🧘' },
+        { value: 'sports', label: 'Sports & performance', emoji: '🏃' },
         { value: 'fertility', label: 'Fertility / trying to conceive', emoji: '🌱' },
         { value: 'perimenopause', label: 'Perimenopause support', emoji: '🔥' },
         { value: 'hormones', label: 'Hormone balance', emoji: '⚖️' },
@@ -415,6 +419,10 @@
 
     var grid = document.getElementById('optGrid');
     step.options.forEach(function(opt) {
+      // Hide fertility/perimenopause goals for teens (age < 18)
+      if ((opt.value === 'fertility' || opt.value === 'perimenopause') && answers.age && answers.age < 18) {
+        return;
+      }
       var isSel = selected.indexOf(opt.value) !== -1;
       var el = document.createElement('div');
       el.className = 'gcard' + (isSel ? ' selected' : '');
@@ -555,29 +563,43 @@
 
   /* ── Done step ── */
   function renderDone(step) {
-    // Compute ovarian age estimate if possible
+    // Compute ovarian age estimate if possible (adults only)
     var ovInfo = '';
-    try {
-      if (window.OvarianModel && answers.age) {
-        var result = window.OvarianModel.computeOvarianAge({
-          age: answers.age,
-          amh: null,
-          momMeno: answers.momMeno || null,
-          smoke: answers.smoke || 'never',
-          cycle: answers.cycle || 'regular',
-          circ: answers.circ || 'none',
-          sleep: answers.sleep || 'normal'
-        });
-        if (result && result.ovAge) {
-          ovInfo = '<div style="background:var(--sage-tint,#E8EBE2);border-radius:16px;padding:16px;margin:16px 0;text-align:center">' +
-            '<div style="font:700 11px var(--sans);color:var(--sage,#5E9B93);text-transform:uppercase;letter-spacing:.06em">Estimated Ovarian Age</div>' +
-            '<div style="font-family:var(--serif);font-size:36px;color:var(--mauve);margin:4px 0">' + result.ovAge + '</div>' +
-            '<div style="font:500 11px var(--sans);color:var(--muted)">Chronological: ' + result.chrono + ' · ' + result.straw.name + '</div>' +
-            '<div style="font:500 10px var(--sans);color:var(--muted);margin-top:6px;font-style:italic">Wellness estimate only — not a medical diagnosis</div>' +
-          '</div>';
+    var isTeen = answers.age && answers.age < 18;
+
+    if (isTeen) {
+      // Teen-specific: no ovarian age estimate, educational framing instead
+      ovInfo = '<div style="background:linear-gradient(135deg,#E8E0F5,#F5E6E0);border-radius:16px;padding:20px;margin:16px 0;text-align:center">' +
+        '<div style="font:700 11px var(--sans);color:var(--mauve);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Your Cycle Journey</div>' +
+        '<div style="font-family:var(--serif);font-size:22px;color:var(--ink);margin:4px 0 8px">Your body is still finding its rhythm</div>' +
+        '<div style="font:500 12px var(--sans);color:var(--muted);line-height:1.5">Irregular cycles are completely normal in the first 2-3 years after your first period. We\'ll help you learn what\'s normal for <i>your</i> body.</div>' +
+      '</div>';
+    } else {
+      try {
+        if (window.OvarianModel && answers.age) {
+          var result = window.OvarianModel.computeOvarianAge({
+            age: answers.age,
+            amh: null,
+            momMeno: answers.momMeno || null,
+            smoke: answers.smoke || 'never',
+            cycle: answers.cycle || 'regular',
+            circ: answers.circ || 'none',
+            sleep: answers.sleep || 'normal'
+          });
+          if (result && result.ovAge) {
+            ovInfo = '<div style="background:var(--sage-tint,#E8EBE2);border-radius:16px;padding:16px;margin:16px 0;text-align:center">' +
+              '<div style="font:700 11px var(--sans);color:var(--sage,#5E9B93);text-transform:uppercase;letter-spacing:.06em">Estimated Ovarian Age</div>' +
+              '<div style="font-family:var(--serif);font-size:36px;color:var(--mauve);margin:4px 0">' + result.ovAge + '</div>' +
+              '<div style="font:500 11px var(--sans);color:var(--muted)">Chronological: ' + result.chrono + ' · ' + result.straw.name + '</div>' +
+              '<div style="font:500 10px var(--sans);color:var(--muted);margin-top:6px;font-style:italic">Wellness estimate only — not a medical diagnosis</div>' +
+            '</div>';
+          }
         }
-      }
-    } catch(e) {}
+      } catch(e) {}
+    }
+
+    // Minor consent note for users under 18
+    var minorNote = isTeen ? '<p style="font:500 11px var(--sans);color:var(--muted);font-style:italic;margin-top:8px">💜 We recommend sharing this app with a trusted adult or guardian. Your data stays on your device.</p>' : '';
 
     var div = document.createElement('div');
     div.className = 'welcome';
@@ -587,6 +609,7 @@
       '<h1>' + step.title + '</h1>' +
       '<p>' + step.subtitle + '</p>' +
       ovInfo +
+      minorNote +
       '<p class="disc">By continuing, you agree to use Ovuluna for wellness purposes only. This app does not provide medical advice, diagnosis, or treatment.</p>';
     scrollEl.appendChild(div);
     footEl.innerHTML = '<button class="cta coral" id="enterBtn">Enter Ovuluna</button>';

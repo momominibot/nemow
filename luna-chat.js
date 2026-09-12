@@ -196,20 +196,47 @@
   }
 
   /* ── Suggestions ── */
-  var SUGGESTIONS = [
-    'How do I know my cycle phase?',
-    'What is ovarian age?',
-    'Why am I more tired in my luteal phase?',
-    'What helps with hot flashes?',
-    'How does stress affect my cycle?',
-  ];
+  var SUGGESTIONS = {
+    bloom: [
+      'Is it normal to have irregular cycles?',
+      'How do I know when my period is coming?',
+      'What foods help with period cramps?',
+      'How much sleep do I need?',
+      'Why do I feel moody before my period?',
+      'What is a normal period?'
+    ],
+    grow: [
+      'How do I know my cycle phase?',
+      'When is my fertile window?',
+      'What foods support fertility?',
+      'How does stress affect my cycle?',
+      'What is ovarian age?'
+    ],
+    nurture: [
+      'When will my period return after birth?',
+      'What foods help with postpartum recovery?',
+      'How can I improve my sleep with a newborn?',
+      'What exercises are safe postpartum?',
+      'How does stress affect my recovery?'
+    ],
+    wisdom: [
+      'What helps with hot flashes?',
+      'What is perimenopause?',
+      'How can I support my bones?',
+      'What foods help with hormone balance?',
+      'Why am I more tired in my luteal phase?'
+    ]
+  };
 
   function renderSuggestions() {
     var container = document.getElementById('lunaSuggestions');
     if (!container) return;
     container.innerHTML = '';
+    // Get persona-specific suggestions
+    var persona = localStorage.getItem('ovuluna_persona') || 'bloom';
+    var list = SUGGESTIONS[persona] || SUGGESTIONS.bloom;
     // Show 3 random suggestions
-    var shuffled = SUGGESTIONS.slice().sort(function () { return 0.5 - Math.random(); });
+    var shuffled = list.slice().sort(function () { return 0.5 - Math.random(); });
     shuffled.slice(0, 3).forEach(function (s) {
       var chip = document.createElement('span');
       chip.className = 'luna-chip';

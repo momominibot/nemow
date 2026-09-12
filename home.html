@@ -52,8 +52,8 @@
       <div class="p-chip" data-p="wisdom" style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 13px;border-radius:99px;border:1.5px solid var(--line-soft);background:var(--card-solid);font-size:12px;font-weight:700;color:var(--cocoa);cursor:pointer"><img src="assets/icons/persona-wisdom-64.png" style="width:18px;height:18px" alt="">Wisdom <span class="sub">35+</span></div>
     </div>
 
-    <!-- Ovarian Age Hero -->
-    <a href="ovarian-age.html" class="card" style="padding:18px;text-decoration:none;color:inherit;display:block;background:linear-gradient(135deg, rgba(139,108,130,.12), rgba(255,255,255,.85));border:1.5px solid rgba(139,108,130,.35)">
+    <!-- Ovarian Age Hero (adults only) -->
+    <a href="ovarian-age.html" id="ovarianAgeCard" class="card" style="padding:18px;text-decoration:none;color:inherit;display:block;background:linear-gradient(135deg, rgba(139,108,130,.12), rgba(255,255,255,.85));border:1.5px solid rgba(139,108,130,.35)">
       <div class="row" style="justify-content:space-between;align-items:flex-start">
         <div>
           <div class="sub" style="font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mauve)">Ovarian Age</div>
@@ -64,6 +64,19 @@
       </div>
       <div style="margin-top:12px;font-size:12.5px;color:var(--taupe);line-height:1.45">Your latest estimate looks protective. Recalculate anytime with AMH or cycle data.</div>
     </a>
+
+    <!-- Teen Cycle Education Card (teens only) -->
+    <div id="teenCycleCard" class="card" style="display:none;padding:18px;background:linear-gradient(135deg,rgba(196,181,224,.25),rgba(245,198,184,.2));border:1.5px solid rgba(196,181,224,.5)">
+      <div class="row" style="justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="sub" style="font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mauve)">Your Cycle Journey</div>
+          <div style="font-family:var(--serif);font-size:22px;font-weight:600;color:var(--cocoa);line-height:1.2;margin-top:4px">Finding your rhythm</div>
+        </div>
+        <span class="ms" style="font-size:30px;color:var(--mauve)">self_improvement</span>
+      </div>
+      <div style="margin-top:10px;font-size:12.5px;color:var(--taupe);line-height:1.5">Irregular cycles are <b style="color:var(--mauve)">completely normal</b> in the first 2-3 years after your first period. Track what feels right for <i>your</i> body — there's no "perfect" cycle.</div>
+      <a href="learn-cycle-phases.html" style="display:inline-block;margin-top:10px;font-size:11.5px;font-weight:700;color:var(--mauve);text-decoration:none">Learn about your cycle →</a>
+    </div>
 
     <!-- gesture from a loved one -->
     <a href="partner-connect.html" id="gestureBanner" style="display:none;text-decoration:none;color:inherit">
@@ -200,6 +213,7 @@
         <span class="hstat"><span class="ms" style="color:#D983A4;font-size:15px">remove</span> LH low</span>
       </div>
       <p style="margin:12px 2px 0;font-size:12.5px;line-height:1.5;color:var(--cocoa)">A follicle is maturing and estrogen is climbing toward its pre-ovulation peak <span class="qi" data-evidence="estradiol-follicular">i</span>.</p>
+      <p id="teenHormoneNote" style="display:none;margin:10px 2px 0;font-size:11.5px;line-height:1.5;color:var(--mauve);font-style:italic;background:rgba(196,181,224,.15);padding:10px 12px;border-radius:10px">💜 This is a general guide — your cycle may not follow this exact pattern yet. Irregular cycles are normal as your body matures.</p>
     </div>
 
     <!-- Longevity grid -->
@@ -224,6 +238,25 @@
       <div style="flex:1"><b style="font-size:15px;font-family:var(--serif);font-weight:600;color:var(--mauve)">Knowledge Hub</b><div class="sub" style="font-size:12px">Doctor-reviewed guides</div></div>
       <span class="ms" style="color:var(--faded);font-size:18px">chevron_right</span>
     </a>
+
+    <!-- Teen-specific Learn & Grow section (Bloom 13-17 only) -->
+    <div id="teenLearnSection" style="display:none;margin-top:16px">
+      <h2 class="sec" style="font-family:var(--serif);font-size:17px;color:var(--cocoa);margin-bottom:10px">For You 💜</h2>
+      <div class="grid2" style="gap:10px">
+        <a class="card tint-lavender" href="learn-cycle-phases.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--mauve);font-size:22px">self_improvement</span><b style="display:block;font-size:13.5px;margin-top:6px">What\u2019s a normal period?</b><span class="sub" style="font-size:11px">Learn what\u2019s typical for your age</span></a>
+        <a class="card tint-gold" href="learn-discharge.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--terracotta);font-size:22px">lightbulb</span><b style="display:block;font-size:13.5px;margin-top:6px">Body literacy</b><span class="sub" style="font-size:11px">Understand your body\u2019s signals</span></a>
+        <a class="card tint-sage" href="breathwork.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--sage);font-size:22px">spa</span><b style="display:block;font-size:13.5px;margin-top:6px">Stress & school</b><span class="sub" style="font-size:11px">Breathing & calm for exam stress</span></a>
+        <a class="card" href="learn.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms twinkle" style="color:var(--mauve);font-size:22px">favorite</span><b style="display:block;font-size:13.5px;margin-top:6px">When to see a doctor</b><span class="sub" style="font-size:11px">Know what\u2019s normal vs. when to ask for help</span></a>
+      </div>
+      <!-- Mental health resources for teens -->
+      <div class="card" style="padding:16px;margin-top:12px;background:linear-gradient(135deg,rgba(196,181,224,.2),rgba(245,198,184,.15));border:1.5px solid rgba(196,181,224,.4)">
+        <div class="row" style="align-items:center;gap:10px;margin-bottom:8px">
+          <span class="ms" style="color:var(--mauve);font-size:22px">psychology</span>
+          <b style="font-size:14px;font-family:var(--serif);color:var(--cocoa)">You\u2019re not alone 💜</b>
+        </div>
+        <p style="font-size:12px;color:var(--taupe);line-height:1.5;margin:0">If you\u2019re feeling overwhelmed, anxious, or down — that\u2019s okay. Talking to a trusted adult, school counselor, or doctor can help. In Singapore, you can call <b style="color:var(--mauve)">SOS 1-767</b> (24/7) or text <b style="color:var(--mauve)">741741</b>.</p>
+      </div>
+    </div>
 
     <!-- design-review state switcher (prototype only) -->
     <div style="opacity:.7">
@@ -352,12 +385,35 @@ document.addEventListener('DOMContentLoaded', function(){
   var savedP = localStorage.getItem('ovuluna_persona') || 'bloom';
   document.documentElement.dataset.persona = savedP;
   document.querySelectorAll('#personaBar .p-chip').forEach(function(c){ c.classList.toggle('on', c.dataset.p===savedP); });
+
+  // Apply persona-specific content
+  function applyPersonaContent(persona) {
+    var isTeen = persona === 'bloom';
+    // Ovarian age card: hide for teens, show teen cycle education card
+    var ovCard = document.getElementById('ovarianAgeCard');
+    var teenCard = document.getElementById('teenCycleCard');
+    if (ovCard) ovCard.style.display = isTeen ? 'none' : 'block';
+    if (teenCard) teenCard.style.display = isTeen ? 'block' : 'none';
+    // Teen hormone note
+    var teenNote = document.getElementById('teenHormoneNote');
+    if (teenNote) teenNote.style.display = isTeen ? 'block' : 'none';
+    // Teen learn & grow section
+    var teenLearn = document.getElementById('teenLearnSection');
+    if (teenLearn) teenLearn.style.display = isTeen ? 'block' : 'none';
+    // Hide calorie meter for teens (disordered eating risk)
+    var calMeter = document.querySelector('[data-log="food"] .calorie-meter, #calorieMeter');
+    if (calMeter) calMeter.style.display = isTeen ? 'none' : 'block';
+    // Update document dataset
+    document.documentElement.dataset.persona = persona;
+  }
+  applyPersonaContent(savedP);
+
   document.querySelectorAll('#personaBar .p-chip').forEach(function(chip){
     chip.addEventListener('click', function(){
       document.querySelectorAll('#personaBar .p-chip').forEach(function(c){ c.classList.remove('on'); });
       chip.classList.add('on');
       localStorage.setItem('ovuluna_persona', chip.dataset.p);
-      document.documentElement.dataset.persona = chip.dataset.p;
+      applyPersonaContent(chip.dataset.p);
     });
   });
 })();
@@ -444,6 +500,71 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   };
 
+  // Teen-specific logging questions (Bloom 13-17 persona)
+  var questionsTeen = {
+    mood: {
+      title: 'How\u2019s your mood today?',
+      fields: [
+        { type: 'emoji', label: 'Overall mood', options: ['😢','😕','😐','🙂','😄'] },
+        { type: 'radio', label: 'School stress today?', options: ['None','Mild','Moderate','A lot'] },
+        { type: 'radio', label: 'How do you feel about your body today?', options: ['Great','Okay','Not great','Really down'] },
+        { type: 'text', label: 'Anything on your mind? (optional)', placeholder: 'e.g., friends, exams, family...' }
+      ]
+    },
+    sleep: {
+      title: 'How did you sleep?',
+      fields: [
+        { type: 'time', label: 'Bedtime', placeholder: 'e.g., 11:00 PM' },
+        { type: 'time', label: 'Wake time', placeholder: 'e.g., 7:00 AM' },
+        { type: 'stars', label: 'Sleep quality' },
+        { type: 'radio', label: 'Screen time before bed?', options: ['None','< 30 min','30-60 min','> 1 hour'] }
+      ]
+    },
+    symptoms: {
+      title: 'Any symptoms today?',
+      fields: [
+        { type: 'slider', label: 'Cramp pain (0-10)', min: 0, max: 10 },
+        { type: 'checkbox', label: 'Other symptoms', options: ['Bloating','Headache','Fatigue','Acne','Backache','Sore breasts','None'] },
+        { type: 'radio', label: 'Period flow today?', options: ['Not on period','Light','Medium','Heavy','Very heavy'] },
+        { type: 'text', label: 'Notes (optional)', placeholder: 'e.g., mild cramps after school...' }
+      ]
+    },
+    water: {
+      title: 'Hydration check',
+      fields: [
+        { type: 'watermeter', label: 'Today\u2019s water intake' },
+        { type: 'number', label: 'Glasses of water (250ml each)', placeholder: 'e.g., 6', min: 0, max: 20 },
+        { type: 'radio', label: 'Other drinks today', options: ['Only water','Some tea/juice','Sugary drinks','Energy drinks'] }
+      ]
+    },
+    activity: {
+      title: 'Today\u2019s activity',
+      fields: [
+        { type: 'radio', label: 'Activity type', options: ['School sports','PE class','Walking/biking to school','Gym/workout','Dance','Just everyday movement','None today'] },
+        { type: 'number', label: 'Active minutes', placeholder: 'e.g., 30', min: 0, max: 300 },
+        { type: 'slider', label: 'How did it feel? (1-10)', min: 1, max: 10 }
+      ]
+    },
+    food: {
+      title: 'Today\u2019s nourishment',
+      fields: [
+        { type: 'checkbox', label: 'Did you eat these growth-supportive foods?', options: ['Fruits','Vegetables','Protein (meat/beans/eggs)','Whole grains','Dairy/calcium-rich','Nuts/seeds','Water-rich foods'] },
+        { type: 'radio', label: 'Did you eat breakfast?', options: ['Yes, a good one','Yes, something small','No, skipped'] },
+        { type: 'radio', label: 'Sugar intake today', options: ['Minimal','Moderate','High','Very high'] },
+        { type: 'text', label: 'Anything notable? (optional)', placeholder: 'e.g., had a big lunch, craved fruit...' }
+      ]
+    }
+  };
+
+  // Persona-aware questions helper
+  function getQuestions(type) {
+    var persona = localStorage.getItem('ovuluna_persona') || 'bloom';
+    if (persona === 'bloom' && questionsTeen[type]) {
+      return questionsTeen[type];
+    }
+    return questions[type];
+  }
+
   var currentLog = null;
   var modal = document.getElementById('logModal');
   var sheet = document.getElementById('logModalSheet');
@@ -452,7 +573,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
   function openLog(type) {
     currentLog = type;
-    var q = questions[type];
+    var q = getQuestions(type);
     title.textContent = 'Log ' + type.charAt(0).toUpperCase() + type.slice(1);
     var html = '';
     q.fields.forEach(function(f, i) {
@@ -745,7 +866,7 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   function saveLog() {
-    var q = questions[currentLog];
+    var q = getQuestions(currentLog);
     var fields = [];
     q.fields.forEach(function(f, i) {
       if (f.type === 'emoji' || f.type === 'radio') {
