@@ -264,7 +264,7 @@
     div.className = 'welcome';
     div.innerHTML =
       '<div class="brandmark"><span class="dot"></span><b>OVULUNA</b></div>' +
-      '<img class="hero" src="assets/onboarding/egg.png" alt="Ovuluna" onerror="this.style.display=\'none\'">' +
+      '<img class="hero" src="assets/onboarding/luna.png" alt="Ovuluna" onerror="this.style.display=\'none\'">' +
       '<h1>' + step.title + '</h1>' +
       '<p>' + step.subtitle + '</p>';
     scrollEl.appendChild(div);
@@ -518,7 +518,7 @@
     div.className = 'pers';
     div.innerHTML =
       '<div class="pers-orb">' +
-        '<img src="assets/onboarding/egg.png" alt="" onerror="this.style.display=\'none\'">' +
+        '<img src="assets/onboarding/luna.png" alt="" onerror="this.style.display=\'none\'">' +
         '<div class="sparkles">' +
           '<i style="--s:8px;--d:2s;--t:0s;left:20%;top:15%"></i>' +
           '<i style="--s:12px;--d:2.8s;--t:.5s;left:75%;top:25%"></i>' +
@@ -583,7 +583,7 @@
     div.className = 'welcome';
     div.innerHTML =
       '<div class="brandmark"><span class="dot"></span><b>OVULUNA</b></div>' +
-      '<img class="hero" src="assets/onboarding/egg.png" alt="" onerror="this.style.display=\'none\'">' +
+      '<img class="hero" src="assets/onboarding/luna.png" alt="" onerror="this.style.display=\'none\'">' +
       '<h1>' + step.title + '</h1>' +
       '<p>' + step.subtitle + '</p>' +
       ovInfo +
