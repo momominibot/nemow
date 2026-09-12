@@ -27,7 +27,7 @@
       title: 'How old are you?',
       subtitle: 'We use this to contextualize your cycle and ovarian wellness stage.',
       field: 'age',
-      min: 16, max: 65, default: 28, unit: 'years'
+      min: 10, max: 65, default: 28, unit: 'years'
     },
     {
       id: 'height-weight',
@@ -71,6 +71,16 @@
       subtitle: 'Tap the date on the calendar.',
       field: 'lastPeriod',
       showIf: function(a) { return a.cycle !== 'post12' && a.cycle !== 'contraceptive'; }
+    },
+    {
+      id: 'first-period-age',
+      section: 'Your Cycle',
+      type: 'wheel',
+      title: 'How old were you at your first period?',
+      subtitle: 'Early or late menarche can affect your cycle pattern. Optional — skip if unsure.',
+      field: 'firstPeriodAge',
+      min: 8, max: 18, default: 12, unit: 'years',
+      showIf: function(a) { return a.cycle !== 'post12'; }
     },
     {
       id: 'mom-meno',
