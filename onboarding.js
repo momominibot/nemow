@@ -205,16 +205,6 @@
     backBtn.addEventListener('click', goBack);
     skipBtn.addEventListener('click', skipStep);
 
-    // Defensive: delegate clicks on foot area to catch Next button
-    // even if direct addEventListener fails due to timing/re-render
-    footEl.addEventListener('click', function(e) {
-      var btn = e.target.closest('#nextBtn');
-      if (btn && !btn.disabled) {
-        e.preventDefault();
-        nextStep();
-      }
-    });
-
     renderStep();
   }
 
