@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" data-persona="bloom">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ovuluna · Wellness Score</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="darkmode.css">
+  <link rel="stylesheet" href="ovuluna-persona.css">
+  <style>
+    .eyebrow { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--taupe); margin-bottom:6px; }
+    .question-card { margin:12px 16px; padding:16px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); }
+    .question-card label.q { display:block; font-size:13px; font-weight:700; margin-bottom:10px; }
+    .option { display:flex; align-items:center; gap:10px; padding:10px; margin:6px 0; border:2px solid var(--line-soft); border-radius:12px; cursor:pointer; }
+    .option:hover { border-color:var(--ink); }
+    .option input { width:18px; height:18px; accent-color:var(--ink); }
+    .option.selected { border-color:var(--ink); background:rgba(29,27,24,.04); }
+    .save-btn { margin:16px; width:calc(100% - 32px); padding:14px; border:none; border-radius:12px; background:linear-gradient(135deg,var(--mauve),var(--coral)); color:#fff; font-weight:800; font-size:15px; cursor:pointer; }
+    .result { margin:16px; padding:20px; border-radius:var(--r); background:linear-gradient(135deg,rgba(139,108,130,.1),rgba(255,255,255,.9)); border:1.5px solid rgba(139,108,130,.3); }
+    .score-ring { width:140px; height:140px; margin:0 auto 16px; position:relative; }
+    .score-ring svg { transform:rotate(-90deg); }
+    .score-text { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    .score-num { font-family:var(--serif); font-size:42px; font-weight:600; color:var(--cocoa); }
+    .score-label { font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--taupe); }
+    .breakdown { margin-top:16px; }
+    .breakdown-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--line-soft); font-size:13px; }
+    .breakdown-row:last-child { border-bottom:none; }
+    .breakdown-label { font-weight:600; color:var(--cocoa); }
+    .breakdown-val { font-weight:800; color:var(--mauve); }
+    .rec-card { margin:12px 16px; padding:14px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); display:flex; gap:12px; align-items:flex-start; }
+    .rec-icon { font-size:28px; color:var(--sage); flex-shrink:0; }
+    .rec-text b { display:block; font-size:13px; margin-bottom:2px; }
+    .rec-text p { font-size:12px; color:var(--taupe); margin:0; line-height:1.4; }
+  </style>
+  <link rel="stylesheet" href="evidence.css">
+  <link rel="stylesheet" href="luna-chat.css">
+</head>
+<body>
+  <div class="app">
+    <div class="top">
+      <div class="brandline"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">OVULUNA</b></div>
+      <a class="t-icon ms" href="notifications.html">notifications</a>
+      <a class="t-icon ms" href="cycle-trends.html">calendar_today</a>
+    </div>
+
+    <div class="scroll" style="padding-bottom:100px">
+      <div style="text-align:center; padding:24px 16px 8px">
+        <div class="eyebrow">DAILY OVARIAN WELLNESS</div>
+        <h2 style="font-size:24px; margin-bottom:8px">How are you nurturing today?</h2>
+        <p style="color:var(--taupe); font-size:14px; line-height:1.5">Six factors shape ovarian resilience. Check in daily to track your wellness trajectory over time. <span class="qi" data-evidence="exercise-cycle">i</span></p>
+      </div>
+
+      <div id="questions"></div>
+
+      <button class="save-btn" onclick="saveWellness()">Calculate my score</button>
+
+      <div id="result" class="result" style="display:none">
+        <div class="score-ring">
+          <svg width="140" height="140" viewBox="0 0 140 140">
+            <circle cx="70" cy="70" r="60" fill="none" stroke="var(--line-soft)" stroke-width="10"/>
+            <circle id="scoreArc" cx="70" cy="70" r="60" fill="none" stroke="url(#scoreGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="377" stroke-dashoffset="377"/>
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:var(--mauve)"/><stop offset="100%" style="stop-color:var(--coral)"/></linearGradient></defs>
+          </svg>
+          <div class="score-text">
+            <div class="score-num" id="scoreNum">—</div>
+            <div class="score-label">Wellness</div>
+          </div>
+        </div>
+        <div id="scoreMessage" style="text-align:center; font-size:14px; color:var(--cocoa); font-weight:600; margin-bottom:8px"></div>
+        <div class="breakdown" id="breakdown"></div>
+      </div>
+
+      <div id="recommendations" style="display:none">
+        <div style="margin:20px 16px 8px; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--taupe)">Today's gentle nudges</div>
+        <div id="recList"></div>
+      </div>
+
+      <div style="margin:24px 16px; padding:14px; border-radius:12px; background:rgba(139,108,130,.08); border:1px solid rgba(139,108,130,.2); font-size:11.5px; color:var(--taupe); line-height:1.5; text-align:center">
+        <b style="color:var(--mauve)">Wellness, not diagnosis.</b> This score is a self-reflection tool, not a medical assessment. Persistent symptoms warrant clinical evaluation. <span class="qi" data-evidence="cycle-length-normal">i</span>
+      </div>
+    </div>
+  </div>
+
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
+<script>
+const wellnessQuestions = [
+  { id:'sleep', label:'How well did you sleep last night? <span class="qi" data-evidence="sleep-duration">i</span>', options:[
+    {label:'Deep & restorative (7-9hrs)', val:10},
+    {label:'Okay, but woke up once', val:7},
+    {label:'Tossed & turned, less than 6hrs', val:4},
+    {label:'Barely slept', val:1}
+  ]},
+  { id:'nutrition', label:'How nourishing were your meals today? <span class="qi" data-evidence="nutrition-follicular">i</span>', options:[
+    {label:'Colorful, balanced, protein-rich', val:10},
+    {label:'Mostly good, one treat', val:7},
+    {label:'Skipped meals / fast food', val:4},
+    {label:'Very little food', val:1}
+  ]},
+  { id:'movement', label:'Did you move your body today? <span class="qi" data-evidence="exercise-dysmenorrhea">i</span>', options:[
+    {label:'30+ min intentional movement', val:10},
+    {label:'Light walk or stretching', val:7},
+    {label:'Some steps, no exercise', val:4},
+    {label:'Sedentary all day', val:1}
+  ]},
+  { id:'stress', label:'How is your stress load today? <span class="qi" data-evidence="stress-cortisol-cycle">i</span>', options:[
+    {label:'Calm & centered', val:10},
+    {label:'Mild pressure, manageable', val:7},
+    {label:'Feeling overwhelmed', val:4},
+    {label:'Panicked / burnt out', val:1}
+  ]},
+  { id:'hydration', label:'How much water have you had?', options:[
+    {label:'8+ glasses', val:10},
+    {label:'5-7 glasses', val:7},
+    {label:'2-4 glasses', val:4},
+    {label:'Barely any', val:1}
+  ]},
+  { id:'symptoms', label:'Any cycle-related discomfort today? <span class="qi" data-evidence="heat-therapy-dysmenorrhea">i</span>', options:[
+    {label:'None, feeling great', val:10},
+    {label:'Mild bloating / moodiness', val:7},
+    {label:'Cramps or fatigue', val:4},
+    {label:'Severe pain / heavy bleeding', val:1}
+  ]}
+];
+
+const recs = {
+  sleep: {icon:'bedtime', title:'Prioritize sleep tonight', text:'Aim for 7-9 hours. Dim screens 1hr before bed, keep room cool (18-20°C).'},
+  nutrition: {icon:'restaurant', title:'Nourish with whole foods', text:'Focus on protein, healthy fats, and colorful vegetables. Iron-rich foods help with cycle recovery.'},
+  movement: {icon:'directions_run', title:'Gentle movement helps', text:'Even a 15-min walk improves circulation and mood. Avoid intense exercise during heavy flow days.'},
+  stress: {icon:'self_improvement', title:'Take a breath break', text:'5 minutes of 4-7-8 breathing lowers cortisol. Try our breathwork session.'},
+  hydration: {icon:'water_drop', title:'Sip more water', text:'Aim for 30-35ml per kg of body weight. Herbal teas count toward your intake.'},
+  symptoms: {icon:'healing', title:'Gentle relief options', text:'Warm compress on lower abdomen, magnesium-rich foods, and rest. Severe pain warrants clinical review.'}
+};
+
+function renderQuestions(){
+  const c = document.getElementById('questions');
+  c.innerHTML = wellnessQuestions.map((q,i)=>`
+    <div class="question-card">
+      <label class="q">${i+1}. ${q.label}</label>
+      ${q.options.map((o,j)=>`
+        <div class="option" onclick="selectOption(this,'${q.id}',${o.val})">
+          <input type="radio" name="${q.id}" value="${o.val}" id="${q.id}_${j}">
+          <label for="${q.id}_${j}" style="cursor:pointer;font-size:13px">${o.label}</label>
+        </div>`).join('')}
+    </div>`).join('');
+}
+
+function selectOption(el, id, val){
+  el.parentElement.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+}
+
+function saveWellness(){
+  const scores = {};
+  let total = 0, answered = 0;
+  wellnessQuestions.forEach(q=>{
+    const sel = document.querySelector(`input[name="${q.id}"]:checked`);
+    if(sel){ scores[q.id] = parseInt(sel.value); total += scores[q.id]; answered++; }
+  });
+  if(answered < wellnessQuestions.length){
+    alert('Please answer all 6 questions to get your wellness score.');
+    return;
+  }
+  const pct = Math.round((total / (wellnessQuestions.length * 10)) * 100);
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('scoreNum').textContent = pct;
+  const arc = document.getElementById('scoreArc');
+  const offset = 377 - (377 * pct / 100);
+  arc.style.transition = 'stroke-dashoffset 1s ease';
+  arc.style.strokeDashoffset = offset;
+
+  let msg = '';
+  if(pct >= 80) msg = '✨ Thriving — your ovaries feel loved today.';
+  else if(pct >= 60) msg = '🌱 Nurturing — small shifts could boost your score.';
+  else if(pct >= 40) msg = '💜 Gentle care needed — your body is asking for attention.';
+  else msg = '🤍 Rest & restore — today is about gentle self-care.';
+  document.getElementById('scoreMessage').textContent = msg;
+
+  const labels = {sleep:'Sleep',nutrition:'Nutrition',movement:'Movement',stress:'Stress',hydration:'Hydration',symptoms:'Comfort'};
+  document.getElementById('breakdown').innerHTML = wellnessQuestions.map(q=>
+    `<div class="breakdown-row"><span class="breakdown-label">${labels[q.id]}</span><span class="breakdown-val">${scores[q.id]}/10</span></div>`
+  ).join('');
+
+  const lowAreas = wellnessQuestions.filter(q=>scores[q.id] <= 4);
+  if(lowAreas.length > 0){
+    document.getElementById('recommendations').style.display = 'block';
+    document.getElementById('recList').innerHTML = lowAreas.map(a=>{
+      const r = recs[a.id];
+      return `<div class="rec-card"><span class="material-symbols-outlined rec-icon">${r.icon}</span><div class="rec-text"><b>${r.title}</b><p>${r.text}</p></div></div>`;
+    }).join('');
+  }
+
+  try{
+    const history = JSON.parse(localStorage.getItem('ovuluna_wellness_history')||'[]');
+    history.push({date:new Date().toISOString().slice(0,10), score:pct, breakdown:scores});
+    localStorage.setItem('ovuluna_wellness_history', JSON.stringify(history.slice(-30)));
+  }catch(e){}
+
+  document.getElementById('result').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+renderQuestions();
+</script>
+<script src="appnav.js" defer></script>
+<script src="darkmode.js?v=8" defer></script>
+</body>
+</html>
