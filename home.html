@@ -57,8 +57,8 @@
       <div class="row" style="justify-content:space-between;align-items:flex-start">
         <div>
           <div class="sub" style="font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mauve)">Ovarian Age</div>
-          <div style="font-family:var(--serif);font-size:32px;font-weight:600;color:var(--cocoa);line-height:1.1;margin-top:4px">33</div>
-          <div style="font-size:13px;color:var(--ok);font-weight:700;margin-top:2px">−3 years vs calendar</div>
+          <div id="ovarianAgeNumber" style="font-family:var(--serif);font-size:32px;font-weight:600;color:var(--cocoa);line-height:1.1;margin-top:4px">—</div>
+          <div id="ovarianAgeDelta" style="font-size:13px;color:var(--taupe);font-weight:700;margin-top:2px">Complete onboarding for estimate</div>
         </div>
         <span class="ms" style="font-size:34px;color:var(--mauve)">radio_button_checked</span>
       </div>
@@ -449,17 +449,54 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 <script>
 (function(){
-  // load saved ovarian age
-  try{
-    var saved = JSON.parse(localStorage.getItem('ovuluna_ovarian_age')||'{}');
-    if(saved.ovAge){
-      document.querySelector('a[href="ovarian-age.html"] div div div + div').textContent = saved.ovAge;
-      var dEl = document.querySelector('a[href="ovarian-age.html"] div div div + div + div');
-      var delta = saved.delta||0;
-      if(delta<=0){ dEl.textContent = '−'+Math.abs(delta)+' vs calendar'; dEl.style.color='var(--ok)'; }
-      else { dEl.textContent = '+'+delta+' vs calendar'; dEl.style.color='var(--low)'; }
+  // load saved ovarian age — recalculate from onboarding if missing
+  function updateOvarianAgeDisplay(saved) {
+    var numEl = document.getElementById('ovarianAgeNumber');
+    var deltaEl = document.getElementById('ovarianAgeDelta');
+    if (!numEl || !deltaEl) return;
+    if (saved && saved.ovAge) {
+      numEl.textContent = saved.ovAge;
+      var delta = saved.delta || 0;
+      if (delta <= 0) {
+        deltaEl.textContent = '−' + Math.abs(delta) + ' years vs calendar';
+        deltaEl.style.color = 'var(--ok)';
+      } else {
+        deltaEl.textContent = '+' + delta + ' years vs calendar';
+        deltaEl.style.color = 'var(--low)';
+      }
+    } else {
+      numEl.textContent = '—';
+      deltaEl.textContent = 'Complete onboarding for estimate';
+      deltaEl.style.color = 'var(--taupe)';
     }
-  }catch(e){}
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem('ovuluna_ovarian_age') || '{}');
+    if (!saved.ovAge && window.OvarianModel) {
+      // Recalculate from onboarding answers
+      var onboarding = JSON.parse(localStorage.getItem('ovuluna_onboarding') || '{}');
+      if (onboarding.age && onboarding.age >= 18) {
+        var result = window.OvarianModel.computeOvarianAge({
+          age: onboarding.age,
+          amh: null,
+          momMeno: onboarding.momMeno || null,
+          smoke: onboarding.smoke || 'never',
+          cycle: onboarding.cycle || 'regular',
+          circ: onboarding.circ || 'none',
+          sleep: onboarding.sleep || 'normal'
+        });
+        if (result && result.ovAge) {
+          saved = result;
+          localStorage.setItem('ovuluna_ovarian_age', JSON.stringify({
+            ovAge: result.ovAge, chrono: result.chrono, delta: result.delta,
+            straw: result.straw, ttm: result.ttm, calculatedAt: new Date().toISOString()
+          }));
+        }
+      }
+    }
+    updateOvarianAgeDisplay(saved);
+  } catch(e) {}
 
   // persona chips
   var savedP = localStorage.getItem('ovuluna_persona') || 'bloom';
@@ -515,6 +552,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 <script src="hormone-graph.js" defer></script>
 <script src="mystical-ring.js" defer></script>
+<script src="ovarian-model.js" defer></script>
 
 <script src="appnav.js" defer></script>
 <script src="evidence-db.js" defer></script>

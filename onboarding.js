@@ -597,6 +597,17 @@
             sleep: answers.sleep || 'normal'
           });
           if (result && result.ovAge) {
+            // Save ovarian age estimate for home page display
+            try {
+              localStorage.setItem('ovuluna_ovarian_age', JSON.stringify({
+                ovAge: result.ovAge,
+                chrono: result.chrono,
+                delta: result.delta,
+                straw: result.straw,
+                ttm: result.ttm,
+                calculatedAt: new Date().toISOString()
+              }));
+            } catch(e) {}
             ovInfo = '<div style="background:var(--sage-tint,#E8EBE2);border-radius:16px;padding:16px;margin:16px 0;text-align:center">' +
               '<div style="font:700 11px var(--sans);color:var(--sage,#5E9B93);text-transform:uppercase;letter-spacing:.06em">Estimated Ovarian Age</div>' +
               '<div style="font-family:var(--serif);font-size:36px;color:var(--mauve);margin:4px 0">' + result.ovAge + '</div>' +
