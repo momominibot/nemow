@@ -21,6 +21,14 @@
       subtitle: 'A few gentle questions to personalize your experience. Takes about 2 minutes.'
     },
     {
+      id: 'language',
+      section: 'Welcome',
+      type: 'language',
+      title: 'Choose your language',
+      subtitle: 'Select your preferred language. You can change this anytime in settings.',
+      field: 'language'
+    },
+    {
       id: 'age',
       section: 'About You',
       type: 'wheel',
@@ -262,6 +270,7 @@
     scrollEl.innerHTML = '';
     switch(step.type) {
       case 'welcome': renderWelcome(step); break;
+      case 'language': renderLanguage(step); break;
       case 'wheel': renderWheel(step); break;
       case 'height-weight': renderHeightWeight(step); break;
       case 'single': renderSingle(step); break;
@@ -283,6 +292,61 @@
       '<p>' + step.subtitle + '</p>';
     scrollEl.appendChild(div);
     footEl.innerHTML = '<button class="cta" id="nextBtn">Get Started</button>';
+    document.getElementById('nextBtn').addEventListener('click', nextStep);
+  }
+
+  /* ── Language step ── */
+  function renderLanguage(step) {
+    var languages = [
+      { code: 'en', name: 'English', flag: '🇬🇧' },
+      { code: 'zh', name: '中文', flag: '🇨🇳' },
+      { code: 'ja', name: '日本語', flag: '🇯🇵' },
+      { code: 'ms', name: 'Bahasa Melayu', flag: '🇲🇾' },
+      { code: 'es', name: 'Español', flag: '🇪🇸' }
+    ];
+    var selected = answers.language || 'en';
+    var div = document.createElement('div');
+    div.style.cssText = 'flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 24px;';
+    div.innerHTML =
+      '<h1 class="q">' + step.title + '</h1>' +
+      '<p class="sub">' + step.subtitle + '</p>' +
+      '<div id="langList" style="display:flex;flex-direction:column;gap:10px;margin-top:8px"></div>';
+    scrollEl.appendChild(div);
+
+    var list = document.getElementById('langList');
+    languages.forEach(function(lang) {
+      var el = document.createElement('div');
+      el.className = 'opt' + (selected === lang.code ? ' selected' : '');
+      el.style.cssText = 'display:flex;align-items:center;gap:14px;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;cursor:pointer;transition:.15s;background:var(--card)';
+      if (selected === lang.code) {
+        el.style.borderColor = 'var(--sage, #5E9B93)';
+        el.style.background = 'var(--sage-tint, #E8EBE2)';
+      }
+      el.innerHTML =
+        '<span style="font-size:26px;flex-shrink:0">' + lang.flag + '</span>' +
+        '<div style="flex:1"><div style="font:700 15px var(--sans);color:var(--ink)">' + lang.name + '</div></div>' +
+        '<span class="tick" style="margin-left:auto;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0">' +
+          (selected === lang.code ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--sage,#5E9B93)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '') +
+        '</span>';
+      el.addEventListener('click', function() {
+        answers.language = lang.code;
+        saveAnswers();
+        localStorage.setItem('ovuluna_language', lang.code);
+        document.documentElement.setAttribute('lang', lang.code);
+        list.querySelectorAll('.opt').forEach(function(o) {
+          o.style.borderColor = 'var(--line)';
+          o.style.background = 'var(--card)';
+          o.querySelector('.tick').innerHTML = '';
+        });
+        el.style.borderColor = 'var(--sage, #5E9B93)';
+        el.style.background = 'var(--sage-tint, #E8EBE2)';
+        el.querySelector('.tick').innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--sage,#5E9B93)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        document.getElementById('nextBtn').disabled = false;
+      });
+      list.appendChild(el);
+    });
+
+    footEl.innerHTML = '<button class="cta" id="nextBtn" ' + (selected ? '' : 'disabled') + '>Continue</button>';
     document.getElementById('nextBtn').addEventListener('click', nextStep);
   }
 
@@ -323,43 +387,126 @@
     nextBtn.addEventListener('click', nextStep);
   }
 
-  /* ── Height & Weight step ── */
+  /* ── Height & Weight step (dual metric/imperial) ── */
   function renderHeightWeight(step) {
-    var h = answers.heightCm || '';
-    var w = answers.weightKg || '';
+    var units = answers.units || localStorage.getItem('ovuluna_units') || 'metric';
+    var hCm = answers.heightCm || '';
+    var wKg = answers.weightKg || '';
     var div = document.createElement('div');
     div.style.cssText = 'flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 24px;';
     div.innerHTML =
       '<h1 class="q">' + step.title + '</h1>' +
       '<p class="sub">' + step.subtitle + '</p>' +
-      '<div style="display:flex;gap:14px;margin-bottom:16px">' +
+      '<div style="display:flex;gap:8px;margin-bottom:18px;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:4px">' +
+        '<button id="unitMetric" style="flex:1;padding:10px;border:none;border-radius:9px;font:700 13px var(--sans);cursor:pointer;transition:.15s;background:' + (units==='metric'?'var(--mauve)':'transparent') + ';color:' + (units==='metric'?'#fff':'var(--muted)') + '">Metric (cm/kg)</button>' +
+        '<button id="unitImperial" style="flex:1;padding:10px;border:none;border-radius:9px;font:700 13px var(--sans);cursor:pointer;transition:.15s;background:' + (units==='imperial'?'var(--mauve)':'transparent') + ';color:' + (units==='imperial'?'#fff':'var(--muted)') + '">Imperial (ft/lbs)</button>' +
+      '</div>' +
+      '<div id="metricInputs" style="display:' + (units==='metric'?'flex':'none') + ';gap:14px;margin-bottom:16px">' +
         '<div style="flex:1">' +
           '<label style="font:700 12px var(--sans);color:var(--mauve);text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Height (cm)</label>' +
-          '<input type="number" id="heightInput" value="' + h + '" placeholder="165" min="120" max="220" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;font:600 16px var(--sans);color:var(--ink);background:var(--card);outline:none">' +
+          '<input type="number" id="heightInput" value="' + hCm + '" placeholder="165" min="120" max="220" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;font:600 16px var(--sans);color:var(--ink);background:var(--card);outline:none">' +
         '</div>' +
         '<div style="flex:1">' +
           '<label style="font:700 12px var(--sans);color:var(--mauve);text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Weight (kg)</label>' +
-          '<input type="number" id="weightInput" value="' + w + '" placeholder="58" min="30" max="200" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;font:600 16px var(--sans);color:var(--ink);background:var(--card);outline:none">' +
+          '<input type="number" id="weightInput" value="' + wKg + '" placeholder="58" min="30" max="200" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;font:600 16px var(--sans);color:var(--ink);background:var(--card);outline:none">' +
+        '</div>' +
+      '</div>' +
+      '<div id="imperialInputs" style="display:' + (units==='imperial'?'flex':'none') + ';gap:14px;margin-bottom:16px;flex-wrap:wrap">' +
+        '<div style="flex:1;min-width:80px">' +
+          '<label style="font:700 12px var(--sans);color:var(--mauve);text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Height (ft)</label>' +
+          '<input type="number" id="heightFtInput" placeholder="5" min="4" max="7" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;font:600 16px var(--sans);color:var(--ink);background:var(--card);outline:none">' +
+        '</div>' +
+        '<div style="flex:1;min-width:80px">' +
+          '<label style="font:700 12px var(--sans);color:var(--mauve);text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Height (in)</label>' +
+          '<input type="number" id="heightInInput" placeholder="5" min="0" max="11" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;font:600 16px var(--sans);color:var(--ink);background:var(--card);outline:none">' +
+        '</div>' +
+        '<div style="flex:1;min-width:100px">' +
+          '<label style="font:700 12px var(--sans);color:var(--mauve);text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Weight (lbs)</label>' +
+          '<input type="number" id="weightLbsInput" placeholder="128" min="66" max="440" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;font:600 16px var(--sans);color:var(--ink);background:var(--card);outline:none">' +
         '</div>' +
       '</div>' +
       '<p style="font:500 12px var(--sans);color:var(--muted);text-align:center">Used for water goal (~35ml/kg) and activity targets</p>';
     scrollEl.appendChild(div);
 
+    // Pre-fill imperial if metric exists
+    if (units === 'imperial' && hCm) {
+      var totalIn = Math.round(hCm / 2.54);
+      document.getElementById('heightFtInput').value = Math.floor(totalIn / 12);
+      document.getElementById('heightInInput').value = totalIn % 12;
+    }
+    if (units === 'imperial' && wKg) {
+      document.getElementById('weightLbsInput').value = Math.round(wKg * 2.20462);
+    }
+
     function validate() {
-      var h = parseInt(document.getElementById('heightInput').value);
-      var w = parseInt(document.getElementById('weightInput').value);
       var btn = document.getElementById('nextBtn');
-      if (h >= 120 && h <= 220 && w >= 30 && w <= 200) {
-        btn.disabled = false;
-        answers.heightCm = h;
-        answers.weightKg = w;
-        saveAnswers();
+      var currentUnits = document.getElementById('metricInputs').style.display === 'flex' ? 'metric' : 'imperial';
+      if (currentUnits === 'metric') {
+        var h = parseInt(document.getElementById('heightInput').value);
+        var w = parseInt(document.getElementById('weightInput').value);
+        if (h >= 120 && h <= 220 && w >= 30 && w <= 200) {
+          btn.disabled = false;
+          answers.heightCm = h;
+          answers.weightKg = w;
+          saveAnswers();
+        } else {
+          btn.disabled = true;
+        }
       } else {
-        btn.disabled = true;
+        var ft = parseInt(document.getElementById('heightFtInput').value);
+        var inch = parseInt(document.getElementById('heightInInput').value);
+        var lbs = parseInt(document.getElementById('weightLbsInput').value);
+        if (ft >= 4 && ft <= 7 && inch >= 0 && inch <= 11 && lbs >= 66 && lbs <= 440) {
+          btn.disabled = false;
+          answers.heightCm = Math.round((ft * 12 + inch) * 2.54);
+          answers.weightKg = Math.round(lbs / 2.20462);
+          saveAnswers();
+        } else {
+          btn.disabled = true;
+        }
       }
     }
-    document.getElementById('heightInput').addEventListener('input', validate);
-    document.getElementById('weightInput').addEventListener('input', validate);
+
+    // Unit toggle
+    document.getElementById('unitMetric').addEventListener('click', function() {
+      answers.units = 'metric';
+      localStorage.setItem('ovuluna_units', 'metric');
+      document.getElementById('metricInputs').style.display = 'flex';
+      document.getElementById('imperialInputs').style.display = 'none';
+      this.style.background = 'var(--mauve)';
+      this.style.color = '#fff';
+      document.getElementById('unitImperial').style.background = 'transparent';
+      document.getElementById('unitImperial').style.color = 'var(--muted)';
+      // Sync values
+      if (answers.heightCm) document.getElementById('heightInput').value = answers.heightCm;
+      if (answers.weightKg) document.getElementById('weightInput').value = answers.weightKg;
+      validate();
+    });
+    document.getElementById('unitImperial').addEventListener('click', function() {
+      answers.units = 'imperial';
+      localStorage.setItem('ovuluna_units', 'imperial');
+      document.getElementById('metricInputs').style.display = 'none';
+      document.getElementById('imperialInputs').style.display = 'flex';
+      this.style.background = 'var(--mauve)';
+      this.style.color = '#fff';
+      document.getElementById('unitMetric').style.background = 'transparent';
+      document.getElementById('unitMetric').style.color = 'var(--muted)';
+      // Sync values
+      if (answers.heightCm) {
+        var totalIn = Math.round(answers.heightCm / 2.54);
+        document.getElementById('heightFtInput').value = Math.floor(totalIn / 12);
+        document.getElementById('heightInInput').value = totalIn % 12;
+      }
+      if (answers.weightKg) {
+        document.getElementById('weightLbsInput').value = Math.round(answers.weightKg * 2.20462);
+      }
+      validate();
+    });
+
+    ['heightInput','weightInput','heightFtInput','heightInInput','weightLbsInput'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('input', validate);
+    });
 
     footEl.innerHTML = '<button class="cta" id="nextBtn" disabled>Continue</button>';
     document.getElementById('nextBtn').addEventListener('click', nextStep);

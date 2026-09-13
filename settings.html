@@ -75,6 +75,27 @@
 
     <h2 class="sec">Appearance</h2>
     <div class="card" style="padding:18px">
+      <div style="font-weight:700;font-size:13px;color:var(--ovuluna-text-primary);margin-bottom:10px">Language</div>
+      <div class="sub" style="font-size:12px;margin-bottom:12px">Choose your preferred language for the app experience.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px" id="langPicker">
+        <button class="lang-opt" data-lang="en" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">🇬🇧 English</button>
+        <button class="lang-opt" data-lang="zh" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">🇨🇳 中文</button>
+        <button class="lang-opt" data-lang="ja" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">🇯🇵 日本語</button>
+        <button class="lang-opt" data-lang="ms" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">🇲🇾 Bahasa Melayu</button>
+        <button class="lang-opt" data-lang="es" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">🇪🇸 Español</button>
+      </div>
+    </div>
+
+    <div class="card" style="padding:18px;margin-top:12px">
+      <div style="font-weight:700;font-size:13px;color:var(--ovuluna-text-primary);margin-bottom:10px">Units of Measurement</div>
+      <div class="sub" style="font-size:12px;margin-bottom:12px">Choose metric or imperial for height, weight, and distances.</div>
+      <div style="display:flex;gap:8px;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:4px" id="unitPicker">
+        <button id="unitMetricBtn" style="flex:1;padding:10px;border:none;border-radius:9px;font:700 13px var(--sans);cursor:pointer;transition:.15s;background:var(--mauve);color:#fff">Metric (cm/kg)</button>
+        <button id="unitImperialBtn" style="flex:1;padding:10px;border:none;border-radius:9px;font:700 13px var(--sans);cursor:pointer;transition:.15s;background:transparent;color:var(--muted)">Imperial (ft/lbs)</button>
+      </div>
+    </div>
+
+    <div class="card" style="padding:18px;margin-top:12px">
       <div style="font-weight:700;font-size:13px;color:var(--ovuluna-text-primary);margin-bottom:10px">Life Stage Persona</div>
       <div class="sub" style="font-size:12px;margin-bottom:12px">Choose your life stage to personalize your experience — colors, fonts, and content adapt to where you are.</div>
       <div class="persona-picker" id="personaPicker">
@@ -149,6 +170,64 @@
 </nav>
 <script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.tgl').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('on');});});});</script>
 <script>
+// Language picker
+(function(){
+  var savedLang = localStorage.getItem('ovuluna_language') || 'en';
+  document.documentElement.setAttribute('lang', savedLang);
+  var langBtns = document.querySelectorAll('.lang-opt');
+  function setActive(lang){
+    langBtns.forEach(function(b){
+      if(b.dataset.lang === lang){
+        b.style.background = 'var(--mauve)';
+        b.style.color = '#fff';
+        b.style.borderColor = 'var(--mauve)';
+      } else {
+        b.style.background = 'var(--card)';
+        b.style.color = 'var(--ink)';
+        b.style.borderColor = 'var(--line)';
+      }
+    });
+  }
+  setActive(savedLang);
+  langBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var lang = this.dataset.lang;
+      localStorage.setItem('ovuluna_language', lang);
+      document.documentElement.setAttribute('lang', lang);
+      setActive(lang);
+    });
+  });
+})();
+
+// Unit picker
+(function(){
+  var savedUnits = localStorage.getItem('ovuluna_units') || 'metric';
+  var metricBtn = document.getElementById('unitMetricBtn');
+  var imperialBtn = document.getElementById('unitImperialBtn');
+  function setUnits(u){
+    if(u === 'metric'){
+      metricBtn.style.background = 'var(--mauve)';
+      metricBtn.style.color = '#fff';
+      imperialBtn.style.background = 'transparent';
+      imperialBtn.style.color = 'var(--muted)';
+    } else {
+      imperialBtn.style.background = 'var(--mauve)';
+      imperialBtn.style.color = '#fff';
+      metricBtn.style.background = 'transparent';
+      metricBtn.style.color = 'var(--muted)';
+    }
+  }
+  setUnits(savedUnits);
+  metricBtn.addEventListener('click', function(){
+    localStorage.setItem('ovuluna_units', 'metric');
+    setUnits('metric');
+  });
+  imperialBtn.addEventListener('click', function(){
+    localStorage.setItem('ovuluna_units', 'imperial');
+    setUnits('imperial');
+  });
+})();
+
 // Persona picker
 (function(){
   var picker = document.getElementById('personaPicker');
