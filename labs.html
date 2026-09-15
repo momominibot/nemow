@@ -23,9 +23,13 @@
     .field .hint { font-size:12px; color:var(--taupe); margin-top:4px; }
     .save-btn { width:100%; padding:14px; border:none; border-radius:12px; background:var(--ink); color:var(--card); font-weight:800; font-size:15px; cursor:pointer; }
     .result-card { margin:12px 16px; padding:16px; border:2px solid var(--line-soft); border-radius:var(--r); background:var(--card); }
-    .result-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line-soft); }
+    .result-row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--line-soft); gap:12px; }
     .result-row:last-child { border-bottom:none; }
-    .result-value { font-size:20px; font-weight:800; }
+    .result-label { flex:1; min-width:0; }
+    .result-label .name { font-size:13px; font-weight:700; color:var(--cocoa); margin-bottom:2px; }
+    .result-label .val { font-size:20px; font-weight:800; color:var(--ink); }
+    .result-status { text-align:right; flex-shrink:0; }
+    .result-status .text { font-size:11.5px; color:var(--taupe); margin-top:4px; max-width:130px; line-height:1.3; }
     .status { display:inline-block; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:800; text-transform:uppercase; }
     .status-ok { background:rgba(78,140,106,.15); color:#2E6B4E; }
     .status-warn { background:rgba(201,138,46,.15); color:#8B5E16; }
@@ -98,12 +102,12 @@
       </div>
     </div>
 
-    <nav class="bottom-nav">
-      <a href="home.html"><span class="material-symbols-outlined">home</span>Home</a>
-      <a href="learn.html"><span class="material-symbols-outlined">menu_book</span>Learn</a>
-      <a href="tcm-hub.html"><span class="material-symbols-outlined">acupuncture</span>TCM</a>
-      <a href="foods.html"><span class="material-symbols-outlined">restaurant</span>Foods</a>
-      <a href="profile.html"><span class="material-symbols-outlined">person</span>Profile</a>
+    <nav class="nav">
+      <a href="home.html"><span class="n-ic">home</span>Home</a>
+      <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+      <a href="tcm-hub.html"><span class="n-ic">acupuncture</span>TCM</a>
+      <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+      <a href="profile.html"><span class="n-ic">person</span>Profile</a>
     </nav>
   </div>
 
@@ -160,13 +164,13 @@
 
       document.getElementById('resultRows').innerHTML = rows.map(r => `
         <div class="result-row">
-          <div>
-            <div style="font-size:13px; color:var(--taupe)">${r.name}</div>
-            <div class="result-value">${r.val}</div>
+          <div class="result-label">
+            <div class="name">${r.name}</div>
+            <div class="val">${r.val}</div>
           </div>
-          <div style="text-align:right">
+          <div class="result-status">
             <div class="status ${r.cls}">${r.status}</div>
-            <div style="font-size:12px; color:var(--taupe); margin-top:4px; max-width:140px">${r.text}</div>
+            <div class="text">${r.text}</div>
           </div>
         </div>
       `).join('');

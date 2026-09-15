@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ovuluna · Postpartum Recovery Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="darkmode.css">
+  <link rel="stylesheet" href="ovuluna-persona.css">
+  <link rel="stylesheet" href="evidence.css">
+  <link rel="stylesheet" href="luna-chat.css">
+  <style>
+    .hero { text-align:center; padding:28px 20px 16px; }
+    .hero h1 { font-family:var(--serif); font-size:26px; color:var(--cocoa); margin:0 0 8px; }
+    .hero p { font-size:13.5px; color:var(--taupe); line-height:1.55; max-width:480px; margin:0 auto; }
+    .phase-tabs { display:flex; gap:6px; padding:0 16px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; margin-bottom:12px; }
+    .phase-tabs::-webkit-scrollbar { display:none; }
+    .ptab { flex-shrink:0; padding:9px 14px; border-radius:99px; border:1.5px solid var(--line-soft); background:var(--card-solid); font-size:12px; font-weight:700; color:var(--taupe); cursor:pointer; transition:all .2s; white-space:nowrap; }
+    .ptab.on { background:var(--sage); color:#fff; border-color:var(--sage); }
+    .phase-content { display:none; padding:0 16px 20px; }
+    .phase-content.on { display:block; }
+    .phase-card { background:var(--card); border:1.5px solid var(--line-soft); border-radius:18px; padding:18px; margin-bottom:14px; }
+    .phase-card h3 { font-family:var(--serif); font-size:17px; color:var(--cocoa); margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+    .phase-card h3 .ms { font-size:20px; color:var(--sage); }
+    .phase-card p { font-size:13px; color:var(--taupe); line-height:1.6; margin:0 0 8px; }
+    .phase-card ul { margin:6px 0; padding-left:18px; }
+    .phase-card li { font-size:12.5px; color:var(--taupe); line-height:1.55; margin-bottom:5px; }
+    .timeline-item { display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--line-soft); }
+    .timeline-item:last-child { border-bottom:none; }
+    .timeline-dot { width:36px; height:36px; border-radius:50%; background:rgba(110,180,150,.18); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .timeline-dot .ms { font-size:18px; color:var(--sage); }
+    .timeline-body { flex:1; min-width:0; }
+    .timeline-body b { font-size:13px; color:var(--cocoa); display:block; margin-bottom:3px; }
+    .timeline-body span { font-size:12px; color:var(--taupe); line-height:1.5; }
+    .warn-box { background:rgba(232,168,152,.1); border:1.5px solid rgba(232,168,152,.35); border-radius:14px; padding:14px 16px; margin:12px 0; }
+    .warn-box b { color:var(--coral); font-size:13px; display:block; margin-bottom:6px; font-family:var(--serif); }
+    .warn-box p { font-size:12px; color:var(--taupe); line-height:1.5; margin:0; }
+    .calm-box { background:linear-gradient(135deg,rgba(110,180,150,.15),rgba(196,181,224,.12)); border:1.5px solid rgba(110,180,150,.35); border-radius:14px; padding:14px 16px; margin:12px 0; }
+    .calm-box b { color:var(--sage); font-size:13px; display:block; margin-bottom:6px; font-family:var(--serif); }
+    .calm-box p { font-size:12px; color:var(--taupe); line-height:1.5; margin:0; }
+    .epds-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0; }
+    .epds-item { background:rgba(196,181,224,.1); border-radius:10px; padding:10px; text-align:center; }
+    .epds-item .num { font-size:20px; font-weight:800; color:var(--mauve); }
+    .epds-item .lbl { font-size:10px; color:var(--taupe); font-weight:700; text-transform:uppercase; letter-spacing:.05em; }
+    .food-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0; }
+    .food-item { background:rgba(110,180,150,.08); border-radius:10px; padding:10px; }
+    .food-item b { font-size:12px; color:var(--cocoa); display:block; margin-bottom:3px; }
+    .food-item span { font-size:11px; color:var(--taupe); line-height:1.4; }
+    .back-link { display:inline-flex; align-items:center; gap:6px; padding:10px 16px; font-size:13px; font-weight:700; color:var(--mauve); text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="top">
+      <div class="brandline"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">OVULUNA</b></div>
+      <a class="t-icon ms" href="notifications.html">notifications</a>
+      <a class="t-icon ms" href="cycle-trends.html">calendar_today</a>
+    </div>
+
+    <div class="scroll" style="padding-bottom:100px">
+      <a href="home.html" class="back-link"><span class="ms" style="font-size:18px">arrow_back</span> Back to home</a>
+
+      <div class="hero">
+        <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,rgba(110,180,150,.25),rgba(196,181,224,.2));display:flex;align-items:center;justify-content:center;margin:0 auto 12px">
+          <span class="ms" style="font-size:32px;color:var(--sage)">favorite</span>
+        </div>
+        <h1>Your Postpartum Journey</h1>
+        <p>A gentle, evidence-based guide to recovery — physical, emotional, and nutritional. Take it one day at a time. You grew a human; now let yourself heal.</p>
+      </div>
+
+      <!-- Phase tabs -->
+      <div class="phase-tabs">
+        <div class="ptab on" data-phase="timeline">Recovery Timeline</div>
+        <div class="ptab" data-phase="physical">Physical Healing</div>
+        <div class="ptab" data-phase="nutrition">Breastfeeding Nutrition</div>
+        <div class="ptab" data-phase="mental">Mental Health</div>
+        <div class="ptab" data-phase="exercise">Exercise & Movement</div>
+        <div class="ptab" data-phase="intimacy">Intimacy & Period</div>
+        <div class="ptab" data-phase="warnings">Warning Signs</div>
+      </div>
+
+      <!-- RECOVERY TIMELINE -->
+      <div class="phase-content on" id="phase-timeline">
+        <div class="phase-card">
+          <h3><span class="ms">schedule</span> What to expect, week by week</h3>
+          <p>Every birth and every body is different. This timeline is a general guide — your recovery may be faster or slower. Be gentle with yourself.</p>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"><span class="ms">bedtime</span></div>
+            <div class="timeline-body">
+              <b>Weeks 1–2: Rest & bond</b>
+              <span>Focus on rest, feeding, and bonding. Lochia (postpartum bleeding) is normal — starts heavy and bright red, gradually lightens. Perineal soreness or C-section incision care. Accept all help offered. Limit visitors if needed. <span class="qi" data-evidence="ppd-prevalence">i</span></span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"><span class="ms">directions_walk</span></div>
+            <div class="timeline-body">
+              <b>Weeks 3–6: Gentle re-entry</b>
+              <span>Short walks outside if you feel up to it. Lochia should be tapering to yellow/white. Pelvic floor awareness begins. You may have your 6-week checkup around now — this is when most people get clearance for exercise and intercourse. Energy slowly returns but "baby brain" and fatigue are normal.</span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"><span class="ms">self_improvement</span></div>
+            <div class="timeline-body">
+              <b>Weeks 6–12: Rebuilding strength</b>
+              <span>With medical clearance, gradually increase activity — walking, gentle core work, pelvic floor exercises. Diastasis recti (abdominal separation) may still be present — avoid crunches. Hormones are still shifting, especially if breastfeeding. Sleep is still fragmented; nap when baby naps.</span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"><span class="ms">fitness_center</span></div>
+            <div class="timeline-body">
+              <b>3–6 months: Finding your new normal</b>
+              <span>Most people feel more like themselves by now. Menstrual cycle may return (especially if not exclusively breastfeeding). Can gradually return to pre-pregnancy exercise intensity, listening to your body. Pelvic floor should be improving — if you still have leakage or pain, see a pelvic floor physiotherapist. <span class="qi" data-evidence="exercise-cycle">i</span></span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"><span class="ms">auto_awesome</span></div>
+            <div class="timeline-body">
+              <b>6+ months: Thriving</b>
+              <span>Your body has done something extraordinary. Some changes (hair texture, skin, pelvic floor tone) may take 12+ months or be permanent — that's okay. If you're considering another pregnancy, now is a good time to rebuild nutrient stores (iron, folate, vitamin D). Prioritize your own health — you can't pour from an empty cup.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHYSICAL HEALING -->
+      <div class="phase-content" id="phase-physical">
+        <div class="phase-card">
+          <h3><span class="ms">healing</span> Vaginal birth recovery</h3>
+          <ul>
+            <li><b>Perineal care:</b> Use a peri bottle with warm water after every bathroom visit. Pat dry — don't rub. Witch hazel pads or cold compresses can ease swelling in the first few days.</li>
+            <li><b>Sitz baths:</b> Warm shallow baths 2-3 times daily for the first week can soothe soreness and promote healing. Keep the area clean and dry between.</li>
+            <li><b>Pain management:</b> Over-the-counter pain relief as recommended by your provider. Ice packs wrapped in cloth for the first 24-48 hours, then warm compresses.</li>
+            <li><b>Stools:</b> Drink plenty of water and eat fiber-rich foods. A stool softener may be recommended to avoid straining. Don't hold your breath when pushing — exhale.</li>
+          </ul>
+        </div>
+
+        <div class="phase-card">
+          <h3><span class="ms">medical_services</span> C-section recovery</h3>
+          <ul>
+            <li><b>Incision care:</b> Keep the incision clean and dry. Follow your surgeon's instructions for dressing changes. Watch for redness, swelling, discharge, or separation.</li>
+            <li><b>Movement:</b> Start walking as soon as you're able (usually within 24 hours) to prevent blood clots. Avoid lifting anything heavier than your baby for 6-8 weeks.</li>
+            <li><b>Pain:</b> Incision pain is normal and gradually improves. Use prescribed pain medication as directed. Coughing or laughing may hurt — hold a pillow against your abdomen for support.</li>
+            <li><b>Recovery is longer:</b> A C-section is major abdominal surgery. Full recovery typically takes 8-12 weeks. Don't rush — internal healing takes longer than the skin incision.</li>
+          </ul>
+        </div>
+
+        <div class="phase-card">
+          <h3><span class="ms">accessibility</span> Pelvic floor health</h3>
+          <p>Your pelvic floor went through a lot. Whether vaginal or C-section, these muscles need attention.</p>
+          <ul>
+            <li><b>Kegels:</b> Gently contract and release the muscles you use to stop urine flow. Start with 3 sets of 10 daily, but only after any tears have healed. Quality matters more than quantity — fully relax between contractions.</li>
+            <li><b>Leakage:</b> A small amount of stress incontinence (leaking when coughing/laughing) is common in the first weeks. If it persists beyond 6 weeks, see a pelvic floor physiotherapist — it's treatable.</li>
+            <li><b>Pain during sex:</b> Common due to hormonal changes and scar tissue. Use lubricant, go slow, communicate with your partner. If pain persists, see your provider or pelvic floor PT.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BREASTFEEDING NUTRITION -->
+      <div class="phase-content" id="phase-nutrition">
+        <div class="phase-card">
+          <h3><span class="ms">restaurant</span> Eating to nourish & heal</h3>
+          <p>Breastfeeding burns approximately 300-500 extra calories per day. You don't need to "eat for two" anymore, but you do need nutrient-dense food to support milk production and your own recovery. <span class="qi" data-evidence="nutrition-follicular">i</span></p>
+
+          <div class="food-grid">
+            <div class="food-item">
+              <b>🥩 Protein</b>
+              <span>71g+ daily. Salmon, eggs, Greek yogurt, lentils, chicken, tofu. Supports tissue repair and milk protein.</span>
+            </div>
+            <div class="food-item">
+              <b>🥬 Iron-rich</b>
+              <span>Spinach, red meat, lentils, pumpkin seeds. Pair with vitamin C (citrus, bell peppers) for better absorption.</span>
+            </div>
+            <div class="food-item">
+              <b>🥑 Healthy fats</b>
+              <span>Avocado, nuts, olive oil, fatty fish (salmon, sardines). DHA supports baby's brain development via breast milk.</span>
+            </div>
+            <div class="food-item">
+              <b>💧 Hydration</b>
+              <span>Drink to thirst — typically 2.5-3L daily. A glass of water at every feeding session. Milk is ~87% water.</span>
+            </div>
+            <div class="food-item">
+              <b>🌾 Whole grains</b>
+              <span>Oats, brown rice, quinoa. Oats are a traditional galactagogue (milk-supporting food) and provide sustained energy.</span>
+            </div>
+            <div class="food-item">
+              <b>🫐 Calcium & vitamin D</b>
+              <span>1000mg calcium daily (dairy, fortified plant milks, sesame, leafy greens). 600 IU vitamin D. Your bones need replenishing.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <h3><span class="ms">local_cafe</span> Galactagogues (milk-supporting foods)</h3>
+          <p>These foods and herbs have traditional use for supporting milk supply. Evidence is mixed but they're generally safe when consumed as food:</p>
+          <ul>
+            <li><b>Oats:</b> The most widely recommended. A bowl of oatmeal daily may help — also provides iron and fiber.</li>
+            <li><b>Fenugreek:</b> The most studied galactagogue herb. Can increase supply in some people, but may cause GI upset in baby. Use short-term (2-3 weeks) and stop if supply doesn't improve.</li>
+            <li><b>Brewer's yeast:</b> Rich in B vitamins and protein. Often mixed into smoothies or lactation cookies.</li>
+            <li><b>Fennel & blessed thistle:</b> Often combined. May help with let-down reflex.</li>
+            <li><b>Dark leafy greens & alfalfa:</b> Nutrient-dense and traditionally used.</li>
+          </ul>
+          <div class="warn-box">
+            <b>Important</b>
+            <p>The most effective way to build and maintain milk supply is frequent, effective milk removal — feed or pump 8-12 times in 24 hours, especially in the first 6 weeks. Galactagogues support but don't replace this. If supply is a concern, see a lactation consultant (IBCLC).</p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <h3><span class="ms">no_food</span> Foods & substances to limit</h3>
+          <ul>
+            <li><b>Alcohol:</b> If you choose to drink, wait 2-3 hours per standard drink before breastfeeding. "Pump and dump" doesn't speed elimination — alcohol leaves milk as it leaves your bloodstream.</li>
+            <li><b>Caffeine:</b> Up to 300mg daily (about 2-3 cups of coffee) is generally considered safe. Some babies are sensitive — watch for fussiness or poor sleep.</li>
+            <li><b>High-mercury fish:</b> Avoid swordfish, king mackerel, tilefish. Choose low-mercury options like salmon, sardines, cod.</li>
+            <li><b>Gassy foods (if baby is fussy):</b> Some babies react to cruciferous veggies (broccoli, cabbage), dairy, or soy in your diet. This is individual — don't eliminate foods unless you notice a clear pattern.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MENTAL HEALTH -->
+      <div class="phase-content" id="phase-mental">
+        <div class="phase-card">
+          <h3><span class="ms">self_improvement</span> Your mental health matters</h3>
+          <p>Postpartum mood changes are common. It's normal to feel overwhelmed, tearful, or anxious in the first weeks. But there's a difference between "baby blues" and something that needs support.</p>
+
+          <div class="calm-box">
+            <b>Baby blues (normal)</b>
+            <p>Affects up to 80% of new parents. Starts 2-3 days after birth, peaks around day 5, resolves by day 10-14. Symptoms: mood swings, tearfulness, irritability, anxiety, trouble sleeping even when baby sleeps. This is hormonal and temporary.</p>
+          </div>
+
+          <div class="warn-box">
+            <b>Postpartum depression (needs support)</b>
+            <p>Affects 1 in 7 women. Can start any time in the first year. Symptoms: persistent sadness, loss of interest, feelings of worthlessness or guilt, changes in appetite/sleep beyond baby's needs, difficulty bonding with baby, thoughts of harming yourself or baby. <b>This is not your fault and it is treatable.</b> Talk to your doctor, midwife, or a mental health professional. <span class="qi" data-evidence="ppd-prevalence">i</span></p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <h3><span class="ms">psychology</span> Edinburgh Postnatal Depression Scale (EPDS)</h3>
+          <p>The EPDS is a 10-item screening tool used worldwide. It's not a diagnosis — it's a way to check in with yourself. Scores range 0-30.</p>
+
+          <div class="epds-grid">
+            <div class="epds-item">
+              <div class="num">0–9</div>
+              <div class="lbl">Likely OK</div>
+            </div>
+            <div class="epds-item">
+              <div class="num">10–12</div>
+              <div class="lbl">Monitor</div>
+            </div>
+            <div class="epds-item">
+              <div class="num">13+</div>
+              <div class="lbl">Seek help</div>
+            </div>
+            <div class="epds-item">
+              <div class="num">Any #10</div>
+              <div class="lbl">Urgent</div>
+            </div>
+          </div>
+
+          <p style="font-size:12px;color:var(--taupe);line-height:1.5;margin-top:8px">Question 10 asks about self-harm thoughts. <b>If you score anything other than 0 on question 10, seek help immediately.</b> In Singapore: SOS 1-767 (24/7), text 741741, or go to the nearest emergency department. You can also ask your partner, family, or friend to help you get support.</p>
+
+          <div class="calm-box">
+            <b>Self-care that actually helps</b>
+            <p>• Sleep when baby sleeps — housework can wait<br>
+            • Accept every offer of help — meals, errands, holding baby<br>
+            • Step outside for 10 minutes daily — fresh air and sunlight help mood<br>
+            • Connect with other new parents — isolation worsens symptoms<br>
+            • Talk to your partner about how you're really feeling<br>
+            • Therapy works — CBT and interpersonal therapy are evidence-based for PPD<br>
+            • Medication is safe while breastfeeding for many people — discuss with your doctor</p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <h3><span class="ms">groups</span> Postpartum anxiety & OCD</h3>
+          <p>Depression isn't the only postpartum mood disorder. Anxiety is actually more common:</p>
+          <ul>
+            <li><b>Postpartum anxiety:</b> Constant worry, racing thoughts, feeling on edge, physical symptoms (heart racing, shortness of breath), difficulty sleeping even when baby sleeps. Affects ~10-15% of new parents.</li>
+            <li><b>Postpartum OCD:</b> Intrusive, unwanted thoughts about the baby (often frightening — e.g., "what if I drop the baby?"), followed by compulsive behaviors (checking, rechecking, avoiding). These thoughts are ego-dystonic (you don't want them) and you would never act on them. Affects ~3-5%. Very treatable with therapy.</li>
+            <li><b>Postpartum psychosis (rare, emergency):</b> Onset within first 2 weeks — confusion, delusions, hallucinations, extreme mood swings, inability to care for self or baby. <b>This is a psychiatric emergency.</b> Call emergency services or go to the ER immediately. Affects 1-2 per 1000 births.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- EXERCISE -->
+      <div class="phase-content" id="phase-exercise">
+        <div class="phase-card">
+          <h3><span class="ms">fitness_center</span> Returning to movement</h3>
+          <p>Exercise after birth is gradual. Always get medical clearance at your 6-week checkup (or 8 weeks for C-section) before starting structured exercise. Before that, gentle walking is fine if you feel up to it.</p>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"><span class="ms">directions_walk</span></div>
+            <div class="timeline-body">
+              <b>0–6 weeks: Gentle walking & breathwork</b>
+              <span>Short walks around the house or block, as tolerated. Diaphragmatic breathing and gentle pelvic floor awareness. No crunches, planks, or high-impact. Listen to your body — if bleeding increases or you feel pain, rest. <span class="qi" data-evidence="exercise-dysmenorrhea">i</span></span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"><span class="ms">self_improvement</span></div>
+            <div class="timeline-body">
+              <b>6–12 weeks: Core & pelvic floor rebuild</b>
+              <span>With clearance: pelvic floor exercises (Kegels with full relaxation), transverse abdominis activation, gentle yoga or Pilates (modified), brisk walking. Avoid crunches, sit-ups, planks, and high-impact until diastasis recti has improved. Focus on form, not intensity.</span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"><span class="ms">fitness_center</span></div>
+            <div class="timeline-body">
+              <b>3–6 months: Gradual intensity</b>
+              <span>Can add low-impact cardio (swimming, cycling, elliptical), light strength training, modified Pilates/yoga. If diastasis recti has closed, can gradually introduce planks and more advanced core work. Watch for pelvic floor symptoms (leakage, heaviness, pain) — back off if they occur.</span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"><span class="ms">bolt</span></div>
+            <div class="timeline-body">
+              <b>6+ months: Return to pre-pregnancy activity</b>
+              <span>Most people can return to their pre-pregnancy exercise routine by 6 months, though some take longer. Running, HIIT, heavy lifting — all possible if your pelvic floor is strong and you've built up gradually. If you have persistent leakage, pain, or pelvic heaviness, see a pelvic floor physiotherapist before high-impact exercise.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <h3><span class="ms">warning</span> What to avoid in the first 6 months</h3>
+          <ul>
+            <li><b>Crunches & sit-ups:</b> Worsen diastasis recti and put pressure on the pelvic floor.</li>
+            <li><b>Planks (until cleared):</b> Can increase intra-abdominal pressure and worsen separation.</li>
+            <li><b>High-impact exercise:</b> Running, jumping jacks, burpees — too much for healing pelvic floor and joints (relaxin may still be present, especially if breastfeeding).</li>
+            <li><b>Heavy lifting:</b> Nothing heavier than your baby for 6-8 weeks, especially after C-section.</li>
+            <li><b>Exercising through pain:</b> Pain is a signal to stop. Discomfort from muscle soreness is different from sharp pain, pelvic heaviness, or increased bleeding.</li>
+          </ul>
+        </div>
+
+        <div class="calm-box">
+          <b>Diastasis recti (abdominal separation)</b>
+          <p>Very common after pregnancy — the connective tissue (linea alba) stretches to make room. Most improve within 6-12 months with proper core rehab. Check by lying on your back, knees bent, and lifting your head slightly — feel for a gap above/below the belly button. A gap of 1-2 finger-widths is common. More than 2-3 fingers, or a persistent bulge, may benefit from physical therapy. Avoid exercises that increase intra-abdominal pressure (crunches, planks) until it improves.</p>
+        </div>
+      </div>
+
+      <!-- INTIMACY & PERIOD -->
+      <div class="phase-content" id="phase-intimacy">
+        <div class="phase-card">
+          <h3><span class="ms">favorite</span> Sex & intimacy after birth</h3>
+          <p>There's no "right" time to resume sex. Most providers advise waiting until your 6-week checkup (or 8 weeks for C-section) to ensure healing is complete. But physical readiness ≠ emotional readiness — both matter.</p>
+          <ul>
+            <li><b>Pain is common at first:</b> Hormonal changes (especially if breastfeeding) cause vaginal dryness and thinning. Use a water-based lubricant generously. Go slow, communicate, and stop if it hurts.</li>
+            <li><b>Desire may be low:</b> Fatigue, body image changes, hormonal shifts, and the demands of a newborn all affect libido. This is normal and usually improves over time. Non-sexual intimacy (cuddling, massage, holding hands) matters too.</li>
+            <li><b>Breastfeeding changes things:</b> Lower estrogen can cause dryness and lower desire. This resolves for most people after weaning or as cycles return.</li>
+            <li><b>Contraception:</b> You can get pregnant before your first period returns — even while exclusively breastfeeding. Discuss contraception with your provider at the 6-week visit. Options include condoms, IUD, implant, progestin-only pills (safe for breastfeeding).</li>
+          </ul>
+        </div>
+
+        <div class="phase-card">
+          <h3><span class="ms">water_drop</span> When will my period return?</h3>
+          <p>This varies widely and depends mostly on breastfeeding patterns:</p>
+
+          <div class="food-grid">
+            <div class="food-item">
+              <b>🍼 Exclusively breastfeeding</b>
+              <span>Periods often return 6+ months postpartum, sometimes not until weaning. Night feedings especially suppress ovulation. But it's not reliable contraception — ovulation happens before the first period.</span>
+            </div>
+            <div class="food-item">
+              <b>🍼 Mixed feeding</b>
+              <span>Periods typically return 3-6 months postpartum as formula supplementation increases and prolactin levels drop.</span>
+            </div>
+            <div class="food-item">
+              <b>🍼 Formula only</b>
+              <span>Periods usually return 6-8 weeks postpartum, sometimes as early as 4 weeks. Your cycle may be irregular for the first few months.</span>
+            </div>
+            <div class="food-item">
+              <b>⚠️ First periods</b>
+              <span>May be heavier, more painful, or irregular than your pre-pregnancy cycles. This usually normalizes within 3-6 cycles. If bleeding is extremely heavy (soaking a pad in 1 hour) or very painful, see your provider.</span>
+            </div>
+          </div>
+
+          <div class="calm-box">
+            <b>Your cycle after baby</b>
+            <p>Many people find their cycles change after pregnancy — some have lighter periods, some heavier, some more or less painful. This is normal as your body adjusts. If you're tracking your cycle in Ovuluna, the first 3-6 postpartum cycles may be irregular — that's expected data, not a problem. Your body is recalibrating. <span class="qi" data-evidence="cycle-length-normal">i</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- WARNING SIGNS -->
+      <div class="phase-content" id="phase-warnings">
+        <div class="phase-card" style="border-color:rgba(232,168,152,.5);background:rgba(232,168,152,.05)">
+          <h3><span class="ms" style="color:var(--coral)">emergency</span> When to call your doctor immediately</h3>
+          <p style="color:var(--coral);font-weight:700">These symptoms require urgent medical attention. Don't wait — call your provider, go to the emergency department, or call emergency services.</p>
+        </div>
+
+        <div class="phase-card">
+          <h3><span class="ms">bloodtype</span> Postpartum hemorrhage warning</h3>
+          <ul>
+            <li>Soaking a maxi pad in 1 hour or less (for 2+ hours)</li>
+            <li>Passing clots larger than a golf ball / plum</li>
+            <li>Bleeding that gets heavier instead of lighter after day 3-4</li>
+            <li>Dizziness, fainting, rapid heartbeat, pale/clammy skin</li>
+          </ul>
+        </div>
+
+        <div class="phase-card">
+          <h3><span class="ms">coronavirus</span> Infection warning</h3>
+          <ul>
+            <li>Fever over 38°C (100.4°F) — especially after the first 24 hours</li>
+            <li>Chills, body aches, feeling very unwell</li>
+            <li>Foul-smelling vaginal discharge</li>
+            <li>C-section incision: redness, swelling, warmth, pus, or opening</li>
+            <li>Perineal tear: increasing pain, swelling, or discharge</li>
+            <li>Painful, red, warm area on the breast (mastitis) — especially with fever</li>
+            <li>Painful urination, urgency, or blood in urine (UTI)</li>
+          </ul>
+        </div>
+
+        <div class="phase-card">
+          <h3><span class="ms">heart_plus</span> Cardiovascular & clot warning</h3>
+          <ul>
+            <li>Chest pain, shortness of breath, or heart palpitations that don't resolve</li>
+            <li>Pain, swelling, redness, or warmth in one leg (deep vein thrombosis)</li>
+            <li>Sudden severe headache, vision changes, or confusion (could be preeclampsia or stroke)</li>
+            <li>Seizures</li>
+          </ul>
+        </div>
+
+        <div class="phase-card">
+          <h3><span class="ms">psychology</span> Mental health emergency</h3>
+          <ul>
+            <li>Thoughts of harming yourself or your baby — <b>call emergency services immediately</b></li>
+            <li>Confusion, disorientation, or not knowing where you are</li>
+            <li>Seeing or hearing things that aren't there (hallucinations)</li>
+            <li>Extreme paranoia or delusions</li>
+            <li>Inability to care for yourself or your baby</li>
+          </ul>
+          <div class="warn-box">
+            <b>Singapore emergency contacts</b>
+            <p>• Emergency: 995<br>
+            • SOS (24/7 mental health): 1-767<br>
+            • Text line: 741741<br>
+            • IMH (Institute of Mental Health): 6389 2222<br>
+            • KKH Women's Clinic: 6225 5554<br>
+            • Your OB/GYN or midwife's after-hours line</p>
+          </div>
+        </div>
+
+        <div class="calm-box">
+          <b>When in doubt, call</b>
+          <p>You know your body best. If something feels wrong — even if it's not on this list — call your provider. It's always better to check. Postpartum complications can develop rapidly, and early treatment makes a big difference. You are not overreacting. You are advocating for yourself, and that's exactly what a good parent does.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <nav class="nav">
+      <a href="home.html"><span class="n-ic">home</span>Home</a>
+      <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+      <a href="tcm-hub.html"><span class="n-ic">acupuncture</span>TCM</a>
+      <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+      <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+    </nav>
+  </div>
+
+  <script>
+    // Phase tab switching
+    document.querySelectorAll('.ptab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.ptab').forEach(t => t.classList.remove('on'));
+        document.querySelectorAll('.phase-content').forEach(c => c.classList.remove('on'));
+        tab.classList.add('on');
+        document.getElementById('phase-' + tab.dataset.phase).classList.add('on');
+      });
+    });
+  </script>
+  <script src="evidence-db.js" defer></script>
+  <script src="evidence.js" defer></script>
+  <script src="luna-chat.js" defer></script>
+  <script src="darkmode.js?v=8" defer></script>
+  <script src="appnav.js" defer></script>
+</body>
+</html>
