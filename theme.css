@@ -395,6 +395,26 @@ h2.sec { font-family:var(--serif); font-weight:800; font-size:19px; color:var(--
 }
 
 /* ── inputs & textareas ── */
+input, textarea, select {
+  background: var(--card-solid, #fff);
+  border: 1.5px solid var(--line-soft, #e8e0f0);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-family: var(--sans, 'Manrope', sans-serif);
+  font-size: 14px;
+  color: var(--ink, #2d2438);
+  transition: border-color .2s, box-shadow .2s;
+  box-sizing: border-box;
+  width: 100%;
+}
+input::placeholder, textarea::placeholder {
+  color: var(--faded, #a898bc);
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--mauve, #c4a8e0);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(196, 168, 224, 0.15);
+}
 [data-theme="dark"] input,
 [data-theme="dark"] textarea,
 [data-theme="dark"] select {
