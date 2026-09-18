@@ -124,11 +124,13 @@
     // Build HTML structure
     card.innerHTML = `
       <div class="hormone-header">
-        <div class="hormone-title">🌙 Hormone Cycle</div>
+        <div class="hormone-title"><span class="hormone-title-icon"><span class="ms">insights</span></span>Hormone Cycle</div>
         <div class="hormone-day-label" id="hormoneDayLabel">Day 6-13</div>
       </div>
       <div class="hormone-phases" id="hormonePhases"></div>
-      <div class="hormone-bars" id="hormoneBars"></div>
+      <div class="hormone-chart-wrap">
+        <div class="hormone-bars" id="hormoneBars"></div>
+      </div>
       <div class="hormone-insight" id="hormoneInsight"></div>
     `;
 
