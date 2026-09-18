@@ -93,6 +93,7 @@ body::before {
   width: 100%; max-width: 430px;
   min-height: 100dvh;
   display: flex; flex-direction: column;
+  margin: 0 auto;
   padding-top: 68px;
   padding-bottom: 92px;
 }

@@ -3,6 +3,77 @@
    Deep midnight purple · lavender text · gold accents · twinkling stars
    ══════════════════════════════════════════════════════════════ */
 
+
+/* ═══ DARK MODE CSS VARIABLE OVERRIDES ═══ */
+[data-theme="dark"] {
+  /* paper & surfaces — deep midnight plum */
+  --paper:      #1a1028;
+  --paper-deep: #140c20;
+  --card:       rgba(42, 28, 66, 0.78);
+  --card-solid: #2a1c42;
+  --sunken:     #241838;
+  --line:       rgba(196, 168, 224, 0.15);
+  --line-soft:  rgba(196, 168, 224, 0.08);
+
+  /* type — soft lavender-cream */
+  --ink:        #e8dff0;
+  --cocoa:      #e8dff0;
+  --taupe:      #a898bc;
+  --faded:      #7a6896;
+
+  /* accents — brighter for dark background */
+  --mauve:      #b898e0;
+  --terracotta: #e8a898;
+  --coral:      #f0b8a8;
+  --coral-deep: #e8a090;
+  --gold:       #f0d898;
+
+  /* signature pastels (brightened) */
+  --lavender:   #9880c0;
+  --periwinkle: #8898c0;
+  --sage:       #88a080;
+  --sky:        #88a0c0;
+  --blush:      #d89888;
+
+  /* six domains (brightened) */
+  --d-medical:  #b898d0;
+  --d-cycle:    #e8a8c8;
+  --d-stress:   #e8b098;
+  --d-exercise: #e0c080;
+  --d-diet:     #98b888;
+  --d-sleep:    #90a8d0;
+
+  /* status */
+  --ok:         #7ac89a;
+  --warn:       #e0b860;
+  --low:        #d88878;
+}
+
+
+/* ── Dark mode: fixed bars ── */
+[data-theme="dark"] .nav {
+  background: rgba(30, 22, 48, 0.92) !important;
+  border-top-color: rgba(196, 168, 224, 0.15) !important;
+}
+[data-theme="dark"] .bottom-nav {
+  background: rgba(30, 22, 48, 0.92) !important;
+  border-top-color: rgba(196, 168, 224, 0.15) !important;
+}
+[data-theme="dark"] .top {
+  background: rgba(26, 16, 40, 0.92) !important;
+}
+[data-theme="dark"] body {
+  background: var(--paper);
+}
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background: var(--sunken) !important;
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
+}
+[data-theme="dark"] ::placeholder { color: var(--faded) !important; }
+
 /* ── Smooth theme transition on all themed elements ── */
 body, .top, .card, .t-icon, .nav, .btn, .chip, .metric,
 .badge, .lrow, .insight, input, textarea, .qi, .g-card,

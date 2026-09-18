@@ -591,7 +591,7 @@ document.addEventListener('DOMContentLoaded', function(){
     mood: {
       title: 'How\'s your mood today?',
       fields: [
-        { type: 'emoji', label: 'Overall mood', options: ['😢','😕','😐','🙂','😄'] },
+        { type: 'emoji', label: 'Overall mood', options: ['low','meh','ok','good','great'], icons: ['sentiment_dissatisfied','sentiment_neutral','sentiment_content','mood','sentiment_very_satisfied'] },
         { type: 'radio', label: 'Mood swings today?', options: ['None','Mild','Moderate','Strong'] },
         { type: 'text', label: 'Anything affecting your mood? (optional)', placeholder: 'e.g., work stress, good news, tired...' }
       ]
@@ -645,7 +645,7 @@ document.addEventListener('DOMContentLoaded', function(){
     mood: {
       title: 'How’s your mood today?',
       fields: [
-        { type: 'emoji', label: 'Overall mood', options: ['😢','😕','😐','🙂','😄'] },
+        { type: 'emoji', label: 'Overall mood', options: ['low','meh','ok','good','great'], icons: ['sentiment_dissatisfied','sentiment_neutral','sentiment_content','mood','sentiment_very_satisfied'] },
         { type: 'radio', label: 'School stress today?', options: ['None','Mild','Moderate','A lot'] },
         { type: 'radio', label: 'How do you feel about your body today?', options: ['Great','Okay','Not great','Really down'] },
         { type: 'text', label: 'Anything on your mind? (optional)', placeholder: 'e.g., friends, exams, family...' }
@@ -701,7 +701,7 @@ document.addEventListener('DOMContentLoaded', function(){
     mood: {
       title: 'How’s your mood & stress?',
       fields: [
-        { type: 'emoji', label: 'Overall mood', options: ['😢','😕','😐','🙂','😄'] },
+        { type: 'emoji', label: 'Overall mood', options: ['low','meh','ok','good','great'], icons: ['sentiment_dissatisfied','sentiment_neutral','sentiment_content','mood','sentiment_very_satisfied'] },
         { type: 'radio', label: 'Stress level today?', options: ['Low','Mild','Moderate','High'] },
         { type: 'radio', label: 'Mood swings today?', options: ['None','Mild','Moderate','Strong'] },
         { type: 'text', label: 'Anything affecting your mood? (optional)', placeholder: 'e.g., TTC stress, work, good news...' }
@@ -759,7 +759,7 @@ document.addEventListener('DOMContentLoaded', function(){
     mood: {
       title: 'How are you feeling?',
       fields: [
-        { type: 'emoji', label: 'Overall mood', options: ['😢','😕','😐','🙂','😄'] },
+        { type: 'emoji', label: 'Overall mood', options: ['low','meh','ok','good','great'], icons: ['sentiment_dissatisfied','sentiment_neutral','sentiment_content','mood','sentiment_very_satisfied'] },
         { type: 'radio', label: 'Feeling overwhelmed or anxious?', options: ['Not at all','Sometimes','Often','Almost always'] },
         { type: 'radio', label: 'Lost interest in things you used to enjoy?', options: ['No','Sometimes','Often','Yes, a lot'] },
         { type: 'radio', label: 'Sleep quality (when you do sleep)?', options: ['Good','Fair','Poor','Very poor'] },
@@ -818,7 +818,7 @@ document.addEventListener('DOMContentLoaded', function(){
     mood: {
       title: 'Mood & emotional wellbeing',
       fields: [
-        { type: 'emoji', label: 'Overall mood', options: ['😢','😕','😐','🙂','😄'] },
+        { type: 'emoji', label: 'Overall mood', options: ['low','meh','ok','good','great'], icons: ['sentiment_dissatisfied','sentiment_neutral','sentiment_content','mood','sentiment_very_satisfied'] },
         { type: 'radio', label: 'Irritability or mood swings today?', options: ['None','Mild','Moderate','Strong'] },
         { type: 'radio', label: 'Anxiety or worry?', options: ['None','Mild','Moderate','High'] },
         { type: 'radio', label: 'Feeling emotionally balanced?', options: ['Very balanced','Mostly','Somewhat','Not really'] },
@@ -908,10 +908,17 @@ document.addEventListener('DOMContentLoaded', function(){
       html += '<div style="margin-bottom:18px">';
       html += '<div style="font-size:13px;font-weight:700;color:var(--cocoa);margin-bottom:8px">' + f.label + '</div>';
       if (f.type === 'emoji') {
-        html += '<div style="display:flex;gap:8px;flex-wrap:wrap">';
+        var faceColors = ['#8a9bc4','#b0a0d0','#c4a8e0','#e8b898','#f0c878'];
+        html += '<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:4px 0">';
         f.options.forEach(function(opt, j) {
-          var checked = logData[type] && logData[type].fields && logData[type].fields[i] === opt ? 'background:rgba(196,181,224,.3);border-color:var(--mauve)' : '';
-          html += '<div class="emoji-opt" data-val="' + opt + '" style="font-size:28px;padding:8px 12px;border-radius:14px;border:2px solid var(--line-soft);cursor:pointer;transition:.15s;' + checked + '">' + opt + '</div>';
+          var ic = (f.icons && f.icons[j]) ? f.icons[j] : opt;
+          var checked = logData[type] && logData[type].fields && logData[type].fields[i] === opt;
+          var bg = checked ? faceColors[j] : 'var(--sunken)';
+          var bd = checked ? faceColors[j] : 'var(--line-soft)';
+          var fg = checked ? '#fff' : 'var(--taupe)';
+          html += '<div class="emoji-opt" data-val="' + opt + '" style="width:52px;height:52px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid ' + bd + ';cursor:pointer;transition:all .2s;background:' + bg + ';color:' + fg + ';box-shadow:' + (checked ? '0 4px 14px -4px ' + faceColors[j] : 'none') + '">';
+          html += '<span class="ms" style="font-size:24px;line-height:1">' + ic + '</span>';
+          html += '</div>';
         });
         html += '</div>';
       } else if (f.type === 'radio') {
