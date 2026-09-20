@@ -65,20 +65,20 @@
       <div class="mood-selector">
         <h3>How are you feeling right now?</h3>
         <div class="mood-chips">
-          <div class="mood-chip" data-mood="stressed">😰 Stressed</div>
-          <div class="mood-chip" data-mood="anxious">😰 Anxious</div>
-          <div class="mood-chip" data-mood="overwhelmed">😵 Overwhelmed</div>
-          <div class="mood-chip" data-mood="work">💼 Work bully / tension</div>
-          <div class="mood-chip" data-mood="insomnia">🌙 Can't sleep</div>
-          <div class="mood-chip" data-mood="lowenergy">🔋 Low energy</div>
-          <div class="mood-chip" data-mood="anger">😤 Frustrated / angry</div>
+          <div class="mood-chip" data-mood="stressed"> Stressed</div>
+          <div class="mood-chip" data-mood="anxious"> Anxious</div>
+          <div class="mood-chip" data-mood="overwhelmed"> Overwhelmed</div>
+          <div class="mood-chip" data-mood="work"> Work bully / tension</div>
+          <div class="mood-chip" data-mood="insomnia"> Can't sleep</div>
+          <div class="mood-chip" data-mood="lowenergy"> Low energy</div>
+          <div class="mood-chip" data-mood="anger"> Frustrated / angry</div>
         </div>
         <div class="mood-recommendation" id="moodRec"></div>
       </div>
 
       <!-- Glowing breathing circle -->
       <div style="text-align:center">
-        <button class="audio-toggle" id="audioToggle">🔊 Ambient sound</button>
+        <button class="audio-toggle" id="audioToggle"> Ambient sound</button>
       </div>
       <div class="breath-circle-wrap">
         <div class="breath-glow" id="breathGlow"></div>
@@ -107,22 +107,22 @@
       </div>
 
       <div class="technique-card">
-        <h4>💭 Resonance Breathing</h4>
+        <h4> Resonance Breathing</h4>
         <p>Inhale 4s, hold 7s, exhale 8s. Shown to reduce cortisol and improve HRV. Best before bed or during high-stress moments.</p>
       </div>
 
       <div class="technique-card">
-        <h4>🔷 Box Breathing</h4>
+        <h4> Box Breathing</h4>
         <p>Equal inhale, hold, exhale, hold. Used by athletes and clinicians to quickly down-regulate the nervous system.</p>
       </div>
 
       <div class="technique-card">
-        <h4>🔄 Coherent Breathing</h4>
+        <h4> Coherent Breathing</h4>
         <p>5.5 seconds in, 5.5 seconds out. Targets cardiac resonance frequency, maximizing heart rate variability.</p>
       </div>
 
       <div class="card" style="margin:16px">
-        <h3 style="margin-bottom:8px">🧠 Why this helps ovaries</h3>
+        <h3 style="margin-bottom:8px"> Why this helps ovaries</h3>
         <p class="sub" style="font-size:13px;line-height:1.5">Chronic stress elevates cortisol, which can disrupt GnRH pulsatility and ovarian function. Regular breathwork is a free, evidence-based tool to support hormonal resilience.</p>
       </div>
     </div>
@@ -202,7 +202,7 @@
       initAudio();
       audioOn = !audioOn;
       this.classList.toggle('on', audioOn);
-      this.textContent = audioOn ? '🔊 Ambient on' : '🔇 Ambient off';
+      this.textContent = audioOn ? ' Ambient on' : '🔇 Ambient off';
       if (audioOn) {
         audioCtx.resume();
         gainNode.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 1);
