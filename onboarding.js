@@ -7,6 +7,8 @@
 (function() {
   'use strict';
 
+  var t = (window.OVULUNA_I18N && window.OVULUNA_I18N.t) || function(s) { return s; };
+
   var STORAGE_KEY = 'ovuluna_onboarding';
   var answers = {};
   var currentStep = 0;
@@ -35,7 +37,7 @@
       title: 'How old are you?',
       subtitle: 'We use this to contextualize your cycle and ovarian wellness stage.',
       field: 'age',
-      min: 10, max: 65, default: 28, unit: 'years'
+      min: 10, max: 65, default: 28, unit: t('years')
     },
     {
       id: 'height-weight',
@@ -68,7 +70,7 @@
       title: 'Average cycle length?',
       subtitle: 'From the first day of one period to the first day of the next.',
       field: 'cycleLength',
-      min: 21, max: 45, default: 28, unit: 'days',
+      min: 21, max: 45, default: 28, unit: t('days'),
       showIf: function(a) { return a.cycle === 'regular' || a.cycle === 'variable'; }
     },
     {
@@ -87,7 +89,7 @@
       title: 'How old were you at your first period?',
       subtitle: 'Early or late menarche can affect your cycle pattern. Optional — skip if unsure.',
       field: 'firstPeriodAge',
-      min: 8, max: 18, default: 12, unit: 'years',
+      min: 8, max: 18, default: 12, unit: t('years'),
       showIf: function(a) { return a.cycle !== 'post12'; }
     },
     {
@@ -97,7 +99,7 @@
       title: 'At what age did your mother reach menopause?',
       subtitle: 'Family history is one of the strongest predictors of your own menopause timing.',
       field: 'momMeno',
-      min: 35, max: 60, default: 51, unit: 'years',
+      min: 35, max: 60, default: 51, unit: t('years'),
       optional: true, optionalLabel: "I don't know"
     },
     {
@@ -245,7 +247,7 @@
     if (!step) { finish(); return; }
 
     // Update header
-    jsection.textContent = step.section || '';
+    jsection.textContent = t(step.section) || '';
     jcount.textContent = (currentStep + 1) + ' / ' + visible.length;
     var progress = ((currentStep + 1) / visible.length) * 100;
     barfill.style.width = progress + '%';
@@ -288,10 +290,10 @@
     div.innerHTML =
       '<div class="brandmark"><span class="dot"></span><b>OVULUNA</b></div>' +
       '<img class="hero" src="assets/onboarding/luna.png" alt="Ovuluna" onerror="this.style.display=\'none\'">' +
-      '<h1>' + step.title + '</h1>' +
-      '<p>' + step.subtitle + '</p>';
+      '<h1>' + t(step.title) + '</h1>' +
+      '<p>' + t(step.subtitle) + '</p>';
     scrollEl.appendChild(div);
-    footEl.innerHTML = '<button class="cta" id="nextBtn">Get Started</button>';
+    footEl.innerHTML = '<button class="cta" id="nextBtn">' + t('Get Started') + '</button>';
     document.getElementById('nextBtn').addEventListener('click', nextStep);
   }
 
@@ -308,8 +310,8 @@
     var div = document.createElement('div');
     div.style.cssText = 'flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 24px;';
     div.innerHTML =
-      '<h1 class="q">' + step.title + '</h1>' +
-      '<p class="sub">' + step.subtitle + '</p>' +
+      '<h1 class="q">' + t(step.title) + '</h1>' +
+      '<p class="sub">' + t(step.subtitle) + '</p>' +
       '<div id="langList" style="display:flex;flex-direction:column;gap:10px;margin-top:8px"></div>';
     scrollEl.appendChild(div);
 
@@ -346,7 +348,7 @@
       list.appendChild(el);
     });
 
-    footEl.innerHTML = '<button class="cta" id="nextBtn" ' + (selected ? '' : 'disabled') + '>Continue</button>';
+    footEl.innerHTML = '<button class="cta" id="nextBtn" ' + (selected ? '' : 'disabled') + '>' + t('Continue') + '</button>';
     document.getElementById('nextBtn').addEventListener('click', nextStep);
   }
 
@@ -356,8 +358,8 @@
     var div = document.createElement('div');
     div.style.cssText = 'flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 24px;';
     div.innerHTML =
-      '<h1 class="q">' + step.title + '</h1>' +
-      '<p class="sub">' + step.subtitle + '</p>' +
+      '<h1 class="q">' + t(step.title) + '</h1>' +
+      '<p class="sub">' + t(step.subtitle) + '</p>' +
       '<div class="wheel">' +
         '<div class="val" id="wheelVal">' + val + '</div>' +
         '<input type="range" min="' + step.min + '" max="' + step.max + '" value="' + val + '" id="wheelInput">' +
@@ -381,7 +383,7 @@
       });
     }
 
-    footEl.innerHTML = '<button class="cta" id="nextBtn" disabled>Continue</button>';
+    footEl.innerHTML = '<button class="cta" id="nextBtn" disabled>' + t('Continue') + '</button>';
     var nextBtn = document.getElementById('nextBtn');
     nextBtn.disabled = false; // wheel always has a default value
     nextBtn.addEventListener('click', nextStep);
@@ -395,8 +397,8 @@
     var div = document.createElement('div');
     div.style.cssText = 'flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 24px;';
     div.innerHTML =
-      '<h1 class="q">' + step.title + '</h1>' +
-      '<p class="sub">' + step.subtitle + '</p>' +
+      '<h1 class="q">' + t(step.title) + '</h1>' +
+      '<p class="sub">' + t(step.subtitle) + '</p>' +
       '<div style="display:flex;gap:8px;margin-bottom:18px;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:4px">' +
         '<button id="unitMetric" style="flex:1;padding:10px;border:none;border-radius:9px;font:700 13px var(--sans);cursor:pointer;transition:.15s;background:' + (units==='metric'?'var(--mauve)':'transparent') + ';color:' + (units==='metric'?'#fff':'var(--muted)') + '">Metric (cm/kg)</button>' +
         '<button id="unitImperial" style="flex:1;padding:10px;border:none;border-radius:9px;font:700 13px var(--sans);cursor:pointer;transition:.15s;background:' + (units==='imperial'?'var(--mauve)':'transparent') + ';color:' + (units==='imperial'?'#fff':'var(--muted)') + '">Imperial (ft/lbs)</button>' +
@@ -508,7 +510,7 @@
       if (el) el.addEventListener('input', validate);
     });
 
-    footEl.innerHTML = '<button class="cta" id="nextBtn" disabled>Continue</button>';
+    footEl.innerHTML = '<button class="cta" id="nextBtn" disabled>' + t('Continue') + '</button>';
     document.getElementById('nextBtn').addEventListener('click', nextStep);
     validate();
   }
@@ -518,8 +520,8 @@
     var div = document.createElement('div');
     div.style.cssText = 'flex:1;display:flex;flex-direction:column;padding:20px 24px;';
     div.innerHTML =
-      '<h1 class="q">' + step.title + '</h1>' +
-      '<p class="sub">' + step.subtitle + '</p>' +
+      '<h1 class="q">' + t(step.title) + '</h1>' +
+      '<p class="sub">' + t(step.subtitle) + '</p>' +
       '<div id="optList" style="display:flex;flex-direction:column;gap:10px"></div>';
     scrollEl.appendChild(div);
 
@@ -535,8 +537,8 @@
       el.innerHTML =
         '<span style="font-size:24px;flex-shrink:0">' + (opt.emoji || '') + '</span>' +
         '<div style="flex:1;min-width:0">' +
-          '<div style="font:700 14px var(--sans);color:var(--ink)">' + opt.label + '</div>' +
-          (opt.desc ? '<div style="font:500 12px var(--sans);color:var(--muted);margin-top:2px">' + opt.desc + '</div>' : '') +
+          '<div style="font:700 14px var(--sans);color:var(--ink)">' + t(opt.label) + '</div>' +
+          (opt.desc ? '<div style="font:500 12px var(--sans);color:var(--muted);margin-top:2px">' + t(opt.desc) + '</div>' : '') +
         '</div>' +
         '<span class="tick" style="margin-left:auto;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0">' +
           (answers[step.field] === opt.value ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--sage,#5E9B93)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '') +
@@ -558,7 +560,7 @@
       list.appendChild(el);
     });
 
-    footEl.innerHTML = '<button class="cta" id="nextBtn" disabled>Continue</button>';
+    footEl.innerHTML = '<button class="cta" id="nextBtn" disabled>' + t('Continue') + '</button>';
     if (answers[step.field]) document.getElementById('nextBtn').disabled = false;
     document.getElementById('nextBtn').addEventListener('click', nextStep);
   }
@@ -569,8 +571,8 @@
     var div = document.createElement('div');
     div.style.cssText = 'flex:1;display:flex;flex-direction:column;padding:20px 24px;';
     div.innerHTML =
-      '<h1 class="q">' + step.title + '</h1>' +
-      '<p class="sub">' + step.subtitle + '</p>' +
+      '<h1 class="q">' + t(step.title) + '</h1>' +
+      '<p class="sub">' + t(step.subtitle) + '</p>' +
       '<div id="optGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"></div>';
     scrollEl.appendChild(div);
 
@@ -590,7 +592,7 @@
       }
       el.innerHTML =
         '<span style="font-size:32px">' + (opt.emoji || '') + '</span>' +
-        '<span style="font:600 12.5px var(--sans);color:var(--ink);line-height:1.2">' + opt.label + '</span>';
+        '<span style="font:600 12.5px var(--sans);color:var(--ink);line-height:1.2">' + t(opt.label) + '</span>';
       el.addEventListener('click', function() {
         var idx = selected.indexOf(opt.value);
         if (idx === -1) {
@@ -610,7 +612,7 @@
       grid.appendChild(el);
     });
 
-    footEl.innerHTML = '<button class="cta" id="nextBtn" ' + (selected.length < (step.minSelect || 0) ? 'disabled' : '') + '>Continue</button>';
+    footEl.innerHTML = '<button class="cta" id="nextBtn" ' + (selected.length < (step.minSelect || 0) ? 'disabled' : '') + '>' + t('Continue') + '</button>';
     document.getElementById('nextBtn').addEventListener('click', nextStep);
   }
 
@@ -621,8 +623,8 @@
     var div = document.createElement('div');
     div.style.cssText = 'flex:1;display:flex;flex-direction:column;padding:20px 24px;';
     div.innerHTML =
-      '<h1 class="q">' + step.title + '</h1>' +
-      '<p class="sub">' + step.subtitle + '</p>' +
+      '<h1 class="q">' + t(step.title) + '</h1>' +
+      '<p class="sub">' + t(step.subtitle) + '</p>' +
       '<div class="cal" id="calWidget"></div>';
     scrollEl.appendChild(div);
 
@@ -673,7 +675,7 @@
     }
     renderMonth();
 
-    footEl.innerHTML = '<button class="cta" id="nextBtn" ' + (selected ? '' : 'disabled') + '>Continue</button>';
+    footEl.innerHTML = '<button class="cta" id="nextBtn" ' + (selected ? '' : 'disabled') + '>' + t('Continue') + '</button>';
     document.getElementById('nextBtn').addEventListener('click', nextStep);
   }
 
@@ -774,7 +776,7 @@
     div.innerHTML =
       '<div class="brandmark"><span class="dot"></span><b>OVULUNA</b></div>' +
       '<img class="hero" src="assets/onboarding/luna.png" alt="" onerror="this.style.display=\'none\'">' +
-      '<h1>' + step.title + '</h1>' +
+      '<h1>' + t(step.title) + '</h1>' +
       '<p>' + step.subtitle + '</p>' +
       ovInfo +
       minorNote +
