@@ -1,0 +1,397 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Ovuluna · Reproductive Stage Calculator</title>
+<link rel="icon" type="image/png" href="assets/onboarding/luna.png">
+<link rel="apple-touch-icon" href="assets/onboarding/luna.png">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<link rel="stylesheet" href="darkmode.css">
+<script src="anim.js" defer></script>
+<link rel="stylesheet" href="evidence.css">
+<link rel="stylesheet" href="luna-chat.css">
+<style>
+.step{display:none}
+.step.active{display:block}
+.qlabel{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.qsub{font-size:11.5px;color:var(--faded);margin-bottom:10px;line-height:1.5}
+.optrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.opt{flex:1;min-width:120px;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);cursor:pointer;text-align:center;font-size:12.5px;font-weight:600;color:var(--ink);transition:all .2s}
+.opt.sel{border-color:var(--mauve);background:rgba(155,107,141,.12);color:var(--mauve)}
+.opt .ms{display:block;font-size:22px;margin-bottom:4px;color:var(--faded)}
+.opt.sel .ms{color:var(--mauve)}
+.numinput{width:100%;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);font-size:15px;font-weight:700;color:var(--ink);text-align:center;outline:none}
+.numinput:focus{border-color:var(--mauve)}
+.cycle-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.cycle-row label{font-size:11.5px;color:var(--faded);min-width:90px}
+.cycle-row input{flex:1;padding:8px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);font-size:13px;font-weight:600;color:var(--ink);text-align:center}
+.result-badge{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.04em}
+.stage-num{font-family:var(--serif);font-size:48px;font-weight:600;line-height:1;color:var(--mauve)}
+.stage-label{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--cocoa);margin-top:4px}
+.stage-desc{font-size:13px;color:var(--ink);line-height:1.6;margin-top:12px}
+.why-box{margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(155,107,141,.08);border:1px solid rgba(155,107,141,.18);font-size:12px;line-height:1.6;color:var(--ink)}
+.why-box b{color:var(--mauve)}
+.na-box{text-align:center;padding:28px 20px}
+.na-box .ms{font-size:48px;color:var(--faded);margin-bottom:10px}
+.na-title{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--cocoa);margin-bottom:8px}
+.na-desc{font-size:13px;color:var(--faded);line-height:1.6;max-width:340px;margin:0 auto}
+.progress-dots{display:flex;gap:6px;justify-content:center;margin:14px 0}
+.pdot{width:8px;height:8px;border-radius:50%;background:var(--line);transition:all .3s}
+.pdot.on{background:var(--mauve);transform:scale(1.3)}
+.ev-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:rgba(155,107,141,.15);color:var(--mauve);font-size:11px;font-weight:700;cursor:pointer;margin-left:4px;vertical-align:middle;border:none}
+</style>
+</head><body>
+
+<div class="app">
+  <div class="top">
+    <div class="brandline"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">OVULUNA</b></div>
+    <a class="t-icon ms" href="learn-straw10.html">menu_book</a>
+    <a class="t-icon ms" href="cycle-trends.html">calendar_today</a>
+  </div>
+  <div class="scroll">
+
+    <!-- Hero -->
+    <div class="card tint-lavender" style="text-align:center;padding:22px 18px">
+      <div style="font-size:36px;margin-bottom:6px" class="ms" style="color:var(--mauve)">insights</div>
+      <div style="font-family:var(--serif);font-weight:600;font-size:22px;color:var(--cocoa);line-height:1.2">Reproductive Stage Calculator</div>
+      <div class="sub" style="font-size:12px;margin-top:8px">Based on the STRAW+10 international standard for reproductive aging staging <button class="ev-btn" data-ev="straw10">i</button></div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--faded);margin-top:10px;justify-content:center">
+        <span class="ms" style="font-size:14px;color:var(--ok)">lock</span> Wellness estimation, not a medical diagnosis
+      </div>
+    </div>
+
+    <!-- Eligibility Check -->
+    <div class="card" id="elig-card">
+      <div class="artsec" style="margin:0 0 4px;font-size:16px">Quick eligibility check</div>
+      <p class="sub" style="font-size:12px;margin-bottom:14px">We need a few questions to know if cycle-based staging works for you right now.</p>
+
+      <div id="elig-step" class="step active">
+        <div class="qlabel"><span class="ms" style="font-size:16px;color:var(--mauve)">medication</span> Are you on hormonal contraception? <button class="ev-btn" data-ev="straw-hormonal">i</button></div>
+        <div class="qsub">Birth control pills, hormonal IUD, implant, injection, or ring can mask your natural cycle pattern.</div>
+        <div class="optrow">
+          <div class="opt" data-q="contraception" data-v="no"><span class="ms">close</span>No</div>
+          <div class="opt" data-q="contraception" data-v="yes"><span class="ms">check_circle</span>Yes</div>
+          <div class="opt" data-q="contraception" data-v="off"><span class="ms">history</span>Stopped &gt;12mo ago</div>
+        </div>
+      </div>
+
+      <div id="elig-step2" class="step">
+        <div class="qlabel"><span class="ms" style="font-size:16px;color:var(--mauve)">medical_information</span> Any diagnosed condition affecting your cycles? <button class="ev-btn" data-ev="straw-pcos">i</button></div>
+        <div class="qsub">PCOS, thyroid disorder, recent pregnancy (within 12 months), or hysterectomy can change cycle patterns independent of reproductive aging.</div>
+        <div class="optrow">
+          <div class="opt" data-q="condition" data-v="none"><span class="ms">shield</span>No known condition</div>
+          <div class="opt" data-q="condition" data-v="pcos"><span class="ms">medical_services</span>PCOS</div>
+          <div class="opt" data-q="condition" data-v="postpartum"><span class="ms">child_care</span>Postpartum &lt;12mo</div>
+          <div class="opt" data-q="condition" data-v="other"><span class="ms">warning</span>Other / not sure</div>
+        </div>
+      </div>
+
+      <div id="elig-step3" class="step">
+        <div class="qlabel"><span class="ms" style="font-size:16px;color:var(--mauve)">history</span> How many cycles have you tracked in the last 12 months?</div>
+        <div class="qsub">STRAW+10 needs at least 3 cycles to detect patterns reliably.</div>
+        <div class="optrow">
+          <div class="opt" data-q="cycles" data-v="0"><span class="ms">block</span>0–2 cycles</div>
+          <div class="opt" data-q="cycles" data-v="3-5"><span class="ms">partial</span>3–5 cycles</div>
+          <div class="opt" data-q="cycles" data-v="6+"><span class="ms">done_all</span>6+ cycles</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-top:16px">
+        <button class="btn ghost" id="btn-back" style="display:none;flex:1" onclick="goBack()">Back</button>
+        <button class="btn primary" id="btn-next" style="flex:1" onclick="nextElig()">Continue</button>
+      </div>
+    </div>
+
+    <!-- Cycle Input (only if eligible) -->
+    <div class="card" id="cycle-card" style="display:none">
+      <div class="artsec" style="margin:0 0 4px;font-size:16px">Your recent cycle lengths</div>
+      <p class="sub" style="font-size:12px;margin-bottom:14px">Enter the length of your last few cycles (days from one period start to the next). More cycles = more accurate staging.</p>
+
+      <div id="cycle-inputs"></div>
+
+      <button class="btn ghost" style="width:100%;margin-bottom:10px" onclick="addCycle()">
+        <span class="ms" style="font-size:16px;vertical-align:-3px">add</span> Add another cycle
+      </button>
+
+      <div class="qlabel" style="margin-top:8px">Have you gone 60+ days without a period in the last year? <button class="ev-btn" data-ev="straw-60day">i</button></div>
+      <div class="optrow">
+        <div class="opt" data-q="amenorrhea" data-v="no"><span class="ms">close</span>No</div>
+        <div class="opt" data-q="amenorrhea" data-v="yes"><span class="ms">event_busy</span>Yes</div>
+      </div>
+
+      <div class="qlabel" style="margin-top:8px">Optional: your age today (helps refine sub-stage)</div>
+      <input type="number" class="numinput" id="age-input" placeholder="e.g. 34" min="9" max="80" style="margin-bottom:8px">
+
+      <button class="btn primary" style="width:100%;margin-top:8px" onclick="calculateStage()">
+        Calculate my stage
+      </button>
+    </div>
+
+    <!-- Result -->
+    <div class="card" id="result-card" style="display:none;text-align:center;padding:24px 18px">
+      <div id="result-content"></div>
+    </div>
+
+    <!-- Unable to determine -->
+    <div class="card" id="na-card" style="display:none">
+      <div class="na-box">
+        <div class="ms">help</div>
+        <div class="na-title">Reproductive stage: unable to determine</div>
+        <div class="na-desc" id="na-reason">
+          We can't reliably estimate your STRAW+10 stage right now. This is not a gap in your health — it means the standard cycle-based criteria don't apply to your current situation.
+        </div>
+        <div style="margin-top:16px;font-size:12px;color:var(--faded);line-height:1.6" id="na-action"></div>
+      </div>
+    </div>
+
+    <!-- Stage reference (always visible at bottom) -->
+    <div class="card" style="margin-top:14px">
+      <div class="artsec" style="margin:0 0 8px;font-size:15px">STRAW+10 stage reference</div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:11.5px">
+          <tr style="border-bottom:1.5px solid var(--line-soft)">
+            <th style="text-align:left;padding:6px 8px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--taupe)">Stage</th>
+            <th style="text-align:left;padding:6px 8px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--taupe)">Label</th>
+            <th style="text-align:left;padding:6px 8px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--taupe)">Key marker</th>
+          </tr>
+          <tr style="border-bottom:1px solid var(--line-soft)"><td style="padding:6px 8px;font-weight:700;color:var(--d-cycle)">-5</td><td style="padding:6px 8px">Early reproductive</td><td style="padding:6px 8px;color:var(--faded)">Irregular cycles post-menarche</td></tr>
+          <tr style="border-bottom:1px solid var(--line-soft)"><td style="padding:6px 8px;font-weight:700;color:var(--d-cycle)">-4</td><td style="padding:6px 8px">Peak reproductive</td><td style="padding:6px 8px;color:var(--faded)">Regular, predictable cycles</td></tr>
+          <tr style="border-bottom:1px solid var(--line-soft)"><td style="padding:6px 8px;font-weight:700;color:var(--sage)">-3a</td><td style="padding:6px 8px">Late reproductive a</td><td style="padding:6px 8px;color:var(--faded)">Regular cycles, normal FSH</td></tr>
+          <tr style="border-bottom:1px solid var(--line-soft)"><td style="padding:6px 8px;font-weight:700;color:var(--sage)">-3b</td><td style="padding:6px 8px">Late reproductive b</td><td style="padding:6px 8px;color:var(--faded)">Regular cycles, rising FSH / low AMH</td></tr>
+          <tr style="border-bottom:1px solid var(--line-soft)"><td style="padding:6px 8px;font-weight:700;color:var(--terracotta)">-2</td><td style="padding:6px 8px">Early transition</td><td style="padding:6px 8px;color:var(--faded)">Persistent ≥7-day cycle variability</td></tr>
+          <tr style="border-bottom:1px solid var(--line-soft)"><td style="padding:6px 8px;font-weight:700;color:var(--terracotta)">-1</td><td style="padding:6px 8px">Late transition</td><td style="padding:6px 8px;color:var(--faded)">≥60 days amenorrhea</td></tr>
+          <tr style="border-bottom:1px solid var(--line-soft)"><td style="padding:6px 8px;font-weight:700;color:var(--mauve)">0</td><td style="padding:6px 8px">FMP (menopause)</td><td style="padding:6px 8px;color:var(--faded)">12 months no period</td></tr>
+          <tr><td style="padding:6px 8px;font-weight:700;color:var(--mauve)">+1</td><td style="padding:6px 8px">Postmenopause</td><td style="padding:6px 8px;color:var(--faded)">After FMP, sub-staged by years since</td></tr>
+        </table>
+      </div>
+      <div style="font-size:10.5px;color:var(--faded);margin-top:8px">Source: Harlow SD et al. STRAW+10 Executive Summary. Menopause 2012. PMID 22395361.</div>
+    </div>
+
+  </div>
+</div>
+
+<nav class="nav">
+  <a href="home.html"><span class="n-ic">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+  <a href="tcm-hub.html"><span class="n-ic">acupuncture</span>TCM</a>
+  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+</nav>
+
+<script src="appnav.js" defer></script>
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
+<script src="luna-chat.js" defer></script>
+<script src="darkmode.js?v=9" defer></script>
+
+<script>
+// State
+const answers = { contraception: null, condition: null, cycles: null, amenorrhea: null };
+let eligStepIdx = 0;
+const eligSteps = ['elig-step', 'elig-step2', 'elig-step3'];
+
+// Option selection
+document.querySelectorAll('.opt').forEach(el => {
+  el.addEventListener('click', () => {
+    const q = el.dataset.q, v = el.dataset.v;
+    el.closest('.optrow').querySelectorAll('.opt').forEach(o => o.classList.remove('sel'));
+    el.classList.add('sel');
+    answers[q] = v;
+  });
+});
+
+function showStep(idx) {
+  eligSteps.forEach((s, i) => {
+    document.getElementById(s).classList.toggle('active', i === idx);
+  });
+  document.getElementById('btn-back').style.display = idx > 0 ? 'flex' : 'none';
+  document.getElementById('btn-next').textContent = idx === eligSteps.length - 1 ? 'Check eligibility' : 'Continue';
+}
+
+function nextElig() {
+  if (!answers[['contraception','condition','cycles'][eligStepIdx]]) {
+    // auto-advance only if answered
+  }
+  if (eligStepIdx < eligSteps.length - 1) {
+    eligStepIdx++;
+    showStep(eligStepIdx);
+  } else {
+    evaluateEligibility();
+  }
+}
+
+function goBack() {
+  if (eligStepIdx > 0) { eligStepIdx--; showStep(eligStepIdx); }
+}
+
+function evaluateEligibility() {
+  // Rule 1: on hormonal contraception now -> unable
+  if (answers.contraception === 'yes') {
+    showNA('hormonal');
+    return;
+  }
+  // Rule 2: diagnosed condition affecting cycles
+  if (answers.condition === 'pcos') {
+    showNA('pcos');
+    return;
+  }
+  if (answers.condition === 'postpartum') {
+    showNA('postpartum');
+    return;
+  }
+  if (answers.condition === 'other') {
+    showNA('other');
+    return;
+  }
+  // Rule 3: too few cycles
+  if (answers.cycles === '0') {
+    showNA('cycles');
+    return;
+  }
+  // Eligible -> show cycle input
+  document.getElementById('elig-card').style.display = 'none';
+  const cc = document.getElementById('cycle-card');
+  cc.style.display = 'block';
+  cc.scrollIntoView({behavior:'smooth'});
+  initCycleInputs();
+}
+
+function showNA(reason) {
+  document.getElementById('elig-card').style.display = 'none';
+  const na = document.getElementById('na-card');
+  na.style.display = 'block';
+  const reasons = {
+    hormonal: {
+      title: 'Hormonal contraception masks natural cycles',
+      action: 'STRAW+10 relies on your natural menstrual pattern. Hormonal birth control (pill, IUD, implant, ring, injection) chemically controls bleeding. Once you stop for 3–6 months, your natural pattern will re-emerge and we can stage you. You can still track symptoms, sleep, and nutrition here.'
+    },
+    pcos: {
+      title: 'PCOS means cycle variability is your baseline',
+      action: 'If you have PCOS, irregular cycles may be your normal — not a sign of menopausal transition. STRAW+10 was designed for women with previously regular cycles. We recommend discussing any new symptoms with your clinician. We can still help you track your personal pattern.'
+    },
+    postpartum: {
+      title: 'Postpartum cycles are not yet re-established',
+      action: 'After pregnancy, cycles take 6–12 months to re-stabilize, especially while breastfeeding. STRAW+10 staging is not reliable during this window. Keep logging — once your cycles have returned to your pre-pregnancy pattern for 6+ months, we can recalculate.'
+    },
+    other: {
+      title: 'Cycle-affecting condition detected',
+      action: 'Thyroid disorders, prolactin issues, weight changes, or other conditions can alter cycle length independent of reproductive aging. We recommend discussing new cycle changes with your clinician. We can still track your wellness markers here.'
+    },
+    cycles: {
+      title: 'Not enough cycle data yet',
+      action: 'STRAW+10 needs at least 3 tracked cycles to detect patterns. Start logging your period start dates — once we have enough data, we will calculate your stage automatically. This usually takes 3–6 months.'
+    }
+  };
+  const r = reasons[reason] || reasons.other;
+  document.querySelector('#na-card .na-title').textContent = r.title;
+  document.getElementById('na-reason').textContent = r.action;
+  na.scrollIntoView({behavior:'smooth'});
+}
+
+// Cycle inputs
+function initCycleInputs() {
+  const container = document.getElementById('cycle-inputs');
+  container.innerHTML = '';
+  addCycleRow(container, 1);
+  addCycleRow(container, 2);
+  addCycleRow(container, 3);
+}
+function addCycle() { addCycleRow(document.getElementById('cycle-inputs'), document.querySelectorAll('.cycle-row').length + 1); }
+function addCycleRow(container, n) {
+  const row = document.createElement('div');
+  row.className = 'cycle-row';
+  row.innerHTML = `<label>Cycle ${n} length</label><input type="number" class="cycle-input" min="15" max="90" placeholder="e.g. 28">`;
+  container.appendChild(row);
+}
+
+function calculateStage() {
+  // Get cycle lengths
+  const cycles = [...document.querySelectorAll('.cycle-input')].map(i => parseInt(i.value)).filter(v => v && v > 0);
+  if (cycles.length < 3) { alert('Please enter at least 3 cycle lengths.'); return; }
+
+  const amenorrhea = answers.amenorrhea;
+  const age = parseInt(document.getElementById('age-input').value) || null;
+
+  // Algorithm per STRAW+10 + Codex corrections:
+  // 1. >=60 day amenorrhea -> Stage -1
+  if (amenorrhea === 'yes') {
+    showResult({
+      stage: '-1', label: 'Late Menopausal Transition',
+      color: 'var(--terracotta)',
+      desc: 'You have experienced 60+ days without a period in the last year. This is the clinical marker for late menopausal transition.',
+      why: '<b>Why:</b> STRAW+10 defines Stage -1 by amenorrhea of 60 days or more, reflecting diminished follicular reserve and erratic estrogen output. FSH is typically >25 IU/L at this stage.'
+    });
+    return;
+  }
+
+  // 2. Check persistent >=7-day variability across last 10 cycles
+  // "Persistent" = recurrence across the cycles we have
+  const baseline = cycles[cycles.length - 1]; // most recent as baseline
+  const diffs = cycles.map(c => Math.abs(c - baseline));
+  const variabilityCount = diffs.filter(d => d >= 7).length;
+  const hasPersistentVariability = variabilityCount >= 2; // 2+ cycles differing by 7+ days
+
+  if (hasPersistentVariability) {
+    showResult({
+      stage: '-2', label: 'Early Menopausal Transition',
+      color: 'var(--terracotta)',
+      desc: `Your cycle lengths have varied by 7+ days across ${variabilityCount} of your last ${cycles.length} tracked cycles. This persistent variability marks early transition.`,
+      why: '<b>Why:</b> STRAW+10 defines Stage -2 by a persistent ≥7-day difference in consecutive cycle lengths, confirmed across multiple cycles (not a one-off). This reflects declining ovarian reserve and irregular follicle recruitment.'
+    });
+    return;
+  }
+
+  // 3. Still reproductive — determine sub-stage by age (tiebreaker only)
+  if (age !== null && age < 20) {
+    showResult({
+      stage: '-5', label: 'Early Reproductive',
+      color: 'var(--d-cycle)',
+      desc: 'Your cycles are not yet regular, which is typical in the first years after menarche as the HPO axis matures.',
+      why: '<b>Why:</b> Stage -5 covers the years after first period when cycles are commonly anovulatory and irregular. This is normal — regularity typically establishes within 2–5 years of menarche.'
+    });
+    return;
+  }
+
+  if (age !== null && age >= 35) {
+    showResult({
+      stage: '-3b', label: 'Late Reproductive',
+      color: 'var(--sage)',
+      desc: 'Your cycles remain regular and predictable, but at your age the ovarian reserve is declining. Without FSH/AMH bloodwork we cannot distinguish -3a from -3b precisely.',
+      why: '<b>Why:</b> In Stage -3, cycles remain regular but fecundability declines. -3a has normal FSH; -3b has elevated FSH / low AMH. Bloodwork (FSH on CD3, AMH) refines this.'
+    });
+    return;
+  }
+
+  // Default: peak reproductive
+  showResult({
+    stage: '-4', label: 'Peak Reproductive',
+    color: 'var(--sage)',
+    desc: 'Your cycles are regular and predictable. This is consistent with peak reproductive function.',
+    why: '<b>Why:</b> Stage -4 represents the years of most regular ovulatory cycles and peak fertility. If you are over 35, add your age to refine to -3a/b.'
+  });
+}
+
+function showResult(r) {
+  document.getElementById('cycle-card').style.display = 'none';
+  const rc = document.getElementById('result-card');
+  rc.style.display = 'block';
+  document.getElementById('result-content').innerHTML = `
+    <div class="result-badge" style="background:${r.color}20;color:${r.color}">
+      <span class="ms" style="font-size:14px">verified</span> Estimated stage
+    </div>
+    <div class="stage-num" style="color:${r.color};margin-top:14px">${r.stage}</div>
+    <div class="stage-label">${r.label}</div>
+    <div class="stage-desc">${r.desc}</div>
+    <div class="why-box">${r.why}</div>
+    <div style="margin-top:14px;font-size:11px;color:var(--faded)">
+      Based on STRAW+10 criteria (Harlow et al. 2012). This is a wellness estimate, not a clinical diagnosis. Discuss staging with your clinician for definitive assessment.
+    </div>
+  `;
+  rc.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body></html>

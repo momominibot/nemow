@@ -29,6 +29,27 @@ window.EVIDENCE_DB = {
     level: "strong",
     wellnessNote: "STRAW+10 staging requires clinical assessment; self-assessment is approximate only."
   },
+  "straw-hormonal": {
+    claim: "Hormonal contraception masks the natural menstrual pattern STRAW+10 relies on.",
+    evidence: "Combined oral contraceptives, hormonal IUDs, implants, and injections chemically regulate bleeding. Estradiol and progesterone are externally controlled, so FSH, cycle length, and bleeding patterns do not reflect native ovarian function. STRAW+10 staging requires natural menstrual bleeding patterns and is not valid while on hormonal contraception.",
+    source: { authors: "Harlow SD et al.", year: "2012", journal: "Menopause", doi: "10.1097/gme.0b013e31823fae38", pmid: "22395361", title: "STRAW+10: executive summary" },
+    level: "strong",
+    wellnessNote: "Natural cycles typically re-emerge 1-3 months after stopping hormonal contraception; staging becomes reliable after 3-6 months off."
+  },
+  "straw-pcos": {
+    claim: "PCOS causes cycle irregularity that is not reproductive aging.",
+    evidence: "Polycystic ovary syndrome (PCOS) is associated with chronic oligo-ovulation or anovulation that begins in adolescence, independent of age-related ovarian decline. Women with PCOS may have irregular cycles their entire reproductive life. STRAW+10 was designed for women with previously regular cycles; pre-existing irregularity cannot be attributed to menopausal transition.",
+    source: { authors: "Rotterdam ESHRE/ASRM-Sponsored PCOS Consensus Group", year: "2004", journal: "Fertil Steril", doi: "", pmid: "15207921", title: "Revised 2003 consensus on diagnostic criteria for PCOS" },
+    level: "strong",
+    wellnessNote: "If you have PCOS, discuss new or changing symptoms with your clinician — do not self-stage as perimenopausal."
+  },
+  "straw-60day": {
+    claim: "A 60-day amenorrhea defines late menopausal transition (Stage -1).",
+    evidence: "STRAW+10 defines entry into the late menopausal transition (Stage -1) as the occurrence of amenorrhea of 60 days or more. This reflects a critical drop in ovarian follicle reserve where cycles can no longer be reliably predicted. FSH is typically elevated (>25 IU/L) at this stage.",
+    source: { authors: "Harlow SD et al.", year: "2012", journal: "Menopause", doi: "10.1097/gme.0b013e31823fae38", pmid: "22395361", title: "STRAW+10: executive summary" },
+    level: "strong",
+    wellnessNote: "A 60-day gap may also be pregnancy, thyroid disorder, or stress — rule out these causes with your clinician."
+  },
   "estradiol-follicular": {
     claim: "Estradiol rises during the follicular phase and peaks just before ovulation.",
     evidence: "During the follicular phase, developing follicles produce increasing estradiol. The preovulatory estradiol peak triggers the LH surge that causes ovulation. Estradiol levels typically reach 200-500 pg/mL at peak.",
