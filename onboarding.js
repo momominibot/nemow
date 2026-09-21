@@ -343,6 +343,17 @@
         el.style.borderColor = 'var(--sage, #5E9B93)';
         el.style.background = 'var(--sage-tint, #E8EBE2)';
         el.querySelector('.tick').innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--sage,#5E9B93)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        // Re-render in the new language
+        if (window.OVULUNA_I18N) {
+          window.OVULUNA_I18N.setLang(lang.code);
+          // Update this step's title/subtitle immediately
+          var q = document.querySelector('h1.q');
+          var sub = document.querySelector('.sub');
+          if (q) q.textContent = t(step.title);
+          if (sub) sub.textContent = t(step.subtitle);
+          var sec = document.getElementById('jsection');
+          if (sec) sec.textContent = t(step.section);
+        }
         document.getElementById('nextBtn').disabled = false;
       });
       list.appendChild(el);
@@ -555,6 +566,17 @@
         el.style.borderColor = 'var(--sage, #5E9B93)';
         el.style.background = 'var(--sage-tint, #E8EBE2)';
         el.querySelector('.tick').innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--sage,#5E9B93)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        // Re-render in the new language
+        if (window.OVULUNA_I18N) {
+          window.OVULUNA_I18N.setLang(lang.code);
+          // Update this step's title/subtitle immediately
+          var q = document.querySelector('h1.q');
+          var sub = document.querySelector('.sub');
+          if (q) q.textContent = t(step.title);
+          if (sub) sub.textContent = t(step.subtitle);
+          var sec = document.getElementById('jsection');
+          if (sec) sec.textContent = t(step.section);
+        }
         document.getElementById('nextBtn').disabled = false;
       });
       list.appendChild(el);

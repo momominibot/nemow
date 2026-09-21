@@ -212,5 +212,11 @@
     return dict[str] || str;
   }
 
-  window.OVULUNA_I18N = { t: t, lang: LANG };
+  function setLang(lang) {
+    LANG = lang || 'en';
+    try { localStorage.setItem('ovuluna_language', LANG); } catch(e) {}
+    document.documentElement.setAttribute('lang', LANG);
+  }
+
+  window.OVULUNA_I18N = { t: t, setLang: setLang, getLang: function(){ return LANG; } };
 })();
