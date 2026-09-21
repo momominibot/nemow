@@ -19,7 +19,7 @@
   --ink:        #e8dff0;
   --cocoa:      #e8dff0;
   --taupe:      #a898bc;
-  --faded:      #7a6896;
+  --faded:      #a898c0;
 
   /* accents — brighter for dark background */
   --mauve:      #b898e0;
@@ -345,4 +345,39 @@ body, .top, .card, .t-icon, .nav, .btn, .chip, .metric,
   background: var(--sunken) !important;
   color: var(--ink) !important;
   border-color: var(--line) !important;
+}
+
+/* ── Dark mode: body gradient overlay (dimmer, deeper) ── */
+[data-theme="dark"] body::before {
+  background:
+    radial-gradient(42% 30% at 82% 6%, rgba(120, 90, 170, 0.25), transparent 70%),
+    radial-gradient(38% 26% at 8% 16%, rgba(180, 120, 100, 0.18), transparent 70%),
+    radial-gradient(46% 30% at 90% 52%, rgba(100, 80, 150, 0.2), transparent 70%),
+    radial-gradient(40% 26% at 4% 66%, rgba(90, 110, 160, 0.15), transparent 70%),
+    radial-gradient(44% 30% at 70% 96%, rgba(170, 100, 90, 0.15), transparent 72%),
+    radial-gradient(26% 18% at 50% 40%, rgba(140, 100, 180, 0.12), transparent 70%);
+}
+
+/* ── Dark mode: card tints ── */
+[data-theme="dark"] .card.tint-blush { background: rgba(216,152,136,0.12) !important; border-color: rgba(216,152,136,0.35) !important; }
+[data-theme="dark"] .card.tint-gold { background: rgba(224,184,96,0.10) !important; border-color: rgba(224,184,96,0.30) !important; }
+[data-theme="dark"] .card.tint-lavender { background: rgba(152,128,192,0.12) !important; border-color: rgba(152,128,192,0.30) !important; }
+[data-theme="dark"] .card.tint-sage { background: rgba(136,160,128,0.12) !important; border-color: rgba(136,160,128,0.30) !important; }
+
+/* ── Dark mode: ensure all text on cards is readable ── */
+[data-theme="dark"] .card,
+[data-theme="dark"] .tcm-tile,
+[data-theme="dark"] .acupoint-card,
+[data-theme="dark"] .metric {
+  color: var(--ink);
+}
+[data-theme="dark"] .card small,
+[data-theme="dark"] .card .sub,
+[data-theme="dark"] .card .muted,
+[data-theme="dark"] .tcm-tile small,
+[data-theme="dark"] .ac-val,
+[data-theme="dark"] .wg-text,
+[data-theme="dark"] .eyebrow,
+[data-theme="dark"] .cs-text p {
+  color: var(--taupe) !important;
 }

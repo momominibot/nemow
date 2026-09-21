@@ -17,8 +17,8 @@
   /* type — deep lavender-plum */
   --ink:        #3d2f52;
   --cocoa:      #3d2f52;
-  --taupe:      #8a78a0;
-  --faded:      #a898bc;
+  --taupe:      #7a6896;
+  --faded:      #7a6896;
 
   /* accents — soft mauve-lavender and peach */
   --mauve:      #7a5c96;
@@ -105,7 +105,7 @@ body::before {
   z-index: 50;
   display: flex; align-items: center; gap: 12px;
   padding: 14px 20px 10px;
-  background: rgba(247, 242, 250, 0.92);
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(196, 181, 224, 0.2);
@@ -144,8 +144,8 @@ h2.sec { font-family:var(--serif); font-weight:800; font-size:19px; color:var(--
 }
 .card.tint-lavender { background: rgba(196, 181, 224, 0.18); border-color: rgba(196, 181, 224, 0.4); }
 .card.tint-sage     { background: rgba(168, 192, 160, 0.16); border-color: rgba(168, 192, 160, 0.35); }
-.card.tint-blush    { background: #FCF6F5; border-color: var(--blush); }
-.card.tint-gold     { background: #FDFAF3; border-color: var(--gold); }
+.card.tint-blush    { background: rgba(245,198,184,0.12); border-color: var(--blush); }
+.card.tint-gold     { background: rgba(229,201,138,0.12); border-color: var(--gold); }
 
 .row { display:flex; align-items:center; gap:12px; }
 .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
@@ -488,7 +488,7 @@ input:focus, textarea:focus, select:focus {
   justify-content: space-around;
   align-items: center;
   padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
-  background: rgba(247, 242, 250, 0.92);
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid rgba(196, 181, 224, 0.3);
