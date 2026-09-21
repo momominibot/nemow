@@ -33,7 +33,7 @@
   .stars { position:fixed; inset:0; z-index:1; pointer-events:none; }
   .stars i {
     position:absolute; width:2px; height:2px; border-radius:50%;
-    background:#fff; opacity:0;
+    background:var(--paper); opacity:0;
     animation: twinkle var(--d,3s) ease-in-out var(--t,0s) infinite;
   }
   @keyframes twinkle { 0%,100%{opacity:0.1;} 50%{opacity:0.9;} }
@@ -103,12 +103,12 @@
   .social-btn svg { width:20px; height:20px; flex-shrink:0; }
 
   .btn-apple {
-    background:#fff; color:#000;
+    background:var(--paper); color:var(--ink);
   }
   .btn-apple:hover { background:#f5f5f5; }
 
   .btn-google {
-    background:#fff; color:#1a1a1a;
+    background:var(--paper); color:var(--ink);
     border:1px solid rgba(0,0,0,0.1);
   }
   .btn-google:hover { background:#f8f9fa; }
