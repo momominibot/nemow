@@ -216,7 +216,71 @@
     LANG = lang || 'en';
     try { localStorage.setItem('ovuluna_language', LANG); } catch(e) {}
     document.documentElement.setAttribute('lang', LANG);
+    autoTranslate();
+    // Update language picker buttons if present
+    var picker = document.getElementById('langPicker');
+    if (picker) {
+      var btns = picker.querySelectorAll('.lang-opt');
+      for (var i = 0; i < btns.length; i++) {
+        if (btns[i].getAttribute('data-lang') === LANG) {
+          btns[i].style.background = 'var(--mauve)';
+          btns[i].style.color = '#fff';
+          btns[i].style.borderColor = 'var(--mauve)';
+        } else {
+          btns[i].style.background = 'var(--card)';
+          btns[i].style.color = 'var(--ink)';
+          btns[i].style.borderColor = 'var(--line)';
+        }
+      }
+    }
   }
 
-  window.OVULUNA_I18N = { t: t, setLang: setLang, getLang: function(){ return LANG; } };
+  function autoTranslate() {
+    if (LANG === 'en') return;
+    var dict = DICT[LANG];
+    if (!dict) return;
+    var keys = Object.keys(dict);
+    // Walk text nodes and replace matching text
+    var walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      { acceptNode: function(node) {
+        var txt = node.textContent.trim();
+        if (!txt || txt.length < 2) return NodeFilter.FILTER_REJECT;
+        // Skip script/style/textarea/input content
+        var parent = node.parentElement;
+        if (!parent) return NodeFilter.FILTER_REJECT;
+        var tag = parent.tagName;
+        if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'TEXTAREA') return NodeFilter.FILTER_REJECT;
+        if (parent.isContentEditable) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }}
+    );
+    var node;
+    var translated = 0;
+    while ((node = walker.nextNode())) {
+      var txt = node.textContent.trim();
+      if (dict[txt]) {
+        node.textContent = dict[txt];
+        translated++;
+      }
+    }
+    // Also translate placeholder attributes
+    var inputs = document.querySelectorAll('input[placeholder], textarea[placeholder]');
+    for (var i = 0; i < inputs.length; i++) {
+      var ph = inputs[i].getAttribute('placeholder');
+      if (ph && dict[ph]) {
+        inputs[i].setAttribute('placeholder', dict[ph]);
+      }
+    }
+  }
+
+  // Auto-translate on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoTranslate);
+  } else {
+    autoTranslate();
+  }
+
+  window.OVULUNA_I18N = { t: t, setLang: setLang, getLang: function(){ return LANG; }, autoTranslate: autoTranslate };
 })();

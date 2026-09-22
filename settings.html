@@ -78,11 +78,11 @@
       <div style="font-weight:700;font-size:13px;color:var(--ovuluna-text-primary);margin-bottom:10px">Language</div>
       <div class="sub" style="font-size:12px;margin-bottom:12px">Choose your preferred language for the app experience.</div>
       <div style="display:flex;flex-wrap:wrap;gap:8px" id="langPicker">
-        <button class="lang-opt" data-lang="en" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">🇬🇧 English</button>
-        <button class="lang-opt" data-lang="zh" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">🇨🇳 中文</button>
-        <button class="lang-opt" data-lang="ja" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">🇯🇵 日本語</button>
-        <button class="lang-opt" data-lang="ms" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">🇲🇾 Bahasa Melayu</button>
-        <button class="lang-opt" data-lang="es" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">🇪🇸 Español</button>
+        <button class="lang-opt" data-lang="en" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">English</button>
+        <button class="lang-opt" data-lang="zh" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">中文</button>
+        <button class="lang-opt" data-lang="ja" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">日本語</button>
+        <button class="lang-opt" data-lang="ms" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">Bahasa Melayu</button>
+        <button class="lang-opt" data-lang="es" style="padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:700 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s">Español</button>
       </div>
     </div>
 
@@ -170,12 +170,10 @@
 </nav>
 <script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.tgl').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('on');});});});</script>
 <script>
-// Language picker
+// Language picker — uses i18n.js API for actual translation
 (function(){
-  var savedLang = localStorage.getItem('ovuluna_language') || 'en';
-  document.documentElement.setAttribute('lang', savedLang);
-  var langBtns = document.querySelectorAll('.lang-opt');
   function setActive(lang){
+    var langBtns = document.querySelectorAll('.lang-opt');
     langBtns.forEach(function(b){
       if(b.dataset.lang === lang){
         b.style.background = 'var(--mauve)';
@@ -188,15 +186,23 @@
       }
     });
   }
-  setActive(savedLang);
-  langBtns.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var lang = this.dataset.lang;
-      localStorage.setItem('ovuluna_language', lang);
-      document.documentElement.setAttribute('lang', lang);
-      setActive(lang);
+  // Wait for i18n.js to load
+  function init(){
+    var i18n = window.OVULUNA_I18N;
+    if (!i18n) { setTimeout(init, 100); return; }
+    var current = i18n.getLang();
+    setActive(current);
+    document.querySelectorAll('.lang-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        i18n.setLang(this.dataset.lang);
+      });
     });
-  });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
 
 // Unit picker
@@ -251,5 +257,6 @@
 <script src="evidence-db.js" defer></script>
 <script src="evidence.js" defer></script>
 <script src="luna-chat.js" defer></script>
-<script src="darkmode.js?v=8" defer></script>
+<script src="i18n.js"></script>
+  <script src="darkmode.js?v=8" defer></script>
 </body></html>
