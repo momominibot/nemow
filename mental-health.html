@@ -133,13 +133,9 @@
   <div class="app">
     <div class="top">
       <a href="home.html" class="logo"><span class="ms">nightlight</span> Ovuluna</a>
-      <div class="top-actions">
-        <button class="icon-btn" id="fontBtn" aria-label="Adjust text size"><span class="ms">text_fields</span></button>
-        <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode"><span class="ms">dark_mode</span></button>
-      </div>
     </div>
 
-    <div class="content">
+    <div class="scroll">
       <a href="home.html" class="back-link"><span class="ms">arrow_back</span> Back</a>
 
       <!-- Hero -->
@@ -270,19 +266,6 @@
   <script src="evidence.js"></script>
   <script src="darkmode.js"></script>
   <script>
-    // ── Font size toggle ──
-    (function(){
-      var btn = document.getElementById('fontBtn');
-      var sizes = ['100%','112%','125%'];
-      var idx = parseInt(localStorage.getItem('ovuluna_fontidx')||'0');
-      document.documentElement.style.fontSize = sizes[idx];
-      btn.addEventListener('click', function(){
-        idx = (idx+1)%sizes.length;
-        document.documentElement.style.fontSize = sizes[idx];
-        localStorage.setItem('ovuluna_fontidx', idx);
-      });
-    })();
-
     // ── EPDS-10 Questions ──
     var epdsQuestions = [
       { q: "I have been able to laugh and see the funny side of things", opts: ["As much as I always could","Not quite so much now","Not so much now","Not at all"] },

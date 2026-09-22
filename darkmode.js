@@ -45,10 +45,11 @@
   function applyFontSize(level) {
     currentFontSize = level;
     var scale = FONT_SCALES[level] || 1.0;
-    // Scale only .scroll content area — top header and bottom nav stay fixed
-    var scroll = document.querySelector('.scroll');
-    if (scroll) {
-      scroll.style.zoom = scale;
+    // Scale content area — top header and bottom nav stay fixed
+    // Support both .scroll and .content class names for robustness
+    var contentEl = document.querySelector('.scroll') || document.querySelector('.content') || document.querySelector('main');
+    if (contentEl) {
+      contentEl.style.zoom = scale;
     }
     // Also set root font-size as fallback for any rem-based elements
     document.documentElement.style.fontSize = (16 * scale) + 'px';
