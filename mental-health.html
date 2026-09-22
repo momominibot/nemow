@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ovuluna · Mental Health & Calm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="darkmode.css">
+  <link rel="stylesheet" href="ovuluna-persona.css">
+  <link rel="stylesheet" href="evidence.css">
+  <style>
+    .hero { text-align:center; padding:28px 20px 12px; position:relative; }
+    .hero h1 { font-family:var(--serif); font-size:26px; color:var(--cocoa); margin:0 0 8px; }
+    .hero p { font-size:13.5px; color:var(--taupe); line-height:1.55; max-width:480px; margin:0 auto; }
+    .hero .luna-wrap { width:72px; height:72px; margin:0 auto 12px; position:relative; }
+    .hero .luna-wrap img { width:100%; height:100%; object-fit:contain; }
+    .glow-ring { position:absolute; inset:-8px; border-radius:50%; background:radial-gradient(circle, rgba(196,181,224,.5), transparent 70%); animation:pulse 3s ease-in-out infinite; pointer-events:none; }
+    @keyframes pulse { 0%,100%{opacity:.5; transform:scale(1);} 50%{opacity:.8; transform:scale(1.08);} }
+
+    .section { padding:0 16px 20px; }
+    .sec-title { font-family:var(--serif); font-size:18px; color:var(--cocoa); margin:0 0 12px; display:flex; align-items:center; gap:8px; }
+    .sec-title .ms { font-size:22px; color:var(--mauve); }
+
+    /* EPDS Screening */
+    .epds-card { background:var(--card); border:1.5px solid var(--line-soft); border-radius:18px; padding:18px; margin-bottom:14px; }
+    .epds-progress { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .epds-bar { flex:1; height:6px; background:var(--sunken); border-radius:99px; overflow:hidden; }
+    .epds-bar-fill { height:100%; background:linear-gradient(90deg,var(--lavender),var(--mauve)); border-radius:99px; transition:width .3s ease; width:0%; }
+    .epds-count { font-size:12px; font-weight:700; color:var(--taupe); white-space:nowrap; }
+    .epds-q { margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid var(--line-soft); }
+    .epds-q:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+    .epds-q-text { font-size:13px; color:var(--cocoa); font-weight:600; margin-bottom:8px; line-height:1.45; }
+    .epds-opts { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+    .epds-opt { padding:9px 10px; border-radius:12px; border:1.5px solid var(--line-soft); background:var(--card-solid); font-size:11.5px; color:var(--taupe); cursor:pointer; transition:all .2s; text-align:left; line-height:1.35; }
+    .epds-opt:hover { border-color:var(--lavender); background:rgba(196,181,224,.08); }
+    .epds-opt.sel { border-color:var(--mauve); background:rgba(122,92,150,.1); color:var(--cocoa); font-weight:700; }
+    .epds-result { display:none; margin-top:16px; padding:16px; border-radius:14px; text-align:center; }
+    .epds-result.show { display:block; animation:fadeUp .4s ease; }
+    @keyframes fadeUp { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+    .epds-result.low { background:rgba(107,168,138,.12); border:1.5px solid rgba(107,168,138,.35); }
+    .epds-result.mid { background:rgba(212,168,90,.12); border:1.5px solid rgba(212,168,90,.35); }
+    .epds-result.high { background:rgba(196,122,106,.12); border:1.5px solid rgba(196,122,106,.4); }
+    .epds-score { font-size:36px; font-weight:800; font-family:var(--serif); margin-bottom:4px; }
+    .epds-result.low .epds-score { color:var(--ok); }
+    .epds-result.mid .epds-score { color:var(--warn); }
+    .epds-result.high .epds-score { color:var(--low); }
+    .epds-label { font-size:13px; font-weight:700; margin-bottom:6px; }
+    .epds-result.low .epds-label { color:var(--ok); }
+    .epds-result.mid .epds-label { color:var(--warn); }
+    .epds-result.high .epds-label { color:var(--low); }
+    .epds-desc { font-size:12px; color:var(--taupe); line-height:1.5; margin-bottom:10px; }
+    .epds-disclaimer { font-size:10.5px; color:var(--faded); line-height:1.45; margin-top:10px; font-style:italic; }
+    .btn-reset { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:99px; border:1.5px solid var(--line-soft); background:var(--card-solid); font-size:12px; font-weight:700; color:var(--taupe); cursor:pointer; transition:all .2s; margin-top:10px; }
+    .btn-reset:hover { border-color:var(--mauve); color:var(--mauve); }
+
+    /* Mood Tracker */
+    .mood-card { background:var(--card); border:1.5px solid var(--line-soft); border-radius:18px; padding:18px; margin-bottom:14px; }
+    .mood-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin:12px 0; }
+    .mood-btn { display:flex; flex-direction:column; align-items:center; gap:5px; padding:12px 4px; border-radius:14px; border:1.5px solid var(--line-soft); background:var(--card-solid); cursor:pointer; transition:all .2s; }
+    .mood-btn:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(122,92,150,.12); }
+    .mood-btn.sel { border-color:var(--mauve); background:rgba(122,92,150,.08); }
+    .mood-btn .ms { font-size:24px; }
+    .mood-btn.calm .ms { color:var(--sage); }
+    .mood-btn.okay .ms { color:var(--periwinkle); }
+    .mood-btn.low .ms { color:var(--lavender); }
+    .mood-btn.anxious .ms { color:var(--gold); }
+    .mood-btn.overwhelmed .ms { color:var(--coral); }
+    .mood-btn span { font-size:10px; font-weight:700; color:var(--taupe); }
+    .mood-btn.sel span { color:var(--cocoa); }
+    .mood-log-display { display:none; margin-top:12px; padding:12px; border-radius:12px; background:rgba(196,181,224,.08); }
+    .mood-log-display.show { display:block; }
+    .mood-log-display b { font-size:12px; color:var(--cocoa); display:block; margin-bottom:4px; }
+    .mood-log-display span { font-size:11px; color:var(--taupe); }
+    .mood-history { margin-top:10px; display:flex; gap:4px; flex-wrap:wrap; }
+    .mood-dot { width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; }
+
+    /* Quick Actions */
+    .quick-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
+    .quick-card { display:flex; flex-direction:column; align-items:center; gap:8px; padding:18px 12px; border-radius:16px; border:1.5px solid var(--line-soft); background:var(--card); text-decoration:none; color:inherit; transition:all .2s; cursor:pointer; }
+    .quick-card:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(122,92,150,.1); }
+    .quick-card .ms { font-size:28px; }
+    .quick-card.breath .ms { color:var(--periwinkle); }
+    .quick-card.support .ms { color:var(--sage); }
+    .quick-card b { font-size:13px; color:var(--cocoa); text-align:center; }
+    .quick-card span { font-size:10.5px; color:var(--taupe); text-align:center; line-height:1.4; }
+
+    /* Motivation Quotes */
+    .quote-card { background:linear-gradient(135deg,rgba(196,181,224,.15),rgba(245,198,184,.12)); border:1.5px solid rgba(196,181,224,.3); border-radius:18px; padding:20px; margin-bottom:14px; text-align:center; position:relative; min-height:120px; display:flex; flex-direction:column; justify-content:center; }
+    .quote-text { font-family:var(--serif); font-size:15px; color:var(--cocoa); line-height:1.6; font-style:italic; margin-bottom:8px; }
+    .quote-author { font-size:11px; color:var(--taupe); font-weight:700; letter-spacing:.03em; }
+    .quote-nav { display:flex; justify-content:center; gap:8px; margin-top:12px; }
+    .quote-dot { width:7px; height:7px; border-radius:50%; background:var(--line); cursor:pointer; transition:all .2s; border:none; padding:0; }
+    .quote-dot.on { background:var(--mauve); width:20px; border-radius:99px; }
+
+    /* Crisis Resources */
+    .crisis-card { background:rgba(196,122,106,.08); border:1.5px solid rgba(196,122,106,.3); border-radius:18px; padding:18px; margin-bottom:14px; }
+    .crisis-card h3 { font-family:var(--serif); font-size:16px; color:var(--low); margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+    .crisis-card h3 .ms { font-size:20px; }
+    .crisis-card p { font-size:12px; color:var(--taupe); line-height:1.55; margin:0 0 10px; }
+    .crisis-list { list-style:none; padding:0; margin:0; }
+    .crisis-list li { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid rgba(196,122,106,.15); }
+    .crisis-list li:last-child { border-bottom:none; }
+    .crisis-list .ms { font-size:20px; color:var(--low); flex-shrink:0; }
+    .crisis-list b { font-size:13px; color:var(--cocoa); display:block; }
+    .crisis-list span { font-size:11px; color:var(--taupe); }
+    .crisis-list a { color:var(--mauve); text-decoration:none; font-weight:700; }
+
+    /* Evidence inline */
+    .qi { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; border-radius:50%; background:var(--mauve); color:#fff; font-size:9px; font-weight:800; cursor:pointer; margin-left:4px; vertical-align:middle; font-style:normal; transition:all .2s; }
+    .qi:hover { background:var(--cocoa); transform:scale(1.15); }
+
+    .back-link { display:inline-flex; align-items:center; gap:6px; padding:10px 16px; font-size:13px; font-weight:700; color:var(--mauve); text-decoration:none; }
+
+    @media (max-width:360px) {
+      .mood-grid { grid-template-columns:repeat(5,1fr); gap:4px; }
+      .mood-btn { padding:10px 2px; }
+      .mood-btn .ms { font-size:20px; }
+      .epds-opts { grid-template-columns:1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .glow-ring, .epds-result.show, .mood-btn:hover, .quick-card:hover { animation:none; transition:none; transform:none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="top">
+      <a href="home.html" class="logo"><span class="ms">nightlight</span> Ovuluna</a>
+      <div class="top-actions">
+        <button class="icon-btn" id="fontBtn" aria-label="Adjust text size"><span class="ms">text_fields</span></button>
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode"><span class="ms">dark_mode</span></button>
+      </div>
+    </div>
+
+    <div class="content">
+      <a href="home.html" class="back-link"><span class="ms">arrow_back</span> Back</a>
+
+      <!-- Hero -->
+      <div class="hero">
+        <div class="luna-wrap">
+          <div class="glow-ring"></div>
+          <img src="assets/luna-crescent.png" alt="Luna mascot" onerror="this.style.display='none'">
+        </div>
+        <h1>Your mind matters</h1>
+        <p>A gentle space for your emotional wellbeing. Track your mood, screen for postpartum depression, breathe, and find support — all in one place.</p>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="section">
+        <div class="quick-grid">
+          <a class="quick-card breath" href="breathwork.html">
+            <span class="ms">air</span>
+            <b>Guided breathing</b>
+            <span>4-7-8, box breathing &amp; more</span>
+          </a>
+          <a class="quick-card support" href="postpartum-guide.html">
+            <span class="ms">groups</span>
+            <b>Recovery guide</b>
+            <span>Weeks 1-6, 6-12, beyond</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Mood Tracker -->
+      <div class="section">
+        <h2 class="sec-title"><span class="ms">mood</span> How are you feeling today?</h2>
+        <div class="mood-card">
+          <div class="mood-grid" id="moodGrid">
+            <button class="mood-btn calm" data-mood="calm" aria-label="Calm"><span class="ms">self_improvement</span><span>Calm</span></button>
+            <button class="mood-btn okay" data-mood="okay" aria-label="Okay"><span class="ms">sentiment_satisfied</span><span>Okay</span></button>
+            <button class="mood-btn low" data-mood="low" aria-label="Low"><span class="ms">sentiment_neutral</span><span>Low</span></button>
+            <button class="mood-btn anxious" data-mood="anxious" aria-label="Anxious"><span class="ms">psychology</span><span>Anxious</span></button>
+            <button class="mood-btn overwhelmed" data-mood="overwhelmed" aria-label="Overwhelmed"><span class="ms">storm</span><span>Heavy</span></button>
+          </div>
+          <div class="mood-log-display" id="moodLogDisplay">
+            <b id="moodLogText"></b>
+            <span>Logged today. Come back tomorrow to continue your pattern.</span>
+          </div>
+          <div class="mood-history" id="moodHistory"></div>
+          <p style="font-size:11px;color:var(--faded);margin-top:10px;line-height:1.45;">Tracking your mood helps you notice patterns over time. This is for your awareness only, not a diagnosis. <span class="qi" data-evidence="mood-tracking-benefit">i</span></p>
+        </div>
+      </div>
+
+      <!-- EPDS Screening -->
+      <div class="section">
+        <h2 class="sec-title"><span class="ms">health_and_safety</span> Postpartum depression check</h2>
+        <div class="epds-card">
+          <p style="font-size:12.5px;color:var(--taupe);line-height:1.55;margin-bottom:14px;">The Edinburgh Postnatal Depression Scale (EPDS) is a validated 10-question screening tool. Answer based on how you have felt in the <b>past 7 days</b>. <span class="qi" data-evidence="epds-validity">i</span></p>
+
+          <div class="epds-progress">
+            <div class="epds-bar"><div class="epds-bar-fill" id="epdsBarFill"></div></div>
+            <span class="epds-count" id="epdsCount">0/10</span>
+          </div>
+
+          <div id="epdsQuestions"></div>
+
+          <div class="epds-result" id="epdsResult">
+            <div class="epds-score" id="epdsScoreNum">0</div>
+            <div class="epds-label" id="epdsScoreLabel"></div>
+            <div class="epds-desc" id="epdsScoreDesc"></div>
+            <button class="btn-reset" id="epdsReset"><span class="ms">refresh</span> Retake screening</button>
+            <div class="epds-disclaimer">This screening is for informational purposes only and does not constitute a medical diagnosis. If you are concerned about your mental health, please talk to your doctor, midwife, or a mental health professional. If you are having thoughts of harming yourself or your baby, seek immediate help.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Motivation Quotes -->
+      <div class="section">
+        <h2 class="sec-title"><span class="ms">auto_awesome</span> Words to carry with you</h2>
+        <div class="quote-card">
+          <div class="quote-text" id="quoteText"></div>
+          <div class="quote-author" id="quoteAuthor"></div>
+          <div class="quote-nav" id="quoteNav"></div>
+        </div>
+      </div>
+
+      <!-- Crisis Resources -->
+      <div class="section">
+        <div class="crisis-card">
+          <h3><span class="ms">emergency</span> If you need help right now</h3>
+          <p>You are not alone. These resources are available 24/7. Reaching out is a sign of strength, not weakness.</p>
+          <ul class="crisis-list">
+            <li>
+              <span class="ms">call</span>
+              <div><b>SOS (Samaritans of Singapore)</b><span>24-hour emotional support: <a href="tel:1767">1-767</a></span></div>
+            </li>
+            <li>
+              <span class="ms">sms</span>
+              <div><b>Text line</b><span>Text 741741 to connect with a crisis responder</span></div>
+            </li>
+            <li>
+              <span class="ms">local_hospital</span>
+              <div><b>Emergency department</b><span>Go to the nearest A&amp;E or call 995 if you or your baby are in immediate danger</span></div>
+            </li>
+            <li>
+              <span class="ms">medical_services</span>
+              <div><b>Your doctor or midwife</b><span>Mention how you're feeling at your 6-week checkup or any appointment</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="height:20px"></div>
+    </div>
+
+    <nav class="nav">
+      <a href="home.html" class="n-ic"><span class="ms">home</span><span>Home</span></a>
+      <a href="learn-cycle-phases.html" class="n-ic"><span class="ms">menu_book</span><span>Learn</span></a>
+      <a href="tcm-hub.html" class="n-ic"><span class="ms">spa</span><span>TCM</span></a>
+      <a href="foods.html" class="n-ic"><span class="ms">restaurant</span><span>Foods</span></a>
+      <a href="profile.html" class="n-ic"><span class="ms">person</span><span>Profile</span></a>
+    </nav>
+  </div>
+
+  <div class="evidence-modal" id="evidenceModal">
+    <div class="evidence-content">
+      <button class="evidence-close" id="evidenceClose">&times;</button>
+      <div id="evidenceBody"></div>
+    </div>
+  </div>
+
+  <script src="evidence-db.js"></script>
+  <script src="evidence.js"></script>
+  <script src="darkmode.js"></script>
+  <script>
+    // ── Font size toggle ──
+    (function(){
+      var btn = document.getElementById('fontBtn');
+      var sizes = ['100%','112%','125%'];
+      var idx = parseInt(localStorage.getItem('ovuluna_fontidx')||'0');
+      document.documentElement.style.fontSize = sizes[idx];
+      btn.addEventListener('click', function(){
+        idx = (idx+1)%sizes.length;
+        document.documentElement.style.fontSize = sizes[idx];
+        localStorage.setItem('ovuluna_fontidx', idx);
+      });
+    })();
+
+    // ── EPDS-10 Questions ──
+    var epdsQuestions = [
+      { q: "I have been able to laugh and see the funny side of things", opts: ["As much as I always could","Not quite so much now","Not so much now","Not at all"] },
+      { q: "I have looked forward with enjoyment to things", opts: ["As much as I ever did","Rather less than I used to","Definitely less than I used to","Hardly at all"] },
+      { q: "I have blamed myself unnecessarily when things went wrong", opts: ["No, never","Hardly ever","Yes, sometimes","Yes, most of the time"] },
+      { q: "I have been anxious or worried for no good reason", opts: ["No, not at all","Hardly ever","Yes, sometimes","Yes, very often"] },
+      { q: "I have felt scared or panicky for no good reason", opts: ["No, not at all","No, occasionally","Yes, sometimes","Yes, quite a lot"] },
+      { q: "Things have been getting on top of me", opts: ["No, I have been coping as well as ever","Yes, sometimes I haven't been coping as well as usual","Yes, often I haven't been coping as well as usual","Yes, most of the time I haven't been able to cope at all"] },
+      { q: "I have been so unhappy that I have had difficulty sleeping", opts: ["No, not at all","Not very often","Yes, sometimes","Yes, most of the time"] },
+      { q: "I have felt sad or miserable", opts: ["No, not at all","Not very often","Yes, sometimes","Yes, most of the time"] },
+      { q: "I have been so unhappy that I have been crying", opts: ["No, never","Hardly ever","Yes, sometimes","Yes, most of the time"] },
+      { q: "The thought of harming myself has occurred to me", opts: ["Never","Hardly ever","Sometimes","Quite often"] }
+    ];
+    var epdsScores = [0,1,2,3];
+    var epdsAnswers = new Array(10).fill(null);
+    var qContainer = document.getElementById('epdsQuestions');
+    var barFill = document.getElementById('epdsBarFill');
+    var countEl = document.getElementById('epdsCount');
+    var resultEl = document.getElementById('epdsResult');
+
+    epdsQuestions.forEach(function(q, i){
+      var div = document.createElement('div');
+      div.className = 'epds-q';
+      div.innerHTML = '<div class="epds-q-text">'+(i+1)+'. '+q.q+'</div><div class="epds-opts">'+q.opts.map(function(o,j){return '<button class="epds-opt" data-q="'+i+'" data-v="'+j+'">'+o+'</button>';}).join('')+'</div>';
+      qContainer.appendChild(div);
+    });
+
+    qContainer.addEventListener('click', function(e){
+      var btn = e.target.closest('.epds-opt');
+      if(!btn) return;
+      var qi = parseInt(btn.dataset.q);
+      var vi = parseInt(btn.dataset.v);
+      epdsAnswers[qi] = vi;
+      var siblings = btn.parentElement.querySelectorAll('.epds-opt');
+      siblings.forEach(function(s){s.classList.remove('sel');});
+      btn.classList.add('sel');
+      updateEpdsProgress();
+    });
+
+    function updateEpdsProgress(){
+      var answered = epdsAnswers.filter(function(a){return a!==null;}).length;
+      countEl.textContent = answered+'/10';
+      barFill.style.width = (answered*10)+'%';
+      if(answered===10){
+        showEpdsResult();
+      }
+    }
+
+    function showEpdsResult(){
+      var total = epdsAnswers.reduce(function(sum,v,i){
+        // Q10 (self-harm) scored 0,1,2,3 but any positive = flag
+        return sum + epdsScores[v];
+      },0);
+      var selfHarmFlag = epdsAnswers[9] > 0;
+      var scoreNum = document.getElementById('epdsScoreNum');
+      var scoreLabel = document.getElementById('epdsScoreLabel');
+      var scoreDesc = document.getElementById('epdsScoreDesc');
+      scoreNum.textContent = total;
+
+      if(selfHarmFlag || total >= 13){
+        resultEl.className = 'epds-result show high';
+        scoreLabel.textContent = 'Please reach out for support';
+        scoreDesc.innerHTML = 'Your score suggests you may be experiencing significant distress. This is not a diagnosis, but please talk to your doctor, midwife, or a mental health professional soon. If you are having thoughts of harming yourself or your baby, call SOS 1-767 (24/7) or go to the nearest emergency department.';
+      } else if(total >= 10){
+        resultEl.className = 'epds-result show mid';
+        scoreLabel.textContent = 'Worth talking to someone';
+        scoreDesc.innerHTML = 'Your score suggests you may be experiencing more than the usual "baby blues." Consider mentioning how you feel at your next appointment. Many women find that talking to a healthcare provider, joining a support group, or starting therapy helps. <span class="qi" data-evidence="ppd-treatment">i</span>';
+      } else {
+        resultEl.className = 'epds-result show low';
+        scoreLabel.textContent = 'Doing okay';
+        scoreDesc.innerHTML = 'Your score is in the lower range. Continue to check in with yourself. If your feelings change or worsen, retake this screening or talk to your doctor. Remember, it is normal to have ups and downs after having a baby.';
+      }
+      resultEl.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+
+    document.getElementById('epdsReset').addEventListener('click', function(){
+      epdsAnswers = new Array(10).fill(null);
+      document.querySelectorAll('.epds-opt').forEach(function(b){b.classList.remove('sel');});
+      resultEl.className = 'epds-result';
+      updateEpdsProgress();
+    });
+
+    // ── Mood Tracker ──
+    var moodColors = { calm:'#a8c0a0', okay:'#a8b8d8', low:'#c4b5e0', anxious:'#e5c98a', overwhelmed:'#e8a898' };
+    var moodLabels = { calm:'Calm', okay:'Okay', low:'Low', anxious:'Anxious', overwhelmed:'Heavy' };
+    var moodGrid = document.getElementById('moodGrid');
+    var moodLogDisplay = document.getElementById('moodLogDisplay');
+    var moodLogText = document.getElementById('moodLogText');
+    var moodHistory = document.getElementById('moodHistory');
+
+    function getTodayKey(){
+      var d = new Date();
+      return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    }
+
+    function loadMoodHistory(){
+      try{
+        var data = JSON.parse(localStorage.getItem('ovuluna_moods')||'{}');
+        moodHistory.innerHTML = '';
+        var days = Object.keys(data).sort().slice(-7);
+        days.forEach(function(day){
+          var dot = document.createElement('div');
+          dot.className = 'mood-dot';
+          dot.style.background = moodColors[data[day]] || 'var(--line)';
+          dot.title = day+': '+moodLabels[data[day]];
+          moodHistory.appendChild(dot);
+        });
+        var today = getTodayKey();
+        if(data[today]){
+          moodLogText.textContent = "You're feeling "+moodLabels[data[today]].toLowerCase()+" today.";
+          moodLogDisplay.classList.add('show');
+          var selBtn = moodGrid.querySelector('[data-mood="'+data[today]+'"]');
+          if(selBtn) selBtn.classList.add('sel');
+        }
+      }catch(e){}
+    }
+
+    moodGrid.addEventListener('click', function(e){
+      var btn = e.target.closest('.mood-btn');
+      if(!btn) return;
+      var mood = btn.dataset.mood;
+      moodGrid.querySelectorAll('.mood-btn').forEach(function(b){b.classList.remove('sel');});
+      btn.classList.add('sel');
+      try{
+        var data = JSON.parse(localStorage.getItem('ovuluna_moods')||'{}');
+        data[getTodayKey()] = mood;
+        localStorage.setItem('ovuluna_moods', JSON.stringify(data));
+      }catch(e){}
+      moodLogText.textContent = "You're feeling "+moodLabels[mood].toLowerCase()+" today.";
+      moodLogDisplay.classList.add('show');
+      loadMoodHistory();
+    });
+
+    loadMoodHistory();
+
+    // ── Motivation Quotes ──
+    var quotes = [
+      { text:"You are doing the hardest job in the world, and you are doing it with love. Be as kind to yourself as you are to your baby.", author:"— A mother's reminder" },
+      { text:"Your worth is not measured by how much you produce, how clean your house is, or how well your baby sleeps. You are enough, exactly as you are.", author:"— Postpartum wisdom" },
+      { text:"It is okay to not be okay. Asking for help is not a sign of weakness — it is the bravest thing you can do for yourself and your family.", author:"— Mental health advocate" },
+      { text:"The nights are long, but the years are short. This season will pass. You will sleep again. You will feel like yourself again.", author:"— Comfort for new mothers" },
+      { text:"You cannot pour from an empty cup. Taking care of yourself is not selfish — it is essential. Your baby needs a healthy, happy mother.", author:"— Self-care reminder" },
+      { text:"Comparison is the thief of joy. Your journey is unique. Do not measure your postpartum experience against someone else's highlight reel.", author:"— Social media wisdom" },
+      { text:"You grew a human being. Your body is amazing, even if it does not look or feel like it did before. Give yourself grace.", author:"— Body positivity" },
+      { text:"If you are going through hell, keep going. The darkness does not last forever. Dawn will come, and you will see the light again.", author:"— Winston Churchill (adapted)" }
+    ];
+    var quoteIdx = 0;
+    var quoteText = document.getElementById('quoteText');
+    var quoteAuthor = document.getElementById('quoteAuthor');
+    var quoteNav = document.getElementById('quoteNav');
+
+    function renderQuote(){
+      quoteText.textContent = '"'+quotes[quoteIdx].text+'"';
+      quoteAuthor.textContent = quotes[quoteIdx].author;
+      quoteNav.innerHTML = '';
+      quotes.forEach(function(_,i){
+        var dot = document.createElement('button');
+        dot.className = 'quote-dot'+(i===quoteIdx?' on':'');
+        dot.setAttribute('aria-label','Quote '+(i+1));
+        dot.addEventListener('click', function(){quoteIdx=i; renderQuote();});
+        quoteNav.appendChild(dot);
+      });
+    }
+    renderQuote();
+    setInterval(function(){
+      quoteIdx = (quoteIdx+1)%quotes.length;
+      renderQuote();
+    }, 8000);
+  </script>
+</body>
+</html>
