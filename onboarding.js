@@ -300,11 +300,12 @@
   /* ── Language step ── */
   function renderLanguage(step) {
     var languages = [
-      { code: 'en', name: 'English', flag: '🇬🇧' },
-      { code: 'zh', name: '中文', flag: '🇨🇳' },
-      { code: 'ja', name: '日本語', flag: '🇯🇵' },
-      { code: 'ms', name: 'Bahasa Melayu', flag: '🇲🇾' },
-      { code: 'es', name: 'Español', flag: '🇪🇸' }
+      { code: 'en', name: 'English' },
+      { code: 'zh', name: '中文' },
+      { code: 'ja', name: '日本語' },
+      { code: 'ms', name: 'Bahasa Melayu' },
+      { code: 'es', name: 'Español' },
+      { code: 'de', name: 'Deutsch' }
     ];
     var selected = answers.language || 'en';
     var div = document.createElement('div');
@@ -325,7 +326,7 @@
         el.style.background = 'var(--sage-tint, #E8EBE2)';
       }
       el.innerHTML =
-        '<span style="font-size:26px;flex-shrink:0">' + lang.flag + '</span>' +
+        '<span style="width:32px;height:32px;border-radius:50%;background:var(--mauve-tint,#f3eef7);display:flex;align-items:center;justify-content:center;font:700 12px var(--sans);color:var(--mauve,#7c5fa8);flex-shrink:0;text-transform:uppercase">' + lang.code + '</span>' +
         '<div style="flex:1"><div style="font:700 15px var(--sans);color:var(--ink)">' + lang.name + '</div></div>' +
         '<span class="tick" style="margin-left:auto;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0">' +
           (selected === lang.code ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--sage,#5E9B93)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '') +
