@@ -334,8 +334,12 @@
       el.addEventListener('click', function() {
         answers.language = lang.code;
         saveAnswers();
-        localStorage.setItem('ovuluna_language', lang.code);
-        document.documentElement.setAttribute('lang', lang.code);
+        if (window.OVULUNA_I18N && window.OVULUNA_I18N.setLang) {
+          window.OVULUNA_I18N.setLang(lang.code);
+        } else {
+          localStorage.setItem('ovuluna_language', lang.code);
+          document.documentElement.setAttribute('lang', lang.code);
+        }
         list.querySelectorAll('.opt').forEach(function(o) {
           o.style.borderColor = 'var(--line)';
           o.style.background = 'var(--card)';
