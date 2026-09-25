@@ -35,7 +35,7 @@
       section: 'About You',
       type: 'wheel',
       title: 'How old are you?',
-      subtitle: 'We use this to contextualize your cycle and ovarian wellness stage.',
+      subtitle: 'This helps us tailor guidance to your life stage.',
       field: 'age',
       min: 10, max: 65, default: 28, unit: t('years')
     },
@@ -44,7 +44,7 @@
       section: 'About You',
       type: 'height-weight',
       title: 'Your height and weight',
-      subtitle: 'This helps us calculate your daily water goal and activity targets.',
+      subtitle: 'We use this to set your daily hydration and movement goals.',
       fields: ['heightCm', 'weightKg']
     },
     {
@@ -52,22 +52,22 @@
       section: 'Your Cycle',
       type: 'single',
       title: 'How would you describe your cycle?',
-      subtitle: 'This helps us understand your current reproductive stage.',
+      subtitle: 'This helps us understand where you are in your reproductive journey.',
       field: 'cycle',
       options: [
-        { value: 'regular', label: 'Regular cycles', emoji: '🔄', desc: 'Predictable 21-35 day cycles' },
-        { value: 'variable', label: 'Variable / irregular', emoji: '📊', desc: 'Cycle length varies by 7+ days' },
-        { value: 'newbie', label: 'Just started my period', emoji: '🌱', desc: 'Cycles still regulating (first 2-3 years)' },
-        { value: 'skipped', label: 'Skipped periods', emoji: '⏭️', desc: 'Occasionally miss periods' },
-        { value: 'contraceptive', label: 'On hormonal contraception', emoji: '💊', desc: 'Pill, IUD, implant, or ring' },
-        { value: 'post12', label: 'Post-menopause', emoji: '🌙', desc: 'No period for 12+ months' }
+        { value: 'regular', label: 'Regular cycles', desc: 'Predictable 21-35 day cycles' },
+        { value: 'variable', label: 'Variable / irregular', desc: 'Cycle length varies by 7+ days' },
+        { value: 'newbie', label: 'Just started my period', desc: 'Cycles still regulating (first 2-3 years)' },
+        { value: 'skipped', label: 'Skipped periods', desc: 'Occasionally miss periods' },
+        { value: 'contraceptive', label: 'On hormonal contraception', desc: 'Pill, IUD, implant, or ring' },
+        { value: 'post12', label: 'Post-menopause', desc: 'No period for 12+ months' }
       ]
     },
     {
       id: 'cycle-length',
       section: 'Your Cycle',
       type: 'wheel',
-      title: 'Average cycle length?',
+      title: "What's your average cycle length?",
       subtitle: 'From the first day of one period to the first day of the next.',
       field: 'cycleLength',
       min: 21, max: 45, default: 28, unit: t('days'),
@@ -86,8 +86,8 @@
       id: 'first-period-age',
       section: 'Your Cycle',
       type: 'wheel',
-      title: 'How old were you at your first period?',
-      subtitle: 'Early or late menarche can affect your cycle pattern. Optional — skip if unsure.',
+      title: 'How old were you when your first period started?',
+      subtitle: "This helps us understand your cycle patterns. Optional — skip if you're not sure.",
       field: 'firstPeriodAge',
       min: 8, max: 18, default: 12, unit: t('years'),
       showIf: function(a) { return a.cycle !== 'post12'; }
@@ -97,7 +97,7 @@
       section: 'Family History',
       type: 'wheel',
       title: 'At what age did your mother reach menopause?',
-      subtitle: 'Family history is one of the strongest predictors of your own menopause timing.',
+      subtitle: 'Family history can give clues about your own menopause journey.',
       field: 'momMeno',
       min: 35, max: 60, default: 51, unit: t('years'),
       optional: true, optionalLabel: "I don't know"
@@ -107,25 +107,25 @@
       section: 'Lifestyle',
       type: 'single',
       title: 'Do you smoke?',
-      subtitle: 'Smoking is associated with earlier menopause and reduced ovarian reserve.',
+      subtitle: 'Smoking can affect hormone balance and ovarian health.',
       field: 'smoke',
       options: [
-        { value: 'never', label: 'Never smoked', emoji: '🚭' },
-        { value: 'former', label: 'Former smoker', emoji: '↩️' },
-        { value: 'current', label: 'Current smoker', emoji: '🚬' }
+        { value: 'never', label: 'Never smoked' },
+        { value: 'former', label: 'Former smoker' },
+        { value: 'current', label: 'Current smoker' }
       ]
     },
     {
       id: 'sleep',
       section: 'Lifestyle',
       type: 'single',
-      title: 'How would you rate your sleep?',
-      subtitle: 'Poor sleep disrupts circadian rhythms and hormone balance.',
+      title: 'How would you describe your sleep?',
+      subtitle: 'Good sleep supports hormone balance and overall wellness.',
       field: 'sleep',
       options: [
-        { value: 'good', label: 'Good — 7-9h, consistent', emoji: '😴' },
-        { value: 'normal', label: 'Fair — mostly okay', emoji: '🙂' },
-        { value: 'poor', label: 'Poor — trouble sleeping', emoji: '😫' }
+        { value: 'good', label: 'Good — 7-9h, consistent' },
+        { value: 'normal', label: 'Fair — mostly okay' },
+        { value: 'poor', label: 'Poor — trouble sleeping' }
       ]
     },
     {
@@ -133,12 +133,12 @@
       section: 'Lifestyle',
       type: 'single',
       title: 'Do you work night shifts or have irregular sleep hours?',
-      subtitle: 'Circadian disruption can affect menstrual regularity and ovarian function.',
+      subtitle: 'Consistent sleep rhythms support regular cycles and ovarian wellness.',
       field: 'circ',
       options: [
-        { value: 'none', label: 'No — regular schedule', emoji: '☀️' },
-        { value: 'some', label: 'Occasionally', emoji: '🌆' },
-        { value: 'chronic', label: 'Often / night shifts', emoji: '🌙' }
+        { value: 'none', label: 'No — regular schedule' },
+        { value: 'some', label: 'Occasionally' },
+        { value: 'chronic', label: 'Often / night shifts' }
       ]
     },
     {
@@ -146,32 +146,32 @@
       section: 'Lifestyle',
       type: 'single',
       title: 'How active are you?',
-      subtitle: 'We use this to set your daily movement and calorie goals.',
+      subtitle: 'This helps us set movement goals that fit your lifestyle.',
       field: 'activity',
       options: [
-        { value: 'sedentary', label: 'Mostly sedentary', emoji: '🛋️', desc: 'Little or no exercise' },
-        { value: 'light', label: 'Lightly active', emoji: '🚶', desc: 'Light exercise 1-3 days/week' },
-        { value: 'moderate', label: 'Moderately active', emoji: '🏃', desc: 'Moderate exercise 3-5 days/week' },
-        { value: 'active', label: 'Very active', emoji: '💪', desc: 'Hard exercise 6-7 days/week' }
+        { value: 'sedentary', label: 'Mostly sedentary', desc: 'Little or no exercise' },
+        { value: 'light', label: 'Lightly active', desc: 'Light exercise 1-3 days/week' },
+        { value: 'moderate', label: 'Moderately active', desc: 'Moderate exercise 3-5 days/week' },
+        { value: 'active', label: 'Very active', desc: 'Hard exercise 6-7 days/week' }
       ]
     },
     {
       id: 'goals',
       section: 'Your Goals',
       type: 'multi',
-      title: 'What are your main goals?',
-      subtitle: 'Select all that apply. We will personalize your experience accordingly.',
+      title: 'What are your main wellness goals?',
+      subtitle: "Select all that apply — we'll personalize your journey around what matters to you.",
       field: 'goals',
       options: [
-        { value: 'wellness', label: 'Overall wellness', emoji: '🌸' },
-        { value: 'cycle', label: 'Cycle tracking', emoji: '🔄' },
-        { value: 'education', label: 'Cycle education & body literacy', emoji: '📚' },
-        { value: 'mental', label: 'Mental health & stress', emoji: '🧘' },
-        { value: 'sports', label: 'Sports & performance', emoji: '🏃' },
-        { value: 'fertility', label: 'Fertility / trying to conceive', emoji: '🌱' },
-        { value: 'perimenopause', label: 'Perimenopause support', emoji: '🔥' },
-        { value: 'hormones', label: 'Hormone balance', emoji: '⚖️' },
-        { value: 'longevity', label: 'Ovarian longevity / anti-aging', emoji: '✨' }
+        { value: 'wellness', label: 'Overall wellness' },
+        { value: 'cycle', label: 'Cycle tracking' },
+        { value: 'education', label: 'Cycle education & body literacy' },
+        { value: 'mental', label: 'Mental health & stress' },
+        { value: 'sports', label: 'Sports & performance' },
+        { value: 'fertility', label: 'Fertility / trying to conceive' },
+        { value: 'perimenopause', label: 'Perimenopause support' },
+        { value: 'hormones', label: 'Hormone balance' },
+        { value: 'longevity', label: 'Ovarian longevity / anti-aging' }
       ],
       minSelect: 1
     },
@@ -180,15 +180,15 @@
       section: 'Your Goals',
       type: 'multi',
       title: 'Any dietary preferences?',
-      subtitle: 'We will tailor food recommendations to your preferences.',
+      subtitle: "We'll tailor food suggestions to your preferences.",
       field: 'diet',
       options: [
-        { value: 'omnivore', label: 'No restrictions', emoji: '🍽️' },
-        { value: 'vegetarian', label: 'Vegetarian', emoji: '🥗' },
-        { value: 'vegan', label: 'Vegan', emoji: '🌱' },
-        { value: 'pescatarian', label: 'Pescatarian', emoji: '🐟' },
-        { value: 'gluten-free', label: 'Gluten-free', emoji: '🌾' },
-        { value: 'dairy-free', label: 'Dairy-free', emoji: '🥛' }
+        { value: 'omnivore', label: 'No restrictions' },
+        { value: 'vegetarian', label: 'Vegetarian' },
+        { value: 'vegan', label: 'Vegan' },
+        { value: 'pescatarian', label: 'Pescatarian' },
+        { value: 'gluten-free', label: 'Gluten-free' },
+        { value: 'dairy-free', label: 'Dairy-free' }
       ],
       optional: true
     },
@@ -196,14 +196,14 @@
       id: 'personalize',
       section: 'Your Profile',
       type: 'personalize',
-      title: 'We are crafting your personalized experience'
+      title: "We're crafting your personalized experience"
     },
     {
       id: 'done',
       section: 'All Set',
       type: 'done',
       title: 'Welcome to Ovuluna',
-      subtitle: 'Your personalized ovarian wellness experience is ready.'
+      subtitle: 'Your personalized ovarian wellness journey is ready to begin.'
     }
   ];
 
@@ -305,7 +305,13 @@
       { code: 'ja', name: '日本語' },
       { code: 'ms', name: 'Bahasa Melayu' },
       { code: 'es', name: 'Español' },
-      { code: 'de', name: 'Deutsch' }
+      { code: 'de', name: 'Deutsch' },
+      { code: 'vi', name: 'Tiếng Việt' },
+      { code: 'id', name: 'Bahasa Indonesia' },
+      { code: 'th', name: 'ไทย' },
+      { code: 'ko', name: '한국어' },
+      { code: 'tl', name: 'Filipino' },
+      { code: 'hi', name: 'हिन्दी' }
     ];
     var selected = answers.language || 'en';
     var div = document.createElement('div');
@@ -540,7 +546,6 @@
         el.style.background = 'var(--sage-tint, #E8EBE2)';
       }
       el.innerHTML =
-        '<span style="font-size:24px;flex-shrink:0">' + (opt.emoji || '') + '</span>' +
         '<div style="flex:1;min-width:0">' +
           '<div style="font:700 14px var(--sans);color:var(--ink)">' + t(opt.label) + '</div>' +
           (opt.desc ? '<div style="font:500 12px var(--sans);color:var(--muted);margin-top:2px">' + t(opt.desc) + '</div>' : '') +
@@ -596,7 +601,6 @@
         el.style.background = 'var(--sage-tint, #E8EBE2)';
       }
       el.innerHTML =
-        '<span style="font-size:32px">' + (opt.emoji || '') + '</span>' +
         '<span style="font:600 12.5px var(--sans);color:var(--ink);line-height:1.2">' + t(opt.label) + '</span>';
       el.addEventListener('click', function() {
         var idx = selected.indexOf(opt.value);
@@ -774,7 +778,7 @@
     }
 
     // Minor consent note for users under 18
-    var minorNote = isTeen ? '<p style="font:500 11px var(--sans);color:var(--muted);font-style:italic;margin-top:8px">💜 We recommend sharing this app with a trusted adult or guardian. Your data stays on your device.</p>' : '';
+    var minorNote = isTeen ? '<p style="font:500 11px var(--sans);color:var(--muted);font-style:italic;margin-top:8px">We recommend sharing this app with a trusted adult or guardian. Your data stays on your device.</p>' : '';
 
     var div = document.createElement('div');
     div.className = 'welcome';
@@ -785,7 +789,7 @@
       '<p>' + step.subtitle + '</p>' +
       ovInfo +
       minorNote +
-      '<p class="disc">By continuing, you agree to use Ovuluna for wellness purposes only. This app does not provide medical advice, diagnosis, or treatment.</p>';
+      '<p class="disc">Your data stays on your device — we never collect or store it. Ovuluna is a wellness tool, not a medical device. You can export a summary to share with your healthcare provider.</p>';
     scrollEl.appendChild(div);
     footEl.innerHTML = '<button class="cta coral" id="enterBtn">Enter Ovuluna</button>';
     document.getElementById('enterBtn').addEventListener('click', function() {
