@@ -130,13 +130,16 @@ for (const file of jsFiles) {
   }
 }
 
-// 4. Check critical pages have persona badge
-const criticalPages = ['home.html', 'learn.html', 'tcm-hub.html', 'foods.html', 'profile.html'];
+// 4. Check critical pages have shared layout
+const criticalPages = ['home.html', 'learn.html', 'tcm-hub.html', 'foods.html', 'profile.html', 'daily-tracker.html', 'mental-health.html', 'community.html', 'ppg.html', 'journal.html'];
 for (const page of criticalPages) {
   if (fs.existsSync(path.join(ROOT, page))) {
     const content = fs.readFileSync(path.join(ROOT, page), 'utf8');
-    if (!content.includes('persona-badge')) {
-      log('warn', `${page}: Missing persona badge in top bar`);
+    if (!content.includes('app-header') && !content.includes('persona-badge')) {
+      log('warn', `${page}: Missing shared layout header placeholder`);
+    }
+    if (!content.includes('app-nav') && !content.includes('<nav class="nav">')) {
+      log('warn', `${page}: Missing shared layout nav placeholder`);
     }
   }
 }

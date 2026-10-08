@@ -37,11 +37,7 @@
 
 
 <div class="app">
-  <div class="top">
-    <a class="t-icon ms" href="cycle-home.html">close</a>
-    <div class="t-title" style="text-align:center">Period Started</div>
-    <span style="width:38px"></span>
-  </div>
+  <div id="app-header"></div>
 
   <div class="scroll">
     <div class="card tint-blush" style="text-align:center;padding:24px 18px">
@@ -103,13 +99,7 @@
   </div>
 </div>
 
-<nav class="nav">
-  <a href="home.html"><span class="n-ic">home</span>Home</a>
-  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
-  <a href="tcm-hub.html"><span class="n-ic">acupuncture</span>TCM</a>
-  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
-  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
-</nav>
+<div id="app-nav"></div>
 <script>
 document.addEventListener('DOMContentLoaded', function(){
   document.getElementById('moreAcc').addEventListener('click', function(){ this.classList.toggle('open'); });
@@ -127,4 +117,5 @@ document.addEventListener('DOMContentLoaded', function(){
 <script src="luna-chat.js" defer></script>
 <script src="i18n.js"></script>
   <script src="darkmode.js?v=8" defer></script>
+  <script src="app-layout.js"></script>
 </body></html>

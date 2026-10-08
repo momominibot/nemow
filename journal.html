@@ -124,6 +124,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 </style>
 </head>
 <body>
+<div id="app-header"></div>
+
 <div class="scroll">
   <!-- Header -->
   <div class="j-header">
@@ -168,13 +170,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 </div>
 
 <!-- Bottom Nav -->
-<nav class="nav">
-  <a href="home.html"><span class="n-ic ms">home</span>Home</a>
-  <a href="learn.html"><span class="n-ic ms">menu_book</span>Learn</a>
-  <a href="tcm-hub.html"><span class="n-ic ms">spa</span>TCM</a>
-  <a href="foods.html"><span class="n-ic ms">restaurant</span>Foods</a>
-  <a href="profile.html"><span class="n-ic ms">person</span>Profile</a>
-</nav>
+<div id="app-nav"></div>
 
 <script src="darkmode.js?v=8" defer></script>
 <script src="evidence-db.js" defer></script>
@@ -557,5 +553,6 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
   renderAll();
 })();
 </script>
+  <script src="app-layout.js"></script>
 </body>
 </html>

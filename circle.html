@@ -73,11 +73,7 @@
 </head><body>
 
 <div class="app">
-  <div class="top">
-    <div class="brandline"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">OVULUNA</b></div>
-    <a class="t-icon ms" href="notifications.html">notifications</a>
-    <a class="t-icon ms" href="cycle-trends.html">calendar_today</a>
-  </div>
+  <div id="app-header"></div>
 
   <div class="scroll">
 
@@ -316,13 +312,7 @@
   <!-- Create post FAB -->
   <button class="fab-create" onclick="alert('Create post — coming soon')"><span class="ms" style="font-size:26px">edit</span></button>
 
-  <nav class="nav">
-    <a href="home.html"><span class="n-ic">home</span>Home</a>
-    <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
-    <a href="tcm-hub.html"><span class="n-ic">acupuncture</span>TCM</a>
-    <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
-    <a href="profile.html"><span class="n-ic">person</span>Profile</a>
-  </nav>
+  <div id="app-nav"></div>
 </div>
 
 <script src="appnav.js" defer></script>
@@ -349,4 +339,5 @@ document.querySelectorAll('.post-action').forEach(function(act){
 </script>
 <script src="i18n.js"></script>
   <script src="darkmode.js?v=8" defer></script>
+  <script src="app-layout.js"></script>
 </body></html>

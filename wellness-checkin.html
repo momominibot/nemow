@@ -43,8 +43,7 @@
 </head>
 <body>
   <div class="app">
-    <div class="top">
-      <div class="brandline"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">OVULUNA</b></div>
+    <div id="app-header"></div>
       <a class="t-icon ms" href="notifications.html">notifications</a>
       <a class="t-icon ms" href="cycle-trends.html">calendar_today</a>
     </div>
@@ -85,13 +84,7 @@
         <b style="color:var(--mauve)">Wellness, not diagnosis.</b> This score is a self-reflection tool, not a medical assessment. Persistent symptoms warrant clinical evaluation. <span class="qi" data-evidence="cycle-length-normal">i</span>
       </div>
     </div>
-    <nav class="nav">
-      <a href="home.html"><span class="n-ic">home</span>Home</a>
-      <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
-      <a href="tcm-hub.html"><span class="n-ic">acupuncture</span>TCM</a>
-      <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
-      <a href="profile.html"><span class="n-ic">person</span>Profile</a>
-    </nav>
+    <div id="app-nav"></div>
   </div>
 <script src="evidence.js" defer></script>
 <script>
@@ -216,5 +209,6 @@ renderQuestions();
 <script src="appnav.js" defer></script>
 <script src="i18n.js"></script>
   <script src="darkmode.js?v=8" defer></script>
+  <script src="app-layout.js"></script>
 </body>
 </html>

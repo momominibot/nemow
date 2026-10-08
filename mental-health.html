@@ -131,11 +131,9 @@
 <script src="persona-filter.js"></script></head>
 <body>
   <div class="app">
-    <div class="top">
-      <a href="home.html" class="logo"><span class="ms">nightlight</span> Ovuluna</a>
-    </div>
+    <div id="app-header"></div>
 
-    <div class="scroll">
+  <div class="scroll">
       <a href="home.html" class="back-link"><span class="ms">arrow_back</span> Back</a>
 
       <!-- Hero -->
@@ -246,13 +244,7 @@
       <div style="height:20px"></div>
     </div>
 
-    <nav class="nav">
-      <a href="home.html" class="n-ic"><span class="ms">home</span><span>Home</span></a>
-      <a href="learn-cycle-phases.html" class="n-ic"><span class="ms">menu_book</span><span>Learn</span></a>
-      <a href="tcm-hub.html" class="n-ic"><span class="ms">spa</span><span>TCM</span></a>
-      <a href="foods.html" class="n-ic"><span class="ms">restaurant</span><span>Foods</span></a>
-      <a href="profile.html" class="n-ic"><span class="ms">person</span><span>Profile</span></a>
-    </nav>
+    <div id="app-nav"></div>
   </div>
 
   <div class="evidence-modal" id="evidenceModal">
@@ -436,5 +428,6 @@
       renderQuote();
     }, 8000);
   </script>
+  <script src="app-layout.js"></script>
 </body>
 </html>

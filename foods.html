@@ -125,11 +125,7 @@
 <script src="persona-filter.js"></script></head><body>
 
 <div class="app">
-  <div class="top">
-    <div class="persona-badge" style="display:flex;align-items:center;gap:8px"><img class="persona-badge-img" src="assets/icons/persona-grow-64.png" alt="Persona" style="width:28px;height:28px;border-radius:50%;border:2px solid rgba(196,181,224,.5)"><div class="brandline"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">OVULUNA</b></div></div>
-    <a class="t-icon ms" href="notifications.html">notifications</a>
-    <a class="t-icon ms" href="cycle-trends.html">calendar_today</a>
-  </div>
+  <div id="app-header"></div>
 
   <div class="scroll">
 
@@ -1039,13 +1035,7 @@
 
   </div>
 
-  <nav class="nav">
-    <a href="home.html"><span class="n-ic">home</span>Home</a>
-    <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
-    <a href="tcm-hub.html"><span class="n-ic">acupuncture</span>TCM</a>
-    <a href="foods.html" class="on"><span class="n-ic">restaurant</span>Foods</a>
-    <a href="profile.html"><span class="n-ic">person</span>Profile</a>
-  </nav>
+  <div id="app-nav"></div>
 </div>
 
 <script src="appnav.js" defer></script>
@@ -1134,4 +1124,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+  <script src="app-layout.js"></script>
 </body></html>

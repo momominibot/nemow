@@ -70,11 +70,7 @@ textarea:focus { outline:none; border-color:var(--sage); }
 
 
 <div class="app">
-  <div class="top">
-    <a class="t-icon ms" href="cycle-home.html">close</a>
-    <div class="t-title" style="text-align:center">Log Today</div>
-    <a class="t-icon ms" href="#">calendar_today</a>
-  </div>
+  <div id="app-header"></div>
 
   <div class="scroll">
     <div class="card" style="padding:12px 14px;display:flex;align-items:center;gap:10px;background:linear-gradient(145deg, rgba(217,131,164,.12), rgba(255,255,255,.85))">
@@ -194,13 +190,7 @@ textarea:focus { outline:none; border-color:var(--sage); }
   </div>
 </div>
 
-<nav class="nav">
-  <a href="home.html"><span class="n-ic">home</span>Home</a>
-  <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
-  <a href="tcm-hub.html"><span class="n-ic">acupuncture</span>TCM</a>
-  <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
-  <a href="profile.html"><span class="n-ic">person</span>Profile</a>
-</nav>
+<div id="app-nav"></div>
 <script>
 document.addEventListener('DOMContentLoaded', function(){
   // ── Flo-style bubble categories ──
@@ -381,4 +371,5 @@ document.addEventListener('DOMContentLoaded', function(){
 <script src="luna-chat.js" defer></script>
 <script src="i18n.js"></script>
   <script src="darkmode.js?v=8" defer></script>
+  <script src="app-layout.js"></script>
 </body></html>
