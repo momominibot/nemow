@@ -15,6 +15,7 @@
 <script src="food-score.js" defer></script>
 <script src="foods-db.js" defer></script>
 <script src="anim.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <style>
 /* ── Hero ── */
 .scan-hero{ background:linear-gradient(135deg,rgba(168,192,160,.22),rgba(196,181,224,.18)); border:1.5px solid rgba(168,192,160,.4); border-radius:var(--r); padding:20px; position:relative; overflow:hidden; }
@@ -149,7 +150,7 @@
       <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
         <div class="uz-ic ms">photo_camera</div>
         <div class="uz-t">Tap to upload or take photo</div>
-        <div class="uz-s">JPG, PNG · Works best with clear lighting</div>
+        <div class="uz-s">On-device OCR, 100% private, no data leaves your phone</div>
       </div>
       <input type="file" id="fileInput" accept="image/*" capture="environment"/>
 
@@ -444,85 +445,119 @@
     img.src = dataUrl;
   }
 
-  // ── Photo upload handler ──
+  // ── Photo OCR via Tesseract.js (100% client-side, no API key, no data leaves phone) ──
   function sendToOCR(imageDataUrl){
     processingOverlay.style.display = 'flex';
-    scanStatus.textContent = 'Photo received';
-    scanSub.textContent = 'Preparing for analysis…';
+    scanStatus.textContent = 'Loading OCR engine…';
+    scanSub.textContent = 'First run downloads language data (~10MB, cached after)';
 
-    // Check if user has configured a Volcengine Ark API key for vision OCR
-    var arkKey = localStorage.getItem('ovuluna_ark_key');
-    var arkEndpoint = localStorage.getItem('ovuluna_ark_endpoint');
-
-    if(arkKey && arkEndpoint){
-      // Use Volcengine Ark Doubao vision API for OCR
-      scanStatus.textContent = 'Reading label…';
-      scanSub.textContent = 'AI is extracting ingredients & nutrition';
-      var systemPrompt = 'You are a food label OCR parser. Extract data from the food label image and return ONLY a JSON object with these fields: {"name": "product name", "brand": "brand or null", "ingredients": "full ingredients text", "nutriments": {"sugarsG": number or null, "saltG": number or null, "fatG": number or null, "saturatedFatG": number or null, "proteinG": number or null, "carbsG": number or null, "energyKcal": number or null}, "additives": ["E102","citric acid",...], "allergens": ["milk","nuts",...]}. All nutriment values must be per 100g. If a value is not visible, use null. Return valid JSON only, no markdown.';
-
-      fetch('https://ark.cn-beijing.volces.com/api/v3/chat/completions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + arkKey },
-        body: JSON.stringify({
-          model: arkEndpoint,
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: [
-              { type: 'text', text: 'Parse this food label and return JSON.' },
-              { type: 'image_url', image_url: { url: imageDataUrl } }
-            ]}
-          ]
-        })
-      })
-      .then(function(res){ return res.json(); })
-      .then(function(data){
-        processingOverlay.style.display = 'none';
-        if(data.error){
-          showError('OCR failed', data.error.message || 'Could not process the image. Try a clearer photo or manual entry.');
-          return;
-        }
-        var content = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
-        var parsed = parseOCRResponse(content);
-        if(!parsed){
-          showError('Could not extract data', 'The AI returned unreadable data. Try a clearer photo or manual entry.');
-          return;
-        }
-        processAndRender(parsed);
-      })
-      .catch(function(err){
-        processingOverlay.style.display = 'none';
-        console.error('OCR error:', err);
-        showError('Connection error', 'Could not reach the vision API. Check your API key in Settings or use barcode/keyword search.');
-      });
-    } else {
-      // No API key configured - show helpful alternatives
-      setTimeout(function(){
-        processingOverlay.style.display = 'none';
-        showError('Photo OCR needs setup', 'To analyze label photos, add your Volcengine Ark API key in Profile > Settings. For now, use the barcode lookup, keyword search, or enter ingredients manually - all three work instantly with the Open Food Facts database.');
-      }, 800);
+    if(typeof Tesseract === 'undefined'){
+      processingOverlay.style.display = 'none';
+      showError('OCR engine not loaded', 'The photo OCR library could not load. Check your internet connection and try again. You can also use barcode lookup, keyword search, or manual entry.');
+      return;
     }
+
+    var worker = null;
+    Tesseract.createWorker('eng', 1, {
+      logger: function(m){
+        if(m.status === 'recognizing text'){
+          var pct = Math.round(m.progress * 100);
+          scanStatus.textContent = 'Reading label… ' + pct + '%';
+          scanSub.textContent = 'Extracting text from your photo';
+        }
+      }
+    })
+    .then(function(w){
+      worker = w;
+      scanStatus.textContent = 'Recognizing text…';
+      scanSub.textContent = 'This takes 3-8 seconds';
+      return worker.recognize(imageDataUrl);
+    })
+    .then(function(result){
+      if(worker) worker.terminate();
+      processingOverlay.style.display = 'none';
+      var text = result.data.text || '';
+      if(!text || text.trim().length < 5){
+        showError('No text found', 'Could not read any text from the photo. Make sure the label is well-lit and in focus, then try again. You can also enter ingredients manually.');
+        return;
+      }
+      var parsed = parseOCRText(text);
+      if(!parsed.ingredients && !parsed.nutrimentsHasData){
+        showError('Could not extract label data', 'Read some text but could not find ingredients or nutrition info. Try a clearer photo of the ingredients list and nutrition panel, or enter ingredients manually.');
+        return;
+      }
+      processAndRender(parsed);
+    })
+    .catch(function(err){
+      if(worker){ try{ worker.terminate(); }catch(e){} }
+      processingOverlay.style.display = 'none';
+      console.error('Tesseract OCR error:', err);
+      var msg = err && err.message ? err.message : 'Unknown error';
+      showError('OCR failed', 'Photo reading failed: ' + msg + '. Try again with a clearer photo, or use barcode lookup / keyword search / manual entry.');
+    });
   }
 
-  // ── Parse OCR JSON response ──
-  function parseOCRResponse(text){
-    if (!text) return null;
-    // Try to extract JSON from the response (may be wrapped in markdown or have extra text)
-    var jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) return null;
-    try {
-      var obj = JSON.parse(jsonMatch[0]);
-      return {
-        name: obj.name || 'Scanned product',
-        brand: obj.brand || undefined,
-        ingredients: obj.ingredients || '',
-        nutriments: obj.nutriments || {},
-        additives: obj.additives || [],
-        allergens: obj.allergens || []
-      };
-    } catch(e) {
-      console.error('JSON parse error:', e);
+  // ── Parse raw OCR text into structured food data ──
+  function parseOCRText(text){
+    var result = {
+      name: 'Scanned product',
+      brand: undefined,
+      ingredients: '',
+      nutriments: {},
+      additives: [],
+      allergens: []
+    };
+    var nutrimentsHasData = false;
+
+    // Extract ingredients
+    var ingMatch = text.match(/ingredients?[:\s]*([\s\S]*?)(?:nutrition|allergen|may contain|storage|best before|$)/i);
+    if(ingMatch && ingMatch[1]){
+      result.ingredients = ingMatch[1].replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+    } else {
+      // Fallback: take first 300 chars after any colon as potential ingredients
+      var fallback = text.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+      if(fallback.length > 10) result.ingredients = fallback.substring(0, 300);
+    }
+
+    // Extract nutrition values per 100g
+    function extractNutrient(pattern, text){
+      var m = text.match(pattern);
+      if(m && m[1]){
+        var val = parseFloat(m[1].replace(/[^\d.]/g, ''));
+        if(!isNaN(val) && val >= 0 && val < 1000) return val;
+      }
       return null;
     }
+
+    result.nutriments.energyKcal = extractNutrient(/(?:energy|calories)[^\d]*(\d+\.?\d*)\s*(?:kcal|cal)/i, text);
+    result.nutriments.fatG = extractNutrient(/(?:total\s+)?fat[^\d]*(\d+\.?\d*)\s*g/i, text);
+    result.nutriments.saturatedFatG = extractNutrient(/saturate[^\d]*(\d+\.?\d*)\s*g/i, text);
+    result.nutriments.carbsG = extractNutrient(/(?:carbohydrate|carbs)[^\d]*(\d+\.?\d*)\s*g/i, text);
+    result.nutriments.sugarsG = extractNutrient(/(?:total\s+)?sugar[^\d]*(\d+\.?\d*)\s*g/i, text);
+    result.nutriments.proteinG = extractNutrient(/protein[^\d]*(\d+\.?\d*)\s*g/i, text);
+    result.nutriments.saltG = extractNutrient(/(?:salt|sodium)[^\d]*(\d+\.?\d*)\s*(?:g|mg)/i, text);
+    // If sodium in mg, convert to salt (salt = sodium * 2.5)
+    var sodiumMg = extractNutrient(/sodium[^\d]*(\d+\.?\d*)\s*mg/i, text);
+    if(sodiumMg && !result.nutriments.saltG) result.nutriments.saltG = Math.round(sodiumMg * 2.5 / 1000 * 100) / 100;
+
+    // Check if any nutrition data was found
+    for(var k in result.nutriments){
+      if(result.nutriments[k] != null){ nutrimentsHasData = true; break; }
+    }
+    result.nutrimentsHasData = nutrimentsHasData;
+
+    // Extract E-number additives
+    var eNums = text.match(/E\s*\d{3}[a-f]?/gi) || [];
+    result.additives = eNums.map(function(e){ return e.replace(/\s/g, '').toUpperCase(); }).filter(function(v,i,a){ return a.indexOf(v) === i; });
+
+    // Extract common allergens
+    var allergenPatterns = ['milk','egg','peanut','tree nut','nut','soy','wheat','gluten','fish','shellfish','sesame','mustard','celery','sulphite'];
+    allergenPatterns.forEach(function(a){
+      var re = new RegExp('\\b' + a + '\\b', 'i');
+      if(re.test(text)) result.allergens.push(a.charAt(0).toUpperCase() + a.slice(1));
+    });
+
+    return result;
   }
 
   // ── Open Food Facts API helpers ──
