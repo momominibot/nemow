@@ -45,10 +45,12 @@
 .off-result .off-nova.n4{ background:rgba(196,122,106,.15); color:var(--low); }
 .off-loading{ text-align:center; padding:20px; color:var(--taupe); font:600 12px var(--sans); }
 .off-powered{ font:600 10px var(--sans); color:var(--faded); text-align:center; margin-top:8px; }
-.food-card{ background:var(--card); border:1px solid var(--line-soft); border-radius:var(--r-sm); padding:14px; box-shadow:0 4px 16px -10px rgba(107,82,142,.15); backdrop-filter:blur(8px); display:flex; gap:12px; }
-.food-card .fc-ic{ width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; background:var(--sunken); }
-.food-card .fc-body{ flex:1; min-width:0; }
-.food-card .fc-name{ font-size:14px; font-weight:800; color:var(--ink); display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.food-card{ background:var(--card); border:1px solid var(--line-soft); border-radius:var(--r-sm); padding:14px; box-shadow:0 4px 16px -10px rgba(107,82,142,.15); backdrop-filter:blur(8px); display:flex; gap:12px; align-items:flex-start; }
+.food-card .fc-ic{ width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; background:var(--sunken); overflow:hidden; }
+.food-card .fc-ic img{ width:100%; height:100%; object-fit:contain; display:block; }
+.food-card .fc-body{ flex:1; min-width:0; display:flex; flex-direction:column; gap:0; }
+.food-card .fc-name{ font-size:14px; font-weight:800; color:var(--ink); display:flex; align-items:center; gap:6px; flex-wrap:wrap; line-height:1.3; min-height:20px; }
+.food-card .fc-name .qi{ flex-shrink:0; }
 .food-card .fc-nutrients{ font-size:10.5px; color:var(--taupe); margin-top:3px; line-height:1.4; }
 .food-card .fc-nutrients b{ color:var(--mauve); font-weight:700; }
 .food-card .fc-benefit{ font-size:11.5px; color:var(--cocoa); line-height:1.45; margin-top:6px; padding-top:6px; border-top:1px solid var(--line-soft); }
@@ -180,7 +182,7 @@
 
         <!-- 1. Spinach -->
         <div class="food-card" data-cats="iron antiox" data-phase="menstrual follicular">
-          <div class="fc-ic">🥬</div>
+          <div class="fc-ic"><img src="assets/spinach.png" alt="Spinach"></div>
           <div class="fc-body">
             <div class="fc-name">Spinach </div>
             <div class="fc-nutrients"><b>Iron</b> · Folate · Vitamin C · Magnesium · Calcium</div>
@@ -191,7 +193,7 @@
 
         <!-- 2. Salmon -->
         <div class="food-card" data-cats="omega protein" data-phase="menstrual follicular ovulation luteal perimenopause pcos endometriosis">
-          <div class="fc-ic">🐟</div>
+          <div class="fc-ic"><img src="assets/salmon.png" alt="Wild Salmon"></div>
           <div class="fc-body">
             <div class="fc-name">Wild Salmon </div>
             <div class="fc-nutrients"><b>Omega-3 (EPA/DHA)</b> · Vitamin D · Selenium · High-quality protein</div>
@@ -202,7 +204,7 @@
 
         <!-- 3. Lentils -->
         <div class="food-card" data-cats="iron protein phyto" data-phase="follicular menstrual">
-          <div class="fc-ic">🫘</div>
+          <div class="fc-ic"><img src="assets/lentils.png" alt="Lentils"></div>
           <div class="fc-body">
             <div class="fc-name">Lentils <span class="qi" data-evidence="iron-menstruation">i</span> <span class="qi" data-evidence="folate-reproduction">i</span></div>
             <div class="fc-nutrients"><b>Iron</b> · Folate · Plant protein · Fiber · B vitamins</div>
@@ -213,7 +215,7 @@
 
         <!-- 4. Pumpkin seeds -->
         <div class="food-card" data-cats="mag omega" data-phase="luteal ovulation">
-          <div class="fc-ic">🎃</div>
+          <div class="fc-ic"><img src="assets/pumpkin-seeds.png" alt="Pumpkin Seeds"></div>
           <div class="fc-body">
             <div class="fc-name">Pumpkin Seeds </div>
             <div class="fc-nutrients"><b>Magnesium</b> · Zinc · Omega-3 · Iron · Tryptophan</div>
@@ -224,7 +226,7 @@
 
         <!-- 5. Greek yogurt -->
         <div class="food-card" data-cats="protein calcium" data-phase="luteal perimenopause">
-          <div class="fc-ic">🥛</div>
+          <div class="fc-ic"><img src="assets/greek-yogurt.png" alt="Greek Yogurt"></div>
           <div class="fc-body">
             <div class="fc-name">Greek Yogurt </div>
             <div class="fc-nutrients"><b>Protein</b> · Calcium · Probiotics · Vitamin B12 · Iodine</div>
@@ -235,7 +237,7 @@
 
         <!-- 6. Blueberries -->
         <div class="food-card" data-cats="antiox" data-phase="ovulation follicular perimenopause pcos endometriosis">
-          <div class="fc-ic">🫐</div>
+          <div class="fc-ic"><img src="assets/blueberries.png" alt="Blueberries"></div>
           <div class="fc-body">
             <div class="fc-name">Blueberries </div>
             <div class="fc-nutrients"><b>Anthocyanins</b> · Vitamin C · Vitamin K · Manganese · Fiber</div>
@@ -246,7 +248,7 @@
 
         <!-- 7. Avocado -->
         <div class="food-card" data-cats="antiox" data-phase="follicular ovulation">
-          <div class="fc-ic">🥑</div>
+          <div class="fc-ic"><img src="assets/avocado.png" alt="Avocado"></div>
           <div class="fc-body">
             <div class="fc-name">Avocado </div>
             <div class="fc-nutrients"><b>Healthy fats</b> · Vitamin E · Potassium · Folate · Fiber</div>
@@ -257,7 +259,7 @@
 
         <!-- 8. Almonds -->
         <div class="food-card" data-cats="mag protein antiox" data-phase="luteal perimenopause">
-          <div class="fc-ic">🌰</div>
+          <div class="fc-ic"><img src="assets/almonds.png" alt="Almonds"></div>
           <div class="fc-body">
             <div class="fc-name">Almonds </div>
             <div class="fc-nutrients"><b>Magnesium</b> · Vitamin E · Protein · Calcium · Healthy fats</div>
@@ -268,7 +270,7 @@
 
         <!-- 9. Eggs -->
         <div class="food-card" data-cats="protein" data-phase="follicular ovulation menstrual luteal">
-          <div class="fc-ic">🥚</div>
+          <div class="fc-ic"><img src="assets/eggs.png" alt="Pasture-Raised Eggs"></div>
           <div class="fc-body">
             <div class="fc-name">Pasture-Raised Eggs <span class="qi" data-evidence="nutrition-follicular">i</span> <span class="qi" data-evidence="folate-reproduction">i</span></div>
             <div class="fc-nutrients"><b>Complete protein</b> · Choline · B12 · Vitamin D · Folate · Lutein</div>
@@ -279,7 +281,7 @@
 
         <!-- 10. Dark chocolate -->
         <div class="food-card" data-cats="mag antiox iron" data-phase="luteal menstrual">
-          <div class="fc-ic">🍫</div>
+          <div class="fc-ic"><img src="assets/dark-chocolate.png" alt="Dark Chocolate (70%+)"></div>
           <div class="fc-body">
             <div class="fc-name">Dark Chocolate (70%+) </div>
             <div class="fc-nutrients"><b>Magnesium</b> · Iron · Flavanols · Copper · Antioxidants</div>
@@ -290,7 +292,7 @@
 
         <!-- 11. Flaxseeds — CORRECTED -->
         <div class="food-card" data-cats="omega phyto" data-phase="follicular perimenopause">
-          <div class="fc-ic">🌾</div>
+          <div class="fc-ic"><img src="assets/flaxseeds.png" alt="Ground Flaxseeds"></div>
           <div class="fc-body">
             <div class="fc-name">Ground Flaxseeds </div>
             <div class="fc-nutrients"><b>ALA (Omega-3)</b> · Lignans (phytoestrogens) · Fiber · Magnesium</div>
@@ -301,7 +303,7 @@
 
         <!-- 12. Broccoli -->
         <div class="food-card" data-cats="antiox iron" data-phase="follicular ovulation endometriosis pcos">
-          <div class="fc-ic">🥦</div>
+          <div class="fc-ic"><img src="assets/broccoli.png" alt="Broccoli"></div>
           <div class="fc-body">
             <div class="fc-name">Broccoli </div>
             <div class="fc-nutrients"><b>Folate</b> · Vitamin C · Vitamin K · Calcium · Sulforaphane · Fiber</div>
@@ -312,7 +314,7 @@
 
         <!-- 13. Chickpeas -->
         <div class="food-card" data-cats="protein phyto iron b6" data-phase="luteal follicular pcos">
-          <div class="fc-ic">🫛</div>
+          <div class="fc-ic"><img src="assets/chickpeas.png" alt="Chickpeas"></div>
           <div class="fc-body">
             <div class="fc-name">Chickpeas </div>
             <div class="fc-nutrients"><b>Plant protein</b> · Iron · Folate · Phytoestrogens · Fiber · Vitamin B6 · Manganese</div>
@@ -323,7 +325,7 @@
 
         <!-- 14. Walnuts -->
         <div class="food-card" data-cats="omega mag" data-phase="luteal perimenopause endometriosis">
-          <div class="fc-ic">🌰</div>
+          <div class="fc-ic"><img src="assets/walnuts.png" alt="Walnuts"></div>
           <div class="fc-body">
             <div class="fc-name">Walnuts <span class="qi" data-evidence="omega3-dysmenorrhea">i</span> <span class="qi" data-evidence="magnesium-pms-mixed">i</span></div>
             <div class="fc-nutrients"><b>ALA (Omega-3)</b> · Magnesium · Copper · Melatonin · Vitamin E</div>
@@ -334,7 +336,7 @@
 
         <!-- 15. Sweet potato -->
         <div class="food-card" data-cats="antiox b6" data-phase="luteal pcos">
-          <div class="fc-ic">🍠</div>
+          <div class="fc-ic"><img src="assets/sweet-potato.png" alt="Sweet Potato"></div>
           <div class="fc-body">
             <div class="fc-name">Sweet Potato </div>
             <div class="fc-nutrients"><b>Beta-carotene</b> · Vitamin B6 · Fiber · Potassium · Vitamin C</div>
@@ -345,7 +347,7 @@
 
         <!-- 16. Turmeric -->
         <div class="food-card" data-cats="antiox" data-phase="menstrual luteal endometriosis pcos perimenopause">
-          <div class="fc-ic">🧡</div>
+          <div class="fc-ic"><img src="assets/turmeric.png" alt="Turmeric"></div>
           <div class="fc-body">
             <div class="fc-name">Turmeric </div>
             <div class="fc-nutrients"><b>Curcumin</b> · Antioxidants · Iron · Manganese · Vitamin B6</div>
@@ -356,7 +358,7 @@
 
         <!-- 17. Oats -->
         <div class="food-card" data-cats="mag protein" data-phase="luteal menstrual pcos">
-          <div class="fc-ic">🥣</div>
+          <div class="fc-ic"><img src="assets/oats.png" alt="Rolled Oats"></div>
           <div class="fc-body">
             <div class="fc-name">Rolled Oats </div>
             <div class="fc-nutrients"><b>Magnesium</b> · B vitamins · Fiber · Iron · Zinc · Complex carbs</div>
@@ -367,7 +369,7 @@
 
         <!-- 18. Kale -->
         <div class="food-card" data-cats="iron antiox calcium" data-phase="menstrual follicular endometriosis">
-          <div class="fc-ic">🥗</div>
+          <div class="fc-ic"><img src="assets/kale.png" alt="Kale"></div>
           <div class="fc-body">
             <div class="fc-name">Kale </div>
             <div class="fc-nutrients"><b>Iron</b> · Vitamin K · Vitamin C · Calcium · Antioxidants · Folate</div>
@@ -390,7 +392,7 @@
 
         <!-- Soy -->
         <div class="food-card" data-cats="phyto protein" data-phase="perimenopause">
-          <div class="fc-ic">🫛</div>
+          <div class="fc-ic"><img src="assets/soy.png" alt="Soy: Edamame, Tofu, Tempeh"></div>
           <div class="fc-body">
             <div class="fc-name">Soy: Edamame, Tofu, Tempeh <span class="qi" data-evidence="soy-isoflavones-hot-flashes">i</span> <span class="qi" data-evidence="soy-isoflavones-bone">i</span></div>
             <div class="fc-nutrients"><b>Isoflavones (50-100mg/day)</b> · Complete protein · Calcium · Fiber</div>
@@ -401,7 +403,7 @@
 
         <!-- Omega-3 -->
         <div class="food-card" data-cats="omega" data-phase="perimenopause">
-          <div class="fc-ic">🐟</div>
+          <div class="fc-ic"><img src="assets/salmon.png" alt="Omega-3 Rich Foods"></div>
           <div class="fc-body">
             <div class="fc-name">Omega-3 Rich Foods </div>
             <div class="fc-nutrients"><b>EPA/DHA</b> · Vitamin D · Anti-inflammatory</div>
@@ -412,7 +414,7 @@
 
         <!-- Magnesium -->
         <div class="food-card" data-cats="mag" data-phase="perimenopause">
-          <div class="fc-ic">🥬</div>
+          <div class="fc-ic"><img src="assets/pumpkin-seeds.png" alt="Magnesium-Rich Foods"></div>
           <div class="fc-body">
             <div class="fc-name">Magnesium-Rich Foods </div>
             <div class="fc-nutrients"><b>Magnesium (310-320mg/day)</b> · Muscle relaxation · Sleep support</div>
@@ -423,7 +425,7 @@
 
         <!-- Calcium + Vitamin D -->
         <div class="food-card" data-cats="calcium" data-phase="perimenopause luteal">
-          <div class="fc-ic">🥛</div>
+          <div class="fc-ic"><img src="assets/greek-yogurt.png" alt="Calcium 1,200mg + Vitamin D"></div>
           <div class="fc-body">
             <div class="fc-name">Calcium 1,200mg + Vitamin D <span class="qi" data-evidence="calcium-pms">i</span> <span class="qi" data-evidence="bone-estrogen">i</span></div>
             <div class="fc-nutrients"><b>Calcium (1,200mg/day)</b> · Vitamin D (600-800 IU) · Bone health</div>
@@ -434,7 +436,7 @@
 
         <!-- Mediterranean diet -->
         <div class="food-card" data-cats="antiox omega" data-phase="perimenopause pcos endometriosis">
-          <div class="fc-ic">🫒</div>
+          <div class="fc-ic"><img src="assets/avocado.png" alt="Mediterranean Diet Pattern"></div>
           <div class="fc-body">
             <div class="fc-name">Mediterranean Diet Pattern </div>
             <div class="fc-nutrients"><b>Anti-inflammatory pattern</b> · Olive oil · Vegetables · Fish · Legumes · Whole grains</div>
@@ -445,7 +447,7 @@
 
         <!-- Protein -->
         <div class="food-card" data-cats="protein" data-phase="perimenopause">
-          <div class="fc-ic">🍳</div>
+          <div class="fc-ic"><img src="assets/eggs.png" alt="Protein 1.1-1.5g/kg/day"></div>
           <div class="fc-body">
             <div class="fc-name">Protein 1.1-1.5g/kg/day </div>
             <div class="fc-nutrients"><b>High-quality protein</b> · Muscle maintenance · Satiety</div>
@@ -468,7 +470,7 @@
 
         <!-- Myo-inositol -->
         <div class="food-card" data-cats="protein" data-phase="pcos">
-          <div class="fc-ic">🧪</div>
+          <div class="fc-ic"><img src="assets/oats.png" alt="Myo-Inositol 4,000mg/day"></div>
           <div class="fc-body">
             <div class="fc-name">Myo-Inositol 4,000mg/day </div>
             <div class="fc-nutrients"><b>Myo-inositol (2-4g/day)</b> · Insulin signaling · Ovulation support</div>
@@ -479,7 +481,7 @@
 
         <!-- Anti-inflammatory -->
         <div class="food-card" data-cats="omega antiox" data-phase="pcos endometriosis perimenopause">
-          <div class="fc-ic">🧡</div>
+          <div class="fc-ic"><img src="assets/turmeric.png" alt="Anti-Inflammatory Foods"></div>
           <div class="fc-body">
             <div class="fc-name">Anti-Inflammatory Foods </div>
             <div class="fc-nutrients"><b>Omega-3 · Polyphenols · Curcumin · Sulforaphane</b></div>
@@ -490,7 +492,7 @@
 
         <!-- Low GI carbs -->
         <div class="food-card" data-cats="protein" data-phase="pcos">
-          <div class="fc-ic">🍚</div>
+          <div class="fc-ic"><img src="assets/oats.png" alt="Low GI carbs"></div>
           <div class="fc-body">
             <div class="fc-name">Low GI Carbs &amp; Fiber </div>
             <div class="fc-nutrients"><b>Low glycemic index</b> · High fiber · Stable blood sugar</div>
@@ -513,7 +515,7 @@
 
         <!-- High fiber -->
         <div class="food-card" data-cats="antiox" data-phase="endometriosis">
-          <div class="fc-ic">🥦</div>
+          <div class="fc-ic"><img src="assets/broccoli.png" alt="High-Fiber Foods"></div>
           <div class="fc-body">
             <div class="fc-name">High-Fiber Foods </div>
             <div class="fc-nutrients"><b>Dietary fiber (25-30g/day)</b> · Estrogen excretion</div>
@@ -524,7 +526,7 @@
 
         <!-- Omega-3 EPA/DHA -->
         <div class="food-card" data-cats="omega" data-phase="endometriosis">
-          <div class="fc-ic">🐟</div>
+          <div class="fc-ic"><img src="assets/salmon.png" alt="Omega-3 (EPA/DHA)"></div>
           <div class="fc-body">
             <div class="fc-name">Omega-3 (EPA/DHA) </div>
             <div class="fc-nutrients"><b>EPA/DHA</b> · Anti-proliferative · Anti-angiogenic</div>
@@ -535,7 +537,7 @@
 
         <!-- Anti-inflammatory diet -->
         <div class="food-card" data-cats="antiox omega" data-phase="endometriosis pcos perimenopause">
-          <div class="fc-ic">🫒</div>
+          <div class="fc-ic"><img src="assets/turmeric.png" alt="Anti-Inflammatory Diet"></div>
           <div class="fc-body">
             <div class="fc-name">Anti-Inflammatory Diet </div>
             <div class="fc-nutrients"><b>Mediterranean pattern</b> · Reduce red meat · Limit alcohol</div>
