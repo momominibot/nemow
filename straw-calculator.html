@@ -58,9 +58,9 @@
     <div class="card tint-lavender" style="text-align:center;padding:22px 18px">
       <div style="font-size:36px;margin-bottom:6px" class="ms" style="color:var(--mauve)">insights</div>
       <div style="font-family:var(--serif);font-weight:600;font-size:22px;color:var(--cocoa);line-height:1.2">Reproductive Stage Calculator</div>
-      <div class="sub" style="font-size:12px;margin-top:8px">Based on the STRAW+10 international standard for reproductive aging staging <button class="ev-btn" data-ev="straw10">i</button></div>
+      <div class="sub" style="font-size:12px;margin-top:8px">Based on the STRAW+10 international standard for reproductive aging staging <span class="qi" data-evidence="straw10">i</span></div>
       <div style="display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--faded);margin-top:10px;justify-content:center">
-        <span class="ms" style="font-size:14px;color:var(--ok)">lock</span> Wellness estimation, not a medical diagnosis
+        <span class="ms" style="font-size:14px;color:var(--ok)">lock</span> Wellness estimation, not a medical diagnosis. Data stays on your device.
       </div>
     </div>
 
@@ -70,7 +70,7 @@
       <p class="sub" style="font-size:12px;margin-bottom:14px">We need a few questions to know if cycle-based staging works for you right now.</p>
 
       <div id="elig-step" class="step active">
-        <div class="qlabel"><span class="ms" style="font-size:16px;color:var(--mauve)">medication</span> Are you on hormonal contraception? <button class="ev-btn" data-ev="straw-hormonal">i</button></div>
+        <div class="qlabel"><span class="ms" style="font-size:16px;color:var(--mauve)">medication</span> Are you on hormonal contraception? <span class="qi" data-evidence="straw-hormonal">i</span></div>
         <div class="qsub">Birth control pills, hormonal IUD, implant, injection, or ring can mask your natural cycle pattern.</div>
         <div class="optrow">
           <div class="opt" data-q="contraception" data-v="no"><span class="ms">close</span>No</div>
@@ -80,7 +80,7 @@
       </div>
 
       <div id="elig-step2" class="step">
-        <div class="qlabel"><span class="ms" style="font-size:16px;color:var(--mauve)">medical_information</span> Any diagnosed condition affecting your cycles? <button class="ev-btn" data-ev="straw-pcos">i</button></div>
+        <div class="qlabel"><span class="ms" style="font-size:16px;color:var(--mauve)">medical_information</span> Any diagnosed condition affecting your cycles? <span class="qi" data-evidence="straw-pcos">i</span></div>
         <div class="qsub">PCOS, thyroid disorder, recent pregnancy (within 12 months), or hysterectomy can change cycle patterns independent of reproductive aging.</div>
         <div class="optrow">
           <div class="opt" data-q="condition" data-v="none"><span class="ms">shield</span>No known condition</div>
@@ -117,7 +117,7 @@
         <span class="ms" style="font-size:16px;vertical-align:-3px">add</span> Add another cycle
       </button>
 
-      <div class="qlabel" style="margin-top:8px">Have you gone 60+ days without a period in the last year? <button class="ev-btn" data-ev="straw-60day">i</button></div>
+      <div class="qlabel" style="margin-top:8px">Have you gone 60+ days without a period in the last year? <span class="qi" data-evidence="straw-60day">i</span></div>
       <div class="optrow">
         <div class="opt" data-q="amenorrhea" data-v="no"><span class="ms">close</span>No</div>
         <div class="opt" data-q="amenorrhea" data-v="yes"><span class="ms">event_busy</span>Yes</div>
