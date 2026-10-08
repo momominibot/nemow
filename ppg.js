@@ -385,6 +385,7 @@
      * Start calibration loop (checks finger placement).
      */
     startCalibration() {
+      this._stopped = false;
       this.isMeasuring = false;
       this.rawData = [];
       let calibratedFrames = 0;
@@ -418,6 +419,7 @@
      * Start 30-second data acquisition.
      */
     startMeasurement(durationSeconds = 30, onProgress) {
+      this._stopped = false;
       this.isMeasuring = true;
       this.rawData = [];
       const startTime = performance.now();

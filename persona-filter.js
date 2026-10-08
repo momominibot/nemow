@@ -49,6 +49,12 @@
         el.style.display = 'none';
       }
     }
+    // Update persona badge icons in top bar
+    var badges = document.querySelectorAll('.persona-badge-img');
+    for (var j = 0; j < badges.length; j++) {
+      badges[j].src = 'assets/icons/persona-' + persona + '-64.png';
+      badges[j].alt = persona.charAt(0).toUpperCase() + persona.slice(1) + ' persona';
+    }
     // Store persona for other scripts to use
     try { localStorage.setItem('ovuluna_persona', persona); } catch (e) {}
   }

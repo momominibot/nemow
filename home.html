@@ -16,6 +16,54 @@
 <link rel="stylesheet" href="hormone-graph.css">
 <script src="anim.js" defer></script>
 <style>
+/* Dreamy mystical background */
+.dreamy-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(245,235,250,.6) 0%, rgba(255,245,240,.4) 50%, rgba(240,245,255,.5) 100%);
+}
+.dreamy-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: .5;
+  animation: floatOrb 12s ease-in-out infinite;
+}
+.dreamy-orb.o1 { width:200px;height:200px;background:rgba(196,181,224,.4);top:5%;left:-5%;animation-delay:0s; }
+.dreamy-orb.o2 { width:180px;height:180px;background:rgba(245,198,184,.35);top:30%;right:-8%;animation-delay:-4s; }
+.dreamy-orb.o3 { width:160px;height:160px;background:rgba(240,200,120,.25);bottom:20%;left:10%;animation-delay:-8s; }
+.dreamy-orb.o4 { width:140px;height:140px;background:rgba(176,160,208,.3);bottom:5%;right:15%;animation-delay:-2s; }
+@keyframes floatOrb {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(20px,-30px) scale(1.1); }
+  66% { transform: translate(-15px,20px) scale(.95); }
+}
+/* Sparkle particles */
+.dreamy-sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(240,200,120,.8);
+  border-radius: 50%;
+  animation: sparkle 4s ease-in-out infinite;
+}
+@keyframes sparkle {
+  0%,100% { opacity:0; transform: scale(0); }
+  50% { opacity:1; transform: scale(1); }
+}
+/* Ensure content is above dreamy bg */
+.app { position: relative; z-index: 1; }
+/* Enhanced card dreaminess */
+.card {
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(139,108,130,.12);
+}
 .hstat{ display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:99px;background:var(--card-solid);border:1.5px solid var(--line-soft);font:700 12px var(--sans);color:var(--cocoa); }
 .leg{ display:flex;align-items:center;gap:8px;font:600 11.5px var(--sans);color:var(--taupe); }
 .leg .sw{ width:15px;height:4px;border-radius:2px;flex-shrink:0; }
@@ -34,10 +82,23 @@
 <link rel="stylesheet" href="luna-chat.css">
 <script src="persona-filter.js"></script></head><body>
 
+<!-- Dreamy mystical background -->
+<div class="dreamy-bg">
+  <div class="dreamy-orb o1"></div>
+  <div class="dreamy-orb o2"></div>
+  <div class="dreamy-orb o3"></div>
+  <div class="dreamy-orb o4"></div>
+  <div class="dreamy-sparkle" style="top:15%;left:20%;animation-delay:0s"></div>
+  <div class="dreamy-sparkle" style="top:25%;right:25%;animation-delay:1s"></div>
+  <div class="dreamy-sparkle" style="top:50%;left:10%;animation-delay:2s"></div>
+  <div class="dreamy-sparkle" style="top:60%;right:15%;animation-delay:0.5s"></div>
+  <div class="dreamy-sparkle" style="top:75%;left:30%;animation-delay:1.5s"></div>
+  <div class="dreamy-sparkle" style="top:85%;right:30%;animation-delay:2.5s"></div>
+</div>
 
 <div class="app">
   <div class="top">
-    <div class="brandline"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">OVULUNA</b></div>
+    <div class="persona-badge" style="display:flex;align-items:center;gap:8px"><img class="persona-badge-img" src="assets/icons/persona-grow-64.png" alt="Persona" style="width:28px;height:28px;border-radius:50%;border:2px solid rgba(196,181,224,.5)"><div class="brandline"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">OVULUNA</b></div></div>
     <a class="t-icon ms" href="notifications.html">notifications</a>
     <a class="t-icon ms" href="cycle-trends.html">calendar_today</a>
   </div>
