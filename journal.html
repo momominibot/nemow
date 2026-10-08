@@ -89,6 +89,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .domain-ic .ms{font-size:20px;}
 .domain-name{font-family:var(--serif);font-size:14px;font-weight:700;color:var(--ink);}
 .domain-status{font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px;margin-left:auto;}
+.domain-score-badge{font-size:11px;font-weight:800;padding:3px 10px;border-radius:10px;margin-left:auto;background:linear-gradient(135deg,#b8a5d8,#9b7fc4);color:#fff;}
 .status-done{background:var(--ok-soft);color:var(--ok);}
 .status-empty{background:var(--sunken);color:var(--taupe);}
 .domain-body{font-size:12px;color:var(--cocoa);line-height:1.6;}
@@ -149,7 +150,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
       </div>
     </div>
     <div class="score-info">
-      <h3 id="scoreTitle">No data yet</h3>
+      <h3 id="scoreTitle">No data yet <span class="qi" data-evidence="wellness-score-overall" style="font-size:11px;vertical-align:super">i</span></h3>
       <p id="scoreDesc">Log your mood, sleep, symptoms, water, activity, and food to see your daily wellness score.</p>
     </div>
   </div>
@@ -210,36 +211,129 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
     dowEl.textContent = currentDate.toLocaleDateString('en-US',{weekday:'long',year:'numeric'});
   }
 
+  var MET_MAP = {
+    'Rest day': 1.0, 'Slow walking': 2.5, 'Brisk walking': 3.5,
+    'Yoga / stretching': 2.5, 'Light cardio': 4.5, 'Moderate cardio': 6.0,
+    'Vigorous cardio': 8.0, 'Strength training': 5.0, 'HIIT': 9.5,
+    'Sports (tennis, basketball)': 7.0
+  };
+
+  function calcSleepDuration(bedtime, wake){
+    if(!bedtime || !wake || bedtime.indexOf(':') === -1 || wake.indexOf(':') === -1) return null;
+    var b = bedtime.split(':'); var w = wake.split(':');
+    var bh = parseInt(b[0]), bm = parseInt(b[1]);
+    var wh = parseInt(w[0]), wm = parseInt(w[1]);
+    if(isNaN(bh)||isNaN(bm)||isNaN(wh)||isNaN(wm)) return null;
+    var bedMin = bh*60+bm; var wakeMin = wh*60+wm;
+    var dur = wakeMin - bedMin;
+    if(dur <= 0) dur += 24*60;
+    return dur / 60;
+  }
+
   function calcScore(log){
     var domains = ['mood','sleep','symptoms','water','activity','food'];
     var filled = 0;
     var score = 0;
+    var breakdown = {};
+
     domains.forEach(function(d){
       if(log[d] && log[d].fields && log[d].fields.length > 0){
         var hasValue = log[d].fields.some(function(f){ return f !== '' && f !== 0 && f !== 'None' && (!Array.isArray(f) || f.length > 0); });
         if(hasValue){
           filled++;
+          var domainScore = 0;
+          var f = log[d].fields;
+
           if(d === 'mood'){
-            var m = log[d].fields[0];
-            if(m === 'great' || m === 'good') score += 20;
-            else if(m === 'ok') score += 15;
-            else score += 8;
-          }else if(d === 'sleep'){
-            var q = parseInt(log[d].fields[2]) || 0;
-            score += Math.min(q * 4, 20);
-          }else if(d === 'water'){
-            var glasses = parseInt(log[d].fields[1]) || 0;
-            score += Math.min(glasses * 2.5, 20);
-          }else if(d === 'activity'){
-            var dur = parseInt(log[d].fields[1]) || 0;
-            score += dur > 0 ? Math.min(dur / 1.5, 20) : 0;
-          }else{
-            score += 16;
+            var moodMap = {low:3, meh:6, ok:9, good:12, great:14};
+            domainScore += moodMap[f[0]] || 0;
+            var swingMap = {'None':4, 'Mild':3, 'Moderate':2, 'Strong':0};
+            domainScore += swingMap[f[1]] !== undefined ? swingMap[f[1]] : 0;
+            if(f[2] && String(f[2]).trim()) domainScore += 2;
+            breakdown.mood = Math.min(domainScore, 20);
+            score += Math.min(domainScore, 20);
+          }
+
+          else if(d === 'sleep'){
+            var quality = parseInt(f[2]) || 0;
+            domainScore += Math.min(quality * 3, 15);
+            var dur = calcSleepDuration(f[0], f[1]);
+            if(dur !== null){
+              if(dur >= 7 && dur <= 9) domainScore += 3;
+              else if(dur >= 6 && dur <= 10) domainScore += 2;
+            }
+            var wakeMap = {'No':2, 'Once':1, '2-3 times':0, 'More than 3':0};
+            domainScore += wakeMap[f[3]] !== undefined ? wakeMap[f[3]] : 0;
+            breakdown.sleep = Math.min(domainScore, 20);
+            score += Math.min(domainScore, 20);
+          }
+
+          else if(d === 'symptoms'){
+            var pain = parseInt(f[0]) || 0;
+            if(pain <= 2) domainScore += 8;
+            else if(pain <= 5) domainScore += 5;
+            else if(pain <= 8) domainScore += 2;
+            var others = Array.isArray(f[1]) ? f[1] : (f[1] ? [f[1]] : []);
+            var hasNone = others.indexOf('None') !== -1;
+            if(hasNone || others.length === 0) domainScore += 4;
+            else if(others.length <= 2) domainScore += 2;
+            if(f[2] && String(f[2]).trim()) domainScore += 3;
+            breakdown.symptoms = Math.min(domainScore, 15);
+            score += Math.min(domainScore, 15);
+          }
+
+          else if(d === 'water'){
+            var waterVal = parseInt(f[0]) || parseInt(f[1]) || 0;
+            var userWeight = parseFloat(localStorage.getItem('ovuluna_user_weight')) || 60;
+            var waterGoal = Math.round(userWeight * 35 / 250);
+            var pct = waterGoal > 0 ? (waterVal / waterGoal) * 100 : 0;
+            if(pct >= 100) domainScore += 10;
+            else if(pct >= 75) domainScore += 7;
+            else if(pct >= 50) domainScore += 4;
+            var drinkMap = {'Only water':3, 'Some tea/coffee':2, 'Some tea/juice':2, 'Sugary drinks':1, 'Alcohol':0, 'Energy drinks':1};
+            domainScore += drinkMap[f[2]] !== undefined ? drinkMap[f[2]] : 0;
+            domainScore += 2;
+            breakdown.water = Math.min(domainScore, 15);
+            score += Math.min(domainScore, 15);
+          }
+
+          else if(d === 'activity'){
+            var duration = parseInt(f[1]) || 0;
+            var met = MET_MAP[f[0]] || 0;
+            var exertion = parseInt(f[2]) || 0;
+            if(duration >= 30) domainScore += 5;
+            else if(duration >= 15) domainScore += 3;
+            else if(duration >= 1) domainScore += 1;
+            else if(met === 1.0 || f[0] === 'Rest day') domainScore += 3;
+            if(met >= 6) domainScore += 4;
+            else if(met >= 3) domainScore += 3;
+            else if(met >= 1) domainScore += 2;
+            if(exertion >= 4 && exertion <= 7) domainScore += 3;
+            else if(exertion > 0) domainScore += 1;
+            domainScore += 3;
+            breakdown.activity = Math.min(domainScore, 15);
+            score += Math.min(domainScore, 15);
+          }
+
+          else if(d === 'food'){
+            var calVal = parseInt(f[0]) || 0;
+            var calGoal = parseInt(localStorage.getItem('ovuluna_calorie_goal')) || 2000;
+            var calPct = calGoal > 0 ? (calVal / calGoal) * 100 : 0;
+            if(calPct >= 80 && calPct <= 120) domainScore += 5;
+            else if((calPct >= 60 && calPct < 80) || (calPct > 120 && calPct <= 140)) domainScore += 3;
+            var supportive = Array.isArray(f[1]) ? f[1] : (f[1] ? [f[1]] : []);
+            if(supportive.length >= 4) domainScore += 4;
+            else if(supportive.length >= 2) domainScore += 2;
+            var sugarMap = {'Minimal':3, 'Moderate':2, 'High':1, 'Very high':0};
+            domainScore += sugarMap[f[2]] !== undefined ? sugarMap[f[2]] : 0;
+            if(f[3] && String(f[3]).trim()) domainScore += 3;
+            breakdown.food = Math.min(domainScore, 15);
+            score += Math.min(domainScore, 15);
           }
         }
       }
     });
-    return {score: Math.round(Math.min(score, 100)), filled: filled, total: domains.length};
+    return {score: Math.round(Math.min(score, 100)), filled: filled, total: domains.length, breakdown: breakdown};
   }
 
   function renderScore(log){
@@ -267,15 +361,30 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
     }
   }
 
-  function renderDomain(name, icon, color, bgColor, log, renderFn){
+  var domainEvidence = {
+    mood: 'wellness-score-mood',
+    sleep: 'wellness-score-sleep',
+    symptoms: 'wellness-score-symptoms',
+    water: 'water-goal-35mlkg',
+    activity: 'wellness-score-activity',
+    food: 'wellness-score-nutrition'
+  };
+  var domainMax = {mood:20, sleep:20, symptoms:15, water:15, activity:15, food:15};
+
+  function renderDomain(name, icon, color, bgColor, log, renderFn, breakdown){
     var data = log[name];
     var hasData = data && data.fields && data.fields.some(function(f){ return f !== '' && f !== 0 && f !== 'None' && (!Array.isArray(f) || (f.length > 0 && f[0] !== 'None')); });
+    var dScore = breakdown && breakdown[name] !== undefined ? breakdown[name] : null;
 
     var html = '<div class="domain">';
     html += '<div class="domain-head">';
     html += '<div class="domain-ic" style="background:' + bgColor + '"><span class="ms" style="color:' + color + '">' + icon + '</span></div>';
-    html += '<div class="domain-name">' + name.charAt(0).toUpperCase() + name.slice(1) + '</div>';
-    html += '<span class="domain-status ' + (hasData ? 'status-done' : 'status-empty') + '">' + (hasData ? 'Logged' : 'Not logged') + '</span>';
+    html += '<div class="domain-name">' + name.charAt(0).toUpperCase() + name.slice(1) + ' <span class="qi" data-evidence="' + domainEvidence[name] + '" style="font-size:10px;vertical-align:super">i</span></div>';
+    if(dScore !== null){
+      html += '<span class="domain-score-badge">' + dScore + '/' + domainMax[name] + '</span>';
+    }else{
+      html += '<span class="domain-status ' + (hasData ? 'status-done' : 'status-empty') + '">' + (hasData ? 'Logged' : 'Not logged') + '</span>';
+    }
     html += '</div>';
     html += '<div class="domain-body">';
     if(hasData){
@@ -327,10 +436,12 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
   }
 
   function renderWater(fields){
-    var glasses = parseInt(fields[1]) || 0;
+    var glasses = parseInt(fields[0]) || parseInt(fields[1]) || 0;
     var drinks = fields[2] || 'Only water';
+    var userWeight = parseFloat(localStorage.getItem('ovuluna_user_weight')) || 60;
+    var waterGoal = Math.round(userWeight * 35 / 250);
     var html = '';
-    html += '<div class="row"><span class="label">Water intake</span><span class="value">' + glasses + ' glasses (' + (glasses * 250) + 'ml)</span></div>';
+    html += '<div class="row"><span class="label">Water intake</span><span class="value">' + glasses + '/' + waterGoal + ' glasses (' + (glasses * 250) + 'ml)</span></div>';
     if(drinks && drinks !== 'Only water') html += '<div class="row"><span class="label">Other drinks</span><span class="value">' + drinks + '</span></div>';
     return html;
   }
@@ -348,12 +459,16 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 
   function renderFood(fields){
     if(!fields || fields.length === 0) return '';
-    var html = '<div class="row"><span class="label">Logged items</span><span class="value">' + fields.length + '</span></div>';
-    fields.forEach(function(f, i){
-      if(f && typeof f === 'string' && f.trim()){
-        html += '<div class="row"><span class="label">Item ' + (i+1) + '</span><span class="value" style="max-width:60%">' + f + '</span></div>';
-      }
-    });
+    var calories = parseInt(fields[0]) || 0;
+    var supportive = Array.isArray(fields[1]) ? fields[1] : (fields[1] ? [fields[1]] : []);
+    var sugar = fields[2] || '';
+    var note = fields[3] || '';
+    var calGoal = parseInt(localStorage.getItem('ovuluna_calorie_goal')) || 2000;
+    var html = '';
+    if(calories > 0) html += '<div class="row"><span class="label">Calorie intake</span><span class="value">' + calories + '/' + calGoal + ' kcal</span></div>';
+    if(supportive.length > 0) html += '<div class="row"><span class="label">Cycle-supportive foods</span><span class="value" style="max-width:60%">' + supportive.join(', ') + '</span></div>';
+    if(sugar) html += '<div class="row"><span class="label">Sugar intake</span><span class="value">' + sugar + '</span></div>';
+    if(note) html += '<div class="row"><span class="label">Notes</span><span class="value" style="max-width:60%">' + note + '</span></div>';
     return html;
   }
 
@@ -361,15 +476,16 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
     var dateStr = formatDate(currentDate);
     var log = getLog(dateStr);
     updateDateDisplay();
+    var result = calcScore(log);
     renderScore(log);
 
     var html = '';
-    html += renderDomain('mood', 'mood', '#8b6c82', '#e8e0f2', log, renderMood);
-    html += renderDomain('sleep', 'bedtime', '#5fa8d4', '#dcebf5', log, renderSleep);
-    html += renderDomain('symptoms', 'monitor_heart', '#e89678', '#fbe8e0', log, renderSymptoms);
-    html += renderDomain('water', 'water_drop', '#5fa8c8', '#d8eef5', log, renderWater);
-    html += renderDomain('activity', 'directions_run', '#7ba89a', '#dcebe5', log, renderActivity);
-    html += renderDomain('food', 'restaurant', '#c49a6c', '#f5ead8', log, renderFood);
+    html += renderDomain('mood', 'mood', '#8b6c82', '#e8e0f2', log, renderMood, result.breakdown);
+    html += renderDomain('sleep', 'bedtime', '#5fa8d4', '#dcebf5', log, renderSleep, result.breakdown);
+    html += renderDomain('symptoms', 'monitor_heart', '#e89678', '#fbe8e0', log, renderSymptoms, result.breakdown);
+    html += renderDomain('water', 'water_drop', '#5fa8c8', '#d8eef5', log, renderWater, result.breakdown);
+    html += renderDomain('activity', 'directions_run', '#7ba89a', '#dcebe5', log, renderActivity, result.breakdown);
+    html += renderDomain('food', 'restaurant', '#c49a6c', '#f5ead8', log, renderFood, result.breakdown);
     domainsContainer.innerHTML = html;
   }
 
