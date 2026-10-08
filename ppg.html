@@ -244,10 +244,16 @@
   (function() {
     'use strict';
 
+    if (!window.OvulunaPPG) {
+      console.error('OvulunaPPG library not loaded');
+      return;
+    }
+
     const { CameraPPG, TCMLogicMapper } = window.OvulunaPPG;
-    
-    const MEASUREMENT_DURATION = 60; // seconds — better for HRV reliability
+    const MEASUREMENT_DURATION = 60;
     let ppg = null;
+    let demoMode = false;
+    let demoInterval = null;
     let pulseWaveData = [];
     const MAX_PULSE_POINTS = 120;
     let isPaused = false;
@@ -255,7 +261,10 @@
     let totalPausedTime = 0;
     let measurementStartTime = 0;
     let fingerLostFrames = 0;
-    const FINGER_LOST_THRESHOLD = 15; // ~0.5s at 30fps
+    const FINGER_LOST_THRESHOLD = 15;
+
+    // Detect mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || ('ontouchstart' in window);
 
     // DOM
     const steps = {
@@ -293,9 +302,30 @@
       });
     }
 
-    // Draw video frame to preview canvases
+    // Add desktop notice to step 1
+    if (!isMobile) {
+      const startBtn = document.getElementById('startBtn');
+      if (startBtn) {
+        const notice = document.createElement('div');
+        notice.style.cssText = 'background:#fff3cd;border:1px solid #ffc107;border-radius:12px;padding:12px 16px;margin:16px 0;font-size:13px;color:#856404;line-height:1.6';
+        notice.innerHTML = '<b>Mobile-only feature:</b> Heart rate measurement requires a smartphone rear camera with flash. On desktop, you can use <b>Demo Mode</b> to preview the experience.';
+        startBtn.parentNode.insertBefore(notice, startBtn);
+
+        const demoBtn = document.createElement('button');
+        demoBtn.className = 'ppg-btn';
+        demoBtn.style.cssText = 'background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;margin-top:8px';
+        demoBtn.innerHTML = '<span style="font-size:18px;vertical-align:middle;margin-right:6px">▶</span> Try Demo Mode';
+        demoBtn.addEventListener('click', () => {
+          demoMode = true;
+          startDemo();
+        });
+        startBtn.parentNode.insertBefore(demoBtn, startBtn.nextSibling);
+      }
+    }
+
     function drawPreviews() {
-      if (video.readyState >= 2) {
+      if (demoMode) return;
+      if (video && video.readyState >= 2) {
         [preview2, preview3].forEach(c => {
           if (c && c.offsetParent !== null) {
             const ctx = c.getContext('2d');
@@ -303,35 +333,75 @@
           }
         });
       }
-      requestAnimationFrame(drawPreviews);
+      if (!demoMode) requestAnimationFrame(drawPreviews);
+    }
+
+    // Demo mode: simulate PPG data
+    function startDemo() {
+      showStep(2);
+      torchWarning.style.display = 'none';
+      calibrationOverlay.style.display = 'none';
+      sampleBox.classList.add('calibrated');
+      calibrationStatus.textContent = '✓ Demo mode — simulating finger detection...';
+      calibrationStatus.style.color = '#5a7a52';
+
+      // Simulate calibration red values
+      let demoRed = 200;
+      demoInterval = setInterval(() => {
+        demoRed = 195 + Math.sin(Date.now() / 500) * 15 + Math.random() * 10;
+        const pct = Math.min(100, (demoRed / 255) * 100);
+        if (redMeterFill) redMeterFill.style.width = pct + '%';
+        if (redMeterFill2) redMeterFill2.style.width = pct + '%';
+      }, 50);
+
+      setTimeout(() => {
+        if (demoMode) startMeasurement();
+      }, 1500);
+    }
+
+    function stopDemo() {
+      if (demoInterval) {
+        clearInterval(demoInterval);
+        demoInterval = null;
+      }
     }
 
     document.getElementById('startBtn').addEventListener('click', async () => {
+      if (demoMode) return;
       showStep(2);
       await initCamera();
     });
 
     document.getElementById('cancelBtn2').addEventListener('click', () => {
       if (ppg) ppg.release();
+      stopDemo();
+      demoMode = false;
       showStep(1);
     });
 
     document.getElementById('remeasureBtn').addEventListener('click', async () => {
       if (ppg) ppg.release();
+      stopDemo();
+      ppg = null;
       pulseWaveData = [];
       totalPausedTime = 0;
       isPaused = false;
+      demoMode = false;
       showStep(2);
-      await initCamera();
+      if (isMobile) {
+        await initCamera();
+      } else {
+        startDemo();
+      }
     });
 
     document.getElementById('doneBtn').addEventListener('click', () => {
       if (ppg) ppg.release();
+      stopDemo();
       window.location.href = 'home.html';
     });
 
     document.getElementById('resumeBtn').addEventListener('click', () => {
-      // User says they replaced finger - reset detection
       fingerLostFrames = 0;
       isPaused = false;
       totalPausedTime += (performance.now() - pauseStartTime);
@@ -340,44 +410,50 @@
     });
 
     async function initCamera() {
-      ppg = new CameraPPG(canvas, video, {
-        onFrame: (redMean, calibrated) => {
-          const pct = Math.min(100, (redMean / 255) * 100);
-          redMeterFill.style.width = pct + '%';
-          redMeterFill2.style.width = pct + '%';
-        },
-        onCalibrationChange: (isCalibrated, redMean, ready) => {
-          if (isCalibrated) {
-            sampleBox.classList.add('calibrated');
-            calibrationOverlay.style.display = 'none';
-            calibrationStatus.textContent = ready ? '✓ Finger detected — starting measurement...' : 'Hold still...';
-            calibrationStatus.style.color = '#5a7a52';
-            if (ready) setTimeout(() => startMeasurement(), 500);
-          } else {
-            sampleBox.classList.remove('calibrated');
-            calibrationOverlay.style.display = 'flex';
-            calibrationStatus.textContent = 'Waiting for finger placement...';
-            calibrationStatus.style.color = 'var(--taupe)';
+      try {
+        ppg = new CameraPPG(canvas, video, {
+          onFrame: (redMean, calibrated) => {
+            const pct = Math.min(100, (redMean / 255) * 100);
+            if (redMeterFill) redMeterFill.style.width = pct + '%';
+            if (redMeterFill2) redMeterFill2.style.width = pct + '%';
+          },
+          onCalibrationChange: (isCalibrated, redMean, ready) => {
+            if (isCalibrated) {
+              sampleBox.classList.add('calibrated');
+              calibrationOverlay.style.display = 'none';
+              calibrationStatus.textContent = ready ? '✓ Finger detected — starting measurement...' : 'Hold still...';
+              calibrationStatus.style.color = '#5a7a52';
+              if (ready) setTimeout(() => startMeasurement(), 500);
+            } else {
+              sampleBox.classList.remove('calibrated');
+              calibrationOverlay.style.display = 'flex';
+              calibrationStatus.textContent = 'Waiting for finger placement...';
+              calibrationStatus.style.color = 'var(--taupe)';
+            }
           }
+        });
+
+        const result = await ppg.init();
+        if (!result.success) {
+          alert('Unable to access camera: ' + result.error + '\n\nPlease allow camera permissions and try again. On desktop, use Demo Mode instead.');
+          showStep(1);
+          return;
         }
-      });
 
-      const result = await ppg.init();
-      if (!result.success) {
-        alert('Unable to access camera: ' + result.error + '\n\nPlease allow camera permissions and try again.');
+        if (!result.torchSupported) {
+          torchWarning.style.display = 'flex';
+        } else {
+          torchWarning.style.display = 'none';
+          try { await ppg.enableTorch(); } catch(e) { console.warn('Torch enable failed:', e); }
+        }
+
+        drawPreviews();
+        ppg.startCalibration();
+      } catch (e) {
+        console.error('Camera init error:', e);
+        alert('Camera error: ' + e.message + '\n\nPlease try again or use Demo Mode on desktop.');
         showStep(1);
-        return;
       }
-
-      if (!result.torchSupported) {
-        torchWarning.style.display = 'flex';
-      } else {
-        torchWarning.style.display = 'none';
-        await ppg.enableTorch();
-      }
-
-      drawPreviews();
-      ppg.startCalibration();
     }
 
     function startMeasurement() {
@@ -387,16 +463,39 @@
       isPaused = false;
       fingerLostFrames = 0;
       resizePulseCanvas();
-      
+
       const CIRCUMFERENCE = 2 * Math.PI * 54;
       measurementStartTime = performance.now();
-      
-      // Override onFrame for measurement + finger-loss detection
+
+      if (demoMode) {
+        // Demo measurement loop
+        let demoElapsed = 0;
+        const demoTimer = setInterval(() => {
+          demoElapsed += 100;
+          const actualProgress = Math.min(100, (demoElapsed / (MEASUREMENT_DURATION * 1000)) * 100);
+          const remaining = Math.max(0, MEASUREMENT_DURATION - Math.floor(demoElapsed / 1000));
+          countdownNumber.textContent = remaining;
+          countdownRing.style.strokeDashoffset = CIRCUMFERENCE * (1 - actualProgress / 100);
+
+          // Simulate pulse wave data
+          const pulse = 195 + Math.sin(demoElapsed / 400) * 20 + Math.random() * 8;
+          pulseWaveData.push(pulse);
+          if (pulseWaveData.length > MAX_PULSE_POINTS) pulseWaveData.shift();
+          drawPulseWave();
+
+          if (demoElapsed >= MEASUREMENT_DURATION * 1000) {
+            clearInterval(demoTimer);
+            processDemoResults();
+          }
+        }, 100);
+        return;
+      }
+
+      // Real measurement
       const originalOnFrame = ppg.onFrame;
       ppg.onFrame = (redMean, calibrated) => {
         originalOnFrame(redMean, calibrated);
-        
-        // Finger loss detection during measurement
+
         if (redMean < 150) {
           fingerLostFrames++;
           if (fingerLostFrames > FINGER_LOST_THRESHOLD && !isPaused) {
@@ -408,14 +507,13 @@
         } else {
           fingerLostFrames = Math.max(0, fingerLostFrames - 1);
           if (isPaused && fingerLostFrames === 0) {
-            // Auto-resume when finger is back
             isPaused = false;
             totalPausedTime += (performance.now() - pauseStartTime);
             fingerLostOverlay.classList.remove('show');
             measuringStatus.textContent = 'Keep your finger steady...';
           }
         }
-        
+
         if (!isPaused) {
           pulseWaveData.push(redMean);
           if (pulseWaveData.length > MAX_PULSE_POINTS) pulseWaveData.shift();
@@ -424,7 +522,6 @@
       };
 
       ppg.startMeasurement(MEASUREMENT_DURATION, (progress, elapsed) => {
-        // Adjust elapsed for paused time
         const actualElapsed = elapsed - totalPausedTime;
         const actualProgress = Math.min(100, (actualElapsed / (MEASUREMENT_DURATION * 1000)) * 100);
         const remaining = Math.max(0, MEASUREMENT_DURATION - Math.floor(actualElapsed / 1000));
@@ -432,34 +529,70 @@
         countdownRing.style.strokeDashoffset = CIRCUMFERENCE * (1 - actualProgress / 100);
       });
 
-      // Override stop to account for paused time
-      const originalStop = ppg.stop.bind(ppg);
-      ppg.stop = function() {
-        ppg._stopped = true;
-        ppg.isMeasuring = false;
-        if (ppg._animationId) cancelAnimationFrame(ppg._animationId);
-        ppg.disableTorch();
-        if (ppg.rawData.length > 0) {
-          // Filter out data collected during pause
-          const filteredData = ppg.rawData.filter(d => {
-            const elapsed = d.time - measurementStartTime;
-            // Simple heuristic: keep data with reasonable red values
-            return d.value > 150;
-          });
-          if (filteredData.length > 30) {
-            ppg.rawData = filteredData;
-          }
-          return ppg.processor.process(ppg.rawData);
-        }
-        return null;
-      };
-
       const checkComplete = setInterval(() => {
-        if (!ppg.isMeasuring && ppg.rawData.length > 0) {
+        if (!ppg.isMeasuring && ppg.rawData && ppg.rawData.length > 0) {
           clearInterval(checkComplete);
           processResults();
         }
       }, 100);
+    }
+
+    function processDemoResults() {
+      // Generate realistic demo results
+      const demoBPM = 68 + Math.floor(Math.random() * 15);
+      const demoHRV = 35 + Math.floor(Math.random() * 25);
+      showResults(demoBPM, demoHRV, 'good', [
+        'Demo mode: these are simulated values.',
+        'For real measurements, use a smartphone with rear camera + flash.',
+        'Place your index finger firmly over the lens and flash.'
+      ]);
+    }
+
+    function processResults() {
+      try {
+        const results = ppg.processor.process(ppg.rawData);
+        const tcmMapper = new TCMLogicMapper();
+        const savedBaseline = localStorage.getItem('ovuluna_ppg_baseline');
+        if (savedBaseline) {
+          try {
+            const b = JSON.parse(savedBaseline);
+            tcmMapper.setBaseline(b.rhr, b.hrv, b.phase);
+          } catch(e) {}
+        }
+        const analysis = tcmMapper.analyze(results);
+
+        showResults(results.bpm || '--', results.hrv || '--', results.quality, analysis.advice);
+
+        if (results.quality === 'good' && !savedBaseline && results.bpm > 0) {
+          localStorage.setItem('ovuluna_ppg_baseline', JSON.stringify({
+            rhr: results.bpm, hrv: results.hrv, phase: 'follicular', date: new Date().toISOString()
+          }));
+        }
+      } catch (e) {
+        console.error('Results processing error:', e);
+        showResults('--', '--', 'unreliable', ['Measurement quality was too low. Please try again with steady finger placement and good lighting.']);
+      }
+    }
+
+    function showResults(bpm, hrv, quality, advice) {
+      document.getElementById('resultBPM').textContent = bpm;
+      document.getElementById('resultHRV').textContent = hrv;
+
+      const qualityBadge = document.getElementById('qualityBadge');
+      qualityBadge.className = 'ppg-quality ' + quality;
+      const qualityLabels = { good: 'Good Quality', poor: 'Low Quality', unreliable: 'Unreliable', uncertain: 'Uncertain', insufficient: 'Insufficient Data' };
+      qualityBadge.textContent = qualityLabels[quality] || quality;
+
+      const adviceList = document.getElementById('adviceList');
+      adviceList.innerHTML = '';
+      (advice || []).forEach(a => {
+        const div = document.createElement('div');
+        div.className = 'ppg-advice-item';
+        div.textContent = a;
+        adviceList.appendChild(div);
+      });
+
+      showStep(4);
     }
 
     function drawPulseWave() {
@@ -482,7 +615,7 @@
         pulseCtx.lineWidth = 2;
         pulseCtx.lineJoin = 'round';
         const stepX = w / (MAX_PULSE_POINTS - 1);
-        
+
         for (let i = 0; i < pulseWaveData.length; i++) {
           const x = i * stepX;
           const normalized = (pulseWaveData[i] - min) / range;
@@ -510,43 +643,6 @@
         pulseWaveCanvas.width = 300;
         pulseWaveCanvas.height = 80;
       }
-    }
-
-    function processResults() {
-      const results = ppg.processor.process(ppg.rawData);
-      const tcmMapper = new TCMLogicMapper();
-      const savedBaseline = localStorage.getItem('ovuluna_ppg_baseline');
-      if (savedBaseline) {
-        try {
-          const b = JSON.parse(savedBaseline);
-          tcmMapper.setBaseline(b.rhr, b.hrv, b.phase);
-        } catch(e) {}
-      }
-      const analysis = tcmMapper.analyze(results);
-
-      document.getElementById('resultBPM').textContent = results.bpm || '--';
-      document.getElementById('resultHRV').textContent = results.hrv || '--';
-
-      const qualityBadge = document.getElementById('qualityBadge');
-      qualityBadge.className = 'ppg-quality ' + results.quality;
-      const qualityLabels = { good: 'Good Quality', poor: 'Low Quality', unreliable: 'Unreliable', uncertain: 'Uncertain', insufficient: 'Insufficient Data' };
-      qualityBadge.textContent = qualityLabels[results.quality] || results.quality;
-
-      const adviceList = document.getElementById('adviceList');
-      adviceList.innerHTML = '';
-      analysis.advice.forEach(advice => {
-        const div = document.createElement('div');
-        div.className = 'ppg-advice-item';
-        div.textContent = advice;
-        adviceList.appendChild(div);
-      });
-
-      if (results.quality === 'good' && !savedBaseline && results.bpm > 0) {
-        localStorage.setItem('ovuluna_ppg_baseline', JSON.stringify({
-          rhr: results.bpm, hrv: results.hrv, phase: 'follicular', date: new Date().toISOString()
-        }));
-      }
-      showStep(4);
     }
 
     window.addEventListener('resize', resizePulseCanvas);
