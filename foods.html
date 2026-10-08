@@ -380,8 +380,8 @@
     </div>
 
     <!-- ═══════════ PERIMENOPAUSE / MENOPAUSE ═══════════ -->
+    </div></div>
     <div class="phase-section" data-section="perimenopause">
-      </div></div>
 <div class="collapsible-header" id="perimenopause-foods-header"><span class="sec-title"><span class="ms" style="font-size:16px;color:var(--coral-deep)">local_fire_department</span> Perimenopause & Menopause</span><span style="display:flex;align-items:center;gap:8px"><span class="count" id="perimenopause-foods-count"></span><span class="chevron">▼</span></span></div>
 <div class="collapsible-content collapsed" id="perimenopause-foods-content"><div class="collapsible-content-inner">
       <div class="sub" style="margin-bottom:10px">Evidence-based nutritional support for vasomotor symptoms, bone health, and body composition</div>
@@ -458,8 +458,8 @@
     </div>
 
     <!-- ═══════════ PCOS ═══════════ -->
+    </div></div>
     <div class="phase-section" data-section="pcos">
-      </div></div>
 <div class="collapsible-header" id="pcos-foods-header"><span class="sec-title"><span class="ms" style="font-size:16px;color:var(--gold)">monitoring</span> PCOS Foods</span><span style="display:flex;align-items:center;gap:8px"><span class="count" id="pcos-foods-count"></span><span class="chevron">▼</span></span></div>
 <div class="collapsible-content collapsed" id="pcos-foods-content"><div class="collapsible-content-inner">
       <div class="sub" style="margin-bottom:10px">Insulin-sensitizing, anti-inflammatory nutrition for polycystic ovary syndrome <span class="qi" data-evidence="pcos-lifestyle">i</span></div>
@@ -503,8 +503,8 @@
     </div>
 
     <!-- ═══════════ ENDOMETRIOSIS ═══════════ -->
+    </div></div>
     <div class="phase-section" data-section="endometriosis">
-      </div></div>
 <div class="collapsible-header" id="endo-foods-header"><span class="sec-title"><span class="ms" style="font-size:16px;color:var(--mauve)">all_inclusive</span> Endometriosis Foods</span><span style="display:flex;align-items:center;gap:8px"><span class="count" id="endo-foods-count"></span><span class="chevron">▼</span></span></div>
 <div class="collapsible-content collapsed" id="endo-foods-content"><div class="collapsible-content-inner">
       <div class="sub" style="margin-bottom:10px">Estrogen-lowering, anti-inflammatory dietary approaches <span class="qi" data-evidence="endometriosis-overview">i</span></div>
@@ -559,8 +559,8 @@
     </div>
 
     <!-- ═══════════ CHINESE HERBS & TEAS ═══════════ -->
+    </div></div>
     <div class="phase-section" data-section="herbs">
-      </div></div>
 <div class="collapsible-header" id="herbs-teas-header"><span class="sec-title"><span class="ms" style="font-size:16px;color:var(--sage)">emoji_food_beverage</span> Chinese Herbs & Teas</span><span style="display:flex;align-items:center;gap:8px"><span class="count" id="herbs-teas-count"></span><span class="chevron">▼</span></span></div>
 <div class="collapsible-content collapsed" id="herbs-teas-content"><div class="collapsible-content-inner">
       <div class="sub" style="margin-bottom:10px">Traditional usage with honest evidence status. Dosages and frequencies from Chinese health platforms; clinical claims verified against PubMed/PMC.</div>
@@ -1099,7 +1099,7 @@ function filterFoods(){
 
 <script>
 
-// Count items in each collapsible section
+// Count items in each collapsible section + ensure food cards visible
 document.addEventListener('DOMContentLoaded', function() {
   var sections = ['cycle-foods','perimenopause-foods','pcos-foods','endo-foods','herbs-teas','formulas','foods-limit','go-deeper'];
   sections.forEach(function(id) {
@@ -1110,6 +1110,8 @@ document.addEventListener('DOMContentLoaded', function() {
       if (cards.length > 0) countEl.textContent = cards.length + ' items';
     }
   });
+  // Ensure all food cards are visible on load
+  if (typeof filterFoods === 'function') filterFoods();
 });
 
 // Collapsible sections

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Daily Journal — Ovuluna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+:root{
+  --serif:'Newsreader',Georgia,serif;
+  --sans:'Manrope',-apple-system,sans-serif;
+  --bg:#faf6f9;
+  --card:#ffffff;
+  --ink:#3a2e42;
+  --cocoa:#5a4a60;
+  --taupe:#8a7a90;
+  --mauve:#8b6c82;
+  --mauve-deep:#6b5270;
+  --lav:#c4b5e0;
+  --lav-soft:#e8e0f2;
+  --peach:#f5c6b8;
+  --peach-soft:#fbe8e0;
+  --sage:#7ba89a;
+  --sage-soft:#dcebe5;
+  --coral:#e89678;
+  --coral-deep:#d4745a;
+  --gold:#e0b84a;
+  --ok:#6ba684;
+  --ok-soft:#d8ede1;
+  --warn:#e0a84a;
+  --warn-soft:#faf0d8;
+  --line-soft:#e8e0ec;
+  --sunken:#f5f0f7;
+  --r:16px;
+  --r-sm:12px;
+}
+[data-theme="dark"]{
+  --bg:#1a1420;
+  --card:#251e2c;
+  --ink:#f0eaf4;
+  --cocoa:#d4c8dc;
+  --taupe:#a898b0;
+  --mauve:#c4a8cc;
+  --mauve-deep:#d4b8dc;
+  --lav:#6b5280;
+  --lav-soft:#3a2e48;
+  --peach:#8a5a4a;
+  --peach-soft:#3a2820;
+  --sage:#5a8a7a;
+  --sage-soft:#1e3028;
+  --line-soft:#3a2e48;
+  --sunken:#201828;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:100vh;padding-bottom:90px;}
+.scroll{max-width:480px;margin:0 auto;padding:0 16px;}
+
+/* Header */
+.j-header{padding:20px 0 12px;display:flex;align-items:center;justify-content:space-between;}
+.j-title{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--ink);}
+.j-sub{font-size:11px;color:var(--taupe);margin-top:2px;}
+
+/* Date nav */
+.date-nav{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r);padding:10px 12px;margin-bottom:14px;}
+.date-nav button{background:none;border:none;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--mauve);transition:background .15s;}
+.date-nav button:hover{background:var(--lav-soft);}
+.date-nav .date-label{text-align:center;}
+.date-nav .date-label .day{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--ink);}
+.date-nav .date-label .dow{font-size:10px;color:var(--taupe);font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+.today-btn{font-size:10px;font-weight:700;color:var(--mauve);background:var(--lav-soft);border:none;padding:5px 10px;border-radius:20px;cursor:pointer;}
+
+/* Wellness score */
+.score-card{background:linear-gradient(135deg,var(--lav-soft),var(--peach-soft));border-radius:var(--r);padding:18px;margin-bottom:14px;display:flex;align-items:center;gap:16px;}
+.score-ring{width:72px;height:72px;border-radius:50%;background:conic-gradient(var(--mauve) var(--pct,0%),var(--line-soft) 0);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.score-ring-inner{width:56px;height:56px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.score-num{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--ink);}
+.score-label{font-size:8px;color:var(--taupe);font-weight:700;text-transform:uppercase;}
+.score-info{flex:1;}
+.score-info h3{font-family:var(--serif);font-size:15px;color:var(--ink);margin-bottom:4px;}
+.score-info p{font-size:11px;color:var(--taupe);line-height:1.4;}
+
+/* Domain cards */
+.domain{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r);padding:14px;margin-bottom:10px;}
+.domain-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.domain-ic{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.domain-ic .ms{font-size:20px;}
+.domain-name{font-family:var(--serif);font-size:14px;font-weight:700;color:var(--ink);}
+.domain-status{font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px;margin-left:auto;}
+.status-done{background:var(--ok-soft);color:var(--ok);}
+.status-empty{background:var(--sunken);color:var(--taupe);}
+.domain-body{font-size:12px;color:var(--cocoa);line-height:1.6;}
+.domain-body .row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--line-soft);}
+.domain-body .row:last-child{border-bottom:none;}
+.domain-body .row .label{color:var(--taupe);font-weight:600;}
+.domain-body .row .value{color:var(--ink);font-weight:700;text-align:right;}
+.empty-hint{font-size:11px;color:var(--taupe);font-style:italic;text-align:center;padding:8px 0;}
+.empty-hint a{color:var(--mauve);font-weight:700;text-decoration:none;}
+
+/* Export button */
+.export-btn{width:100%;padding:14px;border-radius:var(--r);background:linear-gradient(135deg,var(--mauve),var(--mauve-deep));color:#fff;border:none;font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;margin-bottom:20px;transition:opacity .15s;}
+.export-btn:hover{opacity:.9;}
+.export-btn .ms{font-size:18px;}
+
+/* Bottom nav */
+.nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line-soft);display:flex;justify-content:space-around;padding:8px 0 12px;z-index:100;backdrop-filter:blur(10px);}
+.nav a{display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:var(--taupe);font-size:9px;font-weight:700;padding:4px 12px;}
+.nav a.active{color:var(--mauve);}
+.nav .n-ic{font-size:22px;}
+.nav .nav-center{position:relative;top:-18px;}
+.nav .nav-center .n-ic{font-size:28px;background:linear-gradient(135deg,var(--mauve),var(--coral));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+/* Print styles */
+@media print{
+  .nav,.date-nav button,.export-btn,.today-btn{display:none;}
+  body{padding-bottom:0;}
+  .domain,.score-card{break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+<div class="scroll">
+  <!-- Header -->
+  <div class="j-header">
+    <div>
+      <div class="j-title">Daily Journal</div>
+      <div class="j-sub">Your wellness, day by day</div>
+    </div>
+  </div>
+
+  <!-- Date Navigation -->
+  <div class="date-nav">
+    <button id="prevDay" aria-label="Previous day"><span class="ms">chevron_left</span></button>
+    <div class="date-label">
+      <div class="day" id="dateDay">Today</div>
+      <div class="dow" id="dateDow">—</div>
+    </div>
+    <button id="nextDay" aria-label="Next day"><span class="ms">chevron_right</span></button>
+  </div>
+
+  <!-- Wellness Score -->
+  <div class="score-card" id="scoreCard">
+    <div class="score-ring" id="scoreRing" style="--pct:0%">
+      <div class="score-ring-inner">
+        <div class="score-num" id="scoreNum">—</div>
+        <div class="score-label">Score</div>
+      </div>
+    </div>
+    <div class="score-info">
+      <h3 id="scoreTitle">No data yet</h3>
+      <p id="scoreDesc">Log your mood, sleep, symptoms, water, activity, and food to see your daily wellness score.</p>
+    </div>
+  </div>
+
+  <!-- Domains -->
+  <div id="domainsContainer"></div>
+
+  <!-- Export -->
+  <button class="export-btn" id="exportBtn">
+    <span class="ms">download</span>
+    Export Summary for Healthcare Provider
+  </button>
+</div>
+
+<!-- Bottom Nav -->
+<nav class="nav">
+  <a href="home.html"><span class="n-ic ms">home</span>Home</a>
+  <a href="learn.html"><span class="n-ic ms">menu_book</span>Learn</a>
+  <a href="tcm-hub.html"><span class="n-ic ms">spa</span>TCM</a>
+  <a href="foods.html"><span class="n-ic ms">restaurant</span>Foods</a>
+  <a href="profile.html"><span class="n-ic ms">person</span>Profile</a>
+</nav>
+
+<script src="darkmode.js?v=8" defer></script>
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
+<script>
+(function(){
+  var currentDate = new Date();
+  var domainsContainer = document.getElementById('domainsContainer');
+
+  var moodLabels = {low:'Low', meh:'Meh', ok:'Okay', good:'Good', great:'Great'};
+  var moodIcons = {low:'sentiment_dissatisfied', meh:'sentiment_neutral', ok:'sentiment_content', good:'mood', great:'sentiment_very_satisfied'};
+
+  function formatDate(d){
+    return d.toISOString().slice(0,10);
+  }
+
+  function getLog(dateStr){
+    try{
+      return JSON.parse(localStorage.getItem('ovuluna_daily_log_' + dateStr)) || {};
+    }catch(e){ return {}; }
+  }
+
+  function isToday(d){
+    var t = new Date();
+    return d.toDateString() === t.toDateString();
+  }
+
+  function updateDateDisplay(){
+    var dayEl = document.getElementById('dateDay');
+    var dowEl = document.getElementById('dateDow');
+    if(isToday(currentDate)){
+      dayEl.textContent = 'Today';
+    }else{
+      dayEl.textContent = currentDate.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    }
+    dowEl.textContent = currentDate.toLocaleDateString('en-US',{weekday:'long',year:'numeric'});
+  }
+
+  function calcScore(log){
+    var domains = ['mood','sleep','symptoms','water','activity','food'];
+    var filled = 0;
+    var score = 0;
+    domains.forEach(function(d){
+      if(log[d] && log[d].fields && log[d].fields.length > 0){
+        var hasValue = log[d].fields.some(function(f){ return f !== '' && f !== 0 && f !== 'None' && (!Array.isArray(f) || f.length > 0); });
+        if(hasValue){
+          filled++;
+          if(d === 'mood'){
+            var m = log[d].fields[0];
+            if(m === 'great' || m === 'good') score += 20;
+            else if(m === 'ok') score += 15;
+            else score += 8;
+          }else if(d === 'sleep'){
+            var q = parseInt(log[d].fields[2]) || 0;
+            score += Math.min(q * 4, 20);
+          }else if(d === 'water'){
+            var glasses = parseInt(log[d].fields[1]) || 0;
+            score += Math.min(glasses * 2.5, 20);
+          }else if(d === 'activity'){
+            var dur = parseInt(log[d].fields[1]) || 0;
+            score += dur > 0 ? Math.min(dur / 1.5, 20) : 0;
+          }else{
+            score += 16;
+          }
+        }
+      }
+    });
+    return {score: Math.round(Math.min(score, 100)), filled: filled, total: domains.length};
+  }
+
+  function renderScore(log){
+    var result = calcScore(log);
+    var ring = document.getElementById('scoreRing');
+    var num = document.getElementById('scoreNum');
+    var title = document.getElementById('scoreTitle');
+    var desc = document.getElementById('scoreDesc');
+
+    ring.style.setProperty('--pct', result.score + '%');
+    num.textContent = result.filled > 0 ? result.score : '—';
+
+    if(result.filled === 0){
+      title.textContent = 'No data yet';
+      desc.textContent = 'Log your mood, sleep, symptoms, water, activity, and food to see your daily wellness score.';
+    }else if(result.score >= 80){
+      title.textContent = 'Thriving today';
+      desc.textContent = result.filled + '/6 domains logged. Your habits are supporting your cycle well. Keep it up.';
+    }else if(result.score >= 50){
+      title.textContent = 'Doing okay';
+      desc.textContent = result.filled + '/6 domains logged. Some areas could use a little more attention today.';
+    }else{
+      title.textContent = 'Be gentle with yourself';
+      desc.textContent = result.filled + '/6 domains logged. Rest and hydration are the foundation. Small steps count.';
+    }
+  }
+
+  function renderDomain(name, icon, color, bgColor, log, renderFn){
+    var data = log[name];
+    var hasData = data && data.fields && data.fields.some(function(f){ return f !== '' && f !== 0 && f !== 'None' && (!Array.isArray(f) || (f.length > 0 && f[0] !== 'None')); });
+
+    var html = '<div class="domain">';
+    html += '<div class="domain-head">';
+    html += '<div class="domain-ic" style="background:' + bgColor + '"><span class="ms" style="color:' + color + '">' + icon + '</span></div>';
+    html += '<div class="domain-name">' + name.charAt(0).toUpperCase() + name.slice(1) + '</div>';
+    html += '<span class="domain-status ' + (hasData ? 'status-done' : 'status-empty') + '">' + (hasData ? 'Logged' : 'Not logged') + '</span>';
+    html += '</div>';
+    html += '<div class="domain-body">';
+    if(hasData){
+      html += renderFn(data.fields);
+    }else{
+      if(isToday(currentDate)){
+        html += '<div class="empty-hint">Not logged yet. <a href="home.html">Log now</a></div>';
+      }else{
+        html += '<div class="empty-hint">No data logged on this day.</div>';
+      }
+    }
+    html += '</div></div>';
+    return html;
+  }
+
+  function renderMood(fields){
+    var mood = fields[0] || '';
+    var swings = fields[1] || 'None';
+    var note = fields[2] || '';
+    var html = '';
+    if(mood) html += '<div class="row"><span class="label">Overall mood</span><span class="value">' + (moodLabels[mood] || mood) + '</span></div>';
+    if(swings && swings !== 'None') html += '<div class="row"><span class="label">Mood swings</span><span class="value">' + swings + '</span></div>';
+    if(note) html += '<div class="row"><span class="label">Notes</span><span class="value" style="max-width:60%">' + note + '</span></div>';
+    return html;
+  }
+
+  function renderSleep(fields){
+    var bedtime = fields[0] || '';
+    var wake = fields[1] || '';
+    var quality = parseInt(fields[2]) || 0;
+    var wakes = fields[3] || 'No';
+    var html = '';
+    if(bedtime) html += '<div class="row"><span class="label">Bedtime</span><span class="value">' + bedtime + '</span></div>';
+    if(wake) html += '<div class="row"><span class="label">Wake time</span><span class="value">' + wake + '</span></div>';
+    if(quality > 0) html += '<div class="row"><span class="label">Sleep quality</span><span class="value">' + '★'.repeat(quality) + '☆'.repeat(5-quality) + '</span></div>';
+    if(wakes && wakes !== 'No') html += '<div class="row"><span class="label">Night waking</span><span class="value">' + wakes + '</span></div>';
+    return html;
+  }
+
+  function renderSymptoms(fields){
+    var pain = parseInt(fields[0]) || 0;
+    var others = Array.isArray(fields[1]) ? fields[1] : (fields[1] ? [fields[1]] : []);
+    var note = fields[2] || '';
+    var html = '';
+    if(pain > 0) html += '<div class="row"><span class="label">Cramp pain</span><span class="value">' + pain + '/10</span></div>';
+    if(others.length > 0 && others[0] !== 'None') html += '<div class="row"><span class="label">Other symptoms</span><span class="value" style="max-width:60%">' + others.join(', ') + '</span></div>';
+    if(note) html += '<div class="row"><span class="label">Notes</span><span class="value" style="max-width:60%">' + note + '</span></div>';
+    return html;
+  }
+
+  function renderWater(fields){
+    var glasses = parseInt(fields[1]) || 0;
+    var drinks = fields[2] || 'Only water';
+    var html = '';
+    html += '<div class="row"><span class="label">Water intake</span><span class="value">' + glasses + ' glasses (' + (glasses * 250) + 'ml)</span></div>';
+    if(drinks && drinks !== 'Only water') html += '<div class="row"><span class="label">Other drinks</span><span class="value">' + drinks + '</span></div>';
+    return html;
+  }
+
+  function renderActivity(fields){
+    var type = fields[0] || '';
+    var duration = parseInt(fields[1]) || 0;
+    var exertion = parseInt(fields[2]) || 0;
+    var html = '';
+    if(type) html += '<div class="row"><span class="label">Activity</span><span class="value">' + type + '</span></div>';
+    if(duration > 0) html += '<div class="row"><span class="label">Duration</span><span class="value">' + duration + ' min</span></div>';
+    if(exertion > 0) html += '<div class="row"><span class="label">Perceived exertion</span><span class="value">' + exertion + '/10</span></div>';
+    return html;
+  }
+
+  function renderFood(fields){
+    if(!fields || fields.length === 0) return '';
+    var html = '<div class="row"><span class="label">Logged items</span><span class="value">' + fields.length + '</span></div>';
+    fields.forEach(function(f, i){
+      if(f && typeof f === 'string' && f.trim()){
+        html += '<div class="row"><span class="label">Item ' + (i+1) + '</span><span class="value" style="max-width:60%">' + f + '</span></div>';
+      }
+    });
+    return html;
+  }
+
+  function renderAll(){
+    var dateStr = formatDate(currentDate);
+    var log = getLog(dateStr);
+    updateDateDisplay();
+    renderScore(log);
+
+    var html = '';
+    html += renderDomain('mood', 'mood', '#8b6c82', '#e8e0f2', log, renderMood);
+    html += renderDomain('sleep', 'bedtime', '#5fa8d4', '#dcebf5', log, renderSleep);
+    html += renderDomain('symptoms', 'monitor_heart', '#e89678', '#fbe8e0', log, renderSymptoms);
+    html += renderDomain('water', 'water_drop', '#5fa8c8', '#d8eef5', log, renderWater);
+    html += renderDomain('activity', 'directions_run', '#7ba89a', '#dcebe5', log, renderActivity);
+    html += renderDomain('food', 'restaurant', '#c49a6c', '#f5ead8', log, renderFood);
+    domainsContainer.innerHTML = html;
+  }
+
+  function exportSummary(){
+    var dateStr = formatDate(currentDate);
+    var log = getLog(dateStr);
+    var result = calcScore(log);
+    var dateLabel = isToday(currentDate) ? 'Today (' + currentDate.toLocaleDateString() + ')' : currentDate.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+    var text = '=== OVULUNA DAILY WELLNESS SUMMARY ===\n';
+    text += 'Date: ' + dateLabel + '\n';
+    text += 'Wellness Score: ' + (result.filled > 0 ? result.score + '/100' : 'Not available') + '\n';
+    text += 'Domains logged: ' + result.filled + '/6\n\n';
+
+    var domainNames = {mood:'Mood', sleep:'Sleep', symptoms:'Symptoms', water:'Water', activity:'Activity', food:'Food'};
+    var renderers = {mood:renderMood, sleep:renderSleep, symptoms:renderSymptoms, water:renderWater, activity:renderActivity, food:renderFood};
+
+    Object.keys(domainNames).forEach(function(key){
+      var data = log[key];
+      text += '--- ' + domainNames[key] + ' ---\n';
+      if(data && data.fields){
+        var hasValue = data.fields.some(function(f){ return f !== '' && f !== 0 && f !== 'None'; });
+        if(hasValue){
+          data.fields.forEach(function(f, i){
+            if(f !== '' && f !== null && f !== undefined){
+              if(Array.isArray(f)){
+                text += '  Field ' + (i+1) + ': ' + f.join(', ') + '\n';
+              }else{
+                text += '  Field ' + (i+1) + ': ' + f + '\n';
+              }
+            }
+          });
+        }else{
+          text += '  Not logged\n';
+        }
+      }else{
+        text += '  Not logged\n';
+      }
+      text += '\n';
+    });
+
+    text += '=== END OF SUMMARY ===\n';
+    text += '\nThis summary is for informational purposes only and is not a medical diagnosis.\n';
+    text += 'Generated by Ovuluna — all data stored locally on your device.\n';
+
+    var blob = new Blob([text], {type:'text/plain'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'ovuluna-journal-' + dateStr + '.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.getElementById('prevDay').addEventListener('click', function(){
+    currentDate.setDate(currentDate.getDate() - 1);
+    renderAll();
+  });
+  document.getElementById('nextDay').addEventListener('click', function(){
+    currentDate.setDate(currentDate.getDate() + 1);
+    renderAll();
+  });
+  document.getElementById('exportBtn').addEventListener('click', exportSummary);
+
+  renderAll();
+})();
+</script>
+</body>
+</html>
