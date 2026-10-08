@@ -244,10 +244,17 @@
     getRecentSleepLogs: getRecentSleepLogs
   };
 
-  // Auto-render if container exists
-  document.addEventListener('DOMContentLoaded', function() {
+  // Auto-render if container exists (with retry for dynamic content)
+  function tryRender() {
     if (document.getElementById('circadian-widget')) {
       renderCircadianWidget('circadian-widget');
+    } else {
+      setTimeout(tryRender, 300);
     }
-  });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tryRender);
+  } else {
+    tryRender();
+  }
 })();
