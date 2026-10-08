@@ -301,17 +301,7 @@
   function renderLanguage(step) {
     var languages = [
       { code: 'en', name: 'English' },
-      { code: 'zh', name: '中文' },
-      { code: 'ja', name: '日本語' },
-      { code: 'ms', name: 'Bahasa Melayu' },
-      { code: 'es', name: 'Español' },
-      { code: 'de', name: 'Deutsch' },
-      { code: 'vi', name: 'Tiếng Việt' },
-      { code: 'id', name: 'Bahasa Indonesia' },
-      { code: 'th', name: 'ไทย' },
-      { code: 'ko', name: '한국어' },
-      { code: 'tl', name: 'Filipino' },
-      { code: 'hi', name: 'हिन्दी' }
+      { code: 'zh', name: '中文' }
     ];
     var selected = answers.language || 'en';
     var div = document.createElement('div');
@@ -458,15 +448,15 @@
       }
 
       var scrollTimeout;
+      var isProgrammaticScroll = false;
       scroll.addEventListener('scroll', function() {
+        if (isProgrammaticScroll) return;
         updateHighlight();
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(function() {
           var sel = getSelected();
-          var targetTop = 56 + sel.idx * itemHeight;
-          scroll.scrollTo({top: targetTop, behavior: 'smooth'});
           if (onChange) onChange(sel.val);
-        }, 100);
+        }, 150);
       });
 
       // Set initial position
@@ -706,18 +696,69 @@
   /* ── Calendar step ── */
   function renderCalendar(step) {
     var today = new Date();
-    var selected = answers[step.field] ? new Date(answers[step.field]) : null;
+    var startDate = answers.lastPeriod ? new Date(answers.lastPeriod) : null;
+    var periodDays = answers.periodDays || 5;
+    var phase = startDate ? 'end' : 'start';
     var div = document.createElement('div');
     div.style.cssText = 'flex:1;display:flex;flex-direction:column;padding:20px 24px;';
     div.innerHTML =
-      '<h1 class="q">' + t(step.title) + '</h1>' +
-      '<p class="sub">' + t(step.subtitle) + '</p>' +
+      '<h1 class="q" id="calTitle">' + t(step.title) + '</h1>' +
+      '<p class="sub" id="calSub">' + t(step.subtitle) + '</p>' +
+      '<div id="durationSection" style="display:none;margin-bottom:14px">' +
+        '<p style="font:700 12px var(--sans);color:var(--mauve);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">How many days did it last?</p>' +
+        '<div id="durationBtns" style="display:flex;gap:6px;flex-wrap:wrap"></div>' +
+      '</div>' +
       '<div class="cal" id="calWidget"></div>';
     scrollEl.appendChild(div);
 
     var calWidget = document.getElementById('calWidget');
     var month = today.getMonth();
     var year = today.getFullYear();
+
+    function updatePhaseUI() {
+      var title = document.getElementById('calTitle');
+      var sub = document.getElementById('calSub');
+      var durSection = document.getElementById('durationSection');
+      if (phase === 'start') {
+        title.textContent = t('When did your last period start?');
+        sub.textContent = t('Tap the date on the calendar.');
+        durSection.style.display = 'none';
+      } else {
+        title.textContent = t('How long did it last?');
+        sub.textContent = t('Your period started on ' + startDate.toLocaleDateString() + '. Select duration below.');
+        durSection.style.display = 'block';
+      }
+    }
+
+    // Build duration buttons
+    var durBtns = document.getElementById('durationBtns');
+    for (var d = 2; d <= 10; d++) {
+      var btn = document.createElement('button');
+      btn.textContent = d + (d === 1 ? ' day' : ' days');
+      btn.style.cssText = 'padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);font:600 13px var(--sans);color:var(--ink);cursor:pointer;transition:.15s';
+      if (d === periodDays) {
+        btn.style.borderColor = 'var(--terra)';
+        btn.style.background = 'rgba(212,121,90,.1)';
+      }
+      btn.addEventListener('click', function() {
+        periodDays = parseInt(this.textContent);
+        answers.periodDays = periodDays;
+        // Calculate end date
+        var end = new Date(startDate);
+        end.setDate(end.getDate() + periodDays - 1);
+        answers.periodEnd = end.toISOString();
+        saveAnswers();
+        // Update button styles
+        durBtns.querySelectorAll('button').forEach(function(b) {
+          b.style.borderColor = 'var(--line)';
+          b.style.background = 'var(--card)';
+        });
+        this.style.borderColor = 'var(--terra)';
+        this.style.background = 'rgba(212,121,90,.1)';
+        document.getElementById('nextBtn').disabled = false;
+      });
+      durBtns.appendChild(btn);
+    }
 
     function renderMonth() {
       var firstDay = new Date(year, month, 1).getDay();
@@ -734,7 +775,7 @@
       for (var i = 0; i < firstDay; i++) html += '<div></div>';
       for (var d = 1; d <= daysInMonth; d++) {
         var dateStr = year + '-' + String(month+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
-        var isSel = selected && selected.toISOString().slice(0,10) === dateStr;
+        var isSel = startDate && startDate.toISOString().slice(0,10) === dateStr;
         var isFuture = new Date(year, month, d) > today;
         html += '<button class="day' + (isSel ? ' on' : '') + (isFuture ? ' mut' : '') + '" data-date="' + dateStr + '"' + (isFuture ? ' disabled' : '') + '>' + d + '</button>';
       }
@@ -751,18 +792,27 @@
       });
       calWidget.querySelectorAll('.day:not(.mut)').forEach(function(btn) {
         btn.addEventListener('click', function() {
-          selected = new Date(this.dataset.date);
-          answers[step.field] = selected.toISOString();
+          startDate = new Date(this.dataset.date);
+          answers.lastPeriod = startDate.toISOString();
+          // Default end date = start + 4 days (5 day period)
+          var end = new Date(startDate);
+          end.setDate(end.getDate() + periodDays - 1);
+          answers.periodEnd = end.toISOString();
+          answers.periodDays = periodDays;
           saveAnswers();
           calWidget.querySelectorAll('.day').forEach(function(d) { d.classList.remove('on'); });
           this.classList.add('on');
+          // Move to duration phase
+          phase = 'end';
+          updatePhaseUI();
           document.getElementById('nextBtn').disabled = false;
         });
       });
     }
     renderMonth();
+    updatePhaseUI();
 
-    footEl.innerHTML = '<button class="cta" id="nextBtn" ' + (selected ? '' : 'disabled') + '>' + t('Continue') + '</button>';
+    footEl.innerHTML = '<button class="cta" id="nextBtn" ' + (startDate ? '' : 'disabled') + '>' + t('Continue') + '</button>';
     document.getElementById('nextBtn').addEventListener('click', nextStep);
   }
 

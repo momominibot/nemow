@@ -15,8 +15,13 @@
 <script src="foods-db.js" defer></script>
 <script src="anim.js" defer></script>
 <style>
-.tracker-hero{ background:linear-gradient(135deg,rgba(196,181,224,.25),rgba(245,198,184,.2)); border:1.5px solid rgba(196,181,224,.4); border-radius:var(--r); padding:20px; position:relative; overflow:hidden; }
-.tracker-hero::after{ content:''; position:absolute; top:-30px; right:-20px; width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,.3); }
+.tracker-hero{ background:linear-gradient(135deg,rgba(196,181,224,.3),rgba(245,198,184,.25),rgba(216,196,246,.2)); border:1.5px solid rgba(196,181,224,.5); border-radius:20px; padding:20px; position:relative; overflow:hidden; box-shadow:0 8px 32px -12px rgba(124,95,168,.25); }
+.tracker-hero::before{ content:''; position:absolute; top:-40px; right:-30px; width:160px; height:160px; border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.4),transparent 70%); }
+.tracker-hero::after{ content:''; position:absolute; bottom:-30px; left:-20px; width:120px; height:120px; border-radius:50%; background:radial-gradient(circle,rgba(245,198,184,.3),transparent 70%); }
+.goal-select{ display:flex; gap:6px; margin:12px 0 4px; position:relative; z-index:1; }
+.goal-btn{ flex:1; padding:8px 4px; border:1.5px solid rgba(196,181,224,.4); border-radius:12px; background:rgba(255,255,255,.5); font:700 10.5px var(--sans); color:var(--taupe); cursor:pointer; transition:.2s; text-align:center; line-height:1.2; backdrop-filter:blur(4px); }
+.goal-btn.on{ border-color:var(--mauve); background:linear-gradient(135deg,rgba(196,181,224,.4),rgba(245,198,184,.3)); color:var(--ink); box-shadow:0 4px 12px -4px rgba(124,95,168,.3); }
+.goal-btn .gb-icon{ display:block; font-size:16px; margin-bottom:2px; }
 .cal-ring-wrap{ display:flex; align-items:center; gap:16px; margin-top:14px; }
 .cal-ring{ width:110px; height:110px; border-radius:50%; background:conic-gradient(var(--mauve) 0%, var(--mauve) var(--pct,0%), var(--line) var(--pct,0%), var(--line) 100%); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; }
 .cal-ring::before{ content:''; position:absolute; inset:10px; border-radius:50%; background:var(--card-solid); }
@@ -91,8 +96,27 @@
 .nfc-card .nfc-title{ font:700 13px var(--sans); color:var(--ink); }
 .nfc-card .nfc-desc{ font-size:11px; color:var(--taupe); margin-top:2px; line-height:1.4; }
 .nfc-card .nfc-btn{ background:var(--mauve); color:#fff; border:none; border-radius:99px; padding:8px 14px; font:700 11px var(--sans); cursor:pointer; flex-shrink:0; }
+.nfc-custom{ background:var(--card-solid); border:1.5px solid var(--line-soft); border-radius:16px; padding:16px; margin-top:10px; display:none; }
+.nfc-custom.show{ display:block; }
+.nfc-custom h4{ margin:0 0 10px; font:700 13px var(--sans); color:var(--ink); display:flex; align-items:center; gap:6px; }
+.amount-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:6px; margin-bottom:12px; }
+.amount-btn{ padding:10px 4px; border:1.5px solid var(--line); border-radius:10px; background:var(--card-solid); cursor:pointer; text-align:center; transition:.15s; }
+.amount-btn.on{ border-color:var(--d-sleep); background:rgba(127,174,201,.12); }
+.amount-btn .ab-v{ font:800 14px var(--sans); color:var(--ink); }
+.amount-btn .ab-u{ font-size:9px; color:var(--taupe); font-weight:600; margin-top:1px; }
+.url-box{ display:flex; gap:8px; align-items:center; background:var(--sunken); border:1.5px solid var(--line); border-radius:10px; padding:8px 12px; margin-bottom:10px; }
+.url-box input{ flex:1; border:none; background:transparent; font-size:11px; font-family:var(--sans); color:var(--ink); outline:none; min-width:0; }
+.url-box .copy-btn{ background:var(--mauve); color:#fff; border:none; border-radius:8px; padding:6px 10px; font:700 10px var(--sans); cursor:pointer; flex-shrink:0; }
+.nfc-guide{ font-size:11.5px; color:var(--cocoa); line-height:1.6; }
+.nfc-guide b{ color:var(--ink); }
+.nfc-guide ol{ margin:6px 0; padding-left:18px; }
+.nfc-guide li{ margin-bottom:4px; }
+.nfc-webnfc{ margin-top:10px; padding:10px; background:rgba(168,192,160,.1); border:1.5px solid rgba(168,192,160,.3); border-radius:10px; display:none; }
+.nfc-webnfc.show{ display:block; }
+.nfc-webnfc button{ width:100%; padding:10px; background:var(--sage); color:#fff; border:none; border-radius:10px; font:700 12px var(--sans); cursor:pointer; }
+.nfc-toggle{ background:none; border:none; color:var(--mauve); font:700 11px var(--sans); cursor:pointer; padding:4px 0; text-decoration:underline; }
 </style>
-</head><body>
+<script src="persona-filter.js"></script></head><body>
 
 <div class="app">
   <div class="top">
@@ -109,6 +133,12 @@
       <div style="display:flex;align-items:center;justify-content:space-between">
         <span class="badge info"><span class="ms" style="font-size:14px">local_fire_department</span> Daily Intake</span>
         <span style="font-size:11px;color:var(--taupe);font-weight:600" id="goalLabel">Goal: 1800 kcal</span>
+      </div>
+      <div class="goal-select" id="goalSelect">
+        <button class="goal-btn on" data-goal="maintain"><span class="gb-icon">⚖️</span>Maintain</button>
+        <button class="goal-btn" data-goal="loss"><span class="gb-icon">🔥</span>Lose</button>
+        <button class="goal-btn" data-goal="gain"><span class="gb-icon">💪</span>Gain</button>
+        <button class="goal-btn" data-goal="glp1"><span class="gb-icon">💉</span>GLP-1</button>
       </div>
       <div class="cal-ring-wrap">
         <div class="cal-ring" id="calRing" style="--pct:0%">
@@ -155,8 +185,8 @@
       </div>
       <div class="water-drops" id="waterDrops"></div>
       <div style="display:flex;gap:8px;margin-top:10px">
-        <button class="meal-add" style="flex:1" onclick="addWater(1)">+ 1 glass (250ml)</button>
-        <button class="meal-add" style="flex:1" onclick="addWater(-1)">Undo</button>
+        <button class="meal-add" style="flex:1" onclick="addWaterMl(250)">+ 1 glass (250ml)</button>
+        <button class="meal-add" style="flex:1" onclick="addWaterMl(-250)">Undo</button>
       </div>
     </div>
 
@@ -165,9 +195,45 @@
       <div class="nfc-ic">🌙</div>
       <div class="nfc-body">
         <div class="nfc-title">Ovuluna Luna Keychain</div>
-        <div class="nfc-desc">Tap your NFC keychain to your phone to instantly log a glass of water. No app opening needed.</div>
+        <div class="nfc-desc">Tap your NFC keychain to log water instantly. <span id="nfcAmountLabel">250ml</span> per tap.</div>
       </div>
       <button class="nfc-btn" onclick="simulateNFCTap()">Tap</button>
+    </div>
+    <button class="nfc-toggle" onclick="toggleKeychainCustom()" id="keychainToggleBtn">Customize my keychain →</button>
+
+    <!-- Keychain Customization Panel -->
+    <div class="nfc-custom" id="nfcCustom">
+      <h4><span class="ms" style="font-size:16px;color:var(--d-sleep)">tune</span> Set water amount per tap</h4>
+      <div class="amount-grid" id="amountGrid">
+        <div class="amount-btn" onclick="setAmount(150)"><div class="ab-v">150</div><div class="ab-u">ml</div></div>
+        <div class="amount-btn" onclick="setAmount(200)"><div class="ab-v">200</div><div class="ab-u">ml</div></div>
+        <div class="amount-btn on" onclick="setAmount(250)"><div class="ab-v">250</div><div class="ab-u">ml</div></div>
+        <div class="amount-btn" onclick="setAmount(300)"><div class="ab-v">300</div><div class="ab-u">ml</div></div>
+        <div class="amount-btn" onclick="setAmount(500)"><div class="ab-v">500</div><div class="ab-u">ml</div></div>
+      </div>
+
+      <h4 style="margin-top:14px"><span class="ms" style="font-size:16px;color:var(--mauve)">link</span> Your keychain URL</h4>
+      <div class="url-box">
+        <input type="text" id="nfcUrl" readonly value="https://ovuluna.vercel.app/daily-tracker.html?water=250&action=log">
+        <button class="copy-btn" onclick="copyNfcUrl()">Copy</button>
+      </div>
+
+      <div class="nfc-guide">
+        <b>How to write this URL to your keychain (30 seconds):</b>
+        <ol>
+          <li>Install <b>NFC Tools</b> (free, App Store / Google Play)</li>
+          <li>Open the app, tap <b>Write</b> → <b>Add a record</b> → <b>URL</b></li>
+          <li>Paste the URL above, tap <b>OK</b> → <b>Write</b></li>
+          <li>Hold your Luna keychain against the top of your phone</li>
+          <li>Done! Every tap now logs <span id="nfcAmountGuide">250ml</span> of water</li>
+        </ol>
+        <div style="font-size:10.5px;color:var(--taupe);margin-top:6px">NFC tags are rewritable up to 100,000 times. Change the amount anytime by repeating these steps.</div>
+      </div>
+
+      <div class="nfc-webnfc" id="webNfcSection">
+        <button onclick="writeNfcDirect()">Write to keychain directly (Android Chrome)</button>
+        <div style="font-size:10px;color:var(--taupe);text-align:center;margin-top:6px">Hold keychain to phone after tapping</div>
+      </div>
     </div>
 
     <!-- Breakfast -->
@@ -258,7 +324,74 @@
   'use strict';
 
   var STORAGE_KEY = 'ovuluna_daily_tracker';
-  var GOALS = { calories: 1800, protein: 75, carbs: 200, fat: 60, fiber: 25, water: 8 };
+  var GOALS = { calories: 1800, protein: 75, carbs: 200, fat: 60, fiber: 25, waterMl: 2000 };
+  var DEFAULT_TAP_ML = 250;
+  var NFC_AMOUNT_KEY = 'ovuluna_nfc_tap_ml';
+  var GOAL_KEY = 'ovuluna_fitness_goal';
+
+  // Goal config: activity multiplier, protein g/kg, carb/fat % of calories
+  var GOAL_CONFIG = {
+    maintain: { label: 'Maintain', mult: 1.4, proteinGkg: 1.2, carbPct: 0.45, fatPct: 0.30 },
+    loss:     { label: 'Weight loss', mult: 1.2, proteinGkg: 1.6, carbPct: 0.40, fatPct: 0.30 },
+    gain:     { label: 'Muscle gain', mult: 1.6, proteinGkg: 1.8, carbPct: 0.50, fatPct: 0.25 },
+    glp1:     { label: 'GLP-1', mult: 1.3, proteinGkg: 1.6, carbPct: 0.40, fatPct: 0.30 }
+  };
+
+  function getUserStats() {
+    try {
+      var raw = localStorage.getItem('ovuluna_onboarding');
+      if (raw) {
+        var d = JSON.parse(raw);
+        var h = parseInt(d.heightCm) || 0;
+        var w = parseInt(d.weightKg) || 0;
+        var a = parseInt(d.age) || 0;
+        if (h > 0 && w > 0 && a > 0) return { height: h, weight: w, age: a };
+      }
+    } catch (e) {}
+    return { height: 165, weight: 58, age: 30 }; // defaults
+  }
+
+  // Mifflin-St Jeor for women: BMR = 10*kg + 6.25*cm - 5*age - 161
+  function calcBMR(stats) {
+    return 10 * stats.weight + 6.25 * stats.height - 5 * stats.age - 161;
+  }
+
+  function calcGoals(goalType) {
+    var cfg = GOAL_CONFIG[goalType] || GOAL_CONFIG.maintain;
+    var stats = getUserStats();
+    var bmr = calcBMR(stats);
+    var tdee = bmr * cfg.mult;
+    var calories = Math.round(tdee / 10) * 10;
+    var protein = Math.round(cfg.proteinGkg * stats.weight);
+    var proteinCal = protein * 4;
+    var fat = Math.round((calories * cfg.fatPct) / 9);
+    var fatCal = fat * 9;
+    var carbs = Math.round((calories - proteinCal - fatCal) / 4);
+    return { calories: calories, protein: protein, carbs: carbs, fat: fat, fiber: 25, waterMl: 2000 };
+  }
+
+  function setGoal(goalType) {
+    GOALS = calcGoals(goalType);
+    try { localStorage.setItem(GOAL_KEY, goalType); } catch (e) {}
+    document.querySelectorAll('.goal-btn').forEach(function (b) {
+      b.classList.toggle('on', b.dataset.goal === goalType);
+    });
+    var gl = document.getElementById('goalLabel');
+    if (gl) gl.textContent = 'Goal: ' + GOALS.calories + ' kcal · ' + GOALS.protein + 'g protein';
+    render();
+  }
+
+  function initGoals() {
+    var saved = 'maintain';
+    try { saved = localStorage.getItem(GOAL_KEY) || 'maintain'; } catch (e) {}
+    GOALS = calcGoals(saved);
+    document.querySelectorAll('.goal-btn').forEach(function (b) {
+      b.classList.toggle('on', b.dataset.goal === saved);
+      b.addEventListener('click', function () { setGoal(this.dataset.goal); });
+    });
+    var gl = document.getElementById('goalLabel');
+    if (gl) gl.textContent = 'Goal: ' + GOALS.calories + ' kcal · ' + GOALS.protein + 'g protein';
+  }
 
   // Portion multipliers (relative to 100g)
   var PORTIONS = [
@@ -284,7 +417,7 @@
         if(data.date === todayKey()) return data;
       }
     }catch(e){}
-    return { date: todayKey(), meals: { breakfast: [], lunch: [], dinner: [], snack: [] }, water: 0 };
+    return { date: todayKey(), meals: { breakfast: [], lunch: [], dinner: [], snack: [] }, waterMl: 0 };
   }
 
   function saveData(data){
@@ -336,40 +469,97 @@
     document.getElementById('fiberVal').textContent = round1(totals.fiber) + 'g / ' + GOALS.fiber + 'g';
 
     // Water
-    renderWater(data.water);
+    renderWater(data.waterMl || 0);
   }
 
-  function renderWater(count){
+  function renderWater(ml){
     var drops = '';
     for(var i = 0; i < 8; i++){
-      drops += '<div class="water-drop' + (i < count ? ' filled' : '') + '" onclick="setWater(' + (i+1) + ')">💧</div>';
+      var filled = ml >= (i + 1) * 250;
+      drops += '<div class="water-drop' + (filled ? ' filled' : '') + '" onclick="toggleDrop(' + (i+1) + ')">💧</div>';
     }
     document.getElementById('waterDrops').innerHTML = drops;
-    document.getElementById('waterMl').textContent = (count * 250) + ' ml';
-    document.getElementById('waterSummary').textContent = count + ' / 8 glasses';
+    document.getElementById('waterMl').textContent = ml + ' ml';
+    document.getElementById('waterSummary').textContent = (ml / 250).toFixed(1) + ' / 8 glasses';
   }
 
-  window.addWater = function(delta){
+  window.addWaterMl = function(ml){
     var data = loadData();
-    data.water = Math.max(0, Math.min(12, data.water + delta));
+    data.waterMl = Math.max(0, Math.min(4000, (data.waterMl || 0) + ml));
     saveData(data);
     render();
   };
 
-  window.setWater = function(n){
+  window.toggleDrop = function(n){
     var data = loadData();
-    data.water = (data.water === n) ? n - 1 : n;
+    var current = data.waterMl || 0;
+    if(current >= n * 250){
+      data.waterMl = (n - 1) * 250;
+    } else {
+      data.waterMl = n * 250;
+    }
     saveData(data);
     render();
   };
 
   window.simulateNFCTap = function(){
-    addWater(1);
-    // Visual feedback
+    var amount = getTapAmount();
+    addWaterMl(amount);
     var btn = event.target;
-    btn.textContent = '✓ Logged!';
+    btn.textContent = '✓ ' + amount + 'ml!';
     btn.style.background = '#a8c0a0';
     setTimeout(function(){ btn.textContent = 'Tap'; btn.style.background = ''; }, 1200);
+  };
+
+  // Keychain customization
+  function getTapAmount(){
+    try{
+      var saved = localStorage.getItem(NFC_AMOUNT_KEY);
+      return saved ? parseInt(saved, 10) : DEFAULT_TAP_ML;
+    }catch(e){ return DEFAULT_TAP_ML; }
+  }
+
+  function updateNfcUi(){
+    var amount = getTapAmount();
+    document.getElementById('nfcAmountLabel').textContent = amount + 'ml';
+    document.getElementById('nfcAmountGuide').textContent = amount + 'ml';
+    document.getElementById('nfcUrl').value = 'https://ovuluna.vercel.app/daily-tracker.html?water=' + amount + '&action=log';
+    document.querySelectorAll('.amount-btn').forEach(function(el, i){
+      var amounts = [150, 200, 250, 300, 500];
+      el.classList.toggle('on', amounts[i] === amount);
+    });
+  }
+
+  window.toggleKeychainCustom = function(){
+    var panel = document.getElementById('nfcCustom');
+    var btn = document.getElementById('keychainToggleBtn');
+    panel.classList.toggle('show');
+    btn.textContent = panel.classList.contains('show') ? 'Hide customization ↑' : 'Customize my keychain →';
+  };
+
+  window.setAmount = function(ml){
+    try{ localStorage.setItem(NFC_AMOUNT_KEY, ml.toString()); }catch(e){}
+    updateNfcUi();
+  };
+
+  window.copyNfcUrl = function(){
+    var input = document.getElementById('nfcUrl');
+    input.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    var btn = event.target;
+    btn.textContent = 'Copied!';
+    setTimeout(function(){ btn.textContent = 'Copy'; }, 1500);
+  };
+
+  window.writeNfcDirect = function(){
+    if('nfc' in navigator){
+      var url = document.getElementById('nfcUrl').value;
+      navigator.nfc.write(url).then(function(){
+        alert('Keychain written successfully!');
+      }).catch(function(err){
+        alert('Write failed: ' + err.message + '. Try NFC Tools app instead.');
+      });
+    }
   };
 
   window.openAddFood = function(meal){
@@ -484,7 +674,7 @@
 
   // Initial render
   if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', render);
+    document.addEventListener('DOMContentLoaded', function () { initGoals(); render(); });
   } else {
     render();
   }

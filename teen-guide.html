@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ovuluna · Bloom Teen Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="darkmode.css">
+  <link rel="stylesheet" href="evidence.css">
+  <link rel="stylesheet" href="luna-chat.css">
+  <style>
+    .hero { text-align:center; padding:28px 20px 16px; }
+    .hero img { width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 auto 12px;border:3px solid rgba(196,181,224,.5); }
+    .hero h1 { font-family:var(--serif); font-size:26px; color:var(--cocoa); margin:0 0 8px; }
+    .hero p { font-size:13.5px; color:var(--taupe); line-height:1.55; max-width:480px; margin:0 auto; }
+    .phase-tabs { display:flex; gap:6px; padding:0 16px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; margin-bottom:12px; }
+    .phase-tabs::-webkit-scrollbar { display:none; }
+    .ptab { flex-shrink:0; padding:9px 14px; border-radius:99px; border:1.5px solid var(--line-soft); background:var(--card-solid); font-size:12px; font-weight:700; color:var(--taupe); cursor:pointer; transition:all .2s; white-space:nowrap; }
+    .ptab.on { background:var(--mauve); color:#fff; border-color:var(--mauve); }
+    .phase-content { display:none; padding:0 16px 20px; }
+    .phase-content.on { display:block; }
+    .phase-card { background:var(--card); border:1.5px solid var(--line-soft); border-radius:18px; padding:18px; margin-bottom:14px; }
+    .phase-card h3 { font-family:var(--serif); font-size:17px; color:var(--cocoa); margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+    .phase-card h3 .ms { font-size:20px; color:var(--mauve); }
+    .phase-card p { font-size:13px; color:var(--taupe); line-height:1.6; margin:0 0 8px; }
+    .phase-card ul { margin:6px 0; padding-left:18px; }
+    .phase-card li { font-size:12.5px; color:var(--taupe); line-height:1.55; margin-bottom:5px; }
+    .timeline-item { display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--line-soft); }
+    .timeline-item:last-child { border-bottom:none; }
+    .timeline-dot { width:36px;height:36px;border-radius:50%;background:rgba(196,181,224,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .timeline-dot .ms { font-size:18px; color:var(--mauve); }
+    .timeline-body { flex:1; min-width:0; }
+    .timeline-body b { font-size:13px; color:var(--cocoa); display:block; margin-bottom:3px; }
+    .timeline-body span { font-size:12px; color:var(--taupe); line-height:1.5; }
+    .calm-box { background:linear-gradient(135deg,rgba(196,181,224,.15),rgba(245,198,184,.12)); border:1.5px solid rgba(196,181,224,.35); border-radius:14px; padding:14px 16px; margin:12px 0; }
+    .calm-box b { color:var(--mauve); font-size:13px; display:block; margin-bottom:6px; font-family:var(--serif); }
+    .calm-box p { font-size:12px; color:var(--taupe); line-height:1.5; margin:0; }
+    .warn-box { background:rgba(232,168,152,.1); border:1.5px solid rgba(232,168,152,.35); border-radius:14px; padding:14px 16px; margin:12px 0; }
+    .warn-box b { color:var(--coral); font-size:13px; display:block; margin-bottom:6px; font-family:var(--serif); }
+    .warn-box p { font-size:12px; color:var(--taupe); line-height:1.5; margin:0; }
+    .food-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0; }
+    .food-item { background:rgba(196,181,224,.1); border-radius:10px; padding:10px; }
+    .food-item b { font-size:12px; color:var(--cocoa); display:block; margin-bottom:3px; }
+    .food-item span { font-size:11px; color:var(--taupe); line-height:1.4; }
+    .back-link { display:inline-flex; align-items:center; gap:6px; padding:10px 16px; font-size:13px; font-weight:700; color:var(--mauve); text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="top">
+      <div class="brandline"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">OVULUNA</b></div>
+      <a class="t-icon ms" href="notifications.html">notifications</a>
+      <a class="t-icon ms" href="cycle-trends.html">calendar_today</a>
+    </div>
+
+    <div class="scroll" style="padding-bottom:100px">
+      <a href="home.html" class="back-link"><span class="ms" style="font-size:18px">arrow_back</span> Back to home</a>
+
+      <div class="hero">
+        <img src="assets/icons/persona-bloom-256.png" alt="Bloom persona">
+        <h1>Your Bloom Journey</h1>
+        <p>A friendly guide to puberty, your first period, and everything changing in your body. You are not alone. Every body grows at its own pace.</p>
+      </div>
+
+      <div class="phase-tabs">
+        <div class="ptab on" data-phase="puberty">Puberty 101</div>
+        <div class="ptab" data-phase="period">First Period</div>
+        <div class="ptab" data-phase="care">Period Care</div>
+        <div class="ptab" data-phase="emotions">Emotions</div>
+        <div class="ptab" data-phase="food">Food & Energy</div>
+        <div class="ptab" data-phase="doctor">When to Ask</div>
+      </div>
+
+      <!-- Puberty 101 -->
+      <div class="phase-content on" id="phase-puberty">
+        <div class="phase-card">
+          <h3><span class="ms">eco</span> What is puberty?</h3>
+          <p>Puberty is when your body changes from a kid's body to an adult body. It happens to everyone, usually between ages 8 and 14. It is caused by hormones, which are like chemical messengers in your body.</p>
+          <div class="calm-box">
+            <b>Everyone is different</b>
+            <p>Some people start puberty early, some later. It does not mean anything is wrong with you. Your body knows its own timeline.</p>
+          </div>
+        </div>
+        <div class="phase-card">
+          <h3><span class="ms">favorite</span> Changes you might notice</h3>
+          <div class="timeline-item">
+            <div class="timeline-dot"><span class="ms">height</span></div>
+            <div class="timeline-body"><b>Growth spurt</b><span>You might get taller quickly. Do not worry if you feel clumsy, your body is catching up.</span></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"><span class="ms">wb_cloudy</span></div>
+            <div class="timeline-body"><b>Breast development</b><span>Usually the first sign. It is normal for one side to grow faster than the other at first.</span></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"><span class="ms">water_drop</span></div>
+            <div class="timeline-body"><b>Body hair</b><span>Hair grows under your arms and in your pubic area. It starts soft and gets coarser.</span></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"><span class="ms">mood</span></div>
+            <div class="timeline-body"><b>Mood swings</b><span>Hormones can make you feel happy one minute and sad the next. This is normal.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- First Period -->
+      <div class="phase-content" id="phase-period">
+        <div class="phase-card">
+          <h3><span class="ms">dark_mode</span> Your first period</h3>
+          <p>A period (also called menstruation) is when blood and tissue come out of your vagina for a few days. It is a sign that your body is growing up and your reproductive system is working.</p>
+          <div class="calm-box">
+            <b>It is completely normal</b>
+            <p>Most people get their first period between ages 9 and 16. The average age is 12. If you have not gotten it by 15, you can ask a doctor, but it is usually fine.</p>
+          </div>
+        </div>
+        <div class="phase-card">
+          <h3><span class="ms">schedule</span> What to expect</h3>
+          <ul>
+            <li><b>How long:</b> Usually 3 to 7 days. The first day is when you see blood.</li>
+            <li><b>How much blood:</b> About 2 to 3 tablespoons total. It looks like more, but it is not.</li>
+            <li><b>Color:</b> Can be bright red, dark red, or brown. All are normal.</li>
+            <li><b>Cramps:</b> Your uterus contracts to shed its lining. It might feel like a dull ache in your lower belly.</li>
+            <li><b>Cycle length:</b> From the first day of one period to the first day of the next. Usually 21 to 35 days. It can be irregular at first.</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <h3><span class="ms">backpack</span> Be prepared</h3>
+          <p>Keep a small kit in your bag or locker:</p>
+          <ul>
+            <li>A pad or tampon (ask a trusted adult to help you choose)</li>
+            <li>A clean pair of underwear, just in case</li>
+            <li>A small plastic bag for used products if there is no disposal bin</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Period Care -->
+      <div class="phase-content" id="phase-care">
+        <div class="phase-card">
+          <h3><span class="ms">shield</span> Period products</h3>
+          <div class="food-grid">
+            <div class="food-item"><b>Pads</b><span>Stick to underwear. Good for beginners. Change every 4-6 hours.</span></div>
+            <div class="food-item"><b>Tampons</b><span>Insert into vagina. Can swim with them. Change every 4-8 hours.</span></div>
+            <div class="food-item"><b>Period underwear</b><span>Washable underwear that absorbs blood. Comfortable and eco-friendly.</span></div>
+            <div class="food-item"><b>Menstrual cup</b><span>Reusable silicone cup. Can last up to 12 hours. Takes practice.</span></div>
+          </div>
+        </div>
+        <div class="phase-card">
+          <h3><span class="ms">healing</span> Cramp relief</h3>
+          <ul>
+            <li><b>Warm compress:</b> A heating pad or warm water bottle on your belly can relax muscles.</li>
+            <li><b>Gentle movement:</b> Walking, stretching, or yoga can reduce cramps.</li>
+            <li><b>Warm drinks:</b> Herbal tea (like chamomile or ginger) can soothe.</li>
+            <li><b>Pain reliever:</b> If cramps are bad, ask a parent or doctor about ibuprofen or paracetamol.</li>
+          </ul>
+        </div>
+        <div class="warn-box">
+          <b>Hygiene reminder</b>
+          <p>Wash your hands before and after changing period products. Do not flush pads or tampons down the toilet, wrap them and put them in the bin.</p>
+        </div>
+      </div>
+
+      <!-- Emotions -->
+      <div class="phase-content" id="phase-emotions">
+        <div class="phase-card">
+          <h3><span class="ms">mood</span> Mood swings are real</h3>
+          <p>Hormones during puberty can affect your emotions. You might feel more sensitive, irritable, or sad for no obvious reason. This is normal and will get easier as your body adjusts.</p>
+          <div class="calm-box">
+            <b>PMS (Premenstrual Syndrome)</b>
+            <p>Some people feel moody, bloated, or tired 1 to 2 weeks before their period. This is called PMS. Tracking your cycle can help you understand your patterns.</p>
+          </div>
+        </div>
+        <div class="phase-card">
+          <h3><span class="ms">self_improvement</span> Taking care of your mental health</h3>
+          <ul>
+            <li><b>Sleep:</b> Aim for 8 to 10 hours. Teen brains need more sleep.</li>
+            <li><b>Move your body:</b> Exercise releases endorphins, which make you feel good.</li>
+            <li><b>Talk to someone:</b> A friend, parent, teacher, or school counselor. You do not have to handle everything alone.</li>
+            <li><b>Limit screen time:</b> Social media can affect how you feel about yourself. Take breaks.</li>
+            <li><b>Be kind to yourself:</b> Your body is doing amazing things. Do not compare yourself to others.</li>
+          </ul>
+        </div>
+        <div class="warn-box">
+          <b>If you feel really down</b>
+          <p>If you feel sad most days, or have thoughts of hurting yourself, please tell a trusted adult right away. You can also call a helpline. In Singapore: 1800-221-4444 (SOS). You matter.</p>
+        </div>
+      </div>
+
+      <!-- Food & Energy -->
+      <div class="phase-content" id="phase-food">
+        <div class="phase-card">
+          <h3><span class="ms">restaurant</span> Fuel your growing body</h3>
+          <p>During puberty, your body needs extra energy and nutrients. Eat regular meals and snacks. Do not skip breakfast, it helps you focus at school.</p>
+        </div>
+        <div class="phase-card">
+          <h3><span class="ms">nutrition</span> Key nutrients for teens</h3>
+          <div class="food-grid">
+            <div class="food-item"><b>Iron</b><span>Important for blood. Eat: lean meat, beans, spinach, fortified cereal.</span></div>
+            <div class="food-item"><b>Calcium</b><span>Builds strong bones. Eat: milk, yogurt, cheese, tofu, leafy greens.</span></div>
+            <div class="food-item"><b>Protein</b><span>Helps you grow. Eat: eggs, fish, chicken, beans, nuts.</span></div>
+            <div class="food-item"><b>Water</b><span>Stay hydrated. Aim for 6 to 8 glasses a day.</span></div>
+          </div>
+        </div>
+        <div class="phase-card">
+          <h3><span class="ms">local_cafe</span> Period-friendly foods</h3>
+          <ul>
+            <li><b>Before your period:</b> Foods rich in magnesium (nuts, seeds, dark chocolate) may help with PMS.</li>
+            <li><b>During your period:</b> Warm foods, ginger tea, and iron-rich foods can help you feel better.</li>
+            <li><b>Limit:</b> Too much sugar, caffeine, and salty foods can make bloating and mood swings worse.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- When to Ask -->
+      <div class="phase-content" id="phase-doctor">
+        <div class="phase-card">
+          <h3><span class="ms">medical_services</span> When to see a doctor</h3>
+          <p>It is a good idea to have a doctor you feel comfortable talking to. Here are some reasons to make an appointment:</p>
+          <ul>
+            <li>You have not gotten your period by age 15</li>
+            <li>Your period is very heavy (soaking through a pad every hour for several hours)</li>
+            <li>Cramps are so bad they stop you from going to school or doing things you enjoy</li>
+            <li>Your period lasts more than 7 days</li>
+            <li>You feel very sad or anxious most of the time</li>
+            <li>You have questions about your body or health that you do not feel comfortable asking anyone else</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <h3><span class="ms">record_voice_over</span> Talking to a doctor</h3>
+          <p>Doctors are there to help. It is their job to answer your questions. You can ask to have a parent or trusted adult in the room with you, or you can ask to talk alone. Everything you say is confidential (private), unless they think you are in danger.</p>
+          <div class="calm-box">
+            <b>Write down your questions</b>
+            <p>Before your appointment, write down what you want to ask. It is easy to forget when you are nervous. You can even show the list to the doctor.</p>
+          </div>
+        </div>
+        <div class="warn-box">
+          <b>Emergency warning signs</b>
+          <p>If you have very heavy bleeding with dizziness, fainting, or severe pain, tell an adult immediately or go to the emergency room.</p>
+        </div>
+      </div>
+
+      <div class="sub" style="text-align:center;font-size:11px;padding:0 16px 20px">This guide is for educational purposes only and is not medical advice. Always consult a healthcare professional for personal medical concerns.</div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a href="home.html"><span class="n-ic">home</span>Home</a>
+    <a href="learn.html"><span class="n-ic">menu_book</span>Learn</a>
+    <a href="tcm-hub.html"><span class="n-ic">acupuncture</span>TCM</a>
+    <a href="foods.html"><span class="n-ic">restaurant</span>Foods</a>
+    <a href="profile.html"><span class="n-ic">person</span>Profile</a>
+  </nav>
+  <script src="appnav.js" defer></script>
+  <script src="evidence-db.js" defer></script>
+  <script src="evidence.js" defer></script>
+  <script src="luna-chat.js" defer></script>
+  <script src="persona-filter.js"></script>
+  <script src="i18n.js"></script>
+  <script src="darkmode.js?v=8" defer></script>
+  <script>
+  (function() {
+    var tabs = document.querySelectorAll('.ptab');
+    var contents = document.querySelectorAll('.phase-content');
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var phase = this.dataset.phase;
+        tabs.forEach(function(t) { t.classList.toggle('on', t === tab); });
+        contents.forEach(function(c) { c.classList.toggle('on', c.id === 'phase-' + phase); });
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
