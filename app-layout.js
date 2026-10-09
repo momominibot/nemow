@@ -24,10 +24,7 @@
     const personaNames = { bloom: 'Bloom', grow: 'Grow', nurture: 'Nurture', wisdom: 'Wisdom' };
     return `
     <div class="top" id="app-top-bar">
-      <div class="persona-badge" style="display:flex;align-items:center;gap:8px;cursor:pointer" onclick="window.location.href='profile.html'">
-        <img class="persona-badge-img" src="assets/icons/persona-${persona}-64.png" alt="${personaNames[persona]}" style="width:28px;height:28px;border-radius:50%;border:2px solid rgba(196,181,224,.5)" onerror="this.style.display='none'">
-        <div class="brandline"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">OVULUNA</b></div>
-      </div>
+      <div class="brandline" style="cursor:pointer" onclick="window.location.href='home.html'"><b style="font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.18em;color:var(--mauve)">OVULUNA</b></div>
       <div style="display:flex;align-items:center;gap:6px">
         <button class="t-icon" id="app-font-toggle" title="Adjust font size" style="background:none;border:none;cursor:pointer;padding:6px;border-radius:8px;color:var(--cocoa);font-size:16px;font-weight:700" onclick="window.cycleFontSize && window.cycleFontSize()">A</button>
         <button class="t-icon" id="app-theme-toggle" title="Toggle dark mode" style="background:none;border:none;cursor:pointer;padding:6px;border-radius:8px;color:var(--cocoa);font-size:16px" onclick="window.toggleDarkMode && window.toggleDarkMode()"><span class="ms" style="font-size:18px">dark_mode</span></button>
