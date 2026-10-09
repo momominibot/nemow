@@ -63,7 +63,11 @@
   background: rgba(26, 16, 40, 0.92) !important;
 }
 [data-theme="dark"] body {
-  background: var(--paper);
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(184,152,224,.07) 0%, transparent 55%),
+    radial-gradient(90% 50% at 50% 108%, rgba(232,168,152,.05) 0%, transparent 60%),
+    var(--paper-deep) !important;
+  color: var(--ink) !important;
 }
 [data-theme="dark"] input,
 [data-theme="dark"] textarea,
@@ -380,4 +384,24 @@ body, .top, .card, .t-icon, .nav, .btn, .chip, .metric,
 [data-theme="dark"] .eyebrow,
 [data-theme="dark"] .cs-text p {
   color: var(--taupe) !important;
+}
+
+/* ═══ GOLDDROP FIX: hardcoded light bg overrides (root cause of invisible font) ═══ */
+/* Pages that use #fff/#ffffff instead of var(--card) get dark override */
+[data-theme="dark"] .card[style*="#fff"],
+[data-theme="dark"] .card[style*="#ffffff"],
+[data-theme="dark"] div[style*="background:#fff"],
+[data-theme="dark"] div[style*="background: #fff"],
+[data-theme="dark"] div[style*="background:#ffffff"],
+[data-theme="dark"] div[style*="background: #ffffff"] {
+  background: var(--card-solid) !important;
+}
+/* Hardcoded dark text that stays dark in dark mode */
+[data-theme="dark"] [style*="color:#2"],
+[data-theme="dark"] [style*="color: #2"],
+[data-theme="dark"] [style*="color:#3"],
+[data-theme="dark"] [style*="color: #3"],
+[data-theme="dark"] [style*="color:#1"],
+[data-theme="dark"] [style*="color: #1"] {
+  color: var(--ink) !important;
 }
