@@ -8,8 +8,9 @@
 
   var LANG = 'en';
   try {
-    LANG = localStorage.getItem('ovuluna_language') || 'en';
+    localStorage.setItem('ovuluna_language', 'en');
   } catch (e) {}
+  /* English-only mode: multi-language disabled until translations are complete */
 
   var DICT = {
     /* ── Chinese (zh) ── */
