@@ -669,11 +669,16 @@ function logPeriodToday() {
 }
 function addPastCycle() {
   if (!window.CycleScore) return;
-  var dateInput = document.getElementById('pastCycleDate');
-  if (!dateInput || !dateInput.value) { alert('Please select a date'); return; }
-  window.CycleScore.addCycle(dateInput.value, null);
-  alert('Cycle logged for ' + dateInput.value);
-  dateInput.value = '';
+  var d = document.getElementById('pcDay').value;
+  var m = document.getElementById('pcMonth').value;
+  var y = document.getElementById('pcYear').value;
+  if (!d || !m || !y) { alert('Please select DD / MM / YY'); return; }
+  var dateStr = y + '-' + m.padStart(2,'0') + '-' + d.padStart(2,'0');
+  window.CycleScore.addCycle(dateStr, null);
+  alert('Cycle logged for ' + d + '/' + m + '/' + y);
+  document.getElementById('pcDay').value = '';
+  document.getElementById('pcMonth').value = '';
+  document.getElementById('pcYear').value = '';
   location.reload();
 }
 
@@ -747,7 +752,7 @@ function addPastCycle() {
       html += '<div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">';
       html += '<button onclick="logPeriodToday()" style="padding:12px;border:none;border-radius:999px;background:linear-gradient(135deg,#C4B5E0,#E8B4B8);color:#fff;font:700 14px var(--sans);cursor:pointer;box-shadow:0 4px 16px rgba(196,181,224,.3)">Period started today</button>';
       html += '<div style="display:flex;gap:8px">';
-      html += '<input type="date" id="pastCycleDate" style="flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font:500 13px var(--sans);color:var(--ink);background:var(--cream)">';
+      html += '<div style="flex:1;display:flex;align-items:center;gap:4px"><select id="pcDay" style="flex:1;padding:8px 4px;border:1px solid var(--line);border-radius:8px;font:600 12px var(--sans);color:var(--ink);background:var(--cream);text-align:center"><option value="">DD</option>' + (function(){var s="";for(var i=1;i<=31;i++)s+="<option value=\""+String(i).padStart(2,"0")+"\">"+String(i).padStart(2,"0")+"</option>";return s;})() + '</select><span style="color:var(--muted);font-weight:700">/</span><select id="pcMonth" style="flex:1;padding:8px 4px;border:1px solid var(--line);border-radius:8px;font:600 12px var(--sans);color:var(--ink);background:var(--cream);text-align:center"><option value="">MM</option>' + (function(){var s="";for(var i=1;i<=12;i++)s+="<option value=\""+String(i).padStart(2,"0")+"\">"+String(i).padStart(2,"0")+"</option>";return s;})() + '</select><span style="color:var(--muted);font-weight:700">/</span><select id="pcYear" style="flex:1;padding:8px 4px;border:1px solid var(--line);border-radius:8px;font:600 12px var(--sans);color:var(--ink);background:var(--cream);text-align:center"><option value="">YY</option>' + (function(){var s="";var cy=new Date().getFullYear();for(var y=cy;y>=cy-5;y--)s+="<option value=\""+y+"\">"+String(y).slice(-2)+"</option>";return s;})() + '</select></div>';
       html += '<button onclick="addPastCycle()" style="padding:10px 16px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--mauve);font:600 13px var(--sans);cursor:pointer">Add</button>';
       html += '</div>';
       html += '<div style="font:500 10px var(--sans);color:var(--muted);text-align:center;line-height:1.4;margin-top:4px">Log the first day of each period. After 3 cycles, your score is fully accurate. All data stays on your device.</div>';

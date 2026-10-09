@@ -921,6 +921,24 @@
     }
   }
 
+
+  function dayOptions() {
+    var s = '';
+    for (var i = 1; i <= 31; i++) s += '<option value="' + String(i).padStart(2,'0') + '">' + String(i).padStart(2,'0') + '</option>';
+    return s;
+  }
+  function monthOptions() {
+    var s = '';
+    for (var i = 1; i <= 12; i++) s += '<option value="' + String(i).padStart(2,'0') + '">' + String(i).padStart(2,'0') + '</option>';
+    return s;
+  }
+  function yearOptions() {
+    var s = '';
+    var cy = new Date().getFullYear();
+    for (var y = cy; y >= cy - 5; y--) s += '<option value="' + y + '">' + String(y).slice(-2) + '</option>';
+    return s;
+  }
+
   function openBackfillModal() {
     // Remove existing modal
     var existing = document.getElementById('bfModal');
@@ -940,15 +958,33 @@
         '<div class="bf-cycles">' +
           '<div class="bf-cycle">' +
             '<label>Cycle 1 (most recent)</label>' +
-            '<input type="date" id="bfDate1" class="bf-input">' +
+            '<div class="bf-ddmmyy">' +
+              '<select id="bfDay1" class="bf-dd"><option value="">DD</option>' + dayOptions() + '</select>' +
+              '<span class="bf-sep">/</span>' +
+              '<select id="bfMonth1" class="bf-mm"><option value="">MM</option>' + monthOptions() + '</select>' +
+              '<span class="bf-sep">/</span>' +
+              '<select id="bfYear1" class="bf-yy"><option value="">YY</option>' + yearOptions() + '</select>' +
+            '</div>' +
           '</div>' +
           '<div class="bf-cycle">' +
             '<label>Cycle 2</label>' +
-            '<input type="date" id="bfDate2" class="bf-input">' +
+            '<div class="bf-ddmmyy">' +
+              '<select id="bfDay2" class="bf-dd"><option value="">DD</option>' + dayOptions() + '</select>' +
+              '<span class="bf-sep">/</span>' +
+              '<select id="bfMonth2" class="bf-mm"><option value="">MM</option>' + monthOptions() + '</select>' +
+              '<span class="bf-sep">/</span>' +
+              '<select id="bfYear2" class="bf-yy"><option value="">YY</option>' + yearOptions() + '</select>' +
+            '</div>' +
           '</div>' +
           '<div class="bf-cycle">' +
             '<label>Cycle 3 (oldest)</label>' +
-            '<input type="date" id="bfDate3" class="bf-input">' +
+            '<div class="bf-ddmmyy">' +
+              '<select id="bfDay3" class="bf-dd"><option value="">DD</option>' + dayOptions() + '</select>' +
+              '<span class="bf-sep">/</span>' +
+              '<select id="bfMonth3" class="bf-mm"><option value="">MM</option>' + monthOptions() + '</select>' +
+              '<span class="bf-sep">/</span>' +
+              '<select id="bfYear3" class="bf-yy"><option value="">YY</option>' + yearOptions() + '</select>' +
+            '</div>' +
           '</div>' +
         '</div>' +
         '<div class="bf-actions">' +
@@ -965,9 +1001,16 @@
 
     // Save handler
     document.getElementById('bfSave').addEventListener('click', function() {
-      var d1 = document.getElementById('bfDate1').value;
-      var d2 = document.getElementById('bfDate2').value;
-      var d3 = document.getElementById('bfDate3').value;
+      function getDate(n) {
+        var d = document.getElementById('bfDay' + n).value;
+        var m = document.getElementById('bfMonth' + n).value;
+        var y = document.getElementById('bfYear' + n).value;
+        if (d && m && y) return y + '-' + m.padStart(2,'0') + '-' + d.padStart(2,'0');
+        return '';
+      }
+      var d1 = getDate(1);
+      var d2 = getDate(2);
+      var d3 = getDate(3);
       var cycles = [];
       if (d1) cycles.push({ start: d1, end: null, source: 'backfill' });
       if (d2) cycles.push({ start: d2, end: null, source: 'backfill' });
