@@ -23,14 +23,6 @@
       subtitle: 'A few gentle questions to personalize your experience. Takes about 2 minutes.'
     },
     {
-      id: 'language',
-      section: 'Welcome',
-      type: 'language',
-      title: 'Choose your language',
-      subtitle: 'Select your preferred language. You can change this anytime in settings.',
-      field: 'language'
-    },
-    {
       id: 'age',
       section: 'About You',
       type: 'wheel',
@@ -280,7 +272,6 @@
     scrollEl.innerHTML = '';
     switch(step.type) {
       case 'welcome': renderWelcome(step); break;
-      case 'language': renderLanguage(step); break;
       case 'wheel': renderWheel(step); break;
       case 'height-weight': renderHeightWeight(step); break;
       case 'single': renderSingle(step); break;
@@ -307,62 +298,7 @@
   }
 
   /* ── Language step ── */
-  function renderLanguage(step) {
-    var languages = [
-      { code: 'en', name: 'English' },
-      { code: 'zh', name: '中文' }
-    ];
-    var selected = answers.language || 'en';
-    var div = document.createElement('div');
-    div.style.cssText = 'flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 24px;';
-    div.innerHTML =
-      '<h1 class="q">' + t(step.title) + '</h1>' +
-      '<p class="sub">' + t(step.subtitle) + '</p>' +
-      '<div id="langList" style="display:flex;flex-direction:column;gap:10px;margin-top:8px"></div>';
-    scrollEl.appendChild(div);
 
-    var list = document.getElementById('langList');
-    languages.forEach(function(lang) {
-      var el = document.createElement('div');
-      el.className = 'opt' + (selected === lang.code ? ' selected' : '');
-      el.style.cssText = 'display:flex;align-items:center;gap:14px;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;cursor:pointer;transition:.15s;background:var(--card)';
-      if (selected === lang.code) {
-        el.style.borderColor = 'var(--sage, #5E9B93)';
-        el.style.background = 'var(--sage-tint, #E8EBE2)';
-      }
-      el.innerHTML =
-        '<span style="width:32px;height:32px;border-radius:50%;background:var(--mauve-tint,#f3eef7);display:flex;align-items:center;justify-content:center;font:700 12px var(--sans);color:var(--mauve,#7c5fa8);flex-shrink:0;text-transform:uppercase">' + lang.code + '</span>' +
-        '<div style="flex:1"><div style="font:700 15px var(--sans);color:var(--ink)">' + lang.name + '</div></div>' +
-        '<span class="tick" style="margin-left:auto;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0">' +
-          (selected === lang.code ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--sage,#5E9B93)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '') +
-        '</span>';
-      el.addEventListener('click', function() {
-        answers.language = lang.code;
-        saveAnswers();
-        if (window.OVULUNA_I18N && window.OVULUNA_I18N.setLang) {
-          window.OVULUNA_I18N.setLang(lang.code);
-        } else {
-          localStorage.setItem('ovuluna_language', lang.code);
-          document.documentElement.setAttribute('lang', lang.code);
-        }
-        list.querySelectorAll('.opt').forEach(function(o) {
-          o.style.borderColor = 'var(--line)';
-          o.style.background = 'var(--card)';
-          o.querySelector('.tick').innerHTML = '';
-        });
-        el.style.borderColor = 'var(--sage, #5E9B93)';
-        el.style.background = 'var(--sage-tint, #E8EBE2)';
-        el.querySelector('.tick').innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--sage,#5E9B93)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        document.getElementById('nextBtn').disabled = false;
-      });
-      list.appendChild(el);
-    });
-
-    footEl.innerHTML = '<button class="cta" id="nextBtn" ' + (selected ? '' : 'disabled') + '>' + t('Continue') + '</button>';
-    document.getElementById('nextBtn').addEventListener('click', nextStep);
-  }
-
-  /* ── Wheel / slider step ── */
   function renderWheel(step) {
     var val = answers[step.field] || step.default;
     var div = document.createElement('div');
