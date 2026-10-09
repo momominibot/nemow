@@ -301,6 +301,22 @@
     <div class="grid2" style="gap:10px">
       <a class="card tint-lavender" href="overview.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--mauve);font-size:22px">grid_view</span><b style="display:block;font-size:14px;margin-top:6px">Daily Overview</b><span class="sub" style="font-size:11px">All systems at a glance</span></a>
       <a class="card tint-gold" href="bio-age.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--terracotta);font-size:22px">radio_button_checked</span><b style="display:block;font-size:14px;margin-top:6px">Bio-Age</b><span class="sub" style="font-size:11px">Six-domain breakdown</span></a>
+      <div class="card tint-lavender" id="cycleScoreCard" style="padding:15px;cursor:pointer" onclick="document.getElementById('cycleScoreModal').style.display='flex'">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="ms" style="color:var(--mauve);font-size:22px">autorenew</span>
+          <div style="flex:1">
+            <b style="display:block;font-size:14px">Cycle Score</b>
+            <span class="sub" id="csCardSub" style="font-size:11px">Building baseline</span>
+          </div>
+          <div id="csCardScore" style="font-family:var(--serif);font-size:24px;color:var(--mauve);font-weight:700">--</div>
+        </div>
+        <div id="csCardProgress" style="margin-top:10px;display:flex;gap:4px">
+          <div class="cs-dot" style="flex:1;height:4px;border-radius:2px;background:var(--line)"></div>
+          <div class="cs-dot" style="flex:1;height:4px;border-radius:2px;background:var(--line)"></div>
+          <div class="cs-dot" style="flex:1;height:4px;border-radius:2px;background:var(--line)"></div>
+        </div>
+        <div id="csCardBadge" style="display:none;margin-top:6px;font:600 10px var(--sans);color:var(--gold);text-transform:uppercase;letter-spacing:.05em">Estimated</div>
+      </div>
       <a class="card tint-sage" href="wellness-checkin.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--sage);font-size:22px">spa</span><b style="display:block;font-size:14px;margin-top:6px">Wellness Score</b><span class="sub" style="font-size:11px">Daily ovarian wellness</span></a>
       <a class="card" href="insights.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms twinkle" style="color:var(--mauve);font-size:22px">auto_awesome</span><b style="display:block;font-size:14px;margin-top:6px">AI Insights</b><span class="sub" style="font-size:11px">Personalized guidance</span></a>
       <a class="card" href="longevity.html" style="text-decoration:none;color:inherit;padding:15px"><span class="ms" style="color:var(--d-diet);font-size:22px">eco</span><b style="display:block;font-size:14px;margin-top:6px">Longevity</b><span class="sub" style="font-size:11px">Your reproductive path</span></a>
@@ -620,10 +636,101 @@ document.addEventListener('DOMContentLoaded', function(){
 <script src="evidence-db.js" defer></script>
 <script src="evidence.js" defer></script>
 <script src="circadian.js" defer></script>
+<script src="cycle-score.js" defer></script>
 <script src="luna-chat.js" defer></script>
 <script src="i18n.js"></script>
   <script src="darkmode.js?v=8" defer></script>
   <script src="app-layout.js"></script>
+
+<!-- Cycle Score Modal -->
+<div id="cycleScoreModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)this.style.display='none'">
+  <div style="position:absolute;inset:0;background:rgba(10,34,57,.4);backdrop-filter:blur(4px)"></div>
+  <div style="position:relative;background:#fff;border-radius:24px;padding:28px 24px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.15);max-height:85vh;overflow-y:auto">
+    <button onclick="document.getElementById('cycleScoreModal').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:24px;color:var(--muted);cursor:pointer;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center">&times;</button>
+    <div id="csModalContent"></div>
+  </div>
+</div>
+
+<script>
+// Cycle Score Card Initialization
+(function() {
+  function init() {
+    if (!window.CycleScore) { setTimeout(init, 200); return; }
+    var result = window.CycleScore.calculateScore();
+    var scoreEl = document.getElementById('csCardScore');
+    var subEl = document.getElementById('csCardSub');
+    var badgeEl = document.getElementById('csCardBadge');
+    var dots = document.querySelectorAll('#csCardProgress .cs-dot');
+
+    if (result.status === 'no-data') {
+      scoreEl.textContent = '--';
+      subEl.textContent = 'Log your first cycle';
+    } else if (result.status === 'building') {
+      scoreEl.textContent = result.score;
+      subEl.textContent = result.message;
+      badgeEl.style.display = 'block';
+    } else {
+      scoreEl.textContent = result.score;
+      subEl.textContent = window.CycleScore.getScoreLabel(result.score);
+    }
+
+    // Progress dots
+    var filled = result.progress || 0;
+    for (var i = 0; i < dots.length; i++) {
+      if (i < filled) {
+        dots[i].style.background = 'linear-gradient(90deg,#C4B5E0,#E8B4B8)';
+      }
+    }
+
+    // Modal content
+    var modalContent = document.getElementById('csModalContent');
+    if (modalContent) {
+      var html = '<div style="text-align:center;margin-bottom:20px">';
+      html += '<div style="font:700 11px var(--sans);color:var(--mauve);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Cycle Wellness Score</div>';
+      if (result.score !== null) {
+        html += '<div style="font-family:var(--serif);font-size:56px;color:var(--ink);font-weight:700;line-height:1">' + result.score + '</div>';
+        html += '<div style="font:600 14px var(--sans);color:var(--mauve);margin-top:4px">' + window.CycleScore.getScoreLabel(result.score) + '</div>';
+        if (result.estimated) html += '<div style="display:inline-block;margin-top:8px;padding:4px 12px;background:rgba(242,169,59,.15);color:var(--gold);border-radius:999px;font:600 10px var(--sans);text-transform:uppercase;letter-spacing:.05em">Estimated - refines with more data</div>';
+      } else {
+        html += '<div style="font-family:var(--serif);font-size:32px;color:var(--muted)">No data yet</div>';
+        html += '<div style="font:500 13px var(--sans);color:var(--muted);margin-top:8px">Log your cycles to see your score</div>';
+      }
+      html += '</div>';
+
+      // Progress
+      html += '<div style="margin-bottom:20px">';
+      html += '<div style="display:flex;justify-content:space-between;font:600 11px var(--sans);color:var(--muted);margin-bottom:6px"><span>Cycle baseline</span><span>' + (result.progress || 0) + '/3 cycles</span></div>';
+      html += '<div style="display:flex;gap:4px">';
+      for (var j = 0; j < 3; j++) {
+        var bg = j < (result.progress || 0) ? 'linear-gradient(90deg,#C4B5E0,#E8B4B8)' : 'var(--line)';
+        html += '<div style="flex:1;height:6px;border-radius:3px;background:' + bg + '"></div>';
+      }
+      html += '</div></div>';
+
+      // Breakdown
+      if (result.breakdown) {
+        html += '<div style="background:var(--mist);border-radius:16px;padding:16px;margin-bottom:16px">';
+        html += '<div style="font:700 12px var(--sans);color:var(--ink);margin-bottom:10px">What we measure</div>';
+        var b = result.breakdown;
+        html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span style="font:500 12px var(--sans);color:var(--muted)">Cycles logged</span><span style="font:700 12px var(--sans);color:var(--ink)">' + b.cycleCount + '</span></div>';
+        if (b.avgCycleLength) html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span style="font:500 12px var(--sans);color:var(--muted)">Avg cycle length</span><span style="font:700 12px var(--sans);color:var(--ink)">' + b.avgCycleLength + ' days</span></div>';
+        html += '<div style="display:flex;justify-content:space-between;padding:6px 0"><span style="font:500 12px var(--sans);color:var(--muted)">Regularity</span><span style="font:700 12px var(--sans);color:var(--ink)">' + b.regularity + '</span></div>';
+        html += '</div>';
+      }
+
+      // How to improve
+      html += '<div style="font:500 11px var(--sans);color:var(--muted);text-align:center;line-height:1.5">Log your period start date each cycle. After 3 cycles, your score becomes fully accurate. <a href="onboarding.html" style="color:var(--mauve);font-weight:600">Add past cycles</a></div>';
+
+      modalContent.innerHTML = html;
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 </body></html>
 
 <!-- Daily Logging Modal -->

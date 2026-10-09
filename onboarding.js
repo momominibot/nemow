@@ -907,9 +907,96 @@
         '<div class="cs-metric"><span class="cs-mic">🌡️</span><div><b>Ovulation confirmation</b><span>BBT or symptom tracking</span></div></div>' +
         '<div class="cs-metric"><span class="cs-mic">💜</span><div><b>Symptom burden</b><span>Cramps, mood, energy</span></div></div>' +
       '</div>' +
-      '<div class="cs-note">Your score updates after each completed cycle. Export it anytime to share with your healthcare provider.</div>';
+      '<div class="cs-note">Your score updates after each completed cycle. Export it anytime to share with your healthcare provider.</div>' +
+      '<button class="cs-backfill" id="csBackfill">Have past cycles? Add them now</button>';
     scrollEl.appendChild(div);
     footEl.innerHTML = '';
+
+    // Backfill button opens cycle entry
+    var bfBtn = document.getElementById('csBackfill');
+    if (bfBtn) {
+      bfBtn.addEventListener('click', function() {
+        openBackfillModal();
+      });
+    }
+  }
+
+  function openBackfillModal() {
+    // Remove existing modal
+    var existing = document.getElementById('bfModal');
+    if (existing) existing.remove();
+
+    var modal = document.createElement('div');
+    modal.id = 'bfModal';
+    modal.className = 'bf-modal';
+    modal.innerHTML =
+      '<div class="bf-overlay"></div>' +
+      '<div class="bf-card">' +
+        '<div class="bf-head">' +
+          '<h3>Add Past Cycles</h3>' +
+          '<p>Enter the start date of your last 3 cycles to unlock your score immediately.</p>' +
+          '<button class="bf-close" id="bfClose">&times;</button>' +
+        '</div>' +
+        '<div class="bf-cycles">' +
+          '<div class="bf-cycle">' +
+            '<label>Cycle 1 (most recent)</label>' +
+            '<input type="date" id="bfDate1" class="bf-input">' +
+          '</div>' +
+          '<div class="bf-cycle">' +
+            '<label>Cycle 2</label>' +
+            '<input type="date" id="bfDate2" class="bf-input">' +
+          '</div>' +
+          '<div class="bf-cycle">' +
+            '<label>Cycle 3 (oldest)</label>' +
+            '<input type="date" id="bfDate3" class="bf-input">' +
+          '</div>' +
+        '</div>' +
+        '<div class="bf-actions">' +
+          '<button class="bf-skip" id="bfSkip">Skip for now</button>' +
+          '<button class="bf-save" id="bfSave">Save cycles</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(modal);
+
+    // Close handlers
+    document.getElementById('bfClose').addEventListener('click', closeBackfill);
+    document.getElementById('bfSkip').addEventListener('click', closeBackfill);
+    document.querySelector('.bf-overlay').addEventListener('click', closeBackfill);
+
+    // Save handler
+    document.getElementById('bfSave').addEventListener('click', function() {
+      var d1 = document.getElementById('bfDate1').value;
+      var d2 = document.getElementById('bfDate2').value;
+      var d3 = document.getElementById('bfDate3').value;
+      var cycles = [];
+      if (d1) cycles.push({ start: d1, end: null, source: 'backfill' });
+      if (d2) cycles.push({ start: d2, end: null, source: 'backfill' });
+      if (d3) cycles.push({ start: d3, end: null, source: 'backfill' });
+      if (cycles.length > 0) {
+        try {
+          localStorage.setItem('ovuluna_cycles', JSON.stringify(cycles));
+        } catch(e) {}
+      }
+      closeBackfill();
+      // Update the cycle score visual
+      updateCycleScoreVisual(cycles.length);
+    });
+  }
+
+  function closeBackfill() {
+    var modal = document.getElementById('bfModal');
+    if (modal) modal.remove();
+  }
+
+  function updateCycleScoreVisual(count) {
+    var circles = document.querySelectorAll('.cs-circle');
+    var labels = document.querySelectorAll('.cs-sub');
+    for (var i = 0; i < circles.length; i++) {
+      if (i < count) {
+        circles[i].parentElement.classList.add('cs-active');
+        if (labels[i]) labels[i].textContent = 'Logged';
+      }
+    }
   }
 
   function renderDone(step) {
