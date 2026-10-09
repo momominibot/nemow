@@ -42,6 +42,11 @@
     var elements = document.querySelectorAll('[data-persona]');
     for (var i = 0; i < elements.length; i++) {
       var el = elements[i];
+      // SAFETY GUARD: never hide the document root (html/body)
+      if (el.tagName === 'HTML' || el.tagName === 'BODY') {
+        console.warn('persona-filter: data-persona on document root is not allowed, skipping', el);
+        continue;
+      }
       var allowed = el.getAttribute('data-persona').split(',').map(function(s) { return s.trim(); });
       if (allowed.indexOf(persona) >= 0 || allowed.indexOf('all') >= 0) {
         el.style.display = '';
