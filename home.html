@@ -652,6 +652,25 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>
 
 <script>
+// Cycle logging helpers
+function logPeriodToday() {
+  if (!window.CycleScore) return;
+  var today = new Date().toISOString().split('T')[0];
+  window.CycleScore.addCycle(today, null);
+  alert('Period logged for ' + today + '. Your cycle score will update.');
+  document.getElementById('cycleScoreModal').style.display = 'none';
+  location.reload();
+}
+function addPastCycle() {
+  if (!window.CycleScore) return;
+  var dateInput = document.getElementById('pastCycleDate');
+  if (!dateInput || !dateInput.value) { alert('Please select a date'); return; }
+  window.CycleScore.addCycle(dateInput.value, null);
+  alert('Cycle logged for ' + dateInput.value);
+  dateInput.value = '';
+  location.reload();
+}
+
 // Cycle Score Card Initialization
 (function() {
   function init() {
@@ -718,8 +737,15 @@ document.addEventListener('DOMContentLoaded', function(){
         html += '</div>';
       }
 
-      // How to improve
-      html += '<div style="font:500 11px var(--sans);color:var(--muted);text-align:center;line-height:1.5">Log your period start date each cycle. After 3 cycles, your score becomes fully accurate. <a href="onboarding.html" style="color:var(--mauve);font-weight:600">Add past cycles</a></div>';
+      // Action buttons
+      html += '<div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">';
+      html += '<button onclick="logPeriodToday()" style="padding:12px;border:none;border-radius:999px;background:linear-gradient(135deg,#C4B5E0,#E8B4B8);color:#fff;font:700 14px var(--sans);cursor:pointer;box-shadow:0 4px 16px rgba(196,181,224,.3)">Period started today</button>';
+      html += '<div style="display:flex;gap:8px">';
+      html += '<input type="date" id="pastCycleDate" style="flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font:500 13px var(--sans);color:var(--ink);background:var(--cream)">';
+      html += '<button onclick="addPastCycle()" style="padding:10px 16px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--mauve);font:600 13px var(--sans);cursor:pointer">Add</button>';
+      html += '</div>';
+      html += '<div style="font:500 10px var(--sans);color:var(--muted);text-align:center;line-height:1.4;margin-top:4px">Log the first day of each period. After 3 cycles, your score is fully accurate. All data stays on your device.</div>';
+      html += '</div>';
 
       modalContent.innerHTML = html;
     }
