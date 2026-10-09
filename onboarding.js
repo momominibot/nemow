@@ -200,6 +200,13 @@
       title: "We're crafting your personalized experience"
     },
     {
+      id: 'cycle-score',
+      section: 'Your Cycle Score',
+      type: 'cycle-score',
+      title: 'Your Cycle Wellness Score',
+      subtitle: 'We build your baseline over 3 cycles for the most accurate insights.'
+    },
+    {
       id: 'done',
       section: 'All Set',
       type: 'done',
@@ -280,6 +287,7 @@
       case 'multi': renderMulti(step); break;
       case 'calendar': renderCalendar(step); break;
       case 'personalize': renderPersonalize(step); break;
+      case 'cycle-score': renderCycleScore(step); break;
       case 'done': renderDone(step); break;
     }
   }
@@ -859,6 +867,51 @@
   }
 
   /* ── Done step ── */
+  function renderCycleScore(step) {
+    var div = document.createElement('div');
+    div.className = 'cscore';
+    div.innerHTML =
+      '<div class="cs-orb">' +
+        '<div class="cs-moon"></div>' +
+        '<div class="sparkles">' +
+          '<i style="--s:8px;--d:2s;--t:0s;left:20%;top:15%"></i>' +
+          '<i style="--s:12px;--d:2.8s;--t:.5s;left:75%;top:25%"></i>' +
+          '<i style="--s:6px;--d:2.2s;--t:1s;left:85%;top:60%"></i>' +
+          '<i style="--s:10px;--d:3s;--t:1.5s;left:15%;top:70%"></i>' +
+        '</div>' +
+      '</div>' +
+      '<h2 style="font-family:var(--serif);font-size:24px;color:var(--ink);text-align:center;margin:16px 0 8px">Your Cycle Wellness Score</h2>' +
+      '<p style="font:500 13px var(--sans);color:var(--muted);text-align:center;line-height:1.6;margin:0 0 24px">We need 3 cycles of data to build your personal baseline. The more you log, the smarter your insights become.</p>' +
+      '<div class="cs-cycles">' +
+        '<div class="cs-cycle cs-active">' +
+          '<div class="cs-circle">1</div>' +
+          '<div class="cs-label">Cycle 1</div>' +
+          '<div class="cs-sub">Start logging</div>' +
+        '</div>' +
+        '<div class="cs-line"></div>' +
+        '<div class="cs-cycle">' +
+          '<div class="cs-circle">2</div>' +
+          '<div class="cs-label">Cycle 2</div>' +
+          '<div class="cs-sub">Patterns emerge</div>' +
+        '</div>' +
+        '<div class="cs-line"></div>' +
+        '<div class="cs-cycle">' +
+          '<div class="cs-circle">3</div>' +
+          '<div class="cs-label">Cycle 3</div>' +
+          '<div class="cs-sub">Score unlocked</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="cs-metrics">' +
+        '<div class="cs-metric"><span class="cs-mic">📊</span><div><b>Cycle regularity</b><span>Variance in cycle length</span></div></div>' +
+        '<div class="cs-metric"><span class="cs-mic">📅</span><div><b>Cycle & period length</b><span>Within healthy ranges</span></div></div>' +
+        '<div class="cs-metric"><span class="cs-mic">🌡️</span><div><b>Ovulation confirmation</b><span>BBT or symptom tracking</span></div></div>' +
+        '<div class="cs-metric"><span class="cs-mic">💜</span><div><b>Symptom burden</b><span>Cramps, mood, energy</span></div></div>' +
+      '</div>' +
+      '<div class="cs-note">Your score updates after each completed cycle. Export it anytime to share with your healthcare provider.</div>';
+    scrollEl.appendChild(div);
+    footEl.innerHTML = '';
+  }
+
   function renderDone(step) {
     // Compute ovarian age estimate if possible (adults only)
     var ovInfo = '';

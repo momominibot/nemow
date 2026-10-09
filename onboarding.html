@@ -225,6 +225,27 @@ h1.q em{font-style:italic}
 .pers .pl{display:flex;align-items:center;gap:12px;font:500 15px var(--sans);color:var(--sec);opacity:.3;transition:.4s}
 .pers .pl.done{opacity:1;color:var(--ink)}
 .pers .pl .pc{width:22px;height:22px;border-radius:50%;background:var(--sage);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+/* Cycle Score Step */
+.cscore{flex:1;display:flex;flex-direction:column;align-items:center;padding:24px 20px;overflow-y:auto}
+.cs-orb{position:relative;width:120px;height:120px;margin-bottom:8px;display:flex;align-items:center;justify-content:center}
+.cs-orb::before{content:"";position:absolute;inset:-8%;border-radius:50%;background:radial-gradient(circle,rgba(196,181,224,.25),transparent 70%);animation:pulse 3s ease-in-out infinite}
+.cs-moon{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#E8E0F5,#F5E6E0,#E8E0F5);box-shadow:0 0 30px rgba(196,181,224,.4),inset -8px -8px 20px rgba(0,0,0,.05);position:relative;z-index:1}
+.cs-moon::after{content:"";position:absolute;top:12%;right:15%;width:55%;height:55%;border-radius:50%;background:rgba(250,252,254,.3)}
+.cs-cycles{display:flex;align-items:center;justify-content:center;gap:0;margin:20px 0 24px;width:100%;max-width:340px}
+.cs-cycle{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.cs-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 16px var(--serif);border:2px solid var(--line);color:var(--muted);background:#fff;transition:.3s}
+.cs-cycle.cs-active .cs-circle{background:linear-gradient(135deg,#C4B5E0,#E8B4B8);color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(196,181,224,.4)}
+.cs-label{font:700 12px var(--sans);color:var(--ink)}
+.cs-sub{font:500 10px var(--sans);color:var(--muted);text-align:center}
+.cs-line{flex:0 0 20px;height:2px;background:var(--line);margin-top:-20px;border-radius:2px}
+.cs-metrics{width:100%;max-width:320px;display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.cs-metric{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:14px}
+.cs-mic{font-size:20px;flex-shrink:0}
+.cs-metric b{display:block;font:700 13px var(--sans);color:var(--ink)}
+.cs-metric span{font:500 11px var(--sans);color:var(--muted)}
+.cs-note{font:500 11px var(--sans);color:var(--muted);text-align:center;line-height:1.5;padding:0 20px;margin-top:auto}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.08);opacity:1}}
 .disc{font-size:12px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.5}
 .note{font-size:13px;color:var(--sec);background:var(--sage-tint);border-radius:var(--r-sm);padding:12px 14px;margin-top:16px;line-height:1.5}
 
