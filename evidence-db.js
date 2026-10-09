@@ -916,5 +916,114 @@ window.EVIDENCE_DB = {
     source: { authors: "Bhatt DL et al.", year: "2019", journal: "N Engl J Med", doi: "10.1056/NEJMoa1812792", pmid: "30415611", title: "Cardiovascular risk reduction with icosapent ethyl for hypertriglyceridemia" },
     level: "strong",
     wellnessNote: "Eating fatty fish 2-3 times per week is a safe and beneficial dietary pattern for most people. Omega-3 supplements may be reasonable for those who do not eat fish, but consult a healthcare provider before starting high-dose supplements (>2g/day), especially if taking anticoagulant medications, as omega-3s can have mild blood-thinning effects. This information is for wellness nutrition guidance, not for treatment of hypertriglyceridemia or cardiovascular disease."
-  }
+  },
+  /* ── Teen / adolescent health ── */
+  "teen-cycle-irregular": {
+    claim: "Irregular cycles are normal during the first 2-3 years after menarche.",
+    evidence: "Adolescent cycles are frequently irregular due to immaturity of the hypothalamic-pituitary-ovarian axis. Anovulatory cycles are common in the first year after menarche (up to 80%), decreasing to ~20% by year 5. Cycle length typically ranges 21-45 days in adolescents vs 21-35 days in adults. Persistent irregularity beyond 3 years, cycles >90 days, or heavy bleeding warrants clinical evaluation.",
+    source: { authors: "American College of Obstetricians and Gynecologists", year: "2023", journal: "Obstet Gynecol", doi: "10.1097/AOG.0000000000005295", pmid: "37167012", title: "Menstruation in Girls and Adolescents: Using the Menstrual Cycle as a Vital Sign" },
+    level: "strong",
+    wellnessNote: "Track cycles; if irregularity persists beyond 3 years or cycles exceed 90 days, discuss with a healthcare provider."
+  },
+  "period-duration-normal": {
+    claim: "A normal menstrual period lasts 3 to 7 days.",
+    evidence: "FIGO's 2018 revision of normal menstrual bleeding parameters defines normal menstrual duration as 4.5 to 8 days based on population percentiles (5th-95th). ACOG historically uses 2-7 days. Periods lasting more than 7 days or less than 2 days consistently may warrant evaluation, especially if accompanied by heavy bleeding or pain.",
+    source: { authors: "Munro MG et al.", year: "2018", journal: "Int J Gynaecol Obstet", doi: "10.1002/ijgo.12663", pmid: "30051850", title: "FIGO classification system and normal menstrual cycle parameters" },
+    level: "strong",
+    wellnessNote: "Individual variation is normal; persistent changes from your personal baseline are worth noting."
+  },
+  "menstrual-blood-loss-normal": {
+    claim: "Average menstrual blood loss is approximately 30-40 mL (about 2-3 tablespoons).",
+    evidence: "Population studies show average menstrual blood loss of 30-40 mL per cycle, with 90% of women losing less than 60 mL. Loss exceeding 80 mL is defined as heavy menstrual bleeding. However, perceived blood loss is often overestimated; what looks like a lot may be within normal range. Soaking through a pad or tampon every 1-2 hours for several hours is a sign of heavy bleeding worth clinical evaluation.",
+    source: { authors: "Fraser IS et al.", year: "2011", journal: "Fertil Steril", doi: "10.1016/j.fertnstert.2011.07.1025", pmid: "21872800", title: "The FIGO classification of causes of abnormal uterine bleeding" },
+    level: "strong",
+    wellnessNote: "If you soak through a pad/tampon every 1-2 hours or pass large clots, tell a trusted adult or healthcare provider."
+  },
+  "teen-exercise-cramps": {
+    claim: "Regular physical activity can reduce menstrual cramp pain in adolescents.",
+    evidence: "Randomized controlled trials in adolescent girls show that aerobic exercise (30 min, 3x/week for 8 weeks) significantly reduced menstrual pain intensity compared to controls. Exercise increases blood flow, releases endorphins, and reduces prostaglandin levels. Yoga and stretching specifically targeting the lower abdomen and back have also shown benefit in small trials.",
+    source: { authors: "de Barros Machado AA et al.", year: "2020", journal: "Sci Rep", doi: "10.1038/s41598-020-76588-1", pmid: "33177668", title: "Effect of aerobic exercise on primary dysmenorrhea: systematic review and meta-analysis" },
+    level: "moderate",
+    wellnessNote: "Gentle movement on period days is fine; listen to your body and rest if you need to."
+  },
+
+  /* ── Fertility / TTC ── */
+  "ttc-timeline": {
+    claim: "About 85% of couples conceive within one year of regular unprotected intercourse.",
+    evidence: "Population-based studies show that approximately 50% of couples conceive within 3 months, 75% within 6 months, and 85% within 12 months of trying. These rates apply to couples having regular intercourse (2-3 times per week) without contraception. Time to pregnancy increases with maternal age, particularly after 35.",
+    source: { authors: "Gnoth C et al.", year: "2005", journal: "Hum Reprod", doi: "10.1093/humrep/dei163", pmid: "15890683", title: "Time to pregnancy: a computational model for the calculation of pregnancy probabilities" },
+    level: "strong",
+    wellnessNote: "If you have been trying for 12 months (or 6 months if 35+) without success, talk to your healthcare provider."
+  },
+  "sperm-survival": {
+    claim: "Sperm can survive up to 5 days in the female reproductive tract; the egg is viable for 12-24 hours.",
+    evidence: "The fertile window is the 6-day period ending on the day of ovulation. Sperm survival in cervical mucus ranges from 3-5 days in optimal conditions (egg-white cervical mucus). The oocyte remains fertilizable for approximately 12-24 hours after ovulation. Intercourse on the 2 days before ovulation has the highest conception probability.",
+    source: { authors: "Wilcox AJ et al.", year: "1995", journal: "N Engl J Med", doi: "10.1056/NEJM199512073332301", pmid: "7477185", title: "Timing of sexual intercourse in relation to ovulation" },
+    level: "strong",
+    wellnessNote: "For conception, regular intercourse every 1-2 days throughout the cycle is more effective than timing only around ovulation."
+  },
+  "ovulation-timing": {
+    claim: "Ovulation typically occurs 14 days before the next menstrual period.",
+    evidence: "In a standard 28-day cycle, ovulation occurs around day 14. However, the luteal phase (from ovulation to next period) is relatively constant at 14 days (range 10-16), while the follicular phase varies more. Therefore, ovulation can be estimated by counting back 14 days from the expected next period. In cycles shorter or longer than 28 days, ovulation occurs earlier or later respectively.",
+    source: { authors: "Fehring RJ et al.", year: "2006", journal: "J Obstet Gynaecol Neonatal Nurs", doi: "10.1177/0884217506287729", pmid: "16580650", title: "An evaluation of the accuracy of the luteinizing hormone test for ovulation prediction" },
+    level: "strong",
+    wellnessNote: "Cycle tracking over several months gives a more accurate picture of your personal ovulation timing."
+  },
+  "cervical-mucus": {
+    claim: "Egg-white cervical mucus signals peak fertility and supports sperm survival.",
+    evidence: "Cervical mucus changes throughout the menstrual cycle under hormonal influence. Estrogen-dominant follicular phase produces progressively more watery, stretchy mucus (spinnbarkeit). The 'egg-white' mucus (clear, slippery, stretchable >8cm) appears 1-2 days before ovulation and creates an alkaline, nutrient-rich environment that supports sperm survival and transport. After ovulation, progesterone makes mucus thick and hostile to sperm.",
+    source: { authors: "Bigelow JL et al.", year: "2004", journal: "Fertil Steril", doi: "10.1016/j.fertnstert.2004.01.013", pmid: "15172680", title: "Mucus observations in the fertile window: a better predictor of conception than timing of intercourse" },
+    level: "strong",
+    wellnessNote: "Tracking cervical mucus daily is one of the most reliable natural fertility awareness methods."
+  },
+  "folic-acid": {
+    claim: "Folic acid 400 mcg daily before conception reduces neural tube defects by 50-70%.",
+    evidence: "Randomized controlled trials and meta-analyses consistently show that periconceptional folic acid supplementation (400 mcg/day) reduces the risk of neural tube defects (spina bifida, anencephaly) by approximately 50-70%. Because neural tube closure occurs by day 28 post-conception (before many women know they are pregnant), supplementation should begin at least 1 month before conception and continue through the first trimester.",
+    source: { authors: "De-Regil LM et al.", year: "2015", journal: "Cochrane Database Syst Rev", doi: "10.1002/14651858.CD007950.pub3", pmid: "26471396", title: "Effects and safety of periconceptional folate supplementation" },
+    level: "strong",
+    wellnessNote: "Start a prenatal vitamin with 400 mcg folic acid at least 1 month before trying to conceive."
+  },
+  "bmi-fertility": {
+    claim: "Both underweight (BMI <18.5) and overweight (BMI >25) are associated with longer time to pregnancy.",
+    evidence: "A systematic review of 13 cohort studies found that women with BMI <18.5 had a 37% longer time to pregnancy, and women with BMI >25 had a 24% longer time to pregnancy compared to women with BMI 18.5-24.9. Obesity (BMI >30) is associated with anovulation, reduced implantation rates, and increased miscarriage risk. Even modest weight loss (5-10% of body weight) can improve ovulation and fertility in overweight women.",
+    source: { authors: "van der Steeg JW et al.", year: "2008", journal: "Hum Reprod", doi: "10.1093/humrep/dem383", pmid: "18156630", title: "Obesity affects spontaneous pregnancy chances in subfertile, ovulatory women" },
+    level: "strong",
+    wellnessNote: "A balanced approach to weight, including regular movement and nutrient-dense foods, supports fertility."
+  },
+  "fertility-diet": {
+    claim: "A 'fertility diet' pattern is associated with lower risk of ovulatory infertility.",
+    evidence: "Analysis of the Nurses' Health Study II (17,544 women followed for 8 years) found that a dietary pattern high in monounsaturated fats, vegetable protein, high-fiber carbohydrates, full-fat dairy, and iron from plant sources/supplements was associated with a 66% lower risk of ovulatory infertility. Women with the highest adherence had a 28% lower overall infertility risk. Key components: replacing trans fats with monounsaturated fats, using plant protein instead of animal protein, choosing high-fiber low-glycemic carbs, and consuming full-fat dairy.",
+    source: { authors: "Chavarro JE et al.", year: "2007", journal: "Obstet Gynecol", doi: "10.1097/01.AOG.0000260603.11215.8b", pmid: "17420211", title: "Diet and lifestyle in the prevention of ovulatory disorder infertility" },
+    level: "moderate",
+    wellnessNote: "This is an observational association, not proof of causation. A nutrient-dense diet supports overall health and fertility."
+  },
+  "stress-fertility": {
+    claim: "Higher psychological stress is associated with longer time to pregnancy.",
+    evidence: "A prospective cohort study of 501 couples (the LIFE study) found that women with higher self-reported stress (measured by the Perceived Stress Scale) had a 29% lower probability of conception per cycle and were more than twice as likely to take >12 months to conceive. The mechanism may involve stress-induced disruption of the hypothalamic-pituitary-adrenal axis, altered cortisol rhythms, and effects on ovulation and uterine blood flow. However, stress alone is rarely the sole cause of infertility.",
+    source: { authors: "Lynch CD et al.", year: "2014", journal: "Fertil Steril", doi: "10.1016/j.fertnstert.2013.11.037", pmid: "24365488", title: "Stress and reduced fertility among women and their partners" },
+    level: "moderate",
+    wellnessNote: "Stress management is part of holistic fertility support, but persistent difficulty conceiving warrants clinical evaluation."
+  },
+  "age-fertility-decline": {
+    claim: "Female fertility declines with age, particularly after 35; evaluation is recommended after 6 months of trying for women 35+.",
+    evidence: "Female fertility begins declining gradually around age 32, with a steeper decline after 37-38. This is due to decreasing ovarian reserve (number and quality of oocytes). The American Society for Reproductive Medicine and ACOG recommend infertility evaluation after 12 months of trying for women under 35, and after 6 months for women 35 or older. Women 40+ should undergo immediate evaluation. Age also affects miscarriage risk, which rises from ~10% at age 20 to ~50% at age 45.",
+    source: { authors: "American Society for Reproductive Medicine", year: "2023", journal: "Fertil Steril", doi: "10.1016/j.fertnstert.2023.07.007", pmid: "37643864", title: "Optimizing natural fertility: a committee opinion" },
+    level: "strong",
+    wellnessNote: "If you are 35+ and have been trying for 6 months without success, schedule a fertility evaluation sooner rather than later."
+  },
+  "male-fertility": {
+    claim: "Male factors contribute to 30-40% of infertility; semen analysis is the first-line test.",
+    evidence: "Approximately 30-40% of infertility cases involve male factors, either alone or in combination with female factors. A semen analysis evaluates volume, concentration, motility (total and progressive), morphology, and pH. Modifiable factors affecting sperm quality include: smoking (reduces sperm count by 15-30%), excessive alcohol, obesity, heat exposure (hot tubs, saunas, tight underwear), and certain medications. Antioxidant supplementation (zinc, selenium, vitamin C/E, coenzyme Q10) may improve sperm parameters in some men, though evidence is mixed.",
+    source: { authors: "Practice Committee of the American Society for Reproductive Medicine", year: "2020", journal: "Fertil Steril", doi: "10.1016/j.fertnstert.2020.03.020", pmid: "32409040", title: "Diagnostic evaluation of the infertile male" },
+    level: "strong",
+    wellnessNote: "Both partners should be evaluated simultaneously when infertility is suspected. Male evaluation is non-invasive and relatively inexpensive."
+  },
+  "mindbody-fertility": {
+    claim: "Mind-body interventions may improve pregnancy rates in women undergoing fertility treatment.",
+    evidence: "A systematic review and meta-analysis of 13 randomized controlled trials (n=2,611 women) found that mind-body interventions (mindfulness, yoga, cognitive-behavioral therapy, relaxation training) were associated with significantly higher pregnancy rates (RR 1.54, 95% CI 1.22-1.94) compared to controls in women undergoing fertility treatment. These interventions also reduced anxiety and depression scores. The mechanisms may involve reduced cortisol, improved treatment adherence, and enhanced quality of life.",
+    source: { authors: "Boivin J et al.", year: "2019", journal: "Hum Reprod Update", doi: "10.1093/humupd/dmz024", pmid: "31268108", title: "Effects of emotional support interventions on pregnancy rates in women undergoing fertility treatment: systematic review and meta-analysis" },
+    level: "moderate",
+    wellnessNote: "Mind-body practices support emotional wellbeing during the fertility journey; they are complementary to, not a replacement for, medical fertility treatment."
+  },
+
 };

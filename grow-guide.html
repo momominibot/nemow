@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Ovuluna · Grow — Trying to Conceive</title>
+<link rel="icon" type="image/png" href="assets/onboarding/luna.png">
+<link rel="apple-touch-icon" href="assets/onboarding/luna.png">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Manrope:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="anim.css">
+<link rel="stylesheet" href="darkmode.css">
+<link rel="stylesheet" href="evidence.css">
+<style>
+.artsec{font-family:var(--serif);font-weight:500;font-size:17px;color:var(--cocoa);margin:16px 0 6px}
+.grow-hero{text-align:center;padding:22px 18px;background:linear-gradient(135deg,rgba(196,181,224,.2),rgba(245,198,184,.15));border-radius:var(--r);margin-bottom:14px}
+.grow-hero .emoji{font-size:40px;margin-bottom:6px}
+.grow-hero h1{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--cocoa);line-height:1.2;margin:0}
+.tipbox{background:rgba(196,181,224,.1);border-left:3px solid var(--mauve);padding:12px 14px;border-radius:0 10px 10px 0;margin:10px 0;font-size:12.5px;line-height:1.5;color:var(--cocoa)}
+.window-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.window-day{background:var(--card);border:1px solid var(--line-soft);border-radius:10px;padding:10px;text-align:center}
+.window-day .d{font-size:11px;color:var(--taupe);font-weight:700}
+.window-day .n{font-size:20px;font-weight:800;color:var(--mauve)}
+.window-day.fertile{background:linear-gradient(135deg,rgba(196,181,224,.25),rgba(245,198,184,.15));border-color:var(--mauve)}
+.window-day.peak{background:linear-gradient(135deg,rgba(245,198,184,.3),rgba(196,181,224,.2));border-color:var(--coral)}
+</style>
+<script src="anim.js" defer></script>
+</head><body>
+<div class="app">
+  <div id="app-header"></div>
+  <div class="scroll">
+
+    <div class="grow-hero">
+      <div class="emoji">🌱</div>
+      <h1>Your Fertility Journey</h1>
+      <p class="sub" style="margin-top:8px;margin-bottom:0">Evidence-based tools for trying to conceive</p>
+    </div>
+
+    <div class="card"><p class="sub">Understanding your cycle is the first step. Most couples conceive within <b>6 months</b> of regular unprotected intercourse, and about <b>85%</b> within one year <span class="qi" data-evidence="ttc-timeline">i</span>. Tracking your fertile window, understanding ovulation signs, and supporting overall health can help.</p></div>
+
+    <!-- Fertile Window -->
+    <div class="card">
+      <div class="artsec">🔍 Your Fertile Window</div>
+      <p class="sub">Pregnancy is possible only during the <b>6 days</b> ending on ovulation day. Sperm can survive up to 5 days in the reproductive tract, while the egg is viable for about 12-24 hours after ovulation <span class="qi" data-evidence="sperm-survival">i</span>.</p>
+      <div class="window-grid">
+        <div class="window-day fertile"><div class="d">Day 10</div><div class="n">🌙</div><div class="d">Fertile</div></div>
+        <div class="window-day fertile"><div class="d">Day 11</div><div class="n">🌙</div><div class="d">Fertile</div></div>
+        <div class="window-day fertile"><div class="d">Day 12</div><div class="n">🌙</div><div class="d">Fertile</div></div>
+        <div class="window-day fertile"><div class="d">Day 13</div><div class="n">🌙</div><div class="d">Fertile</div></div>
+        <div class="window-day peak"><div class="d">Day 14</div><div class="n">⭐</div><div class="d">Ovulation</div></div>
+        <div class="window-day"><div class="d">Day 15+</div><div class="n">💤</div><div class="d">Not fertile</div></div>
+      </div>
+      <p class="sub" style="font-size:11px;color:var(--taupe)">Example for a 28-day cycle. Your fertile window shifts with your cycle length. Ovulation typically occurs 14 days before your next period <span class="qi" data-evidence="ovulation-timing">i</span>.</p>
+    </div>
+
+    <!-- Ovulation Signs -->
+    <div class="card">
+      <div class="artsec">👀 Ovulation Signs to Watch</div>
+      <p class="sub"><b>Cervical mucus:</b> Egg-white consistency (clear, stretchy) signals peak fertility <span class="qi" data-evidence="cervical-mucus">i</span>. <b>Basal body temperature:</b> Rises 0.5-1°F after ovulation (use a BBT thermometer first thing in the morning). <b>Ovulation pain (mittelschmerz):</b> Mild one-sided cramping around ovulation. <b>Libido:</b> Often increases around ovulation.</p>
+      <div class="tipbox">💡 Track cervical mucus daily in Ovuluna. The transition from sticky/creamy to egg-white is your most reliable natural fertility signal.</div>
+    </div>
+
+    <!-- Preconception Health -->
+    <div class="card">
+      <div class="artsec">💪 Preconception Health</div>
+      <p class="sub"><b>Folic acid:</b> 400 mcg daily starting at least 1 month before conception reduces neural tube defects by 50-70% <span class="qi" data-evidence="folic-acid">i</span>. <b>Weight:</b> Both underweight and overweight can affect fertility; a BMI of 18.5-24.9 is associated with shortest time to pregnancy <span class="qi" data-evidence="bmi-fertility">i</span>. <b>Alcohol & smoking:</b> Both reduce fertility in women and men; quitting smoking improves fertility within months.</p>
+    </div>
+
+    <!-- Nutrition for TTC -->
+    <div class="card">
+      <div class="artsec">🥗 Nutrition for Fertility</div>
+      <p class="sub">The <b>fertility diet</b> pattern from the Nurses' Health Study II: high monounsaturated fats, vegetable protein, high-fiber low-glycemic carbs, full-fat dairy, and iron from plant sources or supplements was associated with lower risk of ovulatory infertility <span class="qi" data-evidence="fertility-diet">i</span>. Key foods: leafy greens, berries, fatty fish (omega-3), walnuts, Greek yogurt, lentils, eggs, and complex carbs.</p>
+      <a href="foods.html" class="topicchip" style="display:inline-block;margin-top:8px">Explore fertility-supportive foods →</a>
+    </div>
+
+    <!-- Stress & Fertility -->
+    <div class="card">
+      <div class="artsec">🧘 Stress & Conception</div>
+      <p class="sub">Chronic stress can disrupt the hypothalamic-pituitary-adrenal axis and affect ovulation. A large prospective study found that women with higher self-reported stress took longer to conceive <span class="qi" data-evidence="stress-fertility">i</span>. Mind-body interventions (mindfulness, yoga, CBT) may improve pregnancy rates in women undergoing fertility treatment <span class="qi" data-evidence="mindbody-fertility">i</span>.</p>
+      <a href="breathwork.html" class="topicchip" style="display:inline-block;margin-top:8px">Try calming breathwork →</a>
+    </div>
+
+    <!-- When to Seek Help -->
+    <div class="card">
+      <div class="artsec">🏥 When to Seek Help</div>
+      <p class="sub"><b>Under 35:</b> If not pregnant after 12 months of regular unprotected intercourse. <b>35 or older:</b> If not pregnant after 6 months (fertility declines more rapidly after 35) <span class="qi" data-evidence="age-fertility-decline">i</span>. <b>Any age:</b> Seek help sooner if you have irregular cycles, known PCOS/endometriosis, history of PID/STIs, multiple miscarriages, or if your partner has known fertility issues.</p>
+      <div class="tipbox">⚠️ Ovuluna is a wellness tracking tool, not a fertility diagnostic. If you have concerns about fertility, talk to your OB-GYN or a reproductive endocrinologist.</div>
+    </div>
+
+    <!-- Male Factor -->
+    <div class="card">
+      <div class="artsec">👨 Male Factor Matters Too</div>
+      <p class="sub">About 30-40% of infertility involves male factors. Sperm quality can be improved by: avoiding hot tubs/saunas, quitting smoking, reducing alcohol, maintaining healthy weight, eating antioxidant-rich foods (zinc, selenium, vitamin C/E), and avoiding tight underwear. A semen analysis is the first test for male fertility <span class="qi" data-evidence="male-fertility">i</span>.</p>
+    </div>
+
+  </div>
+</div>
+<div id="app-nav"></div>
+<script src="appnav.js" defer></script>
+<script src="evidence-db.js" defer></script>
+<script src="evidence.js" defer></script>
+<script src="darkmode.js?v=8" defer></script>
+<script src="app-layout.js"></script>
+</body></html>
