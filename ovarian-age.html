@@ -58,8 +58,7 @@
 
     <!-- Life-stage chips -->
     <div class="persona-bar" id="personaBar">
-      <div class="p-chip on" data-p="bloom"><img src="assets/icons/persona-bloom-64.png" alt="">Bloom <span class="sub">10–17</span></div>
-      <div class="p-chip" data-p="grow"><img src="assets/icons/persona-grow-64.png" alt="">Grow <span class="sub">TTC</span></div>
+      <div class="p-chip on" data-p="grow"><img src="assets/icons/persona-grow-64.png" alt="">Grow <span class="sub">TTC</span></div>
       <div class="p-chip" data-p="nurture"><img src="assets/icons/persona-nurture-64.png" alt="">Nurture <span class="sub">Postpartum</span></div>
       <div class="p-chip" data-p="wisdom"><img src="assets/icons/persona-wisdom-64.png" alt="">Wisdom <span class="sub">35+</span></div>
     </div>
@@ -265,8 +264,7 @@
       localStorage.setItem('ovuluna_persona', p);
       document.documentElement.dataset.persona = p;
       // sensible defaults per persona
-      if(p==='bloom'){ ageIn.value=16; cycleIn.value='regular'; }
-      if(p==='grow'){ ageIn.value=32; cycleIn.value='regular'; }
+            if(p==='grow'){ ageIn.value=32; cycleIn.value='regular'; }
       if(p==='nurture'){ ageIn.value=34; cycleIn.value='variable'; }
       if(p==='wisdom'){ ageIn.value=48; cycleIn.value='variable'; }
       update();
@@ -274,7 +272,7 @@
   });
 
   // Load saved persona
-  var savedP = localStorage.getItem('ovuluna_persona') || 'bloom';
+  var savedP = localStorage.getItem('ovuluna_persona') || 'grow';
   document.querySelectorAll('#personaBar .p-chip').forEach(function(c){ c.classList.toggle('on', c.dataset.p===savedP); });
   document.documentElement.dataset.persona = savedP;
 

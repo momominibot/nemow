@@ -60,7 +60,6 @@
     <!-- Filter row -->
     <div class="filter-row" id="stageFilter">
       <span class="filter-chip on" data-filter="all">All Points</span>
-      <span class="filter-chip" data-filter="bloom">🌸 Bloom</span>
       <span class="filter-chip" data-filter="grow">🌱 Grow</span>
       <span class="filter-chip" data-filter="nurture">🌿 Nurture</span>
       <span class="filter-chip" data-filter="wisdom">🌙 Wisdom</span>
@@ -290,7 +289,7 @@ updateTimer();
 
 // Persona-aware pregnancy warnings
 function updatePregWarnings(){
-  const persona = document.documentElement.getAttribute('data-persona') || 'bloom';
+  const persona = document.documentElement.getAttribute('data-persona') || 'grow';
   if(persona === 'nurture'){
     document.querySelectorAll('[data-point="sp6"],[data-point="li4"]').forEach(el => {
       el.style.fill = '#C46F4F';
@@ -304,7 +303,7 @@ updatePregWarnings();
 (function(){
   const map = document.getElementById('bodyMapImg');
   if(!map) return;
-  const persona = document.documentElement.getAttribute('data-persona') || 'bloom';
+  const persona = document.documentElement.getAttribute('data-persona') || 'grow';
   const imgMap = {bloom:'assets/illustrations/body-bloom-600.png', grow:'assets/illustrations/body-grow-600.png', nurture:'assets/illustrations/body-nurture-600.png', wisdom:'assets/illustrations/body-wisdom-600.png'};
   if(imgMap[persona]) map.src = imgMap[persona];
 })();

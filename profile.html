@@ -59,13 +59,7 @@
       <div style="font-weight:700;font-size:13px;color:var(--ovuluna-text-primary);margin-bottom:4px">Choose your persona</div>
       <div class="sub" style="font-size:12px;margin-bottom:14px">Colors, fonts, and content adapt to where you are in your journey.</div>
       <div class="persona-picker" id="personaPicker">
-        <div class="persona-opt" data-persona="bloom">
-          <span class="p-check ms">check</span>
-          <span class="p-emoji">🌸</span>
-          <span class="p-name">Bloom</span>
-          <span class="p-age">Teens 10–17</span>
-        </div>
-        <div class="persona-opt" data-persona="grow">
+<div class="persona-opt" data-persona="grow">
           <span class="p-check ms">check</span>
           <span class="p-emoji">🌱</span>
           <span class="p-name">Grow</span>
@@ -187,7 +181,7 @@
 (function(){
   var picker = document.getElementById('personaPicker');
   if(!picker) return;
-  var saved = localStorage.getItem('ovuluna_persona') || 'bloom';
+  var saved = localStorage.getItem('ovuluna_persona') || 'grow';
   document.documentElement.setAttribute('data-persona', saved);
   picker.querySelectorAll('.persona-opt').forEach(function(opt){
     opt.classList.toggle('on', opt.dataset.persona === saved);

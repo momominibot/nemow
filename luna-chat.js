@@ -197,15 +197,7 @@
 
   /* ── Suggestions ── */
   var SUGGESTIONS = {
-    bloom: [
-      'Is it normal to have irregular cycles?',
-      'How do I know when my period is coming?',
-      'What foods help with period cramps?',
-      'How much sleep do I need?',
-      'Why do I feel moody before my period?',
-      'What is a normal period?'
-    ],
-    grow: [
+grow: [
       'How do I know my cycle phase?',
       'When is my fertile window?',
       'What foods support fertility?',
@@ -233,8 +225,8 @@
     if (!container) return;
     container.innerHTML = '';
     // Get persona-specific suggestions
-    var persona = localStorage.getItem('ovuluna_persona') || 'bloom';
-    var list = SUGGESTIONS[persona] || SUGGESTIONS.bloom;
+    var persona = localStorage.getItem('ovuluna_persona') || 'grow';
+    var list = SUGGESTIONS[persona] || SUGGESTIONS.grow;
     // Show 3 random suggestions
     var shuffled = list.slice().sort(function () { return 0.5 - Math.random(); });
     shuffled.slice(0, 3).forEach(function (s) {

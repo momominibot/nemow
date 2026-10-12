@@ -1,7 +1,7 @@
 /* persona-filter.js
    Shows/hides content based on user's life stage (persona).
-   Derived from onboarding age + goals.
-   Usage: add data-persona="bloom,grow,nurture,wisdom" to any element.
+   Derived from onboarding age + goals. 18+ only.
+   Usage: add data-persona="grow,nurture,wisdom" to any element.
    Elements without data-persona show for everyone.
 */
 (function() {
@@ -28,8 +28,7 @@
           return 'grow';
         }
       }
-      // Age-based
-      if (age > 0 && age < 18) return 'bloom';
+      // Age-based (18+ only)
       if (age >= 35) return 'wisdom';
       return 'grow'; // default 18-34
     } catch (e) {

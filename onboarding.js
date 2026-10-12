@@ -29,7 +29,7 @@
       title: 'How old are you?',
       subtitle: 'This helps us tailor guidance to your life stage.',
       field: 'age',
-      min: 10, max: 65, default: 28, unit: t('years')
+      min: 18, max: 65, default: 28, unit: t('years')
     },
     {
       id: 'height-weight',
@@ -601,10 +601,6 @@
 
     var grid = document.getElementById('optGrid');
     step.options.forEach(function(opt) {
-      // Hide fertility/perimenopause goals for teens (age < 18)
-      if ((opt.value === 'fertility' || opt.value === 'perimenopause') && answers.age && answers.age < 18) {
-        return;
-      }
       var isSel = selected.indexOf(opt.value) !== -1;
       var el = document.createElement('div');
       el.className = 'gcard' + (isSel ? ' selected' : '');
@@ -981,10 +977,9 @@
   function renderDone(step) {
     // Compute ovarian age estimate if possible (adults only)
     var ovInfo = '';
-    var isTeen = answers.age && answers.age < 18;
 
-    if (isTeen) {
-      // Teen-specific: no ovarian age estimate, educational framing instead
+    if (false) {
+      // Disabled: teen persona removed (18+ only)
       ovInfo = '<div style="background:linear-gradient(135deg,#E8E0F5,#F5E6E0);border-radius:16px;padding:20px;margin:16px 0;text-align:center">' +
         '<div style="font:700 11px var(--sans);color:var(--mauve);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Your Cycle Journey</div>' +
         '<div style="font-family:var(--serif);font-size:22px;color:var(--ink);margin:4px 0 8px">Your body is still finding its rhythm</div>' +
@@ -1025,7 +1020,6 @@
       } catch(e) {}
     }
 
-    // Minor consent note for users under 18
     var minorNote = isTeen ? '<p style="font:500 11px var(--sans);color:var(--muted);font-style:italic;margin-top:8px">We recommend sharing this app with a trusted adult or guardian. Your data stays on your device.</p>' : '';
 
     var div = document.createElement('div');
