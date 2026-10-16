@@ -124,6 +124,38 @@
         <div class="l-t"><b>Oura Ring</b><span>Connected</span></div><span class="badge ok">Connected</span></div>
     </div>
 
+
+    <h2 class="sec">Data & Privacy</h2>
+    <div class="card" style="padding:18px;margin-bottom:12px;background:linear-gradient(135deg,rgba(110,180,150,.1),rgba(196,181,224,.12));border:1.5px solid rgba(110,180,150,.3)">
+      <div class="row" style="align-items:center;gap:12px;margin-bottom:10px">
+        <span class="ms" style="font-size:28px;color:var(--ok)">lock</span>
+        <div>
+          <b style="font-size:14px;color:var(--cocoa)">Your data never leaves your phone</b>
+          <div class="sub" style="font-size:11.5px;margin-top:2px">All cycle logs, journal entries, and health data are stored locally on this device. Nothing is uploaded to any server.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="padding:4px 18px">
+      <div class="lrow" id="clearDataBtn" style="cursor:pointer">
+        <span class="l-ic ms" style="background:rgba(190,74,62,.12);color:var(--low)">delete_sweep</span>
+        <div class="l-t"><b style="color:var(--low)">Clear All Local Data</b><span>Permanently erase all cycle logs, journal, and settings</span></div>
+        <span class="l-arr ms" style="color:var(--low)">chevron_right</span>
+      </div>
+    </div>
+
+    <!-- Clear Data Confirmation Modal -->
+    <div id="clearDataModal" style="display:none;position:fixed;inset:0;background:rgba(20,10,30,.5);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:24px">
+      <div class="card" style="max-width:380px;width:100%;padding:24px;text-align:center;background:var(--card-solid);border:1.5px solid var(--line)">
+        <span class="ms" style="font-size:40px;color:var(--low)">warning</span>
+        <h3 style="font-family:var(--serif);font-size:20px;color:var(--cocoa);margin:12px 0 8px">Erase all data?</h3>
+        <p style="font-size:13.5px;color:var(--taupe);line-height:1.5;margin:0 0 20px">This will permanently delete all your cycle history, journal entries, wellness logs, and app settings. This cannot be undone.</p>
+        <div style="display:flex;gap:10px">
+          <button id="cancelClearBtn" class="btn ghost" style="flex:1;padding:12px;border-radius:12px;font-size:14px;font-weight:700">Cancel</button>
+          <button id="confirmClearBtn" class="btn" style="flex:1;padding:12px;border-radius:12px;font-size:14px;font-weight:700;background:var(--low);color:#fff;border:none">Yes, erase everything</button>
+        </div>
+      </div>
+    </div>
+
     <h2 class="sec">About</h2>
     <div class="card" style="padding:4px 18px">
       <div class="lrow"><span class="l-ic ms" style="background:rgba(99,54,36,.08);color:var(--cocoa)">code</span>
@@ -205,6 +237,40 @@
     setUnits('imperial');
   });
 })();
+
+
+  // Clear all local data
+  (function(){
+    var modal = document.getElementById('clearDataModal');
+    var openBtn = document.getElementById('clearDataBtn');
+    var cancelBtn = document.getElementById('cancelClearBtn');
+    var confirmBtn = document.getElementById('confirmClearBtn');
+    if(!modal || !openBtn) return;
+    openBtn.addEventListener('click', function(){
+      modal.style.display = 'flex';
+    });
+    cancelBtn.addEventListener('click', function(){
+      modal.style.display = 'none';
+    });
+    modal.addEventListener('click', function(e){
+      if(e.target === modal) modal.style.display = 'none';
+    });
+    confirmBtn.addEventListener('click', function(){
+      // Clear all Ovuluna localStorage keys
+      var keys = Object.keys(localStorage).filter(function(k){ return k.startsWith('ovuluna_'); });
+      keys.forEach(function(k){ localStorage.removeItem(k); });
+      // Also clear any non-prefixed keys we might have used
+      ['persona','theme','font_size','language','units','onboarding','cycles'].forEach(function(k){
+        localStorage.removeItem(k);
+      });
+      modal.style.display = 'none';
+      // Show success message and reload
+      var btn = document.getElementById('confirmClearBtn');
+      btn.textContent = 'Erased. Reloading...';
+      btn.style.background = 'var(--ok)';
+      setTimeout(function(){ window.location.href = 'onboarding.html'; }, 1200);
+    });
+  })();
 
 // Persona picker
 (function(){
